@@ -228,7 +228,7 @@ function applyGen(item,ok){
 const ansOf=it=>it.k==="card"?byId[it.id].a:it.k==="src"?srcById[it.id].a:it.ans;
 
 /* 세션 */
-let session=null,view="today",resetAsk=false,fbAt=0,scrollCur=false;
+let session=null,view="today",resetAsk=false,fbAt=0;
 function begin(kind,items,opt){
   if(!items.length)return;
   session=Object.assign({kind,items,i:0,answered:0,score:0,wrong:[],fb:null,done:false,start:Date.now()},opt||{});
@@ -385,7 +385,6 @@ function render(){
   if(session){app.innerHTML=session.done?(session.mock?mockResultHTML():doneHTML()):studyHTML();focusStudy();return;}
   app.innerHTML=tabsHTML()+({today:todayHTML,path:pathHTML,practice:practiceHTML,wrong:wrongHTML,stats:statsHTML}[view])();
   if(sheet&&view==="path")requestAnimationFrame(()=>{const x=document.getElementById("sheetx");if(x)x.focus({preventScroll:true});});
-  if(view==="path"&&!sheet&&scrollCur){scrollCur=false;requestAnimationFrame(()=>{const c=document.querySelector(".node.cur");if(c)c.scrollIntoView({block:"center"});});}
 }
 function tabsHTML(){
   const t=(v,l)=>`<button role="tab" aria-selected="${view===v}" data-act="tab" data-v="${v}">${l}</button>`;
@@ -393,67 +392,55 @@ function tabsHTML(){
   return `<div class="tabs" role="tablist">${t("today","오늘")}${t("path","경로")}${t("practice","연습")}${t("wrong","오답"+(w?" "+w:""))}${t("stats","기록")}</div>`;
 }
 
-/* 학습 경로: 오늘 탭의 학습 순서(LADDER)를 그대로 보여 준다 */
-const NODE_OFF=[0,56,84,56,0,-56,-84,-56];
-const PATH=(()=>{
-  const out=[],unitEnd={};
-  batches.forEach((bt,bi)=>bt.forEach(c=>{unitEnd[c.u]=bi+1;}));
-  let g=0;
-  const units=n=>Object.keys(unitEnd).map(Number).filter(u=>unitEnd[u]===n);
-  LADDER.forEach((x,j)=>{
-    const n=x.b+x.r-1;
-    if(n!==g){
-      if(g)units(g).forEach(u=>out.push({type:"src",id:"S"+u,u},{type:"utest",id:"T"+u,u}));
-      g=n;out.push({type:"group",n});
-    }
-    out.push({type:"step",id:"P"+j,j,b:x.b,r:x.r});
-  });
-  units(g).forEach(u=>out.push({type:"src",id:"S"+u,u},{type:"utest",id:"T"+u,u}));
-  out.push({type:"mock",id:"M"});
-  return out;
-})();
-const nodeById=Object.fromEntries(PATH.filter(p=>p.id).map(p=>[p.id,p]));
-const STEP_LV={1:0,2:2,3:4};
-function stepProg(p){
-  const i=S.ladder.i;
-  if(p.j<i)return 1;
-  if(p.j>i)return 0;
-  const list=batches[p.b-1];return list.filter(c=>levelOf(c.id)>=STEP_LV[p.r]).length/list.length;
-}
+/* 학습 경로: 학습 순서(LADDER)를 계단 표로 보여 준다. 행 = 차례, 열 = 1회·2회·3회 */
+const UNIT_END={};batches.forEach((bt,bi)=>bt.forEach(c=>{UNIT_END[c.u]=bi+1;}));
+const NODES=LADDER.map((x,j)=>({type:"step",id:"P"+j,j,b:x.b,r:x.r}))
+  .concat(Object.keys(UNITS).flatMap(u=>[{type:"src",id:"S"+u,u:+u},{type:"utest",id:"T"+u,u:+u}]),[{type:"mock",id:"M"}]);
+const nodeById=Object.fromEntries(NODES.map(p=>[p.id,p]));
 function nodeState(p){
-  if(p.type==="step"){const i=S.ladder.i;return {prog:stepProg(p),done:p.j<i,started:false,stars:0};}
-  if(p.type==="src"){const l=srcs.filter(s=>s.u===p.u),t=l.filter(s=>(S.src[s.id]||{}).t>0).length,r=l.filter(s=>(S.src[s.id]||{}).r>0).length;return {prog:r/l.length,done:t===l.length,started:t>0,stars:0};}
-  if(p.type==="utest"){const b=S.utest[p.u];return {prog:(b||0)/100,done:b!=null,started:b!=null,stars:b>=90?3:b>=70?2:b!=null?1:0,best:b};}
-  const m=S.mocks.length?S.mocks[S.mocks.length-1].score:null;return {prog:(m||0)/100,done:m!=null,started:m!=null,stars:0,best:m};
-}
-function ring(prog,cls){
-  const r=36,c=2*Math.PI*r;
-  return `<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="${r}" class="rbg"/><circle cx="42" cy="42" r="${r}" class="rfg ${cls}" ${prog>0?"":"stroke-opacity=\"0\""} stroke-dasharray="${(c*Math.min(1,prog)).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 42 42)"/></svg>`;
-}
-function unitsLabel(list){const us=[...new Set(list.map(c=>c.u))];return us.map(u=>UNITS[u][0]).join("·")+" 단원";}
-function groupBanner(n){
-  if(n>batches.length)return `<div class="ubanner"><div class="un">${n-batches.length===1?batches.length-1+"·"+batches.length:batches.length}일차 복습</div><div class="ut">마무리 복습</div><div class="uc">새 카드 없이 앞 묶음의 2회·3회만 남았어요</div></div>`;
-  const list=batches[n-1],k=counts(list),firstU=list[0].u;
-  return `<div class="ubanner"><div class="un">${n}일차 · ${unitsLabel(list)} · ${batchPages(n)}</div><div class="ut">${esc(UNITS[firstU][1])}</div>
-    <div class="up"><span style="width:${((list.length-k.un)/list.length*100).toFixed(1)}%"></span></div><div class="uc">본 카드 ${list.length-k.un} / ${list.length} · 외움 ${k.l4}</div></div>`;
+  if(p.type==="step"){const i=S.ladder.i;return {done:p.j<i,cur:p.j===i};}
+  if(p.type==="src"){const l=srcs.filter(s=>s.u===p.u),t=l.filter(s=>(S.src[s.id]||{}).t>0).length,r=l.filter(s=>(S.src[s.id]||{}).r>0).length;return {done:t===l.length,r,n:l.length};}
+  if(p.type==="utest"){const b=S.utest[p.u];return {done:b!=null,best:b};}
+  const m=S.mocks.length?S.mocks[S.mocks.length-1].score:null;return {done:m!=null,best:m};
 }
 let sheet=null;
 function pathHTML(){
-  const cur="P"+S.ladder.i;let idx=0;
-  const body=PATH.map(p=>{
-    if(p.type==="group"){idx=0;return groupBanner(p.n);}
-    const s=nodeState(p),isCur=p.id===cur;
-    const off=NODE_OFF[idx++%NODE_OFF.length];
-    const cls=s.done?"done":isCur?"cur":p.type==="step"?"ahead":s.started?"part":"todo";
-    const icon=p.type==="step"?p.r+"회":p.type==="src"?"사료":p.type==="utest"?"점검":"모의";
-    const label=p.type==="step"?`${p.b}일차 ${p.r}회`:p.type==="src"?`${UNITS[p.u][0]} 단원 사료`:p.type==="utest"?`${UNITS[p.u][0]} 단원 점검`:"모의고사";
-    const sub=p.type==="step"?batchPages(p.b):(s.best!=null?s.best+"점":"");
-    const stars=p.type==="utest"?`<span class="stars" aria-label="별 ${s.stars}개">${[1,2,3].map(i=>`<i class="${i<=s.stars?"on":""}"></i>`).join("")}</span>`:"";
-    return `<div class="pnode" style="--off:${off}px">${isCur?`<div class="bubble">여기부터</div>`:""}
-      <button class="node ${cls} ${p.type}" data-act="node" data-v="${p.id}" aria-label="${label} ${sub} ${s.done?"완료":isCur?"진행할 차례":""}">${ring(s.prog,cls)}<span class="ni">${icon}</span></button>
-      <div class="nl">${label}${sub?` · ${sub}`:""}</div>${stars}</div>`;
-  }).join("");
-  return `<div class="path">${body}</div>${sheet?sheetHTML():""}`;
+  const i=S.ladder.i,N=LADDER.length,x=LADDER[i],B=batches.length;
+  const now=x?`<div class="box pnow"><div class="lab">지금 할 단계</div>
+      <div class="pbig">${stepName(x)}</div>
+      <p class="muted m0">${STEP_DESC[x.r]} · 카드 ${batches[x.b-1].length}장 · ${batchPages(x.b)}</p>
+      <div class="pbar" role="img" aria-label="${N}단계 중 ${i}단계 완료"><span style="width:${(i/N*100).toFixed(1)}%"></span></div>
+      <div class="pmeta"><span>${i} / ${N}단계 완료</span><span>남은 단계 ${N-i}</span></div>
+      <button class="btn wide" data-act="ladder">${stepName(x)} 시작</button></div>`
+    :`<div class="box pnow"><div class="lab">학습 순서</div><div class="pbig">모두 마쳤어요</div><p class="muted m0">${N}단계를 다 끝냈어요. 아래 단원 점검과 모의고사로 마무리하세요.</p></div>`;
+  const cell=(b,r)=>{
+    if(b<1||b>B)return `<span class="sc empty" aria-hidden="true"></span>`;
+    const j=LADDER.findIndex(t=>t.b===b&&t.r===r),cls=j<i?"done":j===i?"cur":"ahead";
+    return `<button class="sc ${cls}" data-act="node" data-v="P${j}" aria-label="${b}일차 ${r}회 ${j<i?"완료":j===i?"지금 차례":""}">${b}일차</button>`;
+  };
+  let rows="";
+  for(let n=1;n<=B+2;n++){
+    rows+=`<span class="rn">${n}</span>${cell(n,1)}${cell(n-1,2)}${cell(n-2,3)}`;
+    Object.keys(UNIT_END).map(Number).filter(u=>UNIT_END[u]===n).forEach(u=>{
+      const sS=nodeState(nodeById["S"+u]),sT=nodeState(nodeById["T"+u]);
+      rows+=`<div class="umark"><span class="ut">${UNITS[u][0]} 단원 카드를 여기까지 배워요</span>
+        <button class="uchip ${sS.done?"done":""}" data-act="node" data-v="S${u}">사료 ${sS.r}/${sS.n}</button>
+        <button class="uchip ${sT.done?"done":""}" data-act="node" data-v="T${u}">점검${sT.best!=null?" "+sT.best+"점":""}</button></div>`;
+    });
+  }
+  const m=nodeState(nodeById.M);
+  return `<div class="panel">${now}
+    <div class="box"><h2>학습 계단</h2>
+      <p class="muted">왼쪽 위부터 한 줄씩 차례대로 풀어요. 새 묶음을 배운 뒤 앞 묶음을 다시 봐요.</p>
+      <div class="stair">
+        <span></span><span class="hd"><b>1회</b>외우기</span><span class="hd"><b>2회</b>주관식</span><span class="hd"><b>3회</b>마지막</span>
+        ${rows}
+      </div>
+      <div class="legend"><span><i class="lg done"></i>끝냄</span><span><i class="lg cur"></i>지금</span><span><i class="lg ahead"></i>남음</span></div>
+    </div>
+    <div class="box prow1"><div><h2 class="m0">모의고사</h2><p class="muted m0">${m.best!=null?`지난 점수 ${m.best}점 · ${S.mocks.length}회 응시`:"전 단원 20문항 · 정답은 끝나고 공개"}</p></div>
+      <button class="btn small" data-act="node" data-v="M">${m.best!=null?"다시 보기":"보기"}</button></div>
+  </div>${sheet?sheetHTML():""}`;
 }
 function sheetHTML(){
   const p=nodeById[sheet];if(!p)return "";
@@ -913,10 +900,10 @@ app.addEventListener("click",e=>{
   if(b.disabled)return;
   const act=b.dataset.act,v=b.dataset.v;
   const it=session&&!session.done?session.items[session.i]:null;
-  if(act==="tab"){view=v;resetAsk=false;sheet=null;if(v==="path")scrollCur=true;render();if(v!=="path")window.scrollTo(0,0);}
+  if(act==="tab"){view=v;resetAsk=false;sheet=null;render();window.scrollTo(0,0);}
   else if(act==="node"){sheet=v;render();}
   else if(act==="sheetclose"){sheet=null;render();}
-  else if(act==="backpath"){session=null;view="path";sheet=null;scrollCur=true;render();}
+  else if(act==="backpath"){session=null;view="path";sheet=null;render();window.scrollTo(0,0);}
   else if(act==="stepredo"){sheet=null;startLadder(+v,{fromPath:true});}
   else if(act==="nsrc"){sheet=null;begin("drill",srcItems(99,+v),{lesson:"S"+v});}
   else if(act==="ntest"){sheet=null;begin("drill",unitTestItems(+v),{lesson:"T"+v,unitTest:+v});}
