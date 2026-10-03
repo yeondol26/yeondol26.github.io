@@ -22,6 +22,12 @@ const essays=ESSAYS.map(e=>({id:e[0],u:e[1],q:e[2],model:e[3],kws:e[4].split(";"
 const essById=Object.fromEntries(essays.map(e=>[e.id,e]));
 const TOTAL=cards.length;
 
+/* 학습 순서: 교과서 순서 20장씩 묶어 새 묶음 1회 → 앞 묶음 2회 → 그 앞 묶음 3회 */
+const BATCH=20;
+const batches=[];for(let i=0;i<cards.length;i+=BATCH)batches.push(cards.slice(i,i+BATCH));
+const LADDER=[];
+for(let n=1;n<=batches.length+2;n++)for(let r=1;r<=3;r++){const b=n-r+1;if(b>=1&&b<=batches.length)LADDER.push({b,r});}
+
 /* 날짜 */
 const pad=n=>String(n).padStart(2,"0");
 const ymd=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
@@ -32,7 +38,7 @@ const today=()=>ymd(new Date());
 const md=s=>{const p=s.split("-");return (+p[1])+"/"+(+p[2]);};
 
 /* 상태 */
-function fresh(exam){return {v:1,exam:exam||DEFAULT_EXAM,cards:{},streak:{last:"",n:0},days:{},src:{},ess:{},ustat:{},kstat:{},mocks:[],utest:{},total:0,updatedAt:0};}
+function fresh(exam){return {v:1,exam:exam||DEFAULT_EXAM,cards:{},streak:{last:"",n:0},days:{},src:{},ess:{},ustat:{},kstat:{},mocks:[],utest:{},total:0,updatedAt:0,ladder:{i:0}};}
 function normalize(o){const f=fresh();for(const k in f)if(o[k]===undefined)o[k]=f[k];return o;}
 let S=fresh();
 try{const raw=localStorage.getItem(LSKEY);if(raw){const o=JSON.parse(raw);if(o&&o.v===1)S=normalize(o);}}catch(e){}
@@ -268,6 +274,7 @@ function applyCard(item,ok){
   if(ok){
     if(item.mode==="mc"){if(s.l<1){s.l=1;s.d=sched(1);}}
     else if(s.l<4){s.l=s.l+1;s.d=s.l>=4?null:sched(INTERVAL[s.l]);}
+    if(session.ladder&&session.ladder.r===3&&item.mode==="write"){s.l=4;s.d=null;}
   }else{
     s.w=(s.w||0)+1;s.l=0;s.d=null;
     addWrong({k:"card",id});
@@ -320,6 +327,7 @@ function advance(){
 }
 function finish(){
   session.done=true;
+  if(session.ladder&&S.ladder.i===session.ladder.i){S.ladder.i++;save();}
   if(session.unitTest){const sc=pct(session.score,session.answered);S.utest[session.unitTest]=Math.max(S.utest[session.unitTest]||0,sc);save();}
   if(session.kind==="deep")dayRec().x=1;
   if(session.mock){
@@ -483,13 +491,13 @@ function weakestUnit(){
   rows.sort((a,b)=>a.x[1]/a.x[0]-b.x[1]/b.x[0]);return rows[0]||null;
 }
 function nextStep(){
-  const day=dayRec(),un=unseen().length,wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
+  const day=dayRec(),wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
   const dp=deepPlan();
-  const main=un?{act:"ahead",t:`다음 카드 ${Math.min(10,un)}장 배우기`,d:"교과서 순서대로 이어서 배워요"}
+  const lx=ladderStep();
+  const main=lx?{act:"ladder",t:stepName(lx),d:STEP_DESC[lx.r]}
     :(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
     :{act:"mock",t:"모의고사",d:"20문항 · 실전처럼 정답은 끝나고 공개"};
   const more=[];
-  if(main.act!=="ahead"&&un)more.push(`<button class="btn ghost small" data-act="ahead">새 카드 ${Math.min(10,un)}장 미리 배우기</button>`);
   more.push(`<button class="btn ghost small" data-act="bank">문제 은행 20문제</button>`);
   if(wr)more.push(`<button class="btn ghost small" data-act="drill" data-v="wrong">오답 ${Math.min(30,wr)}장 다시</button>`);
   if(wu)more.push(`<button class="btn ghost small" data-act="drill" data-v="urev" data-u="${wu.u}">약한 단원(${UNITS[wu.u][0]}) 복습</button>`);
@@ -497,52 +505,64 @@ function nextStep(){
   if(main.act!=="deep"&&dp.ok)more.push(`<button class="btn ghost small" data-act="deep">${day.x?"심화 세트 한 번 더":"심화 세트"}</button>`);
   return {main,more};
 }
-function nextBoxHTML(){
-  const n=nextStep();
-  return `<div class="box next"><div class="done-badge">✓ 오늘 카드 완료${dayRec().x?" · 심화 세트 완료":""}</div>
-    <h2>다음 단계: ${esc(n.main.t)}</h2><p class="muted">${esc(n.main.d)}</p>
-    <button class="btn wide" data-act="${n.main.act}">${esc(n.main.t)} 시작</button>
-    ${n.more.length?`<div class="row mt2">${n.more.join("")}</div>`:""}</div>`;
+/* 학습 순서 */
+const ladderStep=()=>LADDER[S.ladder.i]||null;
+const stepName=x=>`${x.b}일차 ${x.r}회`;
+const STEP_DESC={1:"새 카드 · 답을 보고 외운 뒤 객관식으로 확인",2:"주관식으로 두 번째 복습",3:"주관식으로 마지막 복습 · 맞히면 '외움'"};
+function batchPages(b){const ps=batches[b-1].map(c=>c.pg).filter(p=>p<999);if(!ps.length)return "";const a=Math.min(...ps),z=Math.max(...ps);return a===z?a+"쪽":a+"~"+z+"쪽";}
+function startLadder(){
+  const x=ladderStep();if(!x)return;
+  const list=batches[x.b-1];
+  const items=x.r===1?list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"mc"))
+    :shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write")));
+  begin("ladder",items,{ladder:{i:S.ladder.i,b:x.b,r:x.r}});
+}
+let skipAsk=false;
+function ladderBoxHTML(){
+  const x=ladderStep(),i=S.ladder.i,N=LADDER.length,day=dayRec();
+  const todayLine=`<p class="muted mt">오늘 푼 문제 ${day.a}개${day.a?` · 정답률 ${pct(day.c,day.a)}%`:""} · 연속 ${streakNow()}일</p>`;
+  if(!x)return `<div class="box"><h2>1. 학습 순서 <span class="lv l4">완료</span></h2>
+    <p class="muted">${batches.length}일차까지 모두 3회씩 마쳤어요. 모의고사와 오답 복습으로 마무리하세요.</p>
+    <div class="row"><button class="btn" data-act="mock">모의고사</button><button class="btn ghost" data-act="drill" data-v="wrong">오답 다시</button></div>${todayLine}</div>`;
+  const n=batches[x.b-1].length,mins=Math.max(1,Math.round(n*(x.r===1?30:15)/60));
+  const up=LADDER.slice(i+1,i+4).map(t=>`<span class="nw">${stepName(t)}</span>`).join(" → ");
+  const skip=skipAsk
+    ?`<div class="confirm mt2"><span>${stepName(x)}을 건너뛸까요?</span><button class="btn small" data-act="ladderskipyes">건너뛰기</button><button class="btn ghost small" data-act="ladderskipno">취소</button></div>`
+    :`<button class="linkbtn" data-act="ladderskip">이 단계 건너뛰기</button>`;
+  return `<div class="box"><h2>1. 학습 순서 <span class="muted">${i+1} / ${N}단계</span></h2>
+    <div class="ladnow"><b>${stepName(x)}</b> <span class="muted">카드 ${n}장 · ${batchPages(x.b)}</span></div>
+    <p class="muted">${STEP_DESC[x.r]}</p>
+    <button class="btn wide" data-act="ladder">${stepName(x)} 시작 · 약 ${mins}분</button>
+    ${up?`<p class="muted mt">다음: ${up}</p>`:""}${todayLine}
+    <details class="mt"><summary>전체 순서 보기</summary><ol class="ladlist">${LADDER.map((t,j)=>`<li class="${j<i?"done":j===i?"cur":""}">${stepName(t)}</li>`).join("")}</ol></details>
+    ${skip}</div>`;
 }
 
 /* 오늘 */
 function todayHTML(){
   const left=daysLeft();
   const dd=left>0?"D-"+left:left===0?"D-DAY":"시험 끝";
-  const due=dueList().length,nl=newLeft(),k=counts(cards),day=dayRec();
-  const mins=Math.max(1,Math.round((due+nl*2)*15/60));
-  const start=(due+nl)>0
-    ?`<button class="btn wide" data-act="start">오늘 카드 학습 시작 · 약 ${mins}분</button>`
-    :`<p class="muted m0">오늘 카드는 끝냈어요. 아래 심화 세트나 연습 탭으로 넘어가세요.</p>`;
-  const rate=day.a?` · 정답률 ${pct(day.c,day.a)}%`:"";
+  const k=counts(cards),day=dayRec();
   const lastMock=S.mocks.length?S.mocks[S.mocks.length-1]:null;
   const mockTip=(left>=1&&left<=3)
     ?`<div class="box tip"><h2>시험 직전 점검</h2><p class="muted">모의고사로 실전처럼 풀어 보고, 약한 단원을 마지막으로 복습하세요.${lastMock?` 지난 점수 ${lastMock.score}점.`:""}</p><button class="btn" data-act="mock">모의고사 보기</button></div>`:"";
-  const doneToday=(due+nl)===0;
-  const cardBox=doneToday
-    ?`<div class="box"><h2>1. 오늘의 카드 <span class="lv l4">완료</span></h2><p class="muted m0">오늘 푼 문제 ${day.a}개${rate} · 연속 ${streakNow()}일</p></div>`
-    :`<div class="box"><h2>1. 오늘의 카드</h2>
-    <div class="nums"><div><b>${due}</b><span>복습할 카드</span></div><div><b>${nl}</b><span>새 카드</span></div><div><b>${streakNow()}</b><span>연속 학습일</span></div></div>
-    ${start}
-    <p class="muted mt">오늘 푼 문제 ${day.a}개${rate}</p></div>`;
   const dp=deepPlan();
-  const deepBox=doneToday?"":`<div class="box"><h2>2. 심화 세트 ${day.x?'<span class="lv l4">완료</span>':""}</h2>
+  const deepBox=`<div class="box"><h2>2. 심화 세트 ${day.x?'<span class="lv l4">완료</span>':""}</h2>
     ${dp.ok?`<p class="muted">배운 범위(교과서 ${dp.sc.f}쪽까지)에서만 나와요. 사료 ${dp.ns}${dp.tl?`, 연표 순서 ${dp.tl}`:""}${dp.es?`, 서술형 ${dp.es}`:""}문제.</p>
-    <button class="btn ${day.x?"ghost":""} wide" data-act="deep">${day.x?"한 세트 더 풀기":"심화 세트 시작 · 약 10분"}</button>`
-    :`<p class="muted">아직 배운 카드가 없어서 범위를 정할 수 없어요. 카드 학습을 건너뛰고 전체 범위에서 풀 수도 있어요.</p>
-    <button class="btn ghost wide" data-act="deepfull">건너뛰고 전체 범위로 풀기</button>`}
+    <button class="btn ghost wide" data-act="deep">${day.x?"한 세트 더 풀기":"심화 세트 시작 · 약 10분"}</button>`
+    :`<p class="muted">아직 배운 카드가 없어서 범위를 정할 수 없어요. 전체 범위에서 풀 수도 있어요.</p>
+    <button class="btn ghost wide" data-act="deepfull">전체 범위로 풀기</button>`}
     ${dp.ok?`<button class="linkbtn" data-act="deepfull">전체 범위로 풀기</button>`:""}</div>`;
   return `<div class="panel">
   <div class="box dday"><div><div class="lab">시험까지</div><div class="big">${dd}</div></div>
     <label for="exam">시험일 <input type="date" id="exam" value="${esc(S.exam)}"></label></div>
-  ${doneToday?nextBoxHTML():""}
   ${mockTip}
-  ${cardBox}
+  ${ladderBoxHTML()}
   ${deepBox}
   <div class="box"><h2>전체 진행</h2>${barHTML(k,TOTAL)}${legendHTML}
     <p class="muted mt">외운 카드 <b>${k.l4}</b> / ${TOTAL}장 · 아직 안 본 카드 ${k.un}장</p></div>
   <details class="box"><summary>진행 방식</summary>
-    <p class="muted mt">새 카드는 답을 보고 외운 뒤 객관식으로 확인합니다. 다음 날부터는 주관식으로 1일, 2일, 3일 간격으로 다시 나오고, 세 번 연속 맞히면 '외움'이 됩니다. 틀린 카드는 객관식부터 다시 시작합니다. 새 카드는 시험 이틀 전까지 모두 배우도록 하루 분량을 나눕니다. 모의고사에서 틀린 카드도 복습 목록으로 돌아갑니다.</p></details>
+    <p class="muted mt">카드를 교과서 순서대로 ${BATCH}장씩 묶어(1일차, 2일차 …) 계단식으로 공부해요. 1일차 1회 → 2일차 1회 → 1일차 2회 → 3일차 1회 → 2일차 2회 → 1일차 3회 … 처럼 새 묶음을 배운 뒤 앞 묶음을 다시 봐요. 날짜와 상관없이 한 단계를 끝내면 바로 다음 단계로 이어 갈 수 있어요. 1회는 답을 보고 외운 뒤 객관식으로 확인하고, 2회·3회는 주관식이에요. 3회째에 맞힌 카드는 '외움'이 됩니다. 틀린 카드는 그 자리에서 객관식으로 다시 나오고 오답 목록에 남아요.</p></details>
   </div>`;
 }
 
@@ -833,13 +853,14 @@ function wrongListHTML(){
 function doneHTML(){
   const a=session.answered,c=session.score;
   const cw=session.wrong.some(w=>w.k==="card");
+  const nx=(session.ladder||session.kind==="deep"||session.ahead)?nextStep().main:null;
   return `<div class="box done">
-    <div class="muted">${session.test?"건너뛰기 테스트 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"레슨 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
+    <div class="muted">${session.test?"건너뛰기 테스트 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"레슨 끝":session.ladder?stepName(session.ladder)+" 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
     <div class="big">${fmt(c)} / ${a}</div>
     <div class="muted">${a?"정답률 "+pct(c,a)+"%":"푼 문제가 없어요"}</div>
     ${session.test?`<p class="muted">${pct(session.score,session.answered)>=80?"건너뛰기 성공! 맞힌 카드는 바로 복습 단계로 넘어갔어요.":"맞힌 카드는 복습 단계로 넘어갔어요. 틀린 카드는 이 레슨에서 처음부터 배우게 돼요."}</p>`:""}
     ${wrongListHTML()}
-    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${(session.kind!=="drill"||session.ahead)&&(dueList().length+newLeft())===0?`<button class="btn ghost" data-act="${nextStep().main.act}">다음: ${esc(nextStep().main.t)}</button>`:""}<button class="btn" data-act="home" id="focusme">처음으로</button></div>
+    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${nx?`<button class="btn ghost" data-act="home">처음으로</button><button class="btn" data-act="${nx.act}" id="focusme">다음: ${esc(nx.t)}</button>`:`<button class="btn" data-act="home" id="focusme">처음으로</button>`}</div>
   </div>`;
 }
 function mockResultHTML(){
@@ -900,6 +921,10 @@ app.addEventListener("click",e=>{
   else if(act==="nsrc"){sheet=null;begin("drill",srcItems(99,+v),{lesson:"S"+v});}
   else if(act==="ntest"){sheet=null;begin("drill",unitTestItems(+v),{lesson:"T"+v,unitTest:+v});}
   else if(act==="start")startToday();
+  else if(act==="ladder"){session=null;sheet=null;skipAsk=false;startLadder();}
+  else if(act==="ladderskip"){skipAsk=true;render();}
+  else if(act==="ladderskipno"){skipAsk=false;render();}
+  else if(act==="ladderskipyes"){skipAsk=false;if(ladderStep()){S.ladder.i++;save();}render();}
   else if(act==="deep"){session=null;startDeep();}
   else if(act==="deepfull"){session=null;startDeep(true);}
   else if(act==="bank"){session=null;startBank(+(v||0));}
