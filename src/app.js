@@ -39,7 +39,15 @@ const md=s=>{const p=s.split("-");return (+p[1])+"/"+(+p[2]);};
 
 /* 상태 */
 function fresh(exam){return {v:1,exam:exam||DEFAULT_EXAM,cards:{},streak:{last:"",n:0},days:{},src:{},ess:{},ustat:{},kstat:{},mocks:[],utest:{},total:0,updatedAt:0,ladder:{i:0}};}
-function normalize(o){const f=fresh();for(const k in f)if(o[k]===undefined)o[k]=f[k];return o;}
+function normalize(o){
+  if(o.ladder===undefined&&o.cards)o.ladder={i:inferLadder(o.cards)};
+  const f=fresh();for(const k in f)if(o[k]===undefined)o[k]=f[k];return o;
+}
+/* 학습 순서가 생기기 전 기록: 앞에서부터 다 본 묶음 수로 위치를 정한다 */
+function inferLadder(cs){
+  let k=0;while(k<batches.length&&batches[k].every(c=>(cs[c.id]||{}).s))k++;
+  return k?LADDER.findIndex(x=>x.b===k&&x.r===1)+1:0;
+}
 let S=fresh();
 try{const raw=localStorage.getItem(LSKEY);if(raw){const o=JSON.parse(raw);if(o&&o.v===1)S=normalize(o);}}catch(e){}
 
