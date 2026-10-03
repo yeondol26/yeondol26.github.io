@@ -393,34 +393,35 @@ function tabsHTML(){
   return `<div class="tabs" role="tablist">${t("today","오늘")}${t("path","경로")}${t("practice","연습")}${t("wrong","오답"+(w?" "+w:""))}${t("stats","기록")}</div>`;
 }
 
-/* 학습 경로 */
+/* 학습 경로: 오늘 탭의 학습 순서(LADDER)를 그대로 보여 준다 */
 const NODE_OFF=[0,56,84,56,0,-56,-84,-56];
 const PATH=(()=>{
-  const out=[];let n=0;
-  for(let u=1;u<=5;u++){
-    const list=cards.filter(c=>c.u===u),k=Math.ceil(list.length/8),size=Math.ceil(list.length/k);
-    out.push({type:"unit",u});
-    for(let i=0;i<k;i++){
-      const cs=list.slice(i*size,(i+1)*size);if(!cs.length)continue;
-      const pgs=cs.map(c=>c.pg).filter(p=>p<999);
-      out.push({type:"lesson",id:"L"+u+"-"+(i+1),u,no:++n,ids:cs.map(c=>c.id),pg:pgs.length?(Math.min(...pgs)===Math.max(...pgs)?Math.min(...pgs)+"쪽":Math.min(...pgs)+"~"+Math.max(...pgs)+"쪽"):""});
+  const out=[],unitEnd={};
+  batches.forEach((bt,bi)=>bt.forEach(c=>{unitEnd[c.u]=bi+1;}));
+  let g=0;
+  const units=n=>Object.keys(unitEnd).map(Number).filter(u=>unitEnd[u]===n);
+  LADDER.forEach((x,j)=>{
+    const n=x.b+x.r-1;
+    if(n!==g){
+      if(g)units(g).forEach(u=>out.push({type:"src",id:"S"+u,u},{type:"utest",id:"T"+u,u}));
+      g=n;out.push({type:"group",n});
     }
-    out.push({type:"src",id:"S"+u,u});
-    out.push({type:"utest",id:"T"+u,u});
-  }
+    out.push({type:"step",id:"P"+j,j,b:x.b,r:x.r});
+  });
+  units(g).forEach(u=>out.push({type:"src",id:"S"+u,u},{type:"utest",id:"T"+u,u}));
   out.push({type:"mock",id:"M"});
   return out;
 })();
 const nodeById=Object.fromEntries(PATH.filter(p=>p.id).map(p=>[p.id,p]));
-function lessonInfo(L){
-  const ls=L.ids.map(levelOf),n=ls.length,seen=ls.filter(l=>l>=0).length,mast=ls.filter(l=>l>=4).length;
-  const prog=ls.reduce((s,l)=>s+(l<0?0:l+1),0)/(5*n);
-  const stars=seen<n?0:mast===n?3:ls.every(l=>l>=2)?2:1;
-  return {n,seen,mast,prog,stars,done:seen===n};
+const STEP_LV={1:0,2:2,3:4};
+function stepProg(p){
+  const i=S.ladder.i;
+  if(p.j<i)return 1;
+  if(p.j>i)return 0;
+  const list=batches[p.b-1];return list.filter(c=>levelOf(c.id)>=STEP_LV[p.r]).length/list.length;
 }
-function currentLessonId(){const L=PATH.find(p=>p.type==="lesson"&&!lessonInfo(p).done);return L?L.id:null;}
 function nodeState(p){
-  if(p.type==="lesson"){const i=lessonInfo(p);return {prog:i.prog,done:i.done,started:i.seen>0,stars:i.stars};}
+  if(p.type==="step"){const i=S.ladder.i;return {prog:stepProg(p),done:p.j<i,started:false,stars:0};}
   if(p.type==="src"){const l=srcs.filter(s=>s.u===p.u),t=l.filter(s=>(S.src[s.id]||{}).t>0).length,r=l.filter(s=>(S.src[s.id]||{}).r>0).length;return {prog:r/l.length,done:t===l.length,started:t>0,stars:0};}
   if(p.type==="utest"){const b=S.utest[p.u];return {prog:(b||0)/100,done:b!=null,started:b!=null,stars:b>=90?3:b>=70?2:b!=null?1:0,best:b};}
   const m=S.mocks.length?S.mocks[S.mocks.length-1].score:null;return {prog:(m||0)/100,done:m!=null,started:m!=null,stars:0,best:m};
@@ -429,23 +430,25 @@ function ring(prog,cls){
   const r=36,c=2*Math.PI*r;
   return `<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="${r}" class="rbg"/><circle cx="42" cy="42" r="${r}" class="rfg ${cls}" ${prog>0?"":"stroke-opacity=\"0\""} stroke-dasharray="${(c*Math.min(1,prog)).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 42 42)"/></svg>`;
 }
+function unitsLabel(list){const us=[...new Set(list.map(c=>c.u))];return us.map(u=>UNITS[u][0]).join("·")+" 단원";}
+function groupBanner(n){
+  if(n>batches.length)return `<div class="ubanner"><div class="un">${n-batches.length===1?batches.length-1+"·"+batches.length:batches.length}일차 복습</div><div class="ut">마무리 복습</div><div class="uc">새 카드 없이 앞 묶음의 2회·3회만 남았어요</div></div>`;
+  const list=batches[n-1],k=counts(list),firstU=list[0].u;
+  return `<div class="ubanner"><div class="un">${n}일차 · ${unitsLabel(list)} · ${batchPages(n)}</div><div class="ut">${esc(UNITS[firstU][1])}</div>
+    <div class="up"><span style="width:${((list.length-k.un)/list.length*100).toFixed(1)}%"></span></div><div class="uc">본 카드 ${list.length-k.un} / ${list.length} · 외움 ${k.l4}</div></div>`;
+}
 let sheet=null;
 function pathHTML(){
-  const cur=currentLessonId();let ahead=false,idx=0;
+  const cur="P"+S.ladder.i;let idx=0;
   const body=PATH.map(p=>{
-    if(p.type==="unit"){
-      const list=cards.filter(c=>c.u===p.u),k=counts(list);idx=0;
-      return `<div class="ubanner"><div class="un">${UNITS[p.u][0]} 단원 · ${UNITS[p.u][2]}</div><div class="ut">${esc(UNITS[p.u][1])}</div>
-        <div class="up"><span style="width:${((list.length-k.un)/list.length*100).toFixed(1)}%"></span></div><div class="uc">본 카드 ${list.length-k.un} / ${list.length} · 외움 ${k.l4}</div></div>`;
-    }
+    if(p.type==="group"){idx=0;return groupBanner(p.n);}
     const s=nodeState(p),isCur=p.id===cur;
-    if(isCur)ahead=true;
     const off=NODE_OFF[idx++%NODE_OFF.length];
-    const cls=s.done?"done":isCur?"cur":s.started?"part":(ahead&&p.type==="lesson")?"ahead":"todo";
-    const icon=p.type==="lesson"?p.no:p.type==="src"?"사료":p.type==="utest"?"점검":"모의";
-    const label=p.type==="lesson"?`레슨 ${p.no}`:p.type==="src"?"단원 사료":p.type==="utest"?"단원 점검":"모의고사";
-    const sub=p.type==="lesson"?p.pg:(s.best!=null?s.best+"점":"");
-    const stars=p.type==="lesson"||p.type==="utest"?`<span class="stars" aria-label="별 ${s.stars}개">${[1,2,3].map(i=>`<i class="${i<=s.stars?"on":""}"></i>`).join("")}</span>`:"";
+    const cls=s.done?"done":isCur?"cur":p.type==="step"?"ahead":s.started?"part":"todo";
+    const icon=p.type==="step"?p.r+"회":p.type==="src"?"사료":p.type==="utest"?"점검":"모의";
+    const label=p.type==="step"?`${p.b}일차 ${p.r}회`:p.type==="src"?`${UNITS[p.u][0]} 단원 사료`:p.type==="utest"?`${UNITS[p.u][0]} 단원 점검`:"모의고사";
+    const sub=p.type==="step"?batchPages(p.b):(s.best!=null?s.best+"점":"");
+    const stars=p.type==="utest"?`<span class="stars" aria-label="별 ${s.stars}개">${[1,2,3].map(i=>`<i class="${i<=s.stars?"on":""}"></i>`).join("")}</span>`:"";
     return `<div class="pnode" style="--off:${off}px">${isCur?`<div class="bubble">여기부터</div>`:""}
       <button class="node ${cls} ${p.type}" data-act="node" data-v="${p.id}" aria-label="${label} ${sub} ${s.done?"완료":isCur?"진행할 차례":""}">${ring(s.prog,cls)}<span class="ni">${icon}</span></button>
       <div class="nl">${label}${sub?` · ${sub}`:""}</div>${stars}</div>`;
@@ -454,21 +457,16 @@ function pathHTML(){
 }
 function sheetHTML(){
   const p=nodeById[sheet];if(!p)return "";
-  const s=nodeState(p),cur=currentLessonId();
+  const s=nodeState(p);
   let title="",meta="",note="",btns="",list="";
-  if(p.type==="lesson"){
-    const i=lessonInfo(p),curIdx=PATH.indexOf(nodeById[cur]),isAhead=cur&&PATH.indexOf(p)>curIdx;
-    title=`레슨 ${p.no} · ${UNITS[p.u][0]} 단원`;
-    meta=`카드 ${i.n}장 · ${p.pg} · 본 카드 ${i.seen} · 외움 ${i.mast}`;
-    if(i.done){
-      note="다 배운 레슨이에요. 다시 풀면 복습 단계가 올라가요.";
-      btns=`<button class="btn wide" data-act="lredo" data-v="${p.id}">다시 하기 (주관식)</button><button class="btn ghost wide" data-act="lmc" data-v="${p.id}">객관식으로 가볍게 복습</button>`;
-    }else{
-      note=isAhead?"아직 차례가 아닌 레슨이에요. 미리 배우면 그만큼 다음 날 분량이 줄어요.":i.seen?"배우던 레슨이에요. 남은 카드부터 이어서 해요.":"이번 차례 레슨이에요.";
-      btns=`<button class="btn wide" data-act="llearn" data-v="${p.id}">${isAhead?"미리 배우기":i.seen?"이어서 배우기":"배우기"} (${i.n-i.seen}장)</button>`;
-      if(!i.seen)btns+=`<button class="btn ghost wide" data-act="lskip" data-v="${p.id}">아는 내용이면 시험 보고 건너뛰기</button>`;
-    }
-    list=`<details class="mt"><summary>카드 미리 보기</summary><ul class="clist">${p.ids.map(id=>{const c=byId[id];return `<li>${lvChip(id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`;}).join("")}</ul></details>`;
+  if(p.type==="step"){
+    const i=S.ladder.i,cs=batches[p.b-1],k=counts(cs);
+    title=`${p.b}일차 ${p.r}회`;
+    meta=`카드 ${cs.length}장 · ${batchPages(p.b)} · 본 카드 ${cs.length-k.un} · 외움 ${k.l4}`;
+    if(p.j===i){note=STEP_DESC[p.r];btns=`<button class="btn wide" data-act="ladder">${title} 시작</button>`;}
+    else if(p.j<i){note="끝낸 단계예요. 다시 풀어도 학습 순서 위치는 그대로예요.";btns=`<button class="btn wide" data-act="stepredo" data-v="${p.j}">다시 하기</button>`;}
+    else note=`아직 차례가 아니에요. 지금은 ${stepName(LADDER[i])} 차례예요.`;
+    list=`<details class="mt"><summary>카드 미리 보기</summary><ul class="clist">${cs.map(c=>`<li>${lvChip(c.id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul></details>`;
   }else if(p.type==="src"){
     const l=srcs.filter(x=>x.u===p.u);
     title=`${UNITS[p.u][0]} 단원 사료`;meta=`교과서 사료 ${l.length}개 · 맞힌 사료 ${l.filter(x=>(S.src[x.id]||{}).r>0).length}개`;
@@ -476,7 +474,7 @@ function sheetHTML(){
     btns=`<button class="btn wide" data-act="nsrc" data-v="${p.u}">사료 ${l.length}문제 풀기</button>`;
   }else if(p.type==="utest"){
     title=`${UNITS[p.u][0]} 단원 점검`;meta=s.best!=null?`최고 점수 ${s.best}점`:"아직 안 봤어요";
-    note="이 단원 카드 10문제와 사료 2문제. 레슨을 다 안 끝냈어도 미리 볼 수 있어요. 90점 이상이면 별 3개.";
+    note="이 단원 카드 10문제와 사료 2문제. 90점 이상이면 별 3개.";
     btns=`<button class="btn wide" data-act="ntest" data-v="${p.u}">${s.best!=null?"다시 보기":"점검 시작"}</button>`;
   }else{
     title="모의고사";meta=s.best!=null?`지난 점수 ${s.best}점 · ${S.mocks.length}회 응시`:"아직 안 봤어요";
@@ -518,12 +516,13 @@ const ladderStep=()=>LADDER[S.ladder.i]||null;
 const stepName=x=>`${x.b}일차 ${x.r}회`;
 const STEP_DESC={1:"새 카드 · 답을 보고 외운 뒤 객관식으로 확인",2:"주관식으로 두 번째 복습",3:"주관식으로 마지막 복습 · 맞히면 '외움'"};
 function batchPages(b){const ps=batches[b-1].map(c=>c.pg).filter(p=>p<999);if(!ps.length)return "";const a=Math.min(...ps),z=Math.max(...ps);return a===z?a+"쪽":a+"~"+z+"쪽";}
-function startLadder(){
-  const x=ladderStep();if(!x)return;
+function startLadder(j,opt){
+  if(j==null)j=S.ladder.i;
+  const x=LADDER[j];if(!x)return;
   const list=batches[x.b-1];
   const items=x.r===1?list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"mc"))
     :shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write")));
-  begin("ladder",items,{ladder:{i:S.ladder.i,b:x.b,r:x.r}});
+  begin("ladder",items,Object.assign({ladder:{i:j,b:x.b,r:x.r}},opt||{}));
 }
 let skipAsk=false;
 function ladderBoxHTML(){
@@ -864,12 +863,12 @@ function doneHTML(){
   const cw=session.wrong.some(w=>w.k==="card");
   const nx=(session.ladder||session.kind==="deep"||session.ahead)?nextStep().main:null;
   return `<div class="box done">
-    <div class="muted">${session.test?"건너뛰기 테스트 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"레슨 끝":session.ladder?stepName(session.ladder)+" 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
+    <div class="muted">${session.ladder?stepName(session.ladder)+" 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"단원 사료 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
     <div class="big">${fmt(c)} / ${a}</div>
     <div class="muted">${a?"정답률 "+pct(c,a)+"%":"푼 문제가 없어요"}</div>
     ${session.test?`<p class="muted">${pct(session.score,session.answered)>=80?"건너뛰기 성공! 맞힌 카드는 바로 복습 단계로 넘어갔어요.":"맞힌 카드는 복습 단계로 넘어갔어요. 틀린 카드는 이 레슨에서 처음부터 배우게 돼요."}</p>`:""}
     ${wrongListHTML()}
-    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${nx?`<button class="btn ghost" data-act="home">처음으로</button><button class="btn" data-act="${nx.act}" id="focusme">다음: ${esc(nx.t)}</button>`:`<button class="btn" data-act="home" id="focusme">처음으로</button>`}</div>
+    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson||session.fromPath?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${nx?`<button class="btn ghost" data-act="home">처음으로</button><button class="btn" data-act="${nx.act}" id="focusme">다음: ${esc(nx.t)}</button>`:`<button class="btn" data-act="home" id="focusme">처음으로</button>`}</div>
   </div>`;
 }
 function mockResultHTML(){
@@ -918,19 +917,11 @@ app.addEventListener("click",e=>{
   else if(act==="node"){sheet=v;render();}
   else if(act==="sheetclose"){sheet=null;render();}
   else if(act==="backpath"){session=null;view="path";sheet=null;scrollCur=true;render();}
-  else if(act==="llearn"||act==="lredo"||act==="lmc"||act==="lskip"){
-    const L=nodeById[v];sheet=null;
-    const list=L.ids.map(id=>byId[id]);
-    let items;
-    if(act==="llearn")items=list.filter(c=>levelOf(c.id)<0).map(c=>cardItem(c,"learn")).concat(list.filter(c=>{const s=st(c.id);return s&&s.s&&s.l<4&&(s.l===0||(s.d&&s.d<=today()));}).map(c=>cardItem(c)));
-    else if(act==="lredo")items=shuffle(list.map(c=>cardItem(c,levelOf(c.id)>=1?"write":"mc")));
-    else items=shuffle(list.map(c=>cardItem(c,"mc")));
-    begin("drill",items,{lesson:L.id,test:act==="lskip"});
-  }
+  else if(act==="stepredo"){sheet=null;startLadder(+v,{fromPath:true});}
   else if(act==="nsrc"){sheet=null;begin("drill",srcItems(99,+v),{lesson:"S"+v});}
   else if(act==="ntest"){sheet=null;begin("drill",unitTestItems(+v),{lesson:"T"+v,unitTest:+v});}
   else if(act==="start")startToday();
-  else if(act==="ladder"){session=null;sheet=null;skipAsk=false;startLadder();}
+  else if(act==="ladder"){const fp=view==="path"&&!!sheet;session=null;sheet=null;skipAsk=false;startLadder(null,fp?{fromPath:true}:null);}
   else if(act==="ladderskip"){skipAsk=true;render();}
   else if(act==="ladderskipno"){skipAsk=false;render();}
   else if(act==="ladderskipyes"){skipAsk=false;if(ladderStep()){S.ladder.i++;save();}render();}
