@@ -7,7 +7,7 @@ with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page(viewport={"width": 420, "height": 900})
     pg.on("pageerror", lambda e: errs.append(str(e)))
     pg.goto(url); pg.evaluate("localStorage.clear()"); pg.reload(); pg.wait_for_timeout(200)
-    pg.click("[data-act=start]")
+    pg.click("[data-act=ladder]")
     for _ in range(300):
         if pg.locator(".done").count(): break
         if pg.locator("[data-act=learned]").count(): pg.click("[data-act=learned]"); continue
