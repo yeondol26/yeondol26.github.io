@@ -683,7 +683,8 @@ function statsHTML(){
   const rows=range.map(d=>({d,a:(S.days[d]||{}).a||0,c:(S.days[d]||{}).c||0}));
   const tiles=`<div class="tiles">
     <div><b>${totA}</b><span>푼 문제</span></div><div><b>${pct(totC,totA)}%</b><span>전체 정답률</span></div>
-    <div><b>${k.l4}</b><span>외운 카드</span></div><div><b>${streakNow()}</b><span>연속 학습일</span></div></div>`;
+    <div><b>${TOTAL-k.un}</b><span>배운 카드</span></div><div><b>${k.l4}</b><span>외운 카드 (3회 완료)</span></div></div>
+    <p class="muted mt">연속 학습일 ${streakNow()}일 · 외운 카드는 3회째 주관식에서 맞힌 카드예요.</p>`;
   const unitRows=Object.keys(UNITS).map(u=>{const x=S.ustat[u]||[0,0];return {label:UNITS[u][0]+" "+UNITS[u][1],a:x[0],c:x[1]};});
   const kindRows=Object.keys(KIND).map(kk=>{const x=S.kstat[kk]||[0,0];return {label:KIND[kk],a:x[0],c:x[1]};});
   const weakU=unitRows.filter(r=>r.a>=5).sort((a,b)=>a.c/a.a-b.c/b.a)[0];
@@ -913,7 +914,7 @@ app.addEventListener("click",e=>{
   if(b.disabled)return;
   const act=b.dataset.act,v=b.dataset.v;
   const it=session&&!session.done?session.items[session.i]:null;
-  if(act==="tab"){view=v;resetAsk=false;sheet=null;if(v==="path")scrollCur=true;render();}
+  if(act==="tab"){view=v;resetAsk=false;sheet=null;if(v==="path")scrollCur=true;render();if(v!=="path")window.scrollTo(0,0);}
   else if(act==="node"){sheet=v;render();}
   else if(act==="sheetclose"){sheet=null;render();}
   else if(act==="backpath"){session=null;view="path";sheet=null;scrollCur=true;render();}
