@@ -3,8 +3,8 @@
 고1 학생용 암기·연습 웹앱. 단일 HTML 페이지로 빌드된다. 사용자는 한국어로 대화한다.
 
 ## 명령
-- 빌드: `python build.py` → `dist/index.html`(일반 웹), `dist/artifact.html`(Claude 아티팩트용, 문서 뼈대 없음), 루트 `index.html`(GitHub Pages용 웹 사본, 커밋함)
-- 배포: 웹 버전은 `main`의 루트 `index.html`이 https://yeondol26.github.io 로 공개된다(로그인 불필요). Claude 버전은 `dist/artifact.html`을 아티팩트 https://claude.ai/artifact/GVa58vBEbr2wEz5c92ZNPN 에 다시 게시한다. 두 버전의 공부 기록은 서로 따로다.
+- 빌드: `python build.py` → `dist/index.html`(일반 웹), `dist/artifact.html`(Claude 아티팩트용, 문서 뼈대 없음), `docs/index.html`(GitHub Pages용 웹 사본, 커밋함)
+- 배포: 웹 버전은 `main`의 `docs/index.html`이 (Pages 게시 폴더: `/docs`) https://yeondol26.github.io 로 공개된다(로그인 불필요). Claude 버전은 `dist/artifact.html`을 아티팩트 https://claude.ai/artifact/GVa58vBEbr2wEz5c92ZNPN 에 다시 게시한다. 두 버전의 공부 기록은 서로 따로다.
 - 데이터 검사: `node tests/check_data.js` (내용을 바꾸면 반드시 실행)
 - 화면 확인: `python tests/smoke.py` (Playwright 필요, 빌드 후 실행)
 
