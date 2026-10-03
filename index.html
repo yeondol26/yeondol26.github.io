@@ -1,0 +1,1562 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#23262D"><title>일제 강점기 암기 카드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap">
+<style>
+:root{
+  --paper:#FBFAF6; --grid:#ECEEF2; --ink:#23262D; --sub:#6A6F7A; --line:#D9DDE4;
+  --card:#FFFFFF; --soft:#F2F3F6; --on-ink:#FBFAF6;
+  --r:#D12F3A; --b:#2358C4; --g:#1C8651; --p:#8A3CC0; --o:#D9730D; --w:#8B5A2B;
+  --ok:#1C8651; --ok-bg:#E6F4EC; --no:#C62833; --no-bg:#FBE9EA;
+  --l0:#C9CED8; --l1:#9DB8E8; --l2:#6C95DE; --l3:#3E6FCB; --l4:#1C8651;
+  --viz:#3E6FCB; --viz-soft:#A9C1EC;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#15171B; --grid:#1D2026; --ink:#E6E8EC; --sub:#9AA0AB; --line:#30343C;
+    --card:#1C1F25; --soft:#23272E; --on-ink:#15171B;
+    --r:#FF6B72; --b:#79A6FF; --g:#4FCB8B; --p:#C58BFF; --o:#FFAA55; --w:#D6A26E;
+    --ok:#4FCB8B; --ok-bg:#183326; --no:#FF6B72; --no-bg:#3A1C1F;
+    --l0:#3A3F48; --l1:#2E4A7A; --l2:#3E64A8; --l3:#5C86D6; --l4:#3FAE76;
+    --viz:#79A6FF; --viz-soft:#3A5584;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#15171B; --grid:#1D2026; --ink:#E6E8EC; --sub:#9AA0AB; --line:#30343C;
+  --card:#1C1F25; --soft:#23272E; --on-ink:#15171B;
+  --r:#FF6B72; --b:#79A6FF; --g:#4FCB8B; --p:#C58BFF; --o:#FFAA55; --w:#D6A26E;
+  --ok:#4FCB8B; --ok-bg:#183326; --no:#FF6B72; --no-bg:#3A1C1F;
+  --l0:#3A3F48; --l1:#2E4A7A; --l2:#3E64A8; --l3:#5C86D6; --l4:#3FAE76;
+  --viz:#79A6FF; --viz-soft:#3A5584;
+}
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;
+  color:var(--ink);
+  font-family:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:15px; line-height:1.6; word-break:keep-all; overflow-wrap:anywhere;
+}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+.wrap{max-width:680px;margin:0 auto;padding:20px 16px 56px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:22px;font-weight:700;margin:0;line-height:1.25}
+h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--sub);margin-top:4px}
+.sync{font-size:12px;color:var(--sub);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding-top:4px}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--l0);display:inline-block}
+.sync.on i{background:var(--ok)}
+.tabs{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:10px;margin-bottom:16px}
+.tabs button{flex:1;border:0;background:transparent;padding:8px 6px;border-radius:7px;font-size:14px;color:var(--sub)}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.panel{display:grid;gap:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.dday{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dday .big{font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.dday .lab{font-size:13px;color:var(--sub)}
+.dday label{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.dday input{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;font-size:14px}
+.today h2,.box h2{font-size:16px;margin:0 0 8px;font-weight:700}
+.nums{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 14px}
+.nums div{display:grid}
+.nums b{font-size:24px;font-variant-numeric:tabular-nums;line-height:1.2}
+.nums span{font-size:12.5px;color:var(--sub)}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--ink);color:var(--on-ink);font-weight:700;font-size:15px}
+.btn.wide{width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:400}
+.btn.small{padding:7px 12px;font-size:13.5px}
+.btn:disabled{opacity:.45;cursor:default}
+.muted{color:var(--sub);font-size:13.5px}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--l0)}
+.bar span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--sub);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.streak{font-size:13px;color:var(--sub)}
+.unit{display:grid;gap:8px;padding:14px 0;border-top:1px solid var(--line)}
+.unit:first-of-type{border-top:0;padding-top:0}
+.unit .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.unit .t{font-weight:700;font-size:14.5px}
+.unit .c{font-size:12.5px;color:var(--sub);white-space:nowrap;font-variant-numeric:tabular-nums}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+details{font-size:13.5px}
+summary{cursor:pointer;color:var(--sub)}
+.clist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.clist li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:start;padding:8px 10px;background:var(--soft);border-radius:8px}
+.clist .q{grid-column:2;font-size:inherit;line-height:1.5}
+.clist .a{grid-column:2;font-weight:700}
+.lv{font-size:11px;padding:1px 7px;border-radius:999px;white-space:nowrap;align-self:start;margin-top:2px;background:var(--l0);color:var(--ink)}
+.lv.l1{background:var(--l1)} .lv.l2{background:var(--l2);color:#fff} .lv.l3{background:var(--l3);color:#fff} .lv.l4{background:var(--l4);color:#fff}
+.lv.wr{background:var(--no-bg);color:var(--no)}
+.empty{text-align:center;padding:26px 10px;color:var(--sub)}
+
+/* 학습 화면 */
+.study{display:grid;gap:14px}
+.stop{display:flex;align-items:center;gap:12px}
+.stop .prog{flex:1;height:6px;border-radius:3px;background:var(--l0);overflow:hidden}
+.stop .prog span{display:block;height:100%;background:var(--ink);transition:width .25s}
+.stop .cnt{font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;display:grid;gap:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;color:var(--sub)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;background:var(--soft)}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.chip.mode{background:transparent;border:1px solid var(--line)}
+.q{font-size:19px;line-height:1.5;text-wrap:pretty;margin:0}
+.ans{font-size:24px;font-weight:700}
+.note{font-size:13.5px;color:var(--sub)}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:16px}
+.opt .k{font-size:12px;color:var(--sub);width:16px;flex:none}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}
+.opt.no{border-color:var(--no);background:var(--no-bg)}
+.opt:disabled{cursor:default}
+.write{display:flex;gap:8px}
+.write input{flex:1;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:17px}
+.verdict{border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.verdict.ok{background:var(--ok-bg)}
+.verdict.no{background:var(--no-bg)}
+.verdict .h{font-weight:700}
+.verdict.ok .h{color:var(--ok)} .verdict.no .h{color:var(--no)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.done{text-align:center;display:grid;gap:10px;justify-items:center}
+.done .big{font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.confirm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cr{color:var(--r)} .cb{color:var(--b)} .cg{color:var(--g)} .cp{color:var(--p)} .co{color:var(--o)} .cw{color:var(--w)}
+
+.m0{margin:0}.mt{margin:8px 0 0}
+.box p.muted{margin:0 0 12px}
+.box p.muted.m0,.box p.muted.mt{margin-bottom:0}
+details.box summary{font-weight:700;color:var(--ink)}
+.tip h2{margin-bottom:4px}
+.row.center{justify-content:center}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.prow:first-of-type{border-top:0;padding-top:0}
+.prow .t{font-weight:700}
+.prow .muted{font-size:13px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tiles div{display:grid}
+.tiles b{font-size:22px;font-variant-numeric:tabular-nums;line-height:1.25}
+.tiles span{font-size:12px;color:var(--sub)}
+@media (max-width:460px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.chart .ax{fill:var(--sub);font-size:11px;font-family:inherit}
+.chart .vl{fill:var(--ink);font-size:12px;font-weight:700;font-family:inherit}
+.chart .bm{fill:var(--viz-soft)}
+.chart .bm.now{fill:var(--viz)}
+.chart .ln{fill:none;stroke:var(--viz);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .dt{fill:var(--viz);stroke:var(--card);stroke-width:2}
+.chart .hit{fill:transparent;cursor:default}
+.hb{display:grid;gap:8px}
+.hbr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.hl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ht{height:10px;background:var(--soft);border-radius:4px;overflow:hidden}
+.ht span{display:block;height:100%;background:var(--viz);border-radius:0 4px 4px 0}
+.hv{color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12.5px}
+@media (max-width:460px){.hbr{grid-template-columns:1fr auto}.hbr .ht{grid-column:1/-1;grid-row:2}}
+.tip-pop{position:absolute;z-index:10;background:var(--ink);color:var(--on-ink);font-size:12.5px;padding:6px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.tblwrap{overflow-x:auto;margin-top:10px}
+.tblwrap table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tblwrap th,.tblwrap td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}
+.tblwrap th:first-child,.tblwrap td:first-child{text-align:left}
+.tblwrap th{color:var(--sub);font-weight:400}
+.srcq{margin:0;padding:12px 14px;background:var(--soft);border-radius:10px;font-size:15.5px;line-height:1.7;border-left:3px solid var(--line)}
+.q.sm{font-size:16.5px;font-weight:700}
+.opt.sel{border-color:var(--ink);background:var(--soft);font-weight:700}
+.tl{display:grid;gap:8px}
+.tlb{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:15.5px}
+.tlb .n{width:24px;height:24px;flex:none;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.tlb.on .n{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.tlb .yr{margin-left:auto;color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
+.tlb.ok{border-color:var(--ok);background:var(--ok-bg)}
+.tlb.no{border-color:var(--no);background:var(--no-bg)}
+.ord{margin:4px 0 0;padding-left:20px}
+textarea#ei{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font:inherit;font-size:15.5px;resize:vertical}
+.mine,.model{border-radius:10px;padding:10px 12px;background:var(--soft);font-size:14.5px}
+.model{background:var(--ok-bg)}
+.kw{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.kw li{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+.kw li.hit{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+.mockh{font-size:12.5px}
+.clist.left{width:100%;text-align:left}
+.next{border-color:var(--ok)}
+.done-badge{display:inline-block;font-size:12.5px;color:var(--ok);background:var(--ok-bg);padding:2px 10px;border-radius:999px;margin-bottom:8px}
+.mt2{margin-top:10px}
+.filebtn{position:relative;overflow:hidden;cursor:pointer;display:inline-block}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.filebtn:focus-within{outline:2px solid var(--b);outline-offset:2px}
+.confirm.col{flex-direction:column;align-items:flex-start}
+#codein{width:100%;margin:8px 0;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.tabs button{padding:8px 2px}
+.path{display:grid;justify-items:center;gap:6px;padding:4px 0 30px}
+.ubanner{width:100%;background:var(--ink);color:var(--on-ink);border-radius:14px;padding:14px 16px;margin:14px 0 10px;display:grid;gap:3px}
+.ubanner:first-child{margin-top:0}
+.ubanner .un{font-size:12.5px;opacity:.75}
+.ubanner .ut{font-size:17px;font-weight:700;text-wrap:balance}
+.ubanner .up{height:6px;border-radius:3px;background:rgba(127,127,127,.35);overflow:hidden;margin-top:6px}
+.ubanner .up span{display:block;height:100%;background:var(--on-ink)}
+.ubanner .uc{font-size:12px;opacity:.75}
+.pnode{display:grid;justify-items:center;transform:translateX(var(--off));position:relative;padding-top:4px}
+.node{position:relative;width:76px;height:76px;border-radius:50%;border:0;background:transparent;padding:0;display:grid;place-items:center}
+.node .ring{position:absolute;inset:0;width:100%;height:100%}
+.node .rbg{fill:var(--card);stroke:var(--l0);stroke-width:7}
+.node .rfg{fill:none;stroke-width:7;stroke-linecap:round;stroke:var(--l2)}
+.node .rfg.done{stroke:var(--ok)} .node .rfg.cur,.node .rfg.part{stroke:var(--b)}
+.node .ni{position:relative;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;background:var(--l0);color:var(--ink);font-variant-numeric:tabular-nums}
+.node.src .ni,.node.utest .ni,.node.mock .ni{font-size:13px}
+.node.done .ni{background:var(--ok);color:#fff}
+.node.cur .ni,.node.part .ni{background:var(--b);color:#fff}
+.node.ahead .ni{background:var(--soft);color:var(--sub)}
+.node.cur{transform:scale(1.08)}
+.nl{font-size:12.5px;color:var(--sub);margin-top:4px;white-space:nowrap}
+.stars{display:flex;gap:3px;margin-top:2px}
+.stars i{width:8px;height:8px;border-radius:50%;background:var(--l0)}
+.stars i.on{background:var(--o)}
+.bubble{position:absolute;top:-26px;background:var(--b);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--b)}
+.pnode:has(.bubble){margin-top:24px}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:20}
+.sheet{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(680px,100%);max-height:80vh;overflow:auto;background:var(--card);border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));z-index:21;display:grid;gap:10px;box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+.sh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sh-t{font-size:18px;font-weight:700}
+.sh-btns{display:grid;gap:8px}
+.linkbtn{border:0;background:none;color:var(--sub);text-decoration:underline;font-size:13px;padding:8px 0 0;cursor:pointer}
+.oxprop{font-size:22px;font-weight:700;padding:10px 14px;border-radius:10px;background:var(--soft)}
+.oxrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt.ox{justify-content:center;font-size:28px;font-weight:700;padding:16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style></head><body><div class="wrap">
+<header>
+  <h1>일제 강점기 암기 카드<small>고등 한국사2 (미래엔) Ⅰ단원 · 교과서 10~61쪽 · 카드 225장 · 사료 47개 · 서술형 19문항</small></h1>
+  <span class="sync" id="sync"><i></i><span>이 기기에만 저장</span></span>
+</header>
+<div id="app"></div>
+</div>
+<script>
+// [id, 단원, 색, 그룹, 질문, 답, 메모(쪽), 허용답(|), 헷갈리는 보기(|)]
+const CARDS = [
+// ── 01 제국주의 질서와 일제의 식민 통치 정책 (10~19쪽)
+["u1-01",1,"w","세계사건","사라예보 사건을 계기로 일어난 전쟁은?","제1차 세계 대전","1914~1918, 연합국(영·프·미) 승리 · 10쪽","1차 세계 대전|제1차 대전|1차대전|1차 세계대전",""],
+["u1-02",1,"w","세계사건","레닌이 이끈 1917년의 사회주의 혁명은?","러시아 혁명","혁명 후 러시아는 전선에서 이탈 · 10쪽","",""],
+["u1-03",1,"w","회의","제1차 세계 대전 후 전후 처리를 위해 1919년에 열린 회의는?","파리 강화 회의","베르사유 조약 체결(베르사유 체제) · 11쪽","",""],
+["u1-04",1,"w","이념","윌슨이 14개조에서 제안해 약소민족 독립운동에 영향을 준 원칙은?","민족 자결주의","각 민족은 자신의 운명을 스스로 결정할 권리가 있음 · 11쪽","민족자결|민족 자결",""],
+["u1-05",1,"w","회의","동아시아 이해관계를 조정하고 해군 군비 축소에 합의한 1921년 회의는?","워싱턴 회의","11쪽","",""],
+["u1-06",1,"w","세계사건","1929년 미국에서 시작되어 전 세계를 덮친 경제 위기는?","대공황","미국 뉴딜, 영국 블록 경제 / 이탈리아·독일·일본은 전체주의 · 11쪽","",""],
+["u1-07",1,"w","세계사건","일본이 만주 사변(1931) 이후 세운 나라는?","만주국","1932.3. 수립 · 11쪽","",""],
+["u1-08",1,"w","세계사건","일본이 루거우차오 사건을 빌미로 1937년에 일으킨 전쟁은?","중일 전쟁","난징 대학살(1937~1938) · 11쪽","",""],
+["u1-09",1,"w","세계사건","일본의 진주만 기습(1941.12.)으로 시작된 전쟁은?","아시아·태평양 전쟁","미국의 전쟁 물자 수출 금지가 배경 · 11쪽","아시아 태평양 전쟁|태평양 전쟁",""],
+["u1-10",1,"r","기구","총독이 입법·사법·행정권과 군사권을 장악한 식민 통치 최고 기구는?","조선 총독부","총독은 일본 육해군 대장 중 임명, 일왕 직속 · 12쪽","총독부",""],
+["u1-11",1,"r","기구","조선 총독부의 친일파 자문 기구로, 3·1 운동 전까지 한 번도 소집되지 않은 곳은?","중추원","12쪽","",""],
+["u1-12",1,"r","정책","헌병이 경찰 업무를 맡고 정식 재판 없이 즉결 처분까지 한 경찰 제도는?","헌병 경찰제","무단 통치 · 12쪽","","보통 경찰제"],
+["u1-13",1,"r","법령","한국인에게만 적용한 1912년 형벌 법령은?","조선 태형령","12쪽","태형령",""],
+["u1-14",1,"r","법령","「토지 소유자는 조선 총독이 정하는 기간 내에 신고하여야 한다」는 법령은?","토지 조사령","1912 · 13쪽","",""],
+["u1-15",1,"r","정책","공정한 지세와 근대적 토지 소유권을 명분으로 1910~1918년에 실시한 정책은?","토지 조사 사업","실제 의도: 재정 확보, 일본인의 토지 차지 · 13쪽","",""],
+["u1-16",1,"r","기구","총독부가 차지한 토지를 헐값에 넘겨받은 일본 회사는?","동양 척식 주식회사","13쪽","동척",""],
+["u1-17",1,"r","정책","토지 조사 사업에서 농민의 관행적 경작권이 부정된 결과 늘어난 것은?","기한부 계약 소작농","13쪽","기한부 소작농|소작농","자작농|화전민|토막민"],
+["u1-18",1,"r","법령","회사를 세울 때 조선 총독의 허가를 받게 한 1910년 법령은?","회사령","허가제, 총독 명령으로 해산 가능 · 13쪽","",""],
+["u1-19",1,"r","정책","1920년 회사령 폐지로 회사 설립은 허가제에서 무엇으로 바뀌었나?","신고제","일본 기업의 한국 진출이 쉬워짐 · 15쪽","","허가제|등록제|인가제"],
+["u1-20",1,"r","정책","3·1 운동 이후 헌병 경찰제 대신 실시한 경찰 제도는?","보통 경찰제","경찰 인원은 오히려 5,402명→18,376명 · 14쪽","","헌병 경찰제"],
+["u1-21",1,"r","법령","국체 변혁·사유 재산 부인 결사를 처벌해 독립운동가와 사회주의자를 탄압한 1925년 법은?","치안 유지법","14쪽","",""],
+["u1-22",1,"r","기구","한국인을 지방 행정에 참여시킨다고 선전했지만 의결권 없는 자문 기구였던 것은?","도 평의회","부·면 협의회도 같은 성격 · 14쪽","부면 협의회|부·면 협의회|도평의회",""],
+["u1-23",1,"r","정책","'문화 정치'의 실상을 교과서는 무엇이라고 부르나?","민족 분열 통치","친일 세력을 키워 식민 지배를 공고히 함 · 14쪽","",""],
+["u1-24",1,"r","정책","일본의 쌀 부족을 한국에서 보충하려 한 1920~1934년 계획은?","산미 증식 계획","증산은 목표 미달, 반출은 예정대로 · 15쪽","",""],
+["u1-25",1,"r","기구","산미 증식 계획 때 수리 시설 비용을 소작농에게 떠넘기는 일이 많았던 조직은?","수리 조합","15쪽","",""],
+["u1-26",1,"r","정책","1923년 대부분 폐지되어 값싼 일본 상품이 들어오게 된 것은?","관세","한국 기업 큰 타격 · 15쪽","일본 상품 관세","회사령|헌병 경찰제|태형령"],
+["u1-27",1,"r","정책","내선일체·일선동조론을 내세워 한국인을 일왕에 충성하는 백성으로 만들려 한 정책은?","황국 신민화 정책","16쪽","황국 신민화|황국신민화",""],
+["u1-28",1,"r","선언","일왕에 대한 충성을 맹세하며 강제로 외우게 한 글은?","황국 신민 서사","17쪽","",""],
+["u1-29",1,"r","정책","매일 아침 일본 궁성을 향해 절하게 한 것은?","궁성 요배","16쪽","","신사 참배|황국 신민 서사|일본식 성명"],
+["u1-30",1,"r","정책","민족 말살 통치기에 '황국 신민의 학교'라는 뜻으로 바꾼 소학교의 이름은?","국민학교","16쪽","","보통학교|고등 보통학교|신흥 강습소"],
+["u1-31",1,"r","정책","남부에는 면화, 북부에는 양을 기르게 한 정책은?","남면북양 정책","대공황 이후 일본 방직 자본에 원료 공급 · 17쪽","남면북양",""],
+["u1-32",1,"r","정책","한반도를 군수 물자 공급 기지로 만든 정책은?","병참 기지화 정책","군수 산업 중심, 소비재 산업 위축, 남북 산업 불균형 · 17쪽","병참 기지화|병참기지화",""],
+["u1-33",1,"r","법령","인적·물적 자원을 수탈하려고 1938년에 제정한 법은?","국가 총동원법","18쪽","",""],
+["u1-34",1,"r","기구","국민정신 총동원 운동의 말단 조직은?","애국반","일장기 게양, 신사 참배, 애국 저금 강요 · 18쪽","",""],
+["u1-35",1,"r","정책","쌀은 물론 놋그릇·숟가락까지 강제로 거둬 간 수탈 방식은?","공출","18쪽","","배급|징용|징병"],
+["u1-36",1,"r","법령","탄광·철도 건설·군수 공장에 한국인을 동원한 법령은?","국민 징용령","18쪽","",""],
+["u1-37",1,"r","법령","전쟁 막바지에 여성을 군수 공장 등에 동원한 법령은?","여자 정신 근로령","18쪽","",""],
+["u1-38",1,"r","수치","쌀 공출 비율은 1941년 42.8%에서 1944년 몇 %가 되었나?","63.9%","『조선 경제 통계 요람』 · 18쪽","63.9","42.8%|45.2%|55.8%"],
+["u1-39",1,"r","수치","광산 생산액 중 한국인 비율은 1911년 4.8%에서 1920년 몇 %가 되었나?","0.4%","같은 기간 일본인 22.6%→79.9% · 13쪽","0.4","4.8%|22.6%|19.7%"],
+["u1-40",1,"r","연도","조선 태형령이 제정된 해는?","1912","12쪽","",""],
+["u1-41",1,"r","연도","치안 유지법이 제정된 해는?","1925","14쪽","",""],
+["u1-42",1,"r","연도","국가 총동원법이 제정된 해는?","1938","18쪽","",""],
+["u1-43",1,"r","연도","회사령이 폐지되어 신고제가 된 해는?","1920","15쪽","",""],
+// ── 02 3·1 운동과 대한민국 임시 정부 (20~29쪽)
+["u2-01",2,"b","단체","의병장 출신 임병찬이 고종의 밀명을 받아 조직한 단체는?","독립 의군부","1912 · 20쪽","",""],
+["u2-02",2,"b","이념","독립 의군부가 내세운, 고종을 다시 황제로 세우려는 이념은?","복벽주의","20쪽","","공화주의|삼균주의|민족 자결주의"],
+["u2-03",2,"b","단체","박상진이 조직해 공화제 국가 건설을 추구한 단체는?","대한 광복회","1915, 친일파 처단·군자금 모집 · 20쪽","",""],
+["u2-04",2,"b","이념","대한 광복회가 추구한 정치 체제는?","공화주의","국권 회복 후 민주 공화제 국가 · 20쪽","공화제|민주 공화제","복벽주의|입헌 군주제|삼균주의"],
+["u2-05",2,"g","단체","이회영·이상룡 등이 서간도 삼원보에 세운 군사 교육 기관은?","신흥 강습소","1911, 이후 신흥 무관 학교 · 21쪽","신흥 무관 학교",""],
+["u2-06",2,"g","지명","연해주 블라디보스토크의 한인 집단 거주지는?","신한촌","권업회 조직 · 21쪽","","삼원보|명동촌|용정"],
+["u2-07",2,"g","단체","이상설·이동휘 등이 연해주에 세운 정부는?","대한 광복군 정부","21쪽","",""],
+["u2-08",2,"g","단체","안창호 주도로 미주에서 결성된 한인 단체는?","대한인 국민회","21쪽","",""],
+["u2-09",2,"g","단체","하와이에서 박용만이 조직한 군사 단체는?","대조선 국민군단","21쪽","",""],
+["u2-10",2,"g","단체","서일 등이 북간도에서 조직해 북로 군정서로 이어진 단체는?","중광단","대종교 계열 · 21쪽","",""],
+["u2-11",2,"g","단체","신규식이 상하이에서 조직해 신한청년당으로 이어진 단체는?","동제사","21쪽","",""],
+["u2-12",2,"p","선언","국민 주권론을 내세우고 임시 정부 수립을 주장한 1917년 선언은?","대동단결 선언","신규식·박은식·신채호·조소앙 등 · 21쪽","",""],
+["u2-13",2,"b","선언","일본 유학생들이 조선 청년 독립단 이름으로 도쿄에서 발표한 1919년 선언은?","2·8 독립 선언","22쪽","2.8 독립 선언|28 독립 선언|2·8 선언",""],
+["u2-14",2,"b","인물","신한청년당이 파리 강화 회의에 파견한 인물은?","김규식","22쪽","",""],
+["u2-15",2,"b","지명","1919년 3월 1일 민족 대표가 독립 선언식을 연 곳은?","태화관","학생·시민은 탑골 공원 · 23쪽","","탑골 공원|종로|덕수궁"],
+["u2-16",2,"b","지명","3·1 운동 때 학생과 시민이 독립 선언서를 낭독하고 시위를 시작한 곳은?","탑골 공원","23쪽","","태화관|덕수궁|아우내 장터"],
+["u2-17",2,"r","사건","1919년 4월 15일 화성에서 일본군이 주민을 교회에 모아 학살한 사건은?","제암리 학살","23쪽","제암리 사건|제암리",""],
+["u2-18",2,"b","인물","천안 아우내 장터 시위를 이끈 이화 학당 학생은?","유관순","24쪽","",""],
+["u2-19",2,"b","기타","3·1 운동 수감자 중 가장 큰 비율(58.4%)을 차지한 계층은?","농민","25쪽 통계","","학생·지식인|상공업자|노동자"],
+["u2-20",2,"w","세계사건","3·1 운동의 영향을 받은 중국의 반제국주의 운동은?","5·4 운동","24쪽","5.4 운동|54 운동|5·4운동",""],
+["u2-21",2,"p","기구","1919년 3개 임시 정부가 통합할 때 법통을 이은 정부는?","한성 정부","국내 13도 대표 · 26쪽","","대한 국민 의회|상하이 임시 정부|대한 광복군 정부"],
+["u2-22",2,"p","기구","연해주에서 수립된 임시 정부 성격의 조직은?","대한 국민 의회","26쪽","","한성 정부|대한 광복군 정부|권업회"],
+["u2-23",2,"p","인물","대한민국 임시 정부의 초대 대통령은?","이승만","국무총리 이동휘 · 26쪽","",""],
+["u2-24",2,"p","인물","대한민국 임시 정부의 초대 국무총리는?","이동휘","26쪽","",""],
+["u2-25",2,"p","기구","대한민국 임시 정부의 입법 기관은?","임시 의정원","행정 국무원, 사법 법원 · 26쪽","","국무원|법원|중추원"],
+["u2-26",2,"p","기구","대한민국 임시 정부가 국내에 둔 비밀 행정 조직은?","연통제","군자금 조달, 문서·명령 전달 · 27쪽","","교통국|구미 위원부|임시 의정원"],
+["u2-27",2,"p","기구","대한민국 임시 정부의 통신 기관으로 정보 수집과 자금 모집을 맡은 것은?","교통국","이륭양행에 둔 안동 교통국 · 27쪽","","연통제|구미 위원부|임시 의정원"],
+["u2-28",2,"p","기구","이승만 중심으로 미국에 설치한 임시 정부 외교 기구는?","구미 위원부","27쪽","","교통국|연통제|대한인 국민회"],
+["u2-29",2,"p","기타","대한민국 임시 정부가 발행한 신문은?","독립신문","27쪽","","한일 관계 사료집|진단학보|개벽"],
+["u2-30",2,"p","기타","임시 정부 사료 편찬회가 간행한 책은?","한일 관계 사료집","27쪽","","독립신문|조선사|한국통사"],
+["u2-31",2,"p","회의","1923년 독립운동의 새 방향을 찾으려 열린 회의는?","국민 대표 회의","개조파와 창조파 대립 → 결렬 · 28쪽","",""],
+["u2-32",2,"p","기타","국민 대표 회의에서 임시 정부를 고쳐서 유지하자고 한 쪽은?","개조파","28쪽","","창조파|타협파|비타협파"],
+["u2-33",2,"p","기타","국민 대표 회의에서 임시 정부 대신 새 조직을 만들자고 한 쪽은?","창조파","28쪽","","개조파|타협파|비타협파"],
+["u2-34",2,"p","사건","신채호 등이 비판한 이승만의 외교 활동은?","위임 통치 청원","국제 연맹에 위임 통치 요청 · 28쪽","국제 연맹 위임 통치 청원|위임통치","자치 운동|구미 위원부 설치|독립 공채 발행"],
+["u2-35",2,"p","인물","이승만 탄핵 후 제2대 임시 대통령이 된 인물은?","박은식","1925 · 28쪽","",""],
+["u2-36",2,"p","연도","3개 임시 정부가 통합된 해는?","1919","9월 · 26쪽","",""],
+["u2-37",2,"p","연도","국민 대표 회의가 열린 해는?","1923","28쪽","",""],
+["u2-38",2,"b","연도","대한 광복회가 조직된 해는?","1915","20쪽","",""],
+// ── 03 민족 운동의 전개와 분화 (30~45쪽)
+["u3-01",3,"g","전투","홍범도의 대한 독립군 등 연합 부대가 1920년 6월 승리한 전투는?","봉오동 전투","30쪽","봉오동","청산리 대첩"],
+["u3-02",3,"g","전투","김좌진의 북로 군정서 등이 1920년 10월 10여 차례 싸워 승리한 전투는?","청산리 대첩","31쪽","청산리 전투|청산리","봉오동 전투"],
+["u3-03",3,"g","인물","청산리 대첩 때 북로 군정서를 이끈 인물은?","김좌진","31쪽","","홍범도|지청천|양세봉"],
+["u3-04",3,"g","인물","봉오동 전투를 이끈 대한 독립군 지휘관은?","홍범도","30쪽","","김좌진|지청천|양세봉"],
+["u3-05",3,"r","사건","일제가 독립군을 공격하려고 꾸민 구실은?","훈춘 사건","30쪽","",""],
+["u3-06",3,"r","사건","1920년 일본군이 간도 한인 마을을 불태우고 학살한 사건은?","간도 참변","31쪽","","자유시 참변|제암리 학살|관동 대지진"],
+["u3-07",3,"g","사건","1921년 러시아 적군의 무장 해제 과정에서 독립군이 크게 희생된 사건은?","자유시 참변","31쪽","","간도 참변|훈춘 사건|미쓰야 협정"],
+["u3-08",3,"g","단체","1920년대 중반 만주의 3부는 참의부, 정의부와 무엇인가?","신민부","북만주, 자유시에서 돌아온 독립군 중심 · 32쪽","","국민부|혁신 의회|북로 군정서"],
+["u3-09",3,"r","법령","1925년 총독부 경무 국장과 만주 군벌이 맺어 독립운동가를 체포·인도하게 한 협정은?","미쓰야 협정","32쪽","",""],
+["u3-10",3,"g","단체","남만주의 국민부가 조직한 군대는?","조선 혁명군","양세봉 · 32쪽","","한국 독립군|북로 군정서|조선 의용대"],
+["u3-11",3,"g","단체","북만주의 혁신 의회에서 이어진 한국 독립당의 군대는?","한국 독립군","지청천 · 32쪽","","조선 혁명군|북로 군정서|조선 의용대"],
+["u3-12",3,"g","인물","조선 혁명군을 이끈 인물은?","양세봉","33쪽","","지청천|김좌진|홍범도"],
+["u3-13",3,"g","인물","한국 독립군을 이끈 인물은?","지청천","이후 한국광복군 총사령관 · 33쪽","이청천","양세봉|김좌진|홍범도"],
+["u3-14",3,"g","전투","조선 혁명군이 중국 의용군과 함께 1932년 승리한 전투는?","영릉가 전투","흥경성 전투(1933)도 조선 혁명군 · 33쪽","영릉가","쌍성보 전투|대전자령 전투|호가장 전투"],
+["u3-15",3,"g","전투","한국 독립군이 중국군과 함께 1932년 승리한 전투는?","쌍성보 전투","33쪽","쌍성보","영릉가 전투|흥경성 전투|호가장 전투"],
+["u3-16",3,"g","전투","한국 독립군이 1933년 동경성 전투와 함께 승리한 전투는?","대전자령 전투","33쪽","대전자령","영릉가 전투|흥경성 전투|봉오동 전투"],
+["u3-17",3,"g","단체","김원봉·윤세주 등이 1919년 만주 지린에서 조직한 단체는?","의열단","34쪽","","한인 애국단|대한 광복회|중광단"],
+["u3-18",3,"g","선언","신채호가 쓴 의열단의 활동 지침(1923)은?","조선 혁명 선언","34쪽","","대동단결 선언|정우회 선언|2·8 독립 선언"],
+["u3-19",3,"g","이념","조선 혁명 선언이 외교론·실력 양성론을 비판하며 주장한 방법은?","민중 직접 혁명","34쪽","민중 직접혁명|민중 혁명","외교 독립론|실력 양성론|자치론"],
+["u3-20",3,"g","인물","동양 척식 주식회사에 폭탄을 던진 의열단원은?","나석주","1926 · 34쪽","","김익상|김상옥|김지섭"],
+["u3-21",3,"g","인물","조선 총독부에 폭탄을 던진 의열단원은?","김익상","1921 · 34쪽","","나석주|김상옥|박재혁"],
+["u3-22",3,"g","인물","종로 경찰서에 폭탄을 던진 의열단원은?","김상옥","1923 · 34쪽","","나석주|김익상|최수봉"],
+["u3-23",3,"g","인물","남대문역에서 사이토 마코토 총독에게 폭탄을 던진 인물은?","강우규","1919 · 35쪽","","조명하|나석주|이봉창"],
+["u3-24",3,"p","단체","김구가 임시 정부 침체를 극복하려고 1931년 조직한 단체는?","한인 애국단","34쪽","","의열단|한국 국민당|한국 독립당"],
+["u3-25",3,"p","인물","1932년 1월 도쿄에서 일왕 마차에 폭탄을 던진 인물은?","이봉창","일제가 상하이 사변을 일으키는 구실 · 34쪽","","윤봉길|강우규|김지섭"],
+["u3-26",3,"p","인물","1932년 4월 상하이 훙커우 공원 의거의 주인공은?","윤봉길","중국 국민당 정부의 지원 계기 · 35쪽","","이봉창|나석주|김상옥"],
+["u3-27",3,"p","기타","윤봉길 의거 이후 한국 독립운동을 적극 지원한 중국 정부는?","중국 국민당 정부","35쪽","중국 국민당|국민당|국민당 정부","중국 공산당|만주 군벌|만주국"],
+["u3-28",3,"g","기타","1920년대 후반 의열단원들이 정규 군사 훈련을 받으려 들어간 학교는?","황푸 군관 학교","이후 조선 혁명 간부 학교 설립 · 34쪽","황포 군관 학교","신흥 강습소|조선 혁명 간부 학교|명동 학교"],
+["u3-29",3,"b","운동","조만식이 평양에서 시작해 '조선 사람 조선 것'을 내건 운동은?","물산 장려 운동","1920 조선 물산 장려회 · 36쪽","물산장려운동",""],
+["u3-30",3,"b","운동","'한민족 1천만이 한 사람 1원씩'을 내건 운동은?","민립 대학 설립 운동","36쪽","민립 대학 운동",""],
+["u3-31",3,"b","단체","이상재·이승훈 등이 민립 대학 설립을 위해 1923년 조직한 단체는?","조선 민립 대학 기성회","36쪽","민립 대학 기성회",""],
+["u3-32",3,"b","운동","『조선일보』가 '아는 것이 힘, 배워야 산다'를 내건 1929년 운동은?","문자 보급 운동","37쪽","","브나로드 운동"],
+["u3-33",3,"b","운동","『동아일보』가 '민중 속으로'를 내건 1931년 운동은?","브나로드 운동","37쪽","","문자 보급 운동"],
+["u3-34",3,"r","운동","이광수·최린 등이 식민 지배를 인정하고 자치권·참정권을 얻으려 한 운동은?","자치 운동","일제의 민족 분열 정책에 이용 · 37쪽","",""],
+["u3-35",3,"b","운동","70~80% 고율 소작료에 맞서 1년여 투쟁해 소작료를 내린 1923년 쟁의는?","암태도 소작 쟁의","38쪽","암태도",""],
+["u3-36",3,"b","단체","1927년 결성된 전국적 농민 운동 단체는?","조선 농민 총동맹","같은 해 조선 노동 총동맹도 결성 · 38쪽","","조선 노동 총동맹|조선 청년 총동맹|신간회"],
+["u3-37",3,"b","운동","일본인 감독의 구타로 시작되어 4개월 이어진 일제 강점기 최대 노동 운동은?","원산 총파업","1929 · 39쪽","원산",""],
+["u3-38",3,"b","운동","순종의 장례일에 일어난 1926년 만세 운동은?","6·10 만세 운동","40쪽","6.10 만세 운동|610 만세 운동|6·10 만세운동",""],
+["u3-39",3,"b","운동","나주역 한·일 학생 충돌로 시작된 1929년 운동은?","광주 학생 항일 운동","3·1 운동 이후 최대 규모 · 41쪽","광주 학생 운동",""],
+["u3-40",3,"b","단체","1924년 결성된 청년 운동의 통일 조직은?","조선 청년 총동맹","40쪽","","조선 농민 총동맹|조선 노동 총동맹|신간회"],
+["u3-41",3,"b","선언","사회주의 진영이 민족주의 진영과 손잡자고 한 1926년 선언은?","정우회 선언","42쪽","","조선 혁명 선언|대동단결 선언|2·8 독립 선언"],
+["u3-42",3,"b","단체","비타협적 민족주의와 사회주의 진영이 1927년 함께 창립한 단체는?","신간회","약 140개 지회, 4만여 명 · 42쪽","",""],
+["u3-43",3,"b","단체","강령에 '기회주의를 일체 부인함'이 있는 단체는?","신간회","42쪽","","근우회|조선 형평사|정우회"],
+["u3-44",3,"w","세계사건","민족 유일당 운동에 영향을 준 1924년 중국의 사건은?","제1차 국공 합작","42쪽","1차 국공 합작|국공 합작",""],
+["u3-45",3,"b","연도","신간회가 해소된 해는?","1931","43쪽","",""],
+["u3-46",3,"b","연도","신간회가 창립된 해는?","1927","42쪽","",""],
+["u3-47",3,"b","연도","광주 학생 항일 운동이 일어난 해는?","1929","41쪽","",""],
+["u3-48",3,"g","연도","청산리 대첩이 일어난 해는?","1920","31쪽","",""],
+// ── 04 사회·문화의 변화와 대중 운동 (46~55쪽)
+["u4-01",4,"o","기타","도시 빈민이 땅을 파고 짚이나 거적을 두른 움막을 짓고 모여 산 마을은?","토막촌","부동산 폭등과 도시 개발로 강제 철거되기도 · 47쪽","토막","화전|문화 주택|신한촌"],
+["u4-02",4,"r","운동","1930년대 일제가 생활 개선을 내세웠지만 농촌 통제를 강화한 운동은?","농촌 진흥 운동","47쪽","",""],
+["u4-03",4,"o","기타","나운규가 각본·주연·감독을 맡아 흥행한 영화는?","아리랑","48쪽","","운수 좋은 날|어린이|개벽"],
+["u4-04",4,"o","기타","흑백 무성 영화에서 장면을 해설하고 대사를 전하던 사람은?","변사","48쪽","","가수|배우|기자"],
+["u4-05",4,"o","기타","중일 전쟁 이후 여성에게 입도록 강요한 작업복은?","몸뻬","남성은 국민복 · 48쪽","","국민복|양복|한복"],
+["u4-06",4,"r","사건","1923년 도쿄 부근 지진 뒤 유언비어로 한국인 6,000명 이상이 학살된 사건은?","관동 대지진","49쪽","관동 대지진 학살|관동 대지진 한국인 학살","간도 참변|자유시 참변|제암리 학살"],
+["u4-07",4,"r","지명","1937년 연해주 한인들이 강제로 이주당한 곳은?","중앙아시아","약 6,000km · 49쪽","","간도|하와이|만주"],
+["u4-08",4,"o","단체","민족주의·사회주의 계열 여성 단체가 통합해 1927년 창립한 단체는?","근우회","기관지 『근우』 · 50쪽","","신간회|조선 형평사|조선 소년 연합회"],
+["u4-09",4,"o","인물","'어린이'라는 말을 널리 보급하고 어린이날 제정에 앞장선 인물은?","방정환","50쪽","",""],
+["u4-10",4,"o","단체","백정 차별을 없애려고 1923년 진주에서 창립한 단체는?","조선 형평사","51쪽","형평사","근우회|신간회|조선 소년 연합회"],
+["u4-11",4,"r","사관","식민 사관 중 한국사가 외세의 지배와 간섭으로 전개되었다는 주장은?","타율성론","52쪽","","정체성론|당파성론|일선동조론"],
+["u4-12",4,"r","사관","식민 사관 중 한국 사회가 발전 없이 정체되었다는 주장은?","정체성론","백남운이 극복하려 함 · 52쪽","","타율성론|당파성론|일선동조론"],
+["u4-13",4,"r","사관","식민 사관 중 한국인은 단결할 수 없는 민족성을 지녔다는 주장은?","당파성론","52쪽","","타율성론|정체성론|일선동조론"],
+["u4-14",4,"r","기구","식민 사관에 따라 『조선사』를 편찬한 조선 총독부 부설 기구는?","조선사 편수회","52쪽","","진단 학회|조선어 학회|중추원"],
+["u4-15",4,"o","인물","'조선 국혼'을 강조하며 『한국통사』를 쓴 역사가는?","박은식","『한국독립운동지혈사』 · 52쪽","","신채호|백남운|정인보"],
+["u4-16",4,"o","인물","고대사 연구에 힘써 『조선상고사』를 쓴 역사가는?","신채호","『조선사연구초』 · 52쪽","","박은식|백남운|정인보"],
+["u4-17",4,"o","인물","『조선사회경제사』에서 세계사의 보편 법칙을 내세워 정체성론을 극복하려 한 역사가는?","백남운","사회 경제 사학 · 53쪽","","박은식|신채호|정인보"],
+["u4-18",4,"o","단체","실증 사학자들이 1934년 조직해 『진단학보』를 낸 단체는?","진단 학회","53쪽","","조선어 학회|조선사 편수회|조선어 연구회"],
+["u4-19",4,"o","운동","정인보 등이 '문화가 살면 민족은 죽지 않는다'며 벌인 운동은?","조선학 운동","1930년대 중반, 실학 연구 · 52쪽","",""],
+["u4-20",4,"o","기타","조선어 연구회가 정한 한글날의 처음 이름은?","가갸날","잡지 『한글』 간행 · 53쪽","","한글날|훈민정음날|어린이날"],
+["u4-21",4,"o","단체","한글 맞춤법 통일안을 만들고 『조선말 큰사전』 편찬을 추진한 단체는?","조선어 학회","1931 · 53쪽","","진단 학회|조선어 연구회|조선사 편수회"],
+["u4-22",4,"r","사건","1942년 조선어 학회 회원들이 치안 유지법 위반으로 검거된 사건은?","조선어 학회 사건","53쪽","",""],
+["u4-23",4,"o","종교","나철이 일으켜 단군 신앙을 전파한 종교는?","대종교","중광단 조직 · 54쪽","","천도교|원불교|불교"],
+["u4-24",4,"o","종교","제2의 독립 선언 운동을 계획하고 『개벽』을 펴낸 종교는?","천도교","1922 · 54쪽","","대종교|원불교|개신교"],
+["u4-25",4,"o","종교","박중빈이 창시해 새 생활 운동을 펼친 종교는?","원불교","54쪽","","대종교|천도교|불교"],
+["u4-26",4,"r","법령","일제가 불교를 통제하려고 1911년 제정한 법령은?","사찰령","54쪽","",""],
+["u4-27",4,"o","단체","천주교 신자가 중심이 되어 조직한 항일 무장 단체는?","의민단","54쪽","","중광단|의열단|대한 광복회"],
+["u4-28",4,"o","인물","『광야』·『청포도』를 남기고 옥중에서 순국한 저항 시인은?","이육사","55쪽","","윤동주|심훈|이상화"],
+["u4-29",4,"o","연도","조선 형평사가 창립된 해는?","1923","51쪽","",""],
+// ── 05 독립 국가 건설 노력 (56~61쪽)
+["u5-01",5,"g","단체","1935년 난징에서 민족주의·사회주의 계열이 통합해 결성한 정당은?","민족 혁명당","중국 관내 최대 통일 전선 정당 · 56쪽","",""],
+["u5-02",5,"p","단체","김구 등 임시 정부 옹호 세력이 민족 혁명당에 불참하고 만든 정당은?","한국 국민당","56쪽","","한국 독립당|민족 혁명당|조선 독립 동맹"],
+["u5-03",5,"g","단체","중일 전쟁 후 김원봉 중심으로 결성된 연합 조직은?","조선 민족 전선 연맹","56쪽","","한국 광복 운동 단체 연합회|조선 독립 동맹|조선 건국 동맹"],
+["u5-04",5,"p","단체","중일 전쟁 후 김구 중심으로 결성된 연합 조직은?","한국 광복 운동 단체 연합회","56쪽","","조선 민족 전선 연맹|조선 독립 동맹|조선 건국 동맹"],
+["u5-05",5,"g","단체","1938년 우한에서 창설된 중국 관내 최초의 한인 부대는?","조선 의용대","57쪽","","한국광복군|조선 의용군|조선 혁명군"],
+["u5-06",5,"g","단체","조선 의용대 화북 지대가 1942년 개편된 부대는?","조선 의용군","57쪽","","조선 의용대|한국광복군|한국 독립군"],
+["u5-07",5,"g","전투","조선 의용대 화북 지대가 1941년 12월에 치른 전투는?","호가장 전투","1942.5. 반소탕전 · 57쪽","호가장","대전자령 전투|쌍성보 전투|영릉가 전투"],
+["u5-08",5,"p","지명","대한민국 임시 정부가 1940년 정착한 곳은?","충칭","58쪽","중경","상하이|항저우|창사"],
+["u5-09",5,"p","단체","1940년 충칭에서 창설된 임시 정부의 군대는?","한국광복군","총사령관 지청천 · 58쪽","한국 광복군|광복군","조선 의용대|조선 의용군|한국 독립군"],
+["u5-10",5,"p","단체","충칭 시기 민족주의 계열 정당을 통합해 임시 정부를 이끈 정당은?","한국 독립당","1940 · 58쪽","","한국 국민당|민족 혁명당|조선 독립 동맹"],
+["u5-11",5,"p","이념","1941년 임시 정부 건국 강령의 바탕이 된 이념은?","삼균주의","정치·경제·교육의 균등 · 58, 61쪽","","공화주의|복벽주의|민족 자결주의"],
+["u5-12",5,"p","인물","삼균주의를 주창한 인물은?","조소앙","61쪽","","김구|김원봉|여운형"],
+["u5-13",5,"g","인물","조선 의용대 일부를 이끌고 1942년 한국광복군에 합류한 인물은?","김원봉","58쪽","","김두봉|지청천|여운형"],
+["u5-14",5,"p","지명","한국광복군이 영국군의 요청으로 공작대를 파견한 곳(1943)은?","미얀마·인도 전선","59쪽","미얀마 인도 전선|미얀마|인도 미얀마","화북 지방|옌안|만주"],
+["u5-15",5,"p","기타","한국광복군이 국내 진공 작전을 위해 협약을 맺은 미국 기관은?","미국 전략 정보국(OSS)","59쪽","oss|미국 전략 정보국|전략 정보국","영국군|중국 국민당 정부|조선 의용군"],
+["u5-16",5,"g","단체","김두봉을 위원장으로 1942년 화북에서 결성된 사회주의 계열 단체는?","조선 독립 동맹","조선 의용군 · 59쪽","","조선 건국 동맹|조선 민족 전선 연맹|민족 혁명당"],
+["u5-17",5,"b","단체","여운형이 1944년 국내에서 조직한 비밀 결사는?","조선 건국 동맹","59쪽","","조선 독립 동맹|조선 민족 전선 연맹|신간회"],
+["u5-18",5,"w","회의","미·영·중이 처음으로 한국 독립을 약속한 1943년 12월 선언은?","카이로 선언","'적절한 시기'에 독립 · 60쪽","","얄타 회담|포츠담 선언|파리 강화 회의"],
+["u5-19",5,"w","회의","소련의 대일전 참전이 합의된 1945년 2월 회담은?","얄타 회담","미·영·소 · 60쪽","","카이로 선언|포츠담 선언|워싱턴 회의"],
+["u5-20",5,"w","회의","카이로 선언을 재확인하고 일본의 무조건 항복을 촉구한 1945년 7월 선언은?","포츠담 선언","소련도 1945.8.8. 참여 · 60쪽","","카이로 선언|얄타 회담|파리 강화 회의"],
+["u5-21",5,"p","연도","한국광복군이 창설된 해는?","1940","58쪽","",""],
+["u5-22",5,"g","연도","조선 의용대가 창설된 해는?","1938","57쪽","",""],
+["u5-23",5,"b","연도","조선 건국 동맹이 결성된 해는?","1944","59쪽","",""],
+["u5-24",5,"w","연도","카이로 선언이 발표된 해는?","1943","60쪽","",""],
+];
+// ── 추가 카드 (교과서 굵은 글씨·본문 용어 보강)
+CARDS.push(
+["u1-44",1,"r","정책","헌병 경찰제와 태형으로 대표되는 1910년대 일제의 통치 방식은?","무단 통치","12쪽","","'문화 정치'|민족 말살 통치|민족 분열 통치"],
+["u1-45",1,"r","정책","3·1 운동 이후 일제가 한국인을 회유하려고 내세운 통치 방식은?","'문화 정치'","실상은 민족 분열 통치 · 14쪽","문화 정치|문화정치","무단 통치|민족 말살 통치|황국 신민화 정책"],
+["u1-46",1,"r","정책","만주 사변 이후 침략 전쟁을 넓히면서 실시한 통치 방식은?","민족 말살 통치","16쪽","","무단 통치|'문화 정치'|민족 분열 통치"],
+["u1-47",1,"r","사관","일본(내지)과 한국이 한 몸이라는 일제의 구호는?","내선일체","16쪽","내선 일체","일선동조론|황국 신민 서사|민족 자결주의"],
+["u1-48",1,"r","사관","일본인과 한국인이 같은 조상에서 나왔다는 일제의 주장은?","일선동조론","16쪽","일선 동조론","내선일체|정체성론|타율성론"],
+["u1-49",1,"r","정책","지원병제·학도 지원병제에 이어 청년들을 전쟁터로 끌고 간 제도는?","징병제","18쪽","징병","징용|공출|배급제"],
+["u1-50",1,"r","운동","일상생활 속 황국 신민화를 위해 애국반을 두고 벌인 운동은?","국민정신 총동원 운동","18쪽","국민 정신 총동원 운동","농촌 진흥 운동|물산 장려 운동|브나로드 운동"],
+["u2-39",2,"b","단체","상하이에서 김규식을 파리 강화 회의에 파견한 단체는?","신한청년당","22쪽","신한 청년당","동제사|대한인 국민회|대한 광복회"],
+["u2-40",2,"b","기타","1919년 3월 1일 태화관에서 독립 선언식을 연 손병희·이승훈·한용운 등을 부르는 말은?","민족 대표","23쪽","민족 대표 33인","민족 혁명당|임시 의정원|신간회"],
+["u2-41",2,"p","이념","임시 정부가 입법(임시 의정원)·행정(국무원)·사법(법원)을 나눈 원칙은?","삼권 분립","26쪽","삼권분립","삼균주의|민주 공화제|복벽주의"],
+["u2-42",2,"p","정책","임시 정부가 독립운동 자금을 마련하려고 발행해 국내외에서 판매한 채권은?","독립 공채","27쪽","독립공채","의연금|공출|애국 저금"],
+["u2-43",2,"p","기타","대한민국 임시 정부가 우리 역사상 최초로 채택한 정부 형태는?","민주 공화제","26쪽","민주 공화정|민주공화제","입헌 군주제|복벽주의|삼균주의"],
+["u3-49",3,"g","단체","청산리 대첩에서 김좌진이 이끈 부대는?","북로 군정서","31쪽","북로군정서","대한 독립군|서로 군정서|조선 혁명군"],
+["u3-50",3,"g","단체","봉오동 전투에서 홍범도가 이끈 부대는?","대한 독립군","30쪽","대한독립군","북로 군정서|한국 독립군|조선 혁명군"],
+["u3-51",3,"g","단체","1920년대 중반 남만주 지역에 수립된 3부 중 하나는?","참의부","32쪽","","정의부|신민부|국민부"],
+["u3-52",3,"g","단체","1920년대 중반 지린 일대를 중심으로 수립된 3부 중 하나는?","정의부","32쪽","","참의부|신민부|혁신 의회"],
+["u3-53",3,"g","운동","미쓰야 협정 이후 위축된 만주 독립운동을 다시 세우려고 3부를 하나로 합치려 한 운동은?","3부 통합 운동","국민부와 혁신 의회로 재편 · 32쪽","3부 통합","민족 유일당 운동|물산 장려 운동|자치 운동"],
+["u3-54",3,"g","단체","동북 항일 연군 소속 한인 유격대원이 민족주의자와 함께 조직한 단체는?","조국 광복회","33쪽","","조선 독립 동맹|조선 건국 동맹|한국 독립당"],
+["u3-55",3,"r","사건","이봉창 의거를 보도한 중국 언론의 반일적 태도를 구실로 일제가 일으킨 사건은?","상하이 사변","34쪽","상해 사변","만주 사변|훈춘 사건|중일 전쟁"],
+["u3-56",3,"g","기타","1930년대 의열단이 중국 국민당 정부의 지원으로 세운 간부 양성 학교는?","조선 혁명 간부 학교","34쪽","","황푸 군관 학교|신흥 무관 학교|명동 학교"],
+["u3-57",3,"b","단체","1927년 결성된 전국적 노동 운동 단체는?","조선 노동 총동맹","38쪽","","조선 농민 총동맹|조선 청년 총동맹|원산 노동 연합회"],
+["u3-58",3,"b","운동","학생들이 교육 과정 개선·일본인 교사 배척 등을 요구하며 벌인 등교 거부 투쟁은?","동맹 휴학","40쪽","동맹휴학","소작 쟁의|노동 쟁의|문자 보급 운동"],
+["u3-59",3,"b","인물","1926년 세상을 떠나 6·10 만세 운동의 계기가 된 대한 제국의 마지막 황제는?","순종","40쪽","","고종|흥선 대원군|영친왕"],
+["u3-60",3,"b","단체","1926년 11월 3일 조직되어 광주 학생 항일 운동을 이끈 학생들이 속했던 비밀 결사는?","성진회","41쪽","","신간회|조선 청년 총동맹|근우회"],
+["u3-61",3,"b","운동","1920년대 중반 민족 운동 전선을 하나로 묶으려 국내외에서 벌어진 운동은?","민족 유일당 운동","42쪽","","3부 통합 운동|물산 장려 운동|자치 운동"],
+["u3-62",3,"b","단체","1925년 결성되어 6·10 만세 운동을 준비한 사회주의 계열 단체는?","조선 공산당","40, 42쪽","","정우회|신간회|조선 청년 총동맹"],
+["u3-63",3,"b","기타","6·10 만세 운동의 준비 과정에서 생긴, 민족주의·사회주의가 함께해야 한다는 공감대는?","민족 협동 전선","41쪽","","민족 유일당|3부 통합|자치론"],
+["u3-64",3,"b","연도","조선 물산 장려회가 조직된 해는?","1920","36쪽","",""],
+["u3-65",3,"b","연도","6·10 만세 운동이 일어난 해는?","1926","40쪽","",""],
+["u3-66",3,"p","연도","한인 애국단이 조직된 해는?","1931","34쪽","",""],
+["u4-30",4,"o","인물","조선 불교 유신회를 조직해 사찰령에 맞선 승려이자 시인은?","한용운","54쪽","","박중빈|나철|이육사"],
+["u4-31",4,"o","인물","신사 참배를 거부하다 고문 끝에 순교한 개신교 목사는?","주기철","54쪽","","한용운|방정환|안창호"],
+["u4-32",4,"o","운동","주시경의 제자들이 3·1 운동 이후 국문 연구소를 이어 조직한 단체는?","조선어 연구회","→ 조선어 학회(1931) · 53쪽","","조선어 학회|진단 학회|조선사 편수회"],
+["u4-33",4,"o","사관","박은식·신채호처럼 민족정신을 강조한 역사학은?","민족주의 사학","52쪽","","사회 경제 사학|실증 사학|식민 사관"],
+["u4-34",4,"o","사관","백남운처럼 마르크스의 유물 사관에 근거한 역사학은?","사회 경제 사학","53쪽","","민족주의 사학|실증 사학|조선학 운동"],
+["u4-35",4,"o","사관","문헌 고증으로 객관적 역사 서술을 추구한 역사학은?","실증 사학","진단 학회 · 53쪽","","민족주의 사학|사회 경제 사학|식민 사관"],
+["u4-36",4,"o","운동","백정에 대한 사회적 차별을 없애려는 운동은?","형평 운동","51쪽","","소년 운동|여성 운동|브나로드 운동"],
+["u4-37",4,"o","운동","천도교 소년회와 방정환이 이끈, 어린이의 인격 존중을 내건 운동은?","소년 운동","50쪽","","형평 운동|여성 운동|물산 장려 운동"],
+["u4-38",4,"o","인물","1936년 경매 등으로 문화유산을 사들여 지킨 인물은?","전형필","간송 · 54쪽","간송","박은식|정인보|방정환"],
+["u5-25",5,"g","단체","조선 의용대 다수 병력이 1941년 화북으로 옮겨 결성한 부대는?","조선 의용대 화북 지대","57쪽","화북 지대","조선 의용군|한국광복군|조선 혁명군"],
+["u5-26",5,"p","정책","한국광복군이 미국 OSS와 손잡고 준비했으나 일제 항복으로 취소된 작전은?","국내 진공 작전","59쪽","국내 진입 작전","반소탕전|미얀마·인도 전선 파견|3부 통합 운동"],
+["u5-27",5,"p","인물","충칭 시기 임시 정부의 주석으로 단일 지도 체제를 이룬 인물은?","김구","58쪽","","이승만|김규식|조소앙"],
+["u5-28",5,"p","연도","대한민국 임시 정부가 건국 강령을 발표한 해는?","1941","58쪽","",""]
+);
+// 사료: [id, 단원, 색, 질문, 사료 구절(일부·요약), 정답, 오답 보기(|), 출처·쪽]
+const SOURCES = [
+["s1-01",1,"r","이 법령은?","제13조 본령은 조선인에 한하여 적용한다.","조선 태형령","치안 유지법|회사령|토지 조사령","『조선 총독부 관보』, 1912 · 12쪽"],
+["s1-02",1,"r","이 규칙이 시행된 시기의 통치 방식은?","다음 각호에 해당하는 자는 구류 또는 벌금에 처한다. … 함부로 대중을 모아 관공서에 청원 또는 진정을 한 자","무단 통치","'문화 정치'|민족 말살 통치|전시 동원 체제","경찰범 처벌 규칙, 『조선 총독부 관보』, 1912 · 12쪽"],
+["s1-03",1,"r","이 법령은?","토지의 소유자는 조선 총독이 정하는 기간 내에 그 주소, 성명, 소유지의 소재, 지목, 등급 등을 임시 토지 조사 국장에게 신고하여야 한다.","토지 조사령","회사령|조선 태형령|국가 총동원법","『조선 총독부 관보』, 1912 · 13쪽"],
+["s1-04",1,"r","이 법령은?","회사의 설립은 조선 총독의 허가를 받아야 한다. … 조선 총독은 사업의 정지·금지, 지점의 폐쇄 또는 회사의 해산을 명령할 수 있다.","회사령","토지 조사령|치안 유지법|산미 증식 계획","『조선 총독부 관보』, 1910 · 13쪽"],
+["s1-05",1,"r","이 문서가 보여 주는 일제 통치의 실상은?","친일 인물을 물색하고, 각기 계급 및 사정에 따라 여러 친일적 단체를 만들게 한 후 … 조선인 부호들과 민중을 대립하게 하고, 이들에게 일본 자본을 공급해 친일화한다.","민족 분열 통치","무단 통치|민족 말살 통치|병참 기지화","조선 민족 운동에 대한 대책(1921), 『사이토 마코토 문서』 · 14쪽"],
+["s1-06",1,"r","이 법은?","국체를 변혁하거나 사유 재산 제도를 부인할 목적으로 결사를 조직하거나 또는 그 사정을 알고 이에 가입한 자는 10년 이하의 징역 또는 금고에 처한다.","치안 유지법","조선 태형령|국가 총동원법|회사령","『조선 총독부 관보』, 1925 · 14쪽"],
+["s1-07",1,"r","이 신문 기사가 비판한 정책은?","대개 조선인들이 생산한 쌀을 수이출할 때, 결코 자신이 충분히 소비하고 남은 것을 수이출하는 것이 아니다. 생계가 곤란해 먹을 것을 먹지 못하고 파는 것이다.","산미 증식 계획","토지 조사 사업|남면북양 정책|회사령","『동아일보』, 1927 · 15쪽"],
+["s1-08",1,"r","이 규정이 추구한 정책은?","충량한 황국 신민의 자질을 얻게 하고, 내선일체·신애협력의 미풍을 기르는 것에 힘써야 한다.","황국 신민화 정책","민족 분열 통치|남면북양 정책|산미 증식 계획","국민학교 규정, 제3차 조선 교육령(1941) · 16쪽"],
+["s1-09",1,"r","이 훈시가 보여 주는 정책은?","조선의 힘만으로 보충할 수 있도록 조선 산업 분야를 다각화하며 특히 군수 공업의 육성에 역점을 두어야 한다.","병참 기지화 정책","산미 증식 계획|토지 조사 사업|남면북양 정책","조선 총독의 훈시, 『동아일보』, 1938 · 17쪽"],
+["s1-10",1,"r","이 글은?","1. 우리는 대일본 제국의 신민입니다. 2. 우리는 마음을 합하여 천황 폐하에게 충의를 다합니다.","황국 신민 서사","내선일체|일선동조론|국가 총동원법","조선 총독부, 『시정 30년사』 · 17쪽"],
+["s1-11",1,"r","이 법은?","전시에 국방 목적의 달성을 위해 국가의 전력을 가장 유효하게 발휘하도록 인적·물적 자원을 통제 운용하는 것 … 제국 신민을 징용하여 총동원 업무에 종사하게 할 수 있다.","국가 총동원법","치안 유지법|국민 징용령|여자 정신 근로령","『조선 총독부 관보』, 1938 · 18쪽"],
+["s2-01",2,"b","이 강령을 내건 단체는?","일반 부호로부터 의연금을 받는 한편, 일본인이 불법 징수한 세금을 압수하여 무장을 준비한다. … 남북 만주에 사관 학교를 설치하고 인재를 양성하여 사관으로 채용한다.","대한 광복회","독립 의군부|신민회|의열단","대한 광복회 강령, 『광복회 부활 취지 급 연혁』 · 20쪽"],
+["s2-02",2,"p","이 선언은?","융희 황제(순종)가 삼보(영토, 인민, 주권)를 포기한 경술년(1910) 8월 29일은 … 우리 동지가 삼보를 계승한 날이니 …","대동단결 선언","2·8 독립 선언|조선 혁명 선언|기미 독립 선언서","대동단결 선언(1917) · 21쪽"],
+["s2-03",2,"b","이 선언은?","본 단체는 한일 병합이 우리 민족의 자유의사에서 나오지 아니하고 … 앞의 요구가 실현되지 않을 경우 우리 민족은 일본에 대하여 영원의 혈전을 선언한다.","2·8 독립 선언","대동단결 선언|조선 혁명 선언|정우회 선언","조선 청년 독립단, 1919 · 22쪽"],
+["s2-04",2,"b","이 선언서가 낭독된 운동은?","우리는 오늘 우리 조선이 독립국이며 조선인이 자주민임을 선언하노라.","3·1 운동","6·10 만세 운동|광주 학생 항일 운동|2·8 독립 선언","3·1 독립 선언서, 1919 · 22쪽"],
+["s2-05",2,"p","이 헌법 전문이 법통을 계승한다고 밝힌 정부는?","유구한 역사와 전통에 빛나는 우리 대한국민은 3·1 운동으로 건립된 ○○○○ ○○ ○○의 법통과 불의에 항거한 4·19 민주 이념을 계승하고 …","대한민국 임시 정부","한성 정부|대한 국민 의회|대한 광복군 정부","대한민국 헌법 전문(1987) · 26쪽"],
+["s2-06",2,"p","이 자료는 어느 회의에서 대립한 주장인가?","(가) 임시 정부는 민족의 대표 기관이므로 체제를 고쳐 유지해야 한다. (나) 새로운 조직을 만들어 독립운동을 이끌어야 한다.","국민 대표 회의","파리 강화 회의|워싱턴 회의|임시 의정원 회의","28쪽 탐구"],
+["s3-01",3,"g","이 글은?","우리는 '외교', '준비' 등의 미몽을 버리고 민중 직접 혁명의 수단을 취함을 선언하노라.","조선 혁명 선언","대동단결 선언|정우회 선언|2·8 독립 선언","신채호, 1923 · 34쪽"],
+["s3-02",3,"g","파괴·암살 대상을 이렇게 정한 단체는?","파괴 대상: 조선 총독부, 동양 척식 주식회사, 매일신보사, 각 경찰서 / 암살 대상: 조선 총독 이하 고관, 군부 수뇌, 매국노, 친일파 거두, 밀정","의열단","한인 애국단|대한 광복회|북로 군정서","의열단 '5파괴', '7가살' · 34쪽"],
+["s3-03",3,"r","이 협정은?","(만주의 한국인이) 무기를 휴대하고 조선에 침입하는 것을 엄금한다. 범한 자는 이를 체포하여 일본 경찰에 인도한다. … 일본 관헌이 지명하는 불령단 수령을 체포하여 일본 관헌에게 인도한다.","미쓰야 협정","만주국 수립|훈춘 사건|간도 협약","『독립운동사 자료집』 10 · 32쪽"],
+["s3-04",3,"g","이 전투는?","조선 혁명군 총사령 양세봉, 참모장 김학규 등은 일부 병력을 이끌고 중국 의용군 부대와 합세하였다. … 아군은 승세를 몰아 적들을 30여 화리 정도 추격한 끝에 당일 오후 3시경 신빈현 서쪽의 ○○○성을 점령하였다.","영릉가 전투","쌍성보 전투|대전자령 전투|청산리 대첩","『광복』 제1권, 1941 · 33쪽 탐구"],
+["s3-05",3,"g","이 전투는?","○○○○의 양쪽은 우뚝 서 있어 그 절벽은 기어 올라갈 수 없는 험악한 골짜기였다. … 지청천 장군은 우리 군(한국 독립군) 500명만 선발대로 하고 중국군 2,000명과 혼성하여 교전을 맡기로 하였다.","대전자령 전투","영릉가 전투|봉오동 전투|호가장 전투","지헌모, 『청천 장군의 혁명 투쟁사』 · 33쪽 탐구"],
+["s3-06",3,"b","이 구호를 내건 운동은?","내 살림 내 것으로 / 조선 사람 조선 것","물산 장려 운동","민립 대학 설립 운동|문자 보급 운동|브나로드 운동","조선 물산 장려회 · 36~37쪽"],
+["s3-07",3,"b","이 취지서를 낸 운동은?","우리의 운명을 어떻게 개척할까? 정치냐, 외교냐, 산업이냐? … 교육이 아니면 아니 된다.","민립 대학 설립 운동","물산 장려 운동|문자 보급 운동|자치 운동","민립 대학 기성회 발기 취지서, 『동아일보』, 1923 · 36쪽"],
+["s3-08",3,"r","이 글이 주장한 운동은?","지금의 조선 민족에게는 왜 정치적 생활이 없는가? … 조선 내에서 허하는 범위 내에서 일대 정치적 결사를 조직해야 한다.","자치 운동","물산 장려 운동|민족 유일당 운동|신간회 운동","이광수, 「민족적 경륜」, 『동아일보』, 1924 · 37쪽"],
+["s3-09",3,"b","이 기사가 다룬 사건은?","오랫동안 맹렬히 싸워 오던 ○○○ 소작 문제는 일단락을 마쳤는데 … 지주는 소작인회의 요구인 4할을 승낙하였다.","암태도 소작 쟁의","원산 총파업|광주 학생 항일 운동|형평 운동","『동아일보』, 1924 · 38쪽"],
+["s3-10",3,"b","이 구호를 내건 1930년대 농민 운동을 이끈 조직은?","토지와 주거를 달라! 수리 조합, 삼림 조합을 타도하자! 일본 제국주의 타도!","혁명적 농민 조합","암태도 소작 쟁의|농촌 진흥 운동|물산 장려 운동","정평 농민 동맹, 1931 · 39쪽"],
+["s3-11",3,"b","이 기사가 다룬 사건은?","○○ 노동 연합회에 각 방면으로부터 격려하는 전보와 금품이 들어온다 … 재일본 조선 노동 총동맹에서도 … 정신적으로 원조함은 물론이고 물질적으로도 응원하겠다고 하여 …","원산 총파업","암태도 소작 쟁의|6·10 만세 운동|광주 학생 항일 운동","『동아일보』, 1929 · 39쪽"],
+["s3-12",3,"b","이 격문이 뿌려진 운동은?","대한 독립 만세! … 일본 물화를 배척하자! 일본인 지주에게 소작료를 바치지 말자!","6·10 만세 운동","광주 학생 항일 운동|3·1 운동|원산 총파업","격문, 1926 · 41쪽"],
+["s3-13",3,"b","이 격문이 뿌려진 운동은?","학생, 대중이여 궐기하라! … 검거된 학생들을 즉시 우리 손으로 탈환하자. … 식민지적 노예 교육 제도를 철폐하라.","광주 학생 항일 운동","6·10 만세 운동|3·1 운동|동맹 휴학","격문, 1929 · 41쪽"],
+["s3-14",3,"b","이 강령을 내건 단체는?","우리는 정치적·경제적 각성을 촉진함. 우리는 단결을 공고히 함. 우리는 기회주의를 일체 부인함.","신간회","근우회|조선 형평사|정우회","『동아일보』, 1927 · 42쪽"],
+["s3-15",3,"b","이 선언은?","민족주의적 세력에 대해서는 그 부르주아 민주주의적 성질을 명백히 인식하는 한편 … 그것이 타락한 형태로 나타나지 않는 것에 한해서는 적극적으로 제휴하여 …","정우회 선언","조선 혁명 선언|대동단결 선언|2·8 독립 선언","『조선일보』, 1926 · 43쪽"],
+["s3-16",3,"b","이 글이 주장한 것은?","신간회의 유일 생명이요 표방하는 것은 민족의 총역량을 집중한다는 것이다. 그러나 … 차라리 하루라도 조속히 ○○하여 노동자층은 노동 운동, 농민층은 농민 운동으로 …","신간회 해소","신간회 창립|정우회 선언|민족 유일당 운동","「신간회 해소 가부론」, 『별건곤』, 1931 · 43쪽"],
+["s4-01",4,"o","이 행동 강령을 내건 단체는?","여성에 대한 사회적·법률적 일체의 차별을 철폐한다. … 조혼을 폐지하고 결혼의 자유를 확립한다. 인신매매 및 공창을 폐지한다.","근우회","신간회|조선 형평사|천도교 소년회","『조선일보』, 1929 · 51쪽"],
+["s4-02",4,"o","이 조항을 내건 운동은?","어린이를 재래의 윤리적 압박으로부터 해방하여 그들에 대한 완전한 인격적 예우를 허하게 하라.","소년 운동","형평 운동|여성 운동|물산 장려 운동","소년 운동의 기초 조항, 『동아일보』, 1923 · 51쪽"],
+["s4-03",4,"o","이 취지문을 낸 단체는?","공평은 사회의 근본이고 애정은 인류의 본량이다. … 계급을 타파하고 모욕적 칭호를 폐지하며 …","조선 형평사","근우회|신간회|조선 청년 총동맹","『조선일보』, 1923 · 51쪽"],
+["s4-04",4,"r","이 발언이 드러내는 일제의 역사 연구 의도는?","저들의 민족적 반항심이 타오르게 된다면 큰일이므로 … 저들의 민족정신을 철저히 조사하지 않고서 내선동화의 사업은 완전하다고 말할 수 없다.","식민 사관","민족주의 사학|실증 사학|사회 경제 사학","데라우치 마사타케 대담, 『총독 정치사론』 · 52쪽"],
+["s4-05",4,"o","이 글을 쓴 역사가는?","종교, 역사, 말과 글, 풍속 등에 불멸의 국혼이 있다면 비록 한때 병탄을 당할지라도 마침내 독립하는 것을 세계 역사에서 많이 볼 수 있다.","박은식","신채호|백남운|정인보","『한국독립운동지혈사』 · 52쪽"],
+["s4-06",4,"o","이 글을 쓴 역사가는?","우리 조선의 역사적 발전의 전 과정은 … 세계사적 일원론적 역사 법칙에 의해 다른 민족과 거의 같은 궤도로 발전 과정을 거쳐 왔다.","백남운","박은식|신채호|정인보","『조선사회경제사』 · 53쪽"],
+["s4-07",4,"o","이 선언을 계획한 종교는?","지난 기미년의 독립 만세 운동은 곧 우리 전통적인 독립의 의지를 만방에 선명한 것이고 … 우리는 일어나야 합니다.","천도교","대종교|원불교|개신교","「자주독립 선언문」, 1922 · 54쪽"],
+["s5-01",5,"g","이 당의를 내건 정당은?","본 당은 혁명적 수단으로 원수 일본의 침탈 세력을 박멸하여 5천 년 동안 독립자주해 온 국토와 주권을 회복하고 …","민족 혁명당","한국 국민당|한국 독립당|조선 독립 동맹","『한민족 독립운동사 자료집』 · 56쪽"],
+["s5-02",5,"g","이 선언으로 조직된 부대는?","우리는 우선 조선 민족 전선 연맹의 기치 아래 일치단결하고 … ○○ ○○○를 조직한 것이다.","조선 의용대","한국광복군|조선 의용군|한국 독립군","조선 의용대 성립 선언, 1938 · 57쪽"],
+["s5-03",5,"p","이 건국 강령의 바탕 이념은?","○○ 제도를 골자로 한 헌법을 실시하여 정치와 경제와 교육의 민주적 시설로 실제상 균형을 도모하며 …","삼균주의","공화주의|복벽주의|민족 자결주의","대한민국 임시 정부 건국 강령(1941) · 61쪽"],
+["s5-04",5,"g","이 강령을 내건 단체는?","전 국민의 보통 선거에 의한 민주 정권을 수립한다. … 국민 의무 교육 제도를 실시하고 이에 필요한 경비를 국가가 부담한다.","조선 독립 동맹","조선 건국 동맹|대한민국 임시 정부|민족 혁명당","『해방일보』, 1942 · 61쪽"],
+["s5-05",5,"b","이 강령을 내건 단체는?","각인 각파를 대동단결하여 거국일치로 일본 제국주의의 여러 세력을 몰아내고 조선 민족의 자유와 독립을 회복할 것.","조선 건국 동맹","조선 독립 동맹|신간회|한국 독립당","『여운형 투쟁사』(1946) · 61쪽"],
+["s5-06",5,"w","이 선언은?","위대한 세 연합국은 한국 인민의 노예 상태에 유의하여 한국이 적절한 시기에 자유롭게 독립할 것을 결의한다.","카이로 선언","포츠담 선언|얄타 회담|파리 강화 회의","1943 · 60쪽"],
+["s5-07",5,"p","김구가 이렇게 반응한 선언은?","우리는 '적절한 시기'라는 말을 좋아하지 않는다. 우리는 반드시 일본이 붕괴되는 그때에 독립되어야 할 것이다.","카이로 선언","포츠담 선언|얄타 회담|국민 대표 회의","『신한민보』, 1943 · 60쪽"],
+];
+
+// 연표 순서 맞추기: [사건, 연도, 월(교과서에 나온 경우만, 없으면 0), 단원, 교과서 쪽]
+const EVENTS = [
+["한국 강점, 조선 총독부 설치",1910,0,1,12],["조선 태형령 제정",1912,0,1,12],["독립 의군부 조직",1912,0,2,20],["대한 광복회 조직",1915,0,2,20],
+["대동단결 선언",1917,0,2,21],["토지 조사 사업 종결",1918,0,1,13],["2·8 독립 선언",1919,2,2,22],["3·1 운동",1919,3,2,22],["3개 임시 정부 통합",1919,9,2,26],
+["봉오동 전투",1920,6,3,30],["청산리 대첩",1920,10,3,31],["자유시 참변",1921,0,3,31],["국민 대표 회의",1923,0,2,28],["조선 형평사 창립",1923,0,4,51],
+["관동 대지진 한국인 학살",1923,9,4,49],["조선 청년 총동맹 결성",1924,0,3,40],["치안 유지법 제정",1925,0,1,14],["미쓰야 협정",1925,0,3,32],
+["6·10 만세 운동",1926,6,3,40],["신간회 창립",1927,0,3,42],["원산 총파업",1929,0,3,39],["광주 학생 항일 운동",1929,11,3,41],["만주 사변",1931,0,1,11],
+["신간회 해소",1931,0,3,43],["이봉창 의거",1932,1,3,34],["윤봉길 의거",1932,4,3,35],["대전자령 전투",1933,0,3,33],["진단 학회 조직",1934,0,4,53],
+["민족 혁명당 결성",1935,0,5,56],["중일 전쟁",1937,0,1,11],["연해주 한인 중앙아시아 강제 이주",1937,10,4,49],["국가 총동원법 제정",1938,0,1,18],
+["조선 의용대 창설",1938,10,5,57],["한국광복군 창설",1940,0,5,58],["대한민국 임시 정부 건국 강령",1941,0,5,58],["아시아·태평양 전쟁",1941,12,1,11],
+["조선 독립 동맹 결성",1942,0,5,59],["조선어 학회 사건",1942,0,4,53],["카이로 선언",1943,12,5,60],["조선 건국 동맹 결성",1944,0,5,59],
+["얄타 회담",1945,2,5,60],["포츠담 선언",1945,7,5,60]
+];
+
+// 서술형: [id, 단원, 질문, 모범 답안, 핵심어 묶음(; 로 구분, 묶음 안 | 는 같은 뜻), 쪽]
+const ESSAYS = [
+["e1-01",1,"토지 조사 사업의 결과를 두 가지 이상 쓰시오.","총독부의 지세 수입이 크게 늘었다. 총독부가 소유권이 불분명한 민간 토지와 국공유지를 차지해 동양 척식 주식회사나 일본인에게 헐값에 넘겼다. 농민의 관행적 경작권이 부정되어 기한부 계약 소작농이 늘었다.","지세;동양 척식|동척|일본인;경작권|소작농","13쪽"],
+["e1-02",1,"'문화 정치'가 실제로는 민족 분열 통치였다고 볼 수 있는 근거를 쓰시오.","문관 총독은 한 명도 임명되지 않았고, 보통 경찰제로 바꾼 뒤 경찰 인원과 관서는 오히려 크게 늘었다. 치안 유지법으로 탄압을 강화했고, 신문은 검열·정간·폐간했으며, 도 평의회 등은 의결권 없는 자문 기구였다. 친일 세력을 키워 지배를 공고히 하려 했다.","문관;경찰;치안 유지법;검열|정간|폐간|삭제;자문|의결권;친일|분열","14쪽"],
+["e1-03",1,"산미 증식 계획이 농민 생활에 끼친 영향을 쓰시오.","쌀 증산은 목표에 못 미쳤지만 일본으로의 반출은 예정대로 진행되어 한국의 식량 사정이 나빠졌다. 비료 대금과 수리 조합비 등 증산 비용이 농민에게 전가되어 자작농이 소작농·화전민·토막민으로 몰락하고 만주·연해주·일본 등지로 이주하기도 했다.","반출|식량;비료|수리 조합;소작농|화전민|토막민|몰락;이주|만주|연해주","15쪽"],
+["e1-04",1,"1910년대 광산 생산액에서 한국인 비율이 크게 줄어든 이유를 일제의 경제 정책과 관련지어 쓰시오.","일제가 회사령으로 회사 설립을 허가제로 하고 광업 등에도 허가제를 실시해 한국인의 산업 활동을 억제했기 때문이다.","회사령;허가;억제|위축","13쪽 탐구"],
+["e1-05",1,"병참 기지화 정책이 한국 경제 구조에 끼친 영향을 쓰시오.","산업 구조가 군수 산업 중심으로 바뀌고 소비재 산업은 위축되었다. 중화학 공업 시설이 북부 지방에 편중되어 지역 간 산업 불균형이 심해졌다.","군수;소비재;북부|불균형|편중","17쪽"],
+["e2-01",2,"3·1 운동의 의의를 세 가지 이상 쓰시오.","일제 강점기 최대 규모의 항일 운동으로 독립 의지를 세계에 알렸다. 민족 운동을 이끌 대한민국 임시 정부 수립의 계기가 되었다. 학생·농민·노동자·여성 등으로 민족 운동의 주체가 확대되었다. 일제의 통치 방식이 무단 통치에서 '문화 정치'로 바뀌었다. 중국의 5·4 운동 등 약소민족 운동에 영향을 주었다.","임시 정부;주체|농민|노동자|여성|학생;문화 정치;5·4|약소민족|중국","24쪽"],
+["e2-02",2,"대한민국 임시 정부가 역사적으로 갖는 의미를 쓰시오.","우리 역사상 최초의 민주 공화제 정부로, 삼권 분립의 원칙에 따라 임시 의정원·국무원·법원을 두었다. 임시 헌법에 주권이 국민 전체에 있음을 밝혀 황제의 나라에서 국민의 나라로 나아갔다.","민주 공화;삼권 분립;국민","26쪽"],
+["e2-03",2,"국민 대표 회의가 열린 배경을 쓰시오.","연통제와 교통국 조직이 발각되어 재정이 어려워졌고, 외교 활동도 성과를 거두지 못했다. 독립운동 방법을 둘러싼 논쟁 속에 이승만의 위임 통치 청원이 비판받았고, 사회주의와 민족주의 계열의 갈등도 심해졌다.","연통제|교통국;재정|자금;외교;위임 통치;갈등|사회주의","28쪽"],
+["e3-01",3,"1930년대 초 한중 연합 작전이 이루어진 배경을 쓰시오.","일제가 만주를 침략하고 만주국을 세우자 중국 내에서 일본에 대한 반감이 높아졌다. 이에 만주의 독립군은 중국 항일군과 연합해 일본군과 싸웠다.","만주 사변|만주국|침략;반일|반감|중국","33쪽"],
+["e3-02",3,"「조선 혁명 선언」의 핵심 주장을 쓰시오.","외교론과 준비론(실력 양성론)을 비판하고, 민중이 직접 폭력적인 수단으로 일제를 몰아내는 민중 직접 혁명을 주장했다.","외교;준비|실력 양성;민중","34쪽"],
+["e3-03",3,"물산 장려 운동의 한계를 쓰시오.","토산품 수요에 비해 공급이 부족해 상인과 자본가의 농간으로 상품 가격이 올랐다. 일부 사회주의자들은 이 운동이 자본가 계급의 이익만 도모한다고 비판했다.","가격|값;사회주의;자본가","36쪽"],
+["e3-04",3,"민립 대학 설립 운동이 성과를 거두지 못한 까닭을 쓰시오.","자연재해 등으로 모금이 잘 이루어지지 않았고, 일제가 탄압했기 때문이다.","자연재해|모금;탄압","36쪽"],
+["e3-05",3,"6·10 만세 운동이 민족 운동에 끼친 영향을 쓰시오.","준비 과정에서 사회주의 계열과 천도교 등 민족주의 계열이 연대한 경험은 민족 협동 전선을 구축해야 한다는 공감대를 만드는 데 영향을 주었다.","사회주의;천도교|민족주의;협동 전선|연대|신간회","41쪽"],
+["e3-06",3,"신간회가 해소된 배경을 쓰시오.","새로 구성된 집행부가 타협론자와 협력하려는 태도를 보였고, 국제 공산주의 운동이 계급 투쟁을 강조하며 민족주의 세력과의 협력을 부정하는 방향으로 바뀌었다. 이에 사회주의자들을 중심으로 해소가 제기되었다.","타협;국제 공산주의|계급;사회주의","43쪽"],
+["e4-01",4,"일제가 내세운 식민 사관 세 가지를 쓰고 공통된 목적을 쓰시오.","타율성론(외세의 지배로 전개), 정체성론(발전 없이 정체), 당파성론(단결하지 못하는 민족성). 한국사의 자율적·주체적 발전을 부정하고 식민 지배를 정당화하려 했다.","타율성;정체성;당파성;정당화|부정","52쪽"],
+["e4-02",4,"조선어 학회의 활동을 쓰시오.","한글 맞춤법 통일안과 표준어 및 외래어 표기법 통일안을 제정해 한글 표준화에 기여했다. 문맹 퇴치 운동에 참여하고 『조선말 큰사전』 편찬을 추진했다.","맞춤법;표준어|외래어;문맹;큰사전","53쪽"],
+["e5-01",5,"조선 의용대가 창설된 배경을 쓰시오.","중국 내 독립운동 세력은 중일 전쟁을 항일 투쟁의 기회로 보았다. 이에 조선 민족 전선 연맹이 중국 국민당 정부의 지원을 받아 우한에서 조선 의용대를 창설했다.","중일 전쟁;조선 민족 전선 연맹;국민당","57쪽"],
+["e5-02",5,"김구가 카이로 선언에 대해 비판적으로 반응한 까닭을 쓰시오.","카이로 선언이 한국을 '적절한 시기'에 독립시키겠다고 해서, 일본이 무너지는 즉시 독립해야 한다는 입장과 달랐기 때문이다.","적절한 시기;즉시|붕괴|그때","60쪽"],
+["e5-03",5,"광복 직전 대한민국 임시 정부, 조선 독립 동맹, 조선 건국 동맹이 구상한 국가의 공통점을 쓰시오.","일제 세력을 몰아내고 민주 공화국(민주주의 국가)을 세우려 했다. 보통 선거, 토지·대기업 국유화나 토지 분배, 국가 부담 의무 교육 등 정치·경제·교육의 평등을 지향했다.","민주;선거|균등|평등;토지|국유;교육","61쪽"],
+];
+</script>
+<script>
+(function(){
+"use strict";
+const UNITS={1:["01","제국주의 질서와 일제의 식민 통치 정책","10~19쪽"],2:["02","3·1 운동과 대한민국 임시 정부","20~29쪽"],3:["03","민족 운동의 전개와 분화","30~45쪽"],4:["04","사회·문화의 변화와 대중 운동","46~55쪽"],5:["05","독립 국가 건설 노력","56~61쪽"]};
+const CAT={r:"일제 정책·탄압",b:"국내 민족 운동",g:"국외 무장·의열",p:"대한민국 임시 정부",o:"사회·문화",w:"국제 정세"};
+const KIND={mc:"카드 객관식",wr:"카드 주관식",src:"사료",tl:"연표 순서",ess:"서술형",ox:"O/X",rev:"설명 고르기",pair:"먼저 일어난 사건"};
+const LVNAME=["다시 보기","1단계","2단계","3단계","외움"];
+const INTERVAL={1:1,2:2,3:3};
+const DEFAULT_EXAM="2026-10-12";
+const LSKEY="ilje-cards-v1";
+const SUFFIX=["전투","대첩","운동","사건","정책","계획","사업","회의","의거","선언","회담","협정","학살","참변"];
+
+const cards=CARDS.map(c=>({id:c[0],u:c[1],cat:c[2],g:c[3],q:c[4],a:c[5],note:c[6],alts:c[7]?c[7].split("|"):[],x:c[8]?c[8].split("|"):[]}));
+const pageOf=c=>{const m=c.note.match(/(\d+)(?:,\s*\d+)*쪽/);return m?+m[1]:999;};
+cards.forEach((c,i)=>{c.pg=pageOf(c);c.ord=i;});
+cards.sort((a,b)=>a.u-b.u||a.pg-b.pg||a.ord-b.ord);
+const byId=Object.fromEntries(cards.map(c=>[c.id,c]));
+const firstPage=t=>{const m=String(t).match(/(\d+)(?:[,~]\s*\d+)*쪽/);return m?+m[1]:999;};
+const srcs=SOURCES.map(s=>({id:s[0],u:s[1],cat:s[2],q:s[3],text:s[4],a:s[5],x:s[6].split("|"),cite:s[7],pg:firstPage(s[7])}));
+const srcById=Object.fromEntries(srcs.map(s=>[s.id,s]));
+const events=EVENTS.map((e,i)=>({i,label:e[0],y:e[1],m:e[2],u:e[3],pg:e[4]}));
+const essays=ESSAYS.map(e=>({id:e[0],u:e[1],q:e[2],model:e[3],kws:e[4].split(";").map(g=>g.split("|")),pg:e[5],pn:firstPage(e[5])}));
+const essById=Object.fromEntries(essays.map(e=>[e.id,e]));
+const TOTAL=cards.length;
+
+/* 날짜 */
+const pad=n=>String(n).padStart(2,"0");
+const ymd=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const parse=s=>{const p=s.split("-").map(Number);return new Date(p[0],p[1]-1,p[2],12);};
+const addDays=(s,n)=>{const d=parse(s);d.setDate(d.getDate()+n);return ymd(d);};
+const diffDays=(a,b)=>Math.round((parse(b)-parse(a))/864e5);
+const today=()=>ymd(new Date());
+const md=s=>{const p=s.split("-");return (+p[1])+"/"+(+p[2]);};
+
+/* 상태 */
+function fresh(exam){return {v:1,exam:exam||DEFAULT_EXAM,cards:{},streak:{last:"",n:0},days:{},src:{},ess:{},ustat:{},kstat:{},mocks:[],utest:{},total:0,updatedAt:0};}
+function normalize(o){const f=fresh();for(const k in f)if(o[k]===undefined)o[k]=f[k];return o;}
+let S=fresh();
+try{const raw=localStorage.getItem(LSKEY);if(raw){const o=JSON.parse(raw);if(o&&o.v===1)S=normalize(o);}}catch(e){}
+
+const st=id=>S.cards[id];
+function levelOf(id){const s=st(id);return s&&s.s?s.l:-1;}
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=(a,n)=>shuffle(a.slice()).slice(0,n);
+const esc=s=>String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const norm=s=>String(s).normalize("NFC").toLowerCase().replace(/[\s·ㆍ・.,\-–~'"‘’“”『』「」()\[\]%:]/g,"");
+const pct=(c,a)=>a?Math.round(c/a*100):0;
+
+/* 저장: 이 기기 + 계정 */
+let remote=null,writing=false,again=false,rTimer=null;
+function save(){
+  S.updatedAt=Date.now();
+  try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}
+  if(remote){clearTimeout(rTimer);rTimer=setTimeout(push,1500);}
+}
+async function push(){
+  if(!remote)return;
+  if(writing){again=true;return;}
+  writing=true;
+  try{await remote.set(JSON.parse(JSON.stringify(S)));setSync(true);}
+  catch(e){const c=e&&e.code;if(c==="unavailable")setTimeout(push,4000+Math.random()*2000);else{remote=null;setSync(false);}}
+  writing=false;
+  if(again){again=false;push();}
+}
+function setSync(on){
+  const el=document.getElementById("sync");if(!el)return;
+  el.classList.toggle("on",!!on);
+  el.querySelector("span").textContent=on?"계정에 저장 중 (기기 간 공유)":"이 기기에만 저장";
+}
+function adopt(snap){
+  if(!snap||!snap.exists)return;
+  const r=snap.data();if(!r||r.v!==1)return;
+  const ru=r.updatedAt||0,lu=S.updatedAt||0;
+  if(ru>lu){
+    if(session)return;
+    S=normalize(JSON.parse(JSON.stringify(r)));
+    try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}
+    syncTotal();render();
+  }else if(ru<lu)push();
+}
+async function initRemote(){
+  if(!(window.claude&&typeof window.claude.use==="function"))return;
+  try{
+    const db=await window.claude.use("db");const user=await window.claude.use("user");
+    if(!db||!user)return;
+    const uid=await user.id();if(!uid)return;
+    const ref=db.doc("data/users/"+uid+"/progress");
+    const snap=await ref.get();
+    remote=ref;setSync(true);
+    if(snap.exists)adopt(snap);else if(S.updatedAt)push();
+  }catch(e){remote=null;setSync(false);}
+}
+document.addEventListener("visibilitychange",async()=>{
+  if(document.visibilityState==="visible"&&remote&&!session){try{adopt(await remote.get());}catch(e){}}
+});
+
+/* 하루 계획 */
+const daysLeft=()=>diffDays(today(),S.exam);
+const unseen=()=>cards.filter(c=>levelOf(c.id)<0);
+function planNew(already){
+  const left=daysLeft(),un=unseen().length;
+  if(!un)return already;
+  return already+Math.ceil(un/(left>0?Math.max(1,left-2):1));
+}
+function dayRec(){
+  const t=today();let d=S.days[t];
+  if(!d){d={p:planNew(0),n:0,a:0,c:0};S.days[t]=d;}
+  return d;
+}
+function syncTotal(){if(S.total!==TOTAL){const d=dayRec();if(!d.n)d.p=planNew(0);S.total=TOTAL;}}
+function dueList(){const t=today();return cards.filter(c=>{const s=st(c.id);return s&&s.s&&s.l<4&&(s.l===0||(s.d&&s.d<=t));});}
+const newLeft=()=>Math.min(Math.max(0,dayRec().p-dayRec().n),unseen().length);
+function sched(n){
+  const t=today();let d=addDays(t,n);
+  if(S.exam&&d>=S.exam){const b=addDays(S.exam,-1);d=b>t?b:addDays(t,1);}
+  return d;
+}
+function streakNow(){const t=today(),l=S.streak.last;return (l===t||l===addDays(t,-1))?S.streak.n:0;}
+function touchStreak(){const t=today();if(S.streak.last!==t){S.streak.n=(S.streak.last===addDays(t,-1))?S.streak.n+1:1;S.streak.last=t;}}
+function stat(u,kind,score){
+  const d=dayRec();d.a++;d.c+=score;
+  if(u){const x=S.ustat[u]||(S.ustat[u]=[0,0]);x[0]++;x[1]+=score;}
+  const k=S.kstat[kind]||(S.kstat[kind]=[0,0]);k[0]++;k[1]+=score;
+  touchStreak();
+}
+
+/* 배운 범위: 본 카드 중 가장 뒤 쪽까지 */
+function frontier(){let m=0;cards.forEach(c=>{if(levelOf(c.id)>=0&&c.pg<999&&c.pg>m)m=c.pg;});return m;}
+function scope(){const f=frontier();return {f,src:srcs.filter(s=>s.pg<=f),ev:events.filter(e=>e.pg<=f),ess:essays.filter(e=>e.pn<=f)};}
+function canTl(evs){if(evs.length<4)return false;const ys=new Set(evs.map(e=>e.y));return ys.size>=4;}
+
+/* 문제 만들기 */
+function cardItem(c,mode){return {k:"card",id:c.id,mode:mode||modeFor(c.id)};}
+function modeFor(id){const l=levelOf(id);return l<0?"learn":(l===0?"mc":"write");}
+function makeOpts(c){
+  const ds=[];
+  if(c.g==="연도"){const y=+c.a;shuffle([-4,-3,-2,-1,1,2,3,4]).slice(0,3).forEach(k=>ds.push(String(y+k)));}
+  else{
+    const seen=new Set([norm(c.a)]);
+    const add=v=>{const k=norm(v);if(ds.length<3&&!seen.has(k)){seen.add(k);ds.push(v);}};
+    shuffle(c.x.slice()).forEach(add);
+    shuffle(cards.filter(o=>o.g===c.g).map(o=>o.a)).forEach(add);
+    shuffle(cards.filter(o=>o.u===c.u).map(o=>o.a)).forEach(add);
+  }
+  return shuffle([c.a].concat(ds));
+}
+function grade(c,input){
+  const n=norm(input);if(!n)return false;
+  const ts=[c.a].concat(c.alts).map(norm);
+  if(ts.includes(n))return true;
+  return ts.some(t=>n.length>=2&&t.startsWith(n)&&SUFFIX.includes(t.slice(n.length)));
+}
+const evKey=e=>e.y*100+e.m;
+function compatible(a,b){return a.y!==b.y||(a.m&&b.m&&a.m!==b.m);}
+function tlItem(evs){
+  const pool=shuffle((evs||events).slice());
+  const first=pool[0],chosen=[first];
+  const near=pool.filter(e=>e!==first&&Math.abs(e.y-first.y)<=10);
+  for(const e of near.concat(pool)){if(chosen.length>=4)break;if(!chosen.includes(e)&&chosen.every(c=>compatible(c,e)))chosen.push(e);}
+  return {k:"tl",ev:shuffle(chosen.map(e=>e.i)),order:[]};
+}
+function srcScore(s){const r=S.src[s.id];return r?(r.r/(r.t||1))+r.t*0.01:-1;}
+function srcItems(n,u,pool){
+  let list=(pool||srcs).filter(s=>!u||s.u===u);
+  list=shuffle(list).sort((a,b)=>srcScore(a)-srcScore(b)).slice(0,n);
+  return shuffle(list).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))}));
+}
+function essItems(n,pool){
+  const sc=e=>{const r=S.ess[e.id];return r?r.best*10+r.n:-1;};
+  return shuffle((pool||essays).slice()).sort((a,b)=>sc(a)-sc(b)).slice(0,n).map(e=>({k:"ess",id:e.id}));
+}
+function kwHits(e,text){const n=norm(text);return e.kws.map(g=>g.some(w=>n.includes(norm(w))));}
+
+/* 문제 은행: 같은 사실로 여러 형태의 문제 만들기 */
+const revOK=c=>c.g!=="연도"&&c.g!=="수치"&&/(은|는)\?$/.test(c.q);
+const descOf=c=>c.q.replace(/(은|는)\?$/,"");
+function revItem(c){
+  const an=norm(c.a);const seen=new Set([an]);const ds=[];
+  const pool=shuffle(cards.filter(o=>o.g===c.g&&revOK(o))).concat(shuffle(cards.filter(o=>o.u===c.u&&revOK(o))));
+  for(const o of pool){const k=norm(o.a);if(ds.length<3&&!seen.has(k)){seen.add(k);ds.push(descOf(o));}}
+  return {k:"rev",id:c.id,ans:descOf(c),opts:shuffle([descOf(c)].concat(ds))};
+}
+function oxItem(c){
+  const truth=Math.random()<.5;
+  const shown=truth?c.a:makeOpts(c).find(o=>norm(o)!==norm(c.a));
+  return {k:"ox",id:c.id,shown,truth};
+}
+function pairItem(evs){
+  const pool=shuffle((evs||events).slice());const a=pool[0];
+  const b=pool.find(e=>e!==a&&compatible(a,e));
+  const first=evKey(a)<evKey(b)?a:b;
+  return {k:"pair",ev:[a.i,b.i],ans:first.label,opts:shuffle([a.label,b.label])};
+}
+function bankItems(n,full){
+  const sc=scope();const useAll=full||!sc.f;
+  const cs=cards.filter(c=>useAll||c.pg<=sc.f);
+  const ss=useAll?srcs:sc.src,ev=useAll||!canTl(sc.ev)?events:sc.ev;
+  const out=[];
+  for(let i=0;i<n;i++){
+    const r=Math.random(),c=cs[Math.floor(Math.random()*cs.length)];
+    if(r<.35)out.push(oxItem(c));
+    else if(r<.6){const rc=shuffle(cs.filter(revOK))[0];out.push(rc?revItem(rc):oxItem(c));}
+    else if(r<.75)out.push(cardItem(c,"mc"));
+    else if(r<.9&&ss.length){const s=ss[Math.floor(Math.random()*ss.length)];out.push({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))});}
+    else out.push(pairItem(ev));
+  }
+  return out;
+}
+function startBank(full){begin("drill",bankItems(20,full),{bank:true,full:!!full});}
+function applyGen(item,ok){
+  const u=item.k==="pair"?0:byId[item.id].u;
+  stat(u,item.k,ok?1:0);
+  if(!ok&&item.k!=="pair"){const s=st(item.id);if(s&&s.s)s.w=(s.w||0)+1;addWrong({k:"card",id:item.id});}
+}
+const ansOf=it=>it.k==="card"?byId[it.id].a:it.k==="src"?srcById[it.id].a:it.ans;
+
+/* 세션 */
+let session=null,view="today",resetAsk=false,fbAt=0,scrollCur=false;
+function begin(kind,items,opt){
+  if(!items.length)return;
+  session=Object.assign({kind,items,i:0,answered:0,score:0,wrong:[],fb:null,done:false,start:Date.now()},opt||{});
+  if(session.mock){session.ans=[];session.sel=null;}
+  render();
+}
+function startToday(){
+  const rev=shuffle(dueList()).map(c=>cardItem(c));
+  const news=unseen().slice(0,newLeft()).map(c=>cardItem(c,"learn"));
+  begin("today",rev.concat(news));
+}
+function deepPlan(){
+  const sc=scope();const tl=canTl(sc.ev)?2:0;const es=sc.ess.length?1:0;
+  const ns=Math.min(sc.src.length,4+(2-tl)+(1-es));
+  return {sc,ns,tl,es,ok:ns+tl+es>=3};
+}
+function startDeep(full){
+  if(full){begin("deep",srcItems(4).concat([tlItem(),tlItem()]).concat(essItems(1)),{full:true});return;}
+  const d=deepPlan();if(!d.ok)return startDeep(true);
+  const items=srcItems(d.ns,0,d.sc.src);
+  for(let i=0;i<d.tl;i++)items.push(tlItem(d.sc.ev));
+  begin("deep",items.concat(essItems(d.es,d.sc.ess)));
+}
+function startMock(){
+  const items=[];
+  for(let u=1;u<=5;u++){
+    const pool=shuffle(cards.filter(c=>c.u===u));
+    items.push(cardItem(pool[0],"mc"),cardItem(pool[1],Math.random()<.5?"write":"mc"));
+  }
+  const su=[1,2,3,4,5,1+Math.floor(Math.random()*5)];
+  const usedS=new Set();
+  su.forEach(u=>{const c=shuffle(srcs.filter(s=>s.u===u&&!usedS.has(s.id)))[0];if(c){usedS.add(c.id);items.push({k:"src",id:c.id,opts:shuffle([c.a].concat(c.x))});}});
+  items.sort((a,b)=>unitOf(a)-unitOf(b));
+  for(let i=0;i<4;i++)items.push(tlItem());
+  begin("mock",items,{mock:true});
+}
+function unitOf(it){return it.k==="card"?byId[it.id].u:it.k==="src"?srcById[it.id].u:it.k==="ess"?essById[it.id].u:9;}
+function requeue(id){
+  const it=session.items;
+  for(let k=session.i+1;k<it.length;k++)if(it[k].k==="card"&&it[k].id===id)return;
+  it.splice(Math.min(it.length,session.i+4),0,{k:"card",id,mode:"mc"});
+}
+function addWrong(w){if(!session.wrong.some(x=>x.k===w.k&&x.id===w.id))session.wrong.push(w);}
+
+/* 채점 반영 */
+function applyCard(item,ok){
+  const id=item.id,c=byId[id],wasNew=levelOf(id)<0;
+  const s=S.cards[id]||(S.cards[id]={l:0,d:null,w:0,s:true});
+  s.s=true;s.t=(s.t||0)+1;if(ok)s.r=(s.r||0)+1;
+  stat(c.u,item.mode==="mc"?"mc":"wr",ok?1:0);
+  if(ok){
+    if(item.mode==="mc"){if(s.l<1){s.l=1;s.d=sched(1);}}
+    else if(s.l<4){s.l=s.l+1;s.d=s.l>=4?null:sched(INTERVAL[s.l]);}
+  }else{
+    s.w=(s.w||0)+1;s.l=0;s.d=null;
+    addWrong({k:"card",id});
+    if(!session.mock&&!session.test)requeue(id);
+    if(session.test&&wasNew)s.s=false;
+  }
+}
+function applyMockCard(item,ok){
+  const id=item.id,c=byId[id];
+  const s=S.cards[id];
+  stat(c.u,item.mode==="mc"?"mc":"wr",ok?1:0);
+  if(s&&s.s){s.t=(s.t||0)+1;if(ok)s.r=(s.r||0)+1;}
+  if(!ok){
+    if(s&&s.s){s.w=(s.w||0)+1;s.l=0;s.d=null;}
+    else S.cards[id]={l:0,d:null,w:1,s:false};
+    addWrong({k:"card",id});
+  }
+}
+function applySrc(id,ok){
+  const s=srcById[id];const r=S.src[id]||(S.src[id]={t:0,r:0,w:0});
+  r.t++;if(ok)r.r++;else{r.w++;addWrong({k:"src",id});}
+  stat(s.u,"src",ok?1:0);
+}
+function applyTl(ok){stat(0,"tl",ok?1:0);if(!ok)addWrong({k:"tl",id:"tl"+session.i});}
+function applyEss(id,rating){
+  const e=essById[id];const r=S.ess[id]||(S.ess[id]={n:0,best:0});
+  r.n++;const v=rating==="full"?2:rating==="part"?1:0;if(v>r.best)r.best=v;
+  stat(e.u,"ess",v/2);
+}
+function commit(item,ok,extra){
+  session.answered++;session.score+=ok===true?1:(typeof ok==="number"?ok:0);
+  if(item.k==="card")(session.mock?applyMockCard:applyCard)(item,ok);
+  else if(item.k==="src")applySrc(item.id,ok);
+  else if(item.k==="tl")applyTl(ok);
+  else if(item.k==="ess")applyEss(item.id,extra);
+  else applyGen(item,ok);
+  if(session.mock)session.ans[session.i]={ok,given:extra};
+  save();
+}
+function learned(){
+  const it=session.items[session.i];
+  if(levelOf(it.id)<0){const prev=S.cards[it.id];S.cards[it.id]={l:0,d:null,w:prev?prev.w||0:0,s:true};dayRec().n++;touchStreak();save();}
+  requeue(it.id);
+  advance();
+}
+function advance(){
+  session.fb=null;session.sel=null;session.i++;
+  if(session.i>=session.items.length)finish();
+  render();
+}
+function finish(){
+  session.done=true;
+  if(session.unitTest){const sc=pct(session.score,session.answered);S.utest[session.unitTest]=Math.max(S.utest[session.unitTest]||0,sc);save();}
+  if(session.kind==="deep")dayRec().x=1;
+  if(session.mock){
+    const byU={},byK={};
+    session.items.forEach((it,i)=>{
+      const a=session.ans[i]||{ok:false};const u=unitOf(it);const k=it.k==="card"?(it.mode==="mc"?"mc":"wr"):it.k;
+      if(u<9){byU[u]=byU[u]||[0,0];byU[u][0]++;if(a.ok)byU[u][1]++;}
+      byK[k]=byK[k]||[0,0];byK[k][0]++;if(a.ok)byK[k][1]++;
+    });
+    session.result={d:today(),score:Math.round(session.score/session.items.length*100),n:session.items.length,c:session.score,sec:Math.round((Date.now()-session.start)/1000),byU,byK};
+    S.mocks.push(session.result);if(S.mocks.length>30)S.mocks.shift();
+    save();
+  }
+}
+function next(){
+  if(!session||!session.fb||Date.now()-fbAt<200)return;
+  const it=session.items[session.i],fb=session.fb;
+  if(it.k==="ess")commit(it,fb.rating==="full"?true:fb.rating==="part"?0.5:false,fb.rating);
+  else commit(it,fb.ok);
+  advance();
+}
+function mockNext(){
+  const it=session.items[session.i];let ok=false,given="";
+  if(it.k==="card"&&it.mode==="mc"){if(session.sel==null)return;given=it.opts[session.sel];ok=given===byId[it.id].a;}
+  else if(it.k==="card"){const el=document.getElementById("wi");given=el?el.value.trim():"";ok=grade(byId[it.id],given);}
+  else if(it.k==="src"){if(session.sel==null)return;given=it.opts[session.sel];ok=given===srcById[it.id].a;}
+  else if(it.k==="tl"){if(it.order.length<it.ev.length)return;ok=tlCorrect(it);given=it.order.slice();}
+  commit(it,ok,given);
+  advance();
+}
+function tlSorted(it){return it.ev.slice().sort((a,b)=>evKey(events[a])-evKey(events[b]));}
+function tlCorrect(it){const s=tlSorted(it);return it.order.every((v,i)=>v===s[i]);}
+
+/* 그리기: 공통 */
+const app=document.getElementById("app");
+function counts(list){const k={un:0,l0:0,l1:0,l2:0,l3:0,l4:0};list.forEach(c=>{const l=levelOf(c.id);if(l<0)k.un++;else k["l"+l]++;});return k;}
+function barHTML(k,total){
+  const seg=(n,v)=>n?`<span style="width:${(n/total*100).toFixed(2)}%;background:var(--${v})"></span>`:"";
+  return `<div class="bar" role="img" aria-label="외움 ${k.l4}, 복습 중 ${k.l1+k.l2+k.l3}, 다시 보기 ${k.l0}, 안 본 카드 ${k.un}">${seg(k.l4,"l4")}${seg(k.l3,"l3")}${seg(k.l2,"l2")}${seg(k.l1,"l1")}${seg(k.l0,"no")}</div>`;
+}
+const legendHTML=`<div class="legend"><span><i style="background:var(--l4)"></i>외움</span><span><i style="background:var(--l3)"></i>3단계</span><span><i style="background:var(--l2)"></i>2단계</span><span><i style="background:var(--l1)"></i>1단계</span><span><i style="background:var(--no)"></i>다시 보기</span><span><i style="background:var(--l0)"></i>안 본 카드</span></div>`;
+function lvChip(id){const l=levelOf(id);return l<0?`<span class="lv">안 봄</span>`:`<span class="lv l${l}">${LVNAME[l]}</span>`;}
+function evText(e){return e.y+(e.m?"."+e.m:"");}
+
+function render(){
+  hideTip();
+  if(session){app.innerHTML=session.done?(session.mock?mockResultHTML():doneHTML()):studyHTML();focusStudy();return;}
+  app.innerHTML=tabsHTML()+({today:todayHTML,path:pathHTML,practice:practiceHTML,wrong:wrongHTML,stats:statsHTML}[view])();
+  if(sheet&&view==="path")requestAnimationFrame(()=>{const x=document.getElementById("sheetx");if(x)x.focus({preventScroll:true});});
+  if(view==="path"&&!sheet&&scrollCur){scrollCur=false;requestAnimationFrame(()=>{const c=document.querySelector(".node.cur");if(c)c.scrollIntoView({block:"center"});});}
+}
+function tabsHTML(){
+  const t=(v,l)=>`<button role="tab" aria-selected="${view===v}" data-act="tab" data-v="${v}">${l}</button>`;
+  const w=cards.filter(c=>(st(c.id)||{}).w>0).length+srcs.filter(s=>(S.src[s.id]||{}).w>0).length;
+  return `<div class="tabs" role="tablist">${t("today","오늘")}${t("path","경로")}${t("practice","연습")}${t("wrong","오답"+(w?" "+w:""))}${t("stats","기록")}</div>`;
+}
+
+/* 학습 경로 */
+const NODE_OFF=[0,56,84,56,0,-56,-84,-56];
+const PATH=(()=>{
+  const out=[];let n=0;
+  for(let u=1;u<=5;u++){
+    const list=cards.filter(c=>c.u===u),k=Math.ceil(list.length/8),size=Math.ceil(list.length/k);
+    out.push({type:"unit",u});
+    for(let i=0;i<k;i++){
+      const cs=list.slice(i*size,(i+1)*size);if(!cs.length)continue;
+      const pgs=cs.map(c=>c.pg).filter(p=>p<999);
+      out.push({type:"lesson",id:"L"+u+"-"+(i+1),u,no:++n,ids:cs.map(c=>c.id),pg:pgs.length?(Math.min(...pgs)===Math.max(...pgs)?Math.min(...pgs)+"쪽":Math.min(...pgs)+"~"+Math.max(...pgs)+"쪽"):""});
+    }
+    out.push({type:"src",id:"S"+u,u});
+    out.push({type:"utest",id:"T"+u,u});
+  }
+  out.push({type:"mock",id:"M"});
+  return out;
+})();
+const nodeById=Object.fromEntries(PATH.filter(p=>p.id).map(p=>[p.id,p]));
+function lessonInfo(L){
+  const ls=L.ids.map(levelOf),n=ls.length,seen=ls.filter(l=>l>=0).length,mast=ls.filter(l=>l>=4).length;
+  const prog=ls.reduce((s,l)=>s+(l<0?0:l+1),0)/(5*n);
+  const stars=seen<n?0:mast===n?3:ls.every(l=>l>=2)?2:1;
+  return {n,seen,mast,prog,stars,done:seen===n};
+}
+function currentLessonId(){const L=PATH.find(p=>p.type==="lesson"&&!lessonInfo(p).done);return L?L.id:null;}
+function nodeState(p){
+  if(p.type==="lesson"){const i=lessonInfo(p);return {prog:i.prog,done:i.done,started:i.seen>0,stars:i.stars};}
+  if(p.type==="src"){const l=srcs.filter(s=>s.u===p.u),t=l.filter(s=>(S.src[s.id]||{}).t>0).length,r=l.filter(s=>(S.src[s.id]||{}).r>0).length;return {prog:r/l.length,done:t===l.length,started:t>0,stars:0};}
+  if(p.type==="utest"){const b=S.utest[p.u];return {prog:(b||0)/100,done:b!=null,started:b!=null,stars:b>=90?3:b>=70?2:b!=null?1:0,best:b};}
+  const m=S.mocks.length?S.mocks[S.mocks.length-1].score:null;return {prog:(m||0)/100,done:m!=null,started:m!=null,stars:0,best:m};
+}
+function ring(prog,cls){
+  const r=36,c=2*Math.PI*r;
+  return `<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="${r}" class="rbg"/><circle cx="42" cy="42" r="${r}" class="rfg ${cls}" ${prog>0?"":"stroke-opacity=\"0\""} stroke-dasharray="${(c*Math.min(1,prog)).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 42 42)"/></svg>`;
+}
+let sheet=null;
+function pathHTML(){
+  const cur=currentLessonId();let ahead=false,idx=0;
+  const body=PATH.map(p=>{
+    if(p.type==="unit"){
+      const list=cards.filter(c=>c.u===p.u),k=counts(list);idx=0;
+      return `<div class="ubanner"><div class="un">${UNITS[p.u][0]} 단원 · ${UNITS[p.u][2]}</div><div class="ut">${esc(UNITS[p.u][1])}</div>
+        <div class="up"><span style="width:${((list.length-k.un)/list.length*100).toFixed(1)}%"></span></div><div class="uc">본 카드 ${list.length-k.un} / ${list.length} · 외움 ${k.l4}</div></div>`;
+    }
+    const s=nodeState(p),isCur=p.id===cur;
+    if(isCur)ahead=true;
+    const off=NODE_OFF[idx++%NODE_OFF.length];
+    const cls=s.done?"done":isCur?"cur":s.started?"part":(ahead&&p.type==="lesson")?"ahead":"todo";
+    const icon=p.type==="lesson"?p.no:p.type==="src"?"사료":p.type==="utest"?"점검":"모의";
+    const label=p.type==="lesson"?`레슨 ${p.no}`:p.type==="src"?"단원 사료":p.type==="utest"?"단원 점검":"모의고사";
+    const sub=p.type==="lesson"?p.pg:(s.best!=null?s.best+"점":"");
+    const stars=p.type==="lesson"||p.type==="utest"?`<span class="stars" aria-label="별 ${s.stars}개">${[1,2,3].map(i=>`<i class="${i<=s.stars?"on":""}"></i>`).join("")}</span>`:"";
+    return `<div class="pnode" style="--off:${off}px">${isCur?`<div class="bubble">여기부터</div>`:""}
+      <button class="node ${cls} ${p.type}" data-act="node" data-v="${p.id}" aria-label="${label} ${sub} ${s.done?"완료":isCur?"진행할 차례":""}">${ring(s.prog,cls)}<span class="ni">${icon}</span></button>
+      <div class="nl">${label}${sub?` · ${sub}`:""}</div>${stars}</div>`;
+  }).join("");
+  return `<div class="path">${body}</div>${sheet?sheetHTML():""}`;
+}
+function sheetHTML(){
+  const p=nodeById[sheet];if(!p)return "";
+  const s=nodeState(p),cur=currentLessonId();
+  let title="",meta="",note="",btns="",list="";
+  if(p.type==="lesson"){
+    const i=lessonInfo(p),curIdx=PATH.indexOf(nodeById[cur]),isAhead=cur&&PATH.indexOf(p)>curIdx;
+    title=`레슨 ${p.no} · ${UNITS[p.u][0]} 단원`;
+    meta=`카드 ${i.n}장 · ${p.pg} · 본 카드 ${i.seen} · 외움 ${i.mast}`;
+    if(i.done){
+      note="다 배운 레슨이에요. 다시 풀면 복습 단계가 올라가요.";
+      btns=`<button class="btn wide" data-act="lredo" data-v="${p.id}">다시 하기 (주관식)</button><button class="btn ghost wide" data-act="lmc" data-v="${p.id}">객관식으로 가볍게 복습</button>`;
+    }else{
+      note=isAhead?"아직 차례가 아닌 레슨이에요. 미리 배우면 그만큼 다음 날 분량이 줄어요.":i.seen?"배우던 레슨이에요. 남은 카드부터 이어서 해요.":"이번 차례 레슨이에요.";
+      btns=`<button class="btn wide" data-act="llearn" data-v="${p.id}">${isAhead?"미리 배우기":i.seen?"이어서 배우기":"배우기"} (${i.n-i.seen}장)</button>`;
+      if(!i.seen)btns+=`<button class="btn ghost wide" data-act="lskip" data-v="${p.id}">아는 내용이면 시험 보고 건너뛰기</button>`;
+    }
+    list=`<details class="mt"><summary>카드 미리 보기</summary><ul class="clist">${p.ids.map(id=>{const c=byId[id];return `<li>${lvChip(id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`;}).join("")}</ul></details>`;
+  }else if(p.type==="src"){
+    const l=srcs.filter(x=>x.u===p.u);
+    title=`${UNITS[p.u][0]} 단원 사료`;meta=`교과서 사료 ${l.length}개 · 맞힌 사료 ${l.filter(x=>(S.src[x.id]||{}).r>0).length}개`;
+    note="사료 구절을 보고 어떤 사건·법령·단체인지 맞혀요.";
+    btns=`<button class="btn wide" data-act="nsrc" data-v="${p.u}">사료 ${l.length}문제 풀기</button>`;
+  }else if(p.type==="utest"){
+    title=`${UNITS[p.u][0]} 단원 점검`;meta=s.best!=null?`최고 점수 ${s.best}점`:"아직 안 봤어요";
+    note="이 단원 카드 10문제와 사료 2문제. 레슨을 다 안 끝냈어도 미리 볼 수 있어요. 90점 이상이면 별 3개.";
+    btns=`<button class="btn wide" data-act="ntest" data-v="${p.u}">${s.best!=null?"다시 보기":"점검 시작"}</button>`;
+  }else{
+    title="모의고사";meta=s.best!=null?`지난 점수 ${s.best}점 · ${S.mocks.length}회 응시`:"아직 안 봤어요";
+    note="전 단원 20문항, 정답은 끝난 뒤 공개.";
+    btns=`<button class="btn wide" data-act="mock">모의고사 시작</button>`;
+  }
+  return `<div class="sheet-bg" data-act="sheetclose"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+    <div class="sh-top"><div><div class="sh-t">${esc(title)}</div><div class="muted">${esc(meta)}</div></div><button class="btn ghost small" data-act="sheetclose" id="sheetx">닫기</button></div>
+    <p class="muted m0">${esc(note)}</p><div class="sh-btns">${btns}</div>${list}</div>`;
+}
+function unitTestItems(u){
+  const cs=pick(cards.filter(c=>c.u===u),10).map(c=>cardItem(c,levelOf(c.id)>=1&&Math.random()<.5?"write":"mc"));
+  const ss=pick(srcs.filter(s=>s.u===u),2).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))}));
+  return shuffle(cs.concat(ss));
+}
+
+/* 다음 단계 */
+function weakestUnit(){
+  const rows=Object.keys(UNITS).map(u=>({u:+u,x:S.ustat[u]||[0,0]})).filter(r=>r.x[0]>=5&&cards.some(c=>c.u===r.u&&levelOf(c.id)>=0));
+  rows.sort((a,b)=>a.x[1]/a.x[0]-b.x[1]/b.x[0]);return rows[0]||null;
+}
+function nextStep(){
+  const day=dayRec(),un=unseen().length,wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
+  const dp=deepPlan();
+  const main=(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
+    :un?{act:"ahead",t:`다음 새 카드 ${Math.min(10,un)}장 미리 배우기`,d:"내일 분량이 그만큼 줄어요"}
+    :{act:"mock",t:"모의고사",d:"20문항 · 실전처럼 정답은 끝나고 공개"};
+  const more=[];
+  if(main.act!=="ahead"&&un)more.push(`<button class="btn ghost small" data-act="ahead">새 카드 ${Math.min(10,un)}장 미리 배우기</button>`);
+  more.push(`<button class="btn ghost small" data-act="bank">문제 은행 20문제</button>`);
+  if(wr)more.push(`<button class="btn ghost small" data-act="drill" data-v="wrong">오답 ${Math.min(30,wr)}장 다시</button>`);
+  if(wu)more.push(`<button class="btn ghost small" data-act="drill" data-v="urev" data-u="${wu.u}">약한 단원(${UNITS[wu.u][0]}) 복습</button>`);
+  if(main.act!=="mock")more.push(`<button class="btn ghost small" data-act="mock">모의고사</button>`);
+  if(main.act!=="deep"&&day.x&&dp.ok)more.push(`<button class="btn ghost small" data-act="deep">심화 세트 한 번 더</button>`);
+  return {main,more};
+}
+function nextBoxHTML(){
+  const n=nextStep();
+  return `<div class="box next"><div class="done-badge">✓ 오늘 카드 완료${dayRec().x?" · 심화 세트 완료":""}</div>
+    <h2>다음 단계: ${esc(n.main.t)}</h2><p class="muted">${esc(n.main.d)}</p>
+    <button class="btn wide" data-act="${n.main.act}">${esc(n.main.t)} 시작</button>
+    ${n.more.length?`<div class="row mt2">${n.more.join("")}</div>`:""}</div>`;
+}
+
+/* 오늘 */
+function todayHTML(){
+  const left=daysLeft();
+  const dd=left>0?"D-"+left:left===0?"D-DAY":"시험 끝";
+  const due=dueList().length,nl=newLeft(),k=counts(cards),day=dayRec();
+  const mins=Math.max(1,Math.round((due+nl*2)*15/60));
+  const start=(due+nl)>0
+    ?`<button class="btn wide" data-act="start">오늘 카드 학습 시작 · 약 ${mins}분</button>`
+    :`<p class="muted m0">오늘 카드는 끝냈어요. 아래 심화 세트나 연습 탭으로 넘어가세요.</p>`;
+  const rate=day.a?` · 정답률 ${pct(day.c,day.a)}%`:"";
+  const lastMock=S.mocks.length?S.mocks[S.mocks.length-1]:null;
+  const mockTip=(left>=1&&left<=3)
+    ?`<div class="box tip"><h2>시험 직전 점검</h2><p class="muted">모의고사로 실전처럼 풀어 보고, 약한 단원을 마지막으로 복습하세요.${lastMock?` 지난 점수 ${lastMock.score}점.`:""}</p><button class="btn" data-act="mock">모의고사 보기</button></div>`:"";
+  const doneToday=(due+nl)===0;
+  const cardBox=doneToday
+    ?`<div class="box"><h2>1. 오늘의 카드 <span class="lv l4">완료</span></h2><p class="muted m0">오늘 푼 문제 ${day.a}개${rate} · 연속 ${streakNow()}일</p></div>`
+    :`<div class="box"><h2>1. 오늘의 카드</h2>
+    <div class="nums"><div><b>${due}</b><span>복습할 카드</span></div><div><b>${nl}</b><span>새 카드</span></div><div><b>${streakNow()}</b><span>연속 학습일</span></div></div>
+    ${start}
+    <p class="muted mt">오늘 푼 문제 ${day.a}개${rate}</p></div>`;
+  const dp=deepPlan();
+  const deepBox=doneToday?"":`<div class="box"><h2>2. 심화 세트 ${day.x?'<span class="lv l4">완료</span>':""}</h2>
+    ${dp.ok?`<p class="muted">배운 범위(교과서 ${dp.sc.f}쪽까지)에서만 나와요. 사료 ${dp.ns}${dp.tl?`, 연표 순서 ${dp.tl}`:""}${dp.es?`, 서술형 ${dp.es}`:""}문제.</p>
+    <button class="btn ${day.x?"ghost":""} wide" data-act="deep">${day.x?"한 세트 더 풀기":"심화 세트 시작 · 약 10분"}</button>`
+    :`<p class="muted">아직 배운 카드가 없어서 범위를 정할 수 없어요. 카드 학습을 건너뛰고 전체 범위에서 풀 수도 있어요.</p>
+    <button class="btn ghost wide" data-act="deepfull">건너뛰고 전체 범위로 풀기</button>`}
+    ${dp.ok?`<button class="linkbtn" data-act="deepfull">전체 범위로 풀기</button>`:""}</div>`;
+  return `<div class="panel">
+  <div class="box dday"><div><div class="lab">시험까지</div><div class="big">${dd}</div></div>
+    <label for="exam">시험일 <input type="date" id="exam" value="${esc(S.exam)}"></label></div>
+  ${doneToday?nextBoxHTML():""}
+  ${mockTip}
+  ${cardBox}
+  ${deepBox}
+  <div class="box"><h2>전체 진행</h2>${barHTML(k,TOTAL)}${legendHTML}
+    <p class="muted mt">외운 카드 <b>${k.l4}</b> / ${TOTAL}장 · 아직 안 본 카드 ${k.un}장</p></div>
+  <details class="box"><summary>진행 방식</summary>
+    <p class="muted mt">새 카드는 답을 보고 외운 뒤 객관식으로 확인합니다. 다음 날부터는 주관식으로 1일, 2일, 3일 간격으로 다시 나오고, 세 번 연속 맞히면 '외움'이 됩니다. 틀린 카드는 객관식부터 다시 시작합니다. 새 카드는 시험 이틀 전까지 모두 배우도록 하루 분량을 나눕니다. 모의고사에서 틀린 카드도 복습 목록으로 돌아갑니다.</p></details>
+  </div>`;
+}
+
+/* 연습 */
+function practiceHTML(){
+  const seenAll=cards.filter(c=>levelOf(c.id)>=0).length;
+  const lastMock=S.mocks.length?S.mocks[S.mocks.length-1]:null;
+  const units=Object.keys(UNITS).map(Number).map(u=>{
+    const list=cards.filter(c=>c.u===u),k=counts(list),[no,name,pg]=UNITS[u];
+    const seen=list.length-k.un,ns=srcs.filter(s=>s.u===u).length;
+    return `<div class="unit"><div class="top"><span class="t">${no} ${esc(name)}</span><span class="c">${pg}</span></div>
+      ${barHTML(k,list.length)}
+      <span class="c">외움 ${k.l4} · 공부 중 ${k.l0+k.l1+k.l2+k.l3} · 안 봄 ${k.un} / ${list.length}장</span>
+      <div class="row"><button class="btn small" data-act="drill" data-v="unew" data-u="${u}" ${k.un?"":"disabled"}>새 카드 ${Math.min(10,k.un)||10}장 미리 배우기</button>
+      <button class="btn ghost small" data-act="drill" data-v="urev" data-u="${u}" ${seen?"":"disabled"}>본 카드 ${Math.min(20,seen)||20}장 복습</button>
+      <button class="btn ghost small" data-act="usrc" data-u="${u}">사료 ${Math.min(6,ns)}문제</button></div>
+      <details><summary>카드 목록 보기</summary><ul class="clist">${list.map(c=>`<li>${lvChip(c.id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul></details>
+    </div>`;
+  }).join("");
+  const reset=resetAsk
+    ?`<div class="confirm"><span>진행 기록을 모두 지울까요? 되돌릴 수 없어요.</span><button class="btn small" data-act="resetyes">지우기</button><button class="btn ghost small" data-act="resetno">취소</button></div>`
+    :`<button class="btn ghost small" data-act="resetask">진행 기록 초기화</button>`;
+  const row=(t,d,act,label,dis)=>`<div class="prow"><div><div class="t">${t}</div><div class="muted">${d}</div></div><button class="btn small" data-act="${act}" ${dis?"disabled":""}>${label}</button></div>`;
+  return `<div class="panel">
+    <div class="box"><h2>모의고사</h2>
+      <p class="muted">단원별 카드 10문제, 사료 6문제, 연표 순서 4문제, 모두 20문항(문항당 5점). 실전처럼 정답은 끝난 뒤에 한꺼번에 보여 줘요.${lastMock?` 지난 점수 <b>${lastMock.score}점</b>.`:""}</p>
+      <button class="btn wide" data-act="mock">모의고사 시작 · 약 15분</button></div>
+    <div class="box"><h2>유형별 연습</h2>
+      ${row("사료 보고 맞히기",`배운 범위의 사료 중 덜 맞힌 것부터 8문제`,"psrc","시작")}
+      ${row("연표 순서 맞추기","배운 범위의 사건 4개를 일어난 순서대로, 5문제","ptl","시작")}
+      ${row("서술형 연습","배운 범위에서 3문제, 핵심어 체크로 스스로 채점","pess","시작")}
+      ${row("문제 은행 (계속 풀기)","O/X·설명 고르기·객관식·사료·먼저 일어난 사건을 섞어 20문제씩, 배운 범위에서","bank","시작")}
+      ${row("카드 섞어서 풀기","이미 본 카드 중 무작위 20장","pmix","시작",!seenAll)}
+    </div>
+    <div class="box"><h2>단원별</h2>${units}</div>
+    <div class="box"><h2>내 기록 관리</h2>
+      <p class="muted">기록은 자동으로 저장돼요(로그인한 Claude에서는 계정, 그 밖에는 이 기기의 브라우저). 파일로 저장해 두면 다른 기기로 옮기거나 백업할 수 있어요. 다른 사람이 이 앱을 써도 기록은 각자 따로 저장됩니다.</p>
+      ${importAsk?importConfirmHTML():`<div class="row"><button class="btn small" data-act="export" ${dlState===false?"hidden":""}>기록 파일로 저장</button>
+      <label class="btn ghost small filebtn">기록 파일 불러오기<input type="file" id="impf" accept=".json,application/json"></label></div>
+      ${ioMsg?`<p class="muted mt" role="status">${esc(ioMsg)}</p>`:""}
+      <details class="mt"><summary>파일 저장이 안 될 때: 기록 코드로 옮기기</summary>
+        <p class="muted mt">아래 코드를 복사해 메모 등에 보관했다가, 다른 기기에서 붙여 넣으면 기록을 옮길 수 있어요.</p>
+        <div class="row"><button class="btn ghost small" data-act="copycode">기록 코드 복사</button></div>
+        <textarea id="codein" rows="3" placeholder="기록 코드를 여기에 붙여 넣으세요" aria-label="기록 코드"></textarea>
+        <div class="row"><button class="btn ghost small" data-act="pastecode">붙여 넣은 코드로 불러오기</button></div>
+      </details>`}
+    </div>
+    <div class="box"><h2>설정</h2>${reset}</div>
+  </div>`;
+}
+
+/* 기록 파일 */
+let importAsk=null,ioMsg="",dlState=null;
+function exportText(){return JSON.stringify({app:"ilje-cards",exported:new Date().toISOString(),state:S});}
+function parseImport(text){
+  try{const o=JSON.parse(text);const st=o&&o.app==="ilje-cards"?o.state:o;
+    if(!st||st.v!==1||typeof st.cards!=="object")return null;return normalize(st);}catch(e){return null;}
+}
+function importConfirmHTML(){
+  const st=importAsk;const seen=Object.values(st.cards).filter(c=>c.s).length,mast=Object.values(st.cards).filter(c=>c.s&&c.l>=4).length;
+  const days=Object.keys(st.days||{}).filter(d=>st.days[d].a>0).sort();
+  return `<div class="confirm col"><span>불러올 기록: 공부한 날 ${days.length}일${days.length?` (마지막 ${md(days[days.length-1])})`:""} · 본 카드 ${seen}장 · 외운 카드 ${mast}장 · 모의고사 ${st.mocks.length}회. 지금 기록을 이 기록으로 바꿀까요?</span>
+    <div class="row"><button class="btn small" data-act="importyes">이 기록으로 바꾸기</button><button class="btn ghost small" data-act="importno">취소</button></div></div>`;
+}
+async function doExport(){
+  ioMsg="";
+  try{
+    const inClaude=!!(window.claude&&window.claude.use);
+    if(!inClaude){
+      const blob=new Blob([exportText()],{type:"application/json"});const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");a.href=url;a.download=`한국사카드_기록_${today()}.json`;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);ioMsg="기록 파일을 내려받았어요.";render();return;
+    }
+    const dl=await window.claude.use("downloads");
+    if(!dl){dlState=false;ioMsg="이 화면에서는 파일 저장을 쓸 수 없어요. 아래 '기록 코드'를 이용해 주세요.";render();return;}
+    const r=await dl.save({filename:`한국사카드_기록_${today()}.json`,data:exportText()});
+    ioMsg=r.status==="saved"?"기록 파일을 저장했어요.":"기록 파일을 보냈어요.";
+  }catch(e){
+    const c=e&&e.code;
+    ioMsg=c==="declined"?"저장을 취소했어요.":c==="rate_limited"?"저장 창이 이미 열려 있어요. 잠시 뒤 다시 눌러 주세요.":"이 화면에서는 파일 저장을 쓸 수 없어요. 아래 '기록 코드'를 이용해 주세요.";
+    if(c&&c!=="declined"&&c!=="rate_limited")dlState=false;
+  }
+  render();
+}
+
+/* 오답 */
+function wrongHTML(){
+  const list=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w||levelOf(a.id)-levelOf(b.id));
+  const sl=srcs.filter(s=>(S.src[s.id]||{}).w>0).sort((a,b)=>S.src[b.id].w-S.src[a.id].w);
+  if(!list.length&&!sl.length)return `<div class="box empty">아직 틀린 문제가 없어요.</div>`;
+  const cardBox=list.length?`<div class="box"><h2>카드 오답 ${list.length}</h2>
+    <p class="muted">많이 틀린 카드부터. 외움 단계가 되어도 목록에 남아요.</p>
+    <button class="btn wide" data-act="drill" data-v="wrong">많이 틀린 순서로 ${Math.min(30,list.length)}장 풀기</button>
+    <ul class="clist">${list.map(c=>`<li><span class="lv wr">틀림 ${st(c.id).w}</span><span class="q">${esc(c.q)}</span><span class="a"><span class="c${c.cat}">${esc(c.a)}</span> ${lvChip(c.id)}</span><span class="q muted">${esc(c.note)}</span></li>`).join("")}</ul></div>`:"";
+  const srcBox=sl.length?`<div class="box"><h2>사료 오답 ${sl.length}</h2>
+    <button class="btn wide" data-act="wsrc">틀린 사료 다시 풀기</button>
+    <ul class="clist">${sl.map(s=>`<li><span class="lv wr">틀림 ${S.src[s.id].w}</span><span class="q">「${esc(s.text)}」</span><span class="a c${s.cat}">${esc(s.a)}</span><span class="q muted">${esc(s.cite)}</span></li>`).join("")}</ul></div>`:"";
+  return `<div class="panel">${cardBox}${srcBox}</div>`;
+}
+
+/* 기록 */
+function statsHTML(){
+  const keys=Object.keys(S.days).filter(d=>S.days[d].a>0).sort();
+  const totA=keys.reduce((s,d)=>s+S.days[d].a,0),totC=keys.reduce((s,d)=>s+S.days[d].c,0);
+  const k=counts(cards);
+  if(!totA&&!S.mocks.length)return `<div class="box empty">아직 기록이 없어요. 오늘 탭에서 학습을 시작하면 여기에 쌓여요.</div>`;
+  const first=keys[0]||today();
+  let from=addDays(today(),-13);if(first>from)from=first;
+  const range=[];for(let d=from;d<=today();d=addDays(d,1))range.push(d);
+  const rows=range.map(d=>({d,a:(S.days[d]||{}).a||0,c:(S.days[d]||{}).c||0}));
+  const tiles=`<div class="tiles">
+    <div><b>${totA}</b><span>푼 문제</span></div><div><b>${pct(totC,totA)}%</b><span>전체 정답률</span></div>
+    <div><b>${k.l4}</b><span>외운 카드</span></div><div><b>${streakNow()}</b><span>연속 학습일</span></div></div>`;
+  const unitRows=Object.keys(UNITS).map(u=>{const x=S.ustat[u]||[0,0];return {label:UNITS[u][0]+" "+UNITS[u][1],a:x[0],c:x[1]};});
+  const kindRows=Object.keys(KIND).map(kk=>{const x=S.kstat[kk]||[0,0];return {label:KIND[kk],a:x[0],c:x[1]};});
+  const weakU=unitRows.filter(r=>r.a>=5).sort((a,b)=>a.c/a.a-b.c/b.a)[0];
+  const weak=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w).slice(0,8);
+  const mocks=S.mocks.slice(-8);
+  return `<div class="panel">
+    <div class="box">${tiles}</div>
+    <div class="box"><h2>날짜별 푼 문제</h2>${dayBars(rows)}</div>
+    <div class="box"><h2>날짜별 정답률</h2>${accLine(rows.filter(r=>r.a>0))}</div>
+    <div class="box"><h2>단원별 정답률</h2>${weakU?`<p class="muted">가장 약한 단원: <b>${esc(weakU.label)}</b> (${pct(weakU.c,weakU.a)}%)</p>`:`<p class="muted">단원마다 5문제 이상 풀면 약한 단원을 알려 드려요.</p>`}${hbars(unitRows)}</div>
+    <div class="box"><h2>유형별 정답률</h2>${hbars(kindRows)}</div>
+    <div class="box"><h2>모의고사 기록</h2>${mocks.length?hbars(mocks.map((m,i)=>({label:`${md(m.d)} · ${S.mocks.length-mocks.length+i+1}회`,a:m.n,c:m.c,txt:`${m.score}점 · ${Math.round(m.sec/60)}분`}))):`<p class="muted m0">아직 본 모의고사가 없어요.</p>`}</div>
+    <div class="box"><h2>자주 틀리는 카드</h2>${weak.length?`<ul class="clist">${weak.map(c=>`<li><span class="lv wr">틀림 ${st(c.id).w}</span><span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul>`:`<p class="muted m0">아직 없어요.</p>`}</div>
+    <details class="box"><summary>날짜별 기록 표로 보기</summary><div class="tblwrap"><table><thead><tr><th>날짜</th><th>푼 문제</th><th>정답률</th><th>새 카드</th></tr></thead><tbody>${keys.slice().reverse().map(d=>`<tr><td>${md(d)}</td><td>${S.days[d].a}</td><td>${pct(S.days[d].c,S.days[d].a)}%</td><td>${S.days[d].n||0}</td></tr>`).join("")}</tbody></table></div></details>
+  </div>`;
+}
+function chartW(){return Math.max(300,Math.min(640,(app.clientWidth||400)-34));}
+function dayBars(rows){
+  const W=chartW(),H=170,L=34,R=8,T=14,B=24,cw=(W-L-R)/rows.length,bw=Math.min(28,cw*0.62);
+  const max=Math.max(10,...rows.map(r=>r.a));const top=Math.ceil(max/10)*10;
+  const y=v=>T+(H-T-B)*(1-v/top);
+  const grid=[0,top/2,top].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" class="gl"/><text x="${L-6}" y="${y(v)+4}" class="ax" text-anchor="end">${v}</text>`).join("");
+  const step=Math.ceil(rows.length/7);
+  const bars=rows.map((r,i)=>{
+    const cx=L+cw*i+cw/2,h=(H-T-B)*(r.a/top);
+    const tip=`${md(r.d)} · ${r.a}문제${r.a?` · 정답률 ${pct(r.c,r.a)}%`:""}`;
+    const isT=r.d===today();
+    const mark=r.a?`<path d="${roundTop(cx-bw/2,y(r.a),bw,h,4)}" class="bm${isT?" now":""}"/>`:"";
+    const lab=(i%step===0||isT)?`<text x="${cx}" y="${H-6}" class="ax" text-anchor="middle">${isT?"오늘":md(r.d)}</text>`:"";
+    const val=(isT&&r.a)?`<text x="${cx}" y="${y(r.a)-5}" class="vl" text-anchor="middle">${r.a}</text>`:"";
+    return `${mark}${val}${lab}<rect x="${L+cw*i}" y="${T}" width="${cw}" height="${H-T-B}" class="hit" data-tip="${esc(tip)}"/>`;
+  }).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="날짜별 푼 문제 수">${grid}${bars}</svg></div>`;
+}
+function roundTop(x,y,w,h,r){r=Math.min(r,h,w/2);return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`;}
+function accLine(rows){
+  if(!rows.length)return `<p class="muted m0">아직 기록이 없어요.</p>`;
+  const W=chartW(),H=170,L=34,R=36,T=14,B=24,n=rows.length;
+  const x=i=>n===1?(L+W-R)/2:L+(W-L-R)*i/(n-1),y=v=>T+(H-T-B)*(1-v/100);
+  const grid=[0,50,100].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" class="gl"/><text x="${L-6}" y="${y(v)+4}" class="ax" text-anchor="end">${v}%</text>`).join("");
+  const pts=rows.map((r,i)=>[x(i),y(pct(r.c,r.a))]);
+  const line=n>1?`<path d="M${pts.map(p=>p.join(",")).join("L")}" class="ln"/>`:"";
+  const step=Math.ceil(n/7);
+  const dots=rows.map((r,i)=>{
+    const last=i===n-1;
+    return `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="${last?5:3.5}" class="dt${last?" now":""}"/>${last?`<text x="${pts[i][0]+8}" y="${pts[i][1]+4}" class="vl">${pct(r.c,r.a)}%</text>`:""}${(i%step===0||last)?`<text x="${pts[i][0]}" y="${H-6}" class="ax" text-anchor="middle">${md(r.d)}</text>`:""}<rect x="${pts[i][0]-14}" y="${T}" width="28" height="${H-T-B}" class="hit" data-tip="${esc(`${md(r.d)} · 정답률 ${pct(r.c,r.a)}% (${r.a}문제)`)}"/>`;
+  }).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="날짜별 정답률">${grid}${line}${dots}</svg></div>`;
+}
+function hbars(rows){
+  return `<div class="hb">${rows.map(r=>{
+    const p=pct(r.c,r.a);
+    return `<div class="hbr" data-tip="${esc(`${r.label} · ${r.a?p+"%":"기록 없음"} (${fmt(r.c)}/${r.a})`)}"><span class="hl">${esc(r.label)}</span><span class="ht"><span style="width:${r.a?Math.max(p,1):0}%"></span></span><span class="hv">${r.txt?esc(r.txt):(r.a?`${p}% · ${r.a}문제`:"—")}</span></div>`;
+  }).join("")}</div>`;
+}
+const fmt=v=>Math.round(v*10)/10;
+
+let rsT=null;window.addEventListener("resize",()=>{if(view==="stats"&&!session){clearTimeout(rsT);rsT=setTimeout(render,200);}});
+/* 툴팁 */
+const tip=document.createElement("div");tip.className="tip-pop";tip.hidden=true;document.body.appendChild(tip);
+function showTip(el,x,y){tip.textContent=el.dataset.tip;tip.hidden=false;const w=tip.offsetWidth;tip.style.left=Math.max(8,Math.min(window.innerWidth-w-8,x-w/2))+"px";tip.style.top=(y-tip.offsetHeight-12+window.scrollY)+"px";}
+function hideTip(){tip.hidden=true;}
+app.addEventListener("pointermove",e=>{const t=e.target.closest("[data-tip]");if(t&&e.pointerType==="mouse")showTip(t,e.clientX,e.clientY);else if(e.pointerType==="mouse")hideTip();});
+app.addEventListener("pointerleave",hideTip);
+
+/* 그리기: 학습 화면 */
+function studyHTML(){
+  const it=session.items[session.i],fb=session.fb,total=session.items.length;
+  const pc=(session.i/total*100).toFixed(1);
+  let chips="",q="",body="";
+  const unitChip=u=>`<span class="chip">${UNITS[u][0]} 단원</span>`;
+  if(it.k==="card"){
+    const c=byId[it.id];
+    const ml=it.mode==="learn"?"새 카드 · 외우기":it.mode==="mc"?"객관식":"주관식";
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">${ml}</span>`;
+    q=`<p class="q">${esc(c.q)}</p>`;
+    if(it.mode==="learn"){
+      body=`<div class="ans c${c.cat}">${esc(c.a)}</div><div class="note">${esc(c.note)}</div>
+        <div class="acts"><button class="btn" data-act="learned" id="focusme">외웠어요, 문제로 확인</button></div>`;
+    }else if(it.mode==="mc"){
+      if(!it.opts)it.opts=makeOpts(c);
+      body=optsHTML(it.opts,c.a,fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+    }else{
+      body=writeHTML(fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):(session.mock?"":`<div class="acts"><button class="btn ghost small" data-act="giveup">모르겠어요</button></div>`));
+    }
+  }else if(it.k==="src"){
+    const s=srcById[it.id];
+    chips=`<span class="chip c${s.cat}"><i></i>${CAT[s.cat]}</span>${unitChip(s.u)}<span class="chip mode">사료</span>`;
+    q=`<blockquote class="srcq">${esc(s.text)}</blockquote><p class="q sm">${esc(s.q)}</p>`;
+    body=optsHTML(it.opts,s.a,fb)+(fb?verdictHTML(s.a,s.cat,s.cite,fb):"");
+  }else if(it.k==="tl"){
+    chips=`<span class="chip mode">연표 순서</span>`;
+    q=`<p class="q">먼저 일어난 사건부터 차례로 누르세요.</p>`;
+    const sorted=tlSorted(it);
+    body=`<div class="tl">${it.ev.map(ix=>{
+      const e=events[ix],pos=it.order.indexOf(ix);
+      let cls="";if(fb)cls=(sorted[pos]===ix)?"ok":"no";
+      return `<button class="tlb ${pos>=0?"on":""} ${cls}" data-act="tlpick" data-v="${ix}" ${fb?"disabled":""}><span class="n">${pos>=0?pos+1:""}</span><span>${esc(e.label)}</span>${fb?`<span class="yr">${evText(e)}</span>`:""}</button>`;
+    }).join("")}</div>`;
+    if(fb){
+      body+=`<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${fb.ok?"정답!":"순서가 달라요"}</div><ol class="ord">${sorted.map(ix=>`<li>${esc(events[ix].label)} <span class="muted">${evText(events[ix])}</span></li>`).join("")}</ol></div><div class="acts"><button class="btn" data-act="next" id="focusme">다음</button></div>`;
+    }else if(!session.mock){
+      body+=`<div class="acts"><button class="btn ghost small" data-act="tlreset" ${it.order.length?"":"disabled"}>다시 고르기</button><button class="btn" data-act="tlcheck" ${it.order.length===it.ev.length?"":"disabled"}>확인</button></div>`;
+    }else{
+      body+=`<div class="acts"><button class="btn ghost small" data-act="tlreset" ${it.order.length?"":"disabled"}>다시 고르기</button></div>`;
+    }
+  }else if(it.k==="rev"){
+    const c=byId[it.id];
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">설명 고르기</span>`;
+    q=`<p class="q">‘${esc(c.a)}’에 해당하는 설명은?</p>`;
+    body=optsHTML(it.opts,it.ans,fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+  }else if(it.k==="ox"){
+    const c=byId[it.id];
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">O/X</span>`;
+    q=`<p class="q">${esc(c.q)}</p><div class="oxprop">→ ${esc(it.shown)}</div><p class="muted m0">이 답이 맞으면 O, 틀리면 X</p>`;
+    const b=(val,lab)=>{let cls="";if(fb){if(val===it.truth)cls="ok";else if(val===fb.said)cls="no";}return `<button class="opt ox ${cls}" data-act="ox" data-v="${val?1:0}" ${fb?"disabled":""}>${lab}</button>`;};
+    body=`<div class="oxrow">${b(true,"O")}${b(false,"X")}</div>`+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+  }else if(it.k==="pair"){
+    chips=`<span class="chip mode">먼저 일어난 사건</span>`;
+    q=`<p class="q">둘 중 먼저 일어난 사건은?</p>`;
+    const [a,b2]=it.ev.map(i=>events[i]);
+    body=optsHTML(it.opts,it.ans,fb)+(fb?`<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${fb.ok?"정답!":"아쉬워요"}</div><div>${esc(a.label)} <b>${evText(a)}</b></div><div>${esc(b2.label)} <b>${evText(b2)}</b></div></div><div class="acts"><button class="btn" data-act="next" id="focusme">다음</button></div>`:"");
+  }else if(it.k==="ess"){
+    const e=essById[it.id];
+    chips=`${unitChip(e.u)}<span class="chip mode">서술형</span><span class="chip">${esc(e.pg)}</span>`;
+    q=`<p class="q">${esc(e.q)}</p>`;
+    if(!fb){
+      body=`<textarea id="ei" rows="5" placeholder="생각나는 대로 써 보세요. 핵심어가 들어가면 자동으로 표시돼요." aria-label="서술형 답안">${esc(it.draft||"")}</textarea>
+        <div class="acts"><button class="btn ghost small" data-act="essreveal" data-v="skip">모르겠어요</button><button class="btn" data-act="essreveal">다 썼어요, 답 확인</button></div>`;
+    }else{
+      const hits=kwHits(e,fb.input||"");
+      body=`${fb.input?`<div class="mine"><div class="muted">내 답</div>${esc(fb.input)}</div>`:""}
+        <div class="model"><div class="muted">모범 답안</div>${esc(e.model)}</div>
+        <div><div class="muted">핵심어 ${hits.filter(Boolean).length} / ${hits.length}</div><ul class="kw">${e.kws.map((g,i)=>`<li class="${hits[i]?"hit":""}">${hits[i]?"✓":"○"} ${esc(g[0])}</li>`).join("")}</ul></div>
+        ${fb.rating?"":`<p class="muted m0">내 답을 스스로 채점해 주세요.</p>`}
+        <div class="acts">${["again","part","full"].map(r=>`<button class="btn ${fb.rating===r?"":"ghost"} small" data-act="rate" data-v="${r}" ${fb.rating?"disabled":""}>${{again:"다시 공부",part:"일부 맞음",full:"다 맞음"}[r]}</button>`).join("")}${fb.rating?`<button class="btn" data-act="next" id="focusme">다음</button>`:""}</div>`;
+    }
+  }
+  const mockBar=session.mock?`<button class="btn" data-act="mocknext" id="focusme" ${mockReady(it)?"":"disabled"}>${session.i===total-1?"제출하고 채점":"다음 문제"}</button>`:"";
+  return `<div class="study">
+    <div class="stop"><button class="btn ghost small" data-act="quit">${session.mock?"그만두기":"그만하기"}</button><div class="prog"><span style="width:${pc}%"></span></div><span class="cnt">${session.i+1} / ${total}</span></div>
+    <div class="qcard">${session.mock?`<div class="muted mockh">모의고사 · 정답은 끝나고 공개</div>`:""}<div class="chips">${chips}</div>${q}${body}${mockBar?`<div class="acts">${mockBar}</div>`:""}</div></div>`;
+}
+function mockReady(it){
+  if(it.k==="tl")return it.order.length===it.ev.length;
+  if(it.k==="card"&&it.mode==="write")return true;
+  return session.sel!=null;
+}
+function optsHTML(opts,ans,fb){
+  return `<div class="opts">${opts.map((o,i)=>{
+    let cls="";
+    if(fb){if(o===ans)cls="ok";else if(i===fb.pick)cls="no";}
+    else if(session.mock&&session.sel===i)cls="sel";
+    return `<button class="opt ${cls}" data-act="pick" data-v="${i}" ${fb?"disabled":""}><span class="k">${i+1}</span>${esc(o)}</button>`;
+  }).join("")}</div>`;
+}
+function writeHTML(fb){
+  return `<form class="write" id="wf" autocomplete="off"><input id="wi" type="text" placeholder="답을 입력하세요" aria-label="답 입력" value="${fb?esc(fb.input):""}" ${fb?"disabled":""}>${fb||session.mock?"":`<button class="btn" type="submit">확인</button>`}</form>`;
+}
+function verdictHTML(a,cat,note,fb){
+  const head=fb.ok?(fb.override?"맞은 것으로 처리했어요":"정답!"):"아쉬워요";
+  const mine=(!fb.ok&&fb.input)?`<div>내 답: ${esc(fb.input)}</div>`:"";
+  const over=(!fb.ok&&fb.input)?`<button class="btn ghost small" data-act="override">내 답도 맞아요</button>`:"";
+  return `<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${head}</div><div>정답: <b class="c${cat}">${esc(a)}</b></div>${mine}<div class="note">${esc(note)}</div></div>
+    <div class="acts">${over}<button class="btn" data-act="next" id="focusme">다음</button></div>`;
+}
+function wrongListHTML(){
+  const ws=session.wrong.filter(w=>w.k!=="tl");
+  if(!ws.length)return "";
+  return `<ul class="clist left">${ws.map(w=>{
+    if(w.k==="card"){const x=byId[w.id];return `<li><span class="lv wr">카드</span><span class="q">${esc(x.q)}</span><span class="a c${x.cat}">${esc(x.a)}</span></li>`;}
+    const s=srcById[w.id];return `<li><span class="lv wr">사료</span><span class="q">「${esc(s.text)}」</span><span class="a c${s.cat}">${esc(s.a)}</span></li>`;
+  }).join("")}</ul>`;
+}
+function doneHTML(){
+  const a=session.answered,c=session.score;
+  const cw=session.wrong.some(w=>w.k==="card");
+  return `<div class="box done">
+    <div class="muted">${session.test?"건너뛰기 테스트 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"레슨 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
+    <div class="big">${fmt(c)} / ${a}</div>
+    <div class="muted">${a?"정답률 "+pct(c,a)+"%":"푼 문제가 없어요"}</div>
+    ${session.test?`<p class="muted">${pct(session.score,session.answered)>=80?"건너뛰기 성공! 맞힌 카드는 바로 복습 단계로 넘어갔어요.":"맞힌 카드는 복습 단계로 넘어갔어요. 틀린 카드는 이 레슨에서 처음부터 배우게 돼요."}</p>`:""}
+    ${wrongListHTML()}
+    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${(session.kind!=="drill"||session.ahead)&&(dueList().length+newLeft())===0?`<button class="btn ghost" data-act="${nextStep().main.act}">다음: ${esc(nextStep().main.t)}</button>`:""}<button class="btn" data-act="home" id="focusme">처음으로</button></div>
+  </div>`;
+}
+function mockResultHTML(){
+  const r=session.result;
+  const uRows=Object.keys(UNITS).map(u=>{const x=r.byU[u]||[0,0];return {label:UNITS[u][0]+" "+UNITS[u][1],a:x[0],c:x[1]};});
+  const kRows=Object.keys(KIND).filter(k=>r.byK[k]).map(k=>({label:KIND[k],a:r.byK[k][0],c:r.byK[k][1]}));
+  const weakU=uRows.filter(x=>x.a).sort((a,b)=>a.c/a.a-b.c/b.a)[0];
+  const review=session.items.map((it,i)=>{
+    const a=session.ans[i]||{};if(a.ok)return "";
+    let q="",ans="";
+    if(it.k==="card"){const c=byId[it.id];q=esc(c.q);ans=`<b class="c${c.cat}">${esc(c.a)}</b>`;}
+    else if(it.k==="src"){const s=srcById[it.id];q="「"+esc(s.text)+"」 "+esc(s.q);ans=`<b class="c${s.cat}">${esc(s.a)}</b> <span class="muted">${esc(s.cite)}</span>`;}
+    else{q="연표 순서";ans=tlSorted(it).map(ix=>esc(events[ix].label)+" "+evText(events[ix])).join(" → ");}
+    const given=Array.isArray(a.given)?a.given.map(ix=>esc(events[ix].label)).join(" → "):esc(a.given||"(빈칸)");
+    return `<li><span class="lv wr">${i+1}번</span><span class="q">${q}</span><span class="q">내 답: ${given}</span><span class="a">정답: ${ans}</span></li>`;
+  }).join("");
+  return `<div class="panel"><div class="box done">
+    <div class="muted">모의고사 결과 · ${Math.floor(r.sec/60)}분 ${r.sec%60}초</div>
+    <div class="big">${r.score}점</div>
+    <div class="muted">${r.n}문항 중 ${r.c}문항 정답${weakU&&weakU.c<weakU.a?` · 약한 단원 <b>${esc(weakU.label)}</b>`:""}</div></div>
+    <div class="box"><h2>단원별</h2>${hbars(uRows)}</div>
+    <div class="box"><h2>유형별</h2>${hbars(kRows)}</div>
+    ${review?`<div class="box"><h2>틀린 문항 다시 보기</h2><p class="muted">틀린 카드는 복습 목록으로 돌아갔어요.</p><ul class="clist">${review}</ul></div>`:""}
+    <div class="row center"><button class="btn" data-act="home" id="focusme">처음으로</button></div></div>`;
+}
+function focusStudy(){
+  requestAnimationFrame(()=>{
+    const it=session&&!session.done&&session.items[session.i];
+    if(it&&!session.fb){
+      if(it.k==="card"&&it.mode==="write"){const w=document.getElementById("wi");if(w){w.focus();return;}}
+      if(it.k==="ess"){return;}
+    }
+    const f=document.getElementById("focusme");if(f&&!f.disabled)f.focus({preventScroll:true});
+  });
+}
+function setFb(fb){session.fb=fb;fbAt=Date.now();render();}
+
+/* 입력 */
+app.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");
+  if(!b){const t=e.target.closest("[data-tip]");if(t){const r=t.getBoundingClientRect();showTip(t,r.left+r.width/2,r.top+8);}else hideTip();return;}
+  if(b.disabled)return;
+  const act=b.dataset.act,v=b.dataset.v;
+  const it=session&&!session.done?session.items[session.i]:null;
+  if(act==="tab"){view=v;resetAsk=false;sheet=null;if(v==="path")scrollCur=true;render();}
+  else if(act==="node"){sheet=v;render();}
+  else if(act==="sheetclose"){sheet=null;render();}
+  else if(act==="backpath"){session=null;view="path";sheet=null;scrollCur=true;render();}
+  else if(act==="llearn"||act==="lredo"||act==="lmc"||act==="lskip"){
+    const L=nodeById[v];sheet=null;
+    const list=L.ids.map(id=>byId[id]);
+    let items;
+    if(act==="llearn")items=list.filter(c=>levelOf(c.id)<0).map(c=>cardItem(c,"learn")).concat(list.filter(c=>{const s=st(c.id);return s&&s.s&&s.l<4&&(s.l===0||(s.d&&s.d<=today()));}).map(c=>cardItem(c)));
+    else if(act==="lredo")items=shuffle(list.map(c=>cardItem(c,levelOf(c.id)>=1?"write":"mc")));
+    else items=shuffle(list.map(c=>cardItem(c,"mc")));
+    begin("drill",items,{lesson:L.id,test:act==="lskip"});
+  }
+  else if(act==="nsrc"){sheet=null;begin("drill",srcItems(99,+v),{lesson:"S"+v});}
+  else if(act==="ntest"){sheet=null;begin("drill",unitTestItems(+v),{lesson:"T"+v,unitTest:+v});}
+  else if(act==="start")startToday();
+  else if(act==="deep"){session=null;startDeep();}
+  else if(act==="deepfull"){session=null;startDeep(true);}
+  else if(act==="bank"){session=null;startBank(+(v||0));}
+  else if(act==="mock"){sheet=null;startMock();}
+  else if(act==="ahead"){session=null;begin("drill",unseen().slice(0,10).map(c=>cardItem(c,"learn")),{ahead:true});}
+  else if(act==="learned")learned();
+  else if(act==="pick"&&it&&!session.fb){
+    const i=+v;
+    if(session.mock){session.sel=i;render();return;}
+    setFb({ok:it.opts[i]===ansOf(it),pick:i});
+  }
+  else if(act==="ox"&&it&&!session.fb){const said=v==="1";setFb({ok:said===it.truth,said});}
+  else if(act==="giveup"&&it&&!session.fb)setFb({ok:false,input:""});
+  else if(act==="override"&&session&&session.fb){session.fb.ok=true;session.fb.override=true;render();}
+  else if(act==="next")next();
+  else if(act==="mocknext")mockNext();
+  else if(act==="tlpick"&&it&&!session.fb){
+    const ix=+v,p=it.order.indexOf(ix);
+    if(p>=0)it.order.splice(p,1);else it.order.push(ix);
+    render();
+  }
+  else if(act==="tlreset"&&it){it.order=[];render();}
+  else if(act==="tlcheck"&&it&&!session.fb)setFb({ok:tlCorrect(it)});
+  else if(act==="essreveal"&&it){
+    const t=v==="skip"?"":(document.getElementById("ei")||{}).value||"";
+    setFb({input:t.trim()});
+  }
+  else if(act==="rate"&&session&&session.fb){session.fb.rating=v;render();}
+  else if(act==="quit"||act==="home"){session=null;render();}
+  else if(act==="psrc"){const sc=scope();begin("drill",srcItems(8,0,sc.src.length?sc.src:srcs));}
+  else if(act==="usrc")begin("drill",srcItems(6,+b.dataset.u));
+  else if(act==="wsrc")begin("drill",srcs.filter(s=>(S.src[s.id]||{}).w>0).sort((a,b)=>S.src[b.id].w-S.src[a.id].w).slice(0,15).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))})));
+  else if(act==="ptl"){const sc=scope(),ev=canTl(sc.ev)?sc.ev:events;begin("drill",[1,2,3,4,5].map(()=>tlItem(ev)));}
+  else if(act==="pess"){const sc=scope();begin("drill",essItems(3,sc.ess.length?sc.ess:essays));}
+  else if(act==="pmix")begin("drill",pick(cards.filter(c=>levelOf(c.id)>=0),20).map(c=>cardItem(c)));
+  else if(act==="drill"){
+    let list=[];
+    if(v==="wrong")list=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w).slice(0,30);
+    else if(v==="unew")list=unseen().filter(c=>c.u===+b.dataset.u).slice(0,10);
+    else if(v==="urev")list=pick(cards.filter(c=>c.u===+b.dataset.u&&levelOf(c.id)>=0),20);
+    else if(v==="again"&&session)list=session.wrong.filter(w=>w.k==="card").map(w=>byId[w.id]);
+    session=null;begin("drill",list.map(c=>cardItem(c)));
+    if(!session)render();
+  }
+  else if(act==="export")doExport();
+  else if(act==="importyes"&&importAsk){const keepExam=importAsk.exam;S=importAsk;S.exam=keepExam||S.exam;S.total=0;syncTotal();importAsk=null;ioMsg="기록을 불러왔어요.";save();render();}
+  else if(act==="importno"){importAsk=null;ioMsg="";render();}
+  else if(act==="copycode"){
+    const t=exportText();const done=()=>{ioMsg="기록 코드를 복사했어요.";render();};
+    try{navigator.clipboard.writeText(t).then(done,()=>{const ta=document.getElementById("codein");if(ta){ta.value=t;ta.select();}ioMsg="자동 복사가 막혀 있어요. 입력칸에 코드를 넣어 두었으니 직접 복사해 주세요.";const m=document.querySelector('[role=status]');if(m)m.textContent=ioMsg;});}catch(e){}
+  }
+  else if(act==="pastecode"){const ta=document.getElementById("codein");const st=ta&&parseImport(ta.value.trim());if(st){importAsk=st;ioMsg="";}else ioMsg="기록 코드를 읽을 수 없어요. 처음부터 끝까지 빠짐없이 붙여 넣었는지 확인해 주세요.";render();}
+  else if(act==="resetask"){resetAsk=true;render();}
+  else if(act==="resetno"){resetAsk=false;render();}
+  else if(act==="resetyes"){S=fresh(S.exam);S.total=TOTAL;resetAsk=false;save();render();}
+});
+app.addEventListener("input",e=>{if(e.target.id==="ei"&&session){const it=session.items[session.i];if(it)it.draft=e.target.value;}});
+app.addEventListener("submit",e=>{
+  if(e.target.id!=="wf")return;
+  e.preventDefault();
+  if(!session)return;
+  if(session.mock){mockNext();return;}
+  if(session.fb)return;
+  const val=document.getElementById("wi").value.trim();if(!val)return;
+  const it=session.items[session.i];
+  setFb({ok:grade(byId[it.id],val),input:val});
+});
+app.addEventListener("change",e=>{
+  if(e.target.id==="impf"&&e.target.files&&e.target.files[0]){
+    const f=e.target.files[0],fr=new FileReader();
+    fr.onload=()=>{const st=parseImport(String(fr.result));if(st){importAsk=st;ioMsg="";}else ioMsg="이 파일은 이 앱의 기록 파일이 아니에요.";render();};
+    fr.onerror=()=>{ioMsg="파일을 읽지 못했어요.";render();};
+    fr.readAsText(f);return;
+  }
+  if(e.target.id!=="exam"||!e.target.value)return;
+  S.exam=e.target.value;const d=dayRec();d.p=planNew(d.n);
+  save();render();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&sheet&&!session){sheet=null;render();return;}
+  if(!session||session.done||session.fb)return;
+  const it=session.items[session.i];
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;
+  if(it.k==="ox"&&/^[12oOxX]$/.test(e.key)){const said=/^[1oO]$/.test(e.key);setFb({ok:said===it.truth,said});return;}
+  if((it.k==="src"||it.k==="rev"||it.k==="pair"||(it.k==="card"&&it.mode==="mc"))&&/^[1-4]$/.test(e.key)){
+    const i=+e.key-1;if(!it.opts||i>=it.opts.length)return;
+    if(session.mock){session.sel=i;render();return;}
+    setFb({ok:it.opts[i]===ansOf(it),pick:i});
+  }
+});
+
+syncTotal();
+render();
+initRemote();
+})();
+</script>
+</body></html>
