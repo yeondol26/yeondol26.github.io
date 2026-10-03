@@ -1049,8 +1049,8 @@ function weakestUnit(){
 function nextStep(){
   const day=dayRec(),un=unseen().length,wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
   const dp=deepPlan();
-  const main=(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
-    :un?{act:"ahead",t:`다음 새 카드 ${Math.min(10,un)}장 미리 배우기`,d:"내일 분량이 그만큼 줄어요"}
+  const main=un?{act:"ahead",t:`다음 카드 ${Math.min(10,un)}장 배우기`,d:"교과서 순서대로 이어서 배워요"}
+    :(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
     :{act:"mock",t:"모의고사",d:"20문항 · 실전처럼 정답은 끝나고 공개"};
   const more=[];
   if(main.act!=="ahead"&&un)more.push(`<button class="btn ghost small" data-act="ahead">새 카드 ${Math.min(10,un)}장 미리 배우기</button>`);
@@ -1058,7 +1058,7 @@ function nextStep(){
   if(wr)more.push(`<button class="btn ghost small" data-act="drill" data-v="wrong">오답 ${Math.min(30,wr)}장 다시</button>`);
   if(wu)more.push(`<button class="btn ghost small" data-act="drill" data-v="urev" data-u="${wu.u}">약한 단원(${UNITS[wu.u][0]}) 복습</button>`);
   if(main.act!=="mock")more.push(`<button class="btn ghost small" data-act="mock">모의고사</button>`);
-  if(main.act!=="deep"&&day.x&&dp.ok)more.push(`<button class="btn ghost small" data-act="deep">심화 세트 한 번 더</button>`);
+  if(main.act!=="deep"&&dp.ok)more.push(`<button class="btn ghost small" data-act="deep">${day.x?"심화 세트 한 번 더":"심화 세트"}</button>`);
   return {main,more};
 }
 function nextBoxHTML(){
