@@ -136,6 +136,7 @@ details.box summary{font-weight:700;color:var(--ink)}
 .prow:first-of-type{border-top:0;padding-top:0}
 .prow .t{font-weight:700}
 .prow .muted{font-size:13px}
+.prow .btn{flex:none;white-space:nowrap}
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .tiles div{display:grid}
 .tiles b{font-size:22px;font-variant-numeric:tabular-nums;line-height:1.25}
@@ -1247,7 +1248,7 @@ function dayBars(rows){
     const tip=`${md(r.d)} · ${r.a}문제${r.a?` · 정답률 ${pct(r.c,r.a)}%`:""}`;
     const isT=r.d===today();
     const mark=r.a?`<path d="${roundTop(cx-bw/2,y(r.a),bw,h,4)}" class="bm${isT?" now":""}"/>`:"";
-    const lab=(i%step===0||isT)?`<text x="${cx}" y="${H-6}" class="ax" text-anchor="middle">${isT?"오늘":md(r.d)}</text>`:"";
+    const lab=(isT||(i%step===0&&rows.length-1-i>=step))?`<text x="${cx}" y="${H-6}" class="ax" text-anchor="middle">${isT?"오늘":md(r.d)}</text>`:"";
     const val=(isT&&r.a)?`<text x="${cx}" y="${y(r.a)-5}" class="vl" text-anchor="middle">${r.a}</text>`:"";
     return `${mark}${val}${lab}<rect x="${L+cw*i}" y="${T}" width="${cw}" height="${H-T-B}" class="hit" data-tip="${esc(tip)}"/>`;
   }).join("");
@@ -1264,7 +1265,7 @@ function accLine(rows){
   const step=Math.ceil(n/7);
   const dots=rows.map((r,i)=>{
     const last=i===n-1;
-    return `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="${last?5:3.5}" class="dt${last?" now":""}"/>${last?`<text x="${pts[i][0]+8}" y="${pts[i][1]+4}" class="vl">${pct(r.c,r.a)}%</text>`:""}${(i%step===0||last)?`<text x="${pts[i][0]}" y="${H-6}" class="ax" text-anchor="middle">${md(r.d)}</text>`:""}<rect x="${pts[i][0]-14}" y="${T}" width="28" height="${H-T-B}" class="hit" data-tip="${esc(`${md(r.d)} · 정답률 ${pct(r.c,r.a)}% (${r.a}문제)`)}"/>`;
+    return `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="${last?5:3.5}" class="dt${last?" now":""}"/>${last?`<text x="${pts[i][0]+8}" y="${pts[i][1]+4}" class="vl">${pct(r.c,r.a)}%</text>`:""}${(last||(i%step===0&&n-1-i>=step))?`<text x="${pts[i][0]}" y="${H-6}" class="ax" text-anchor="middle">${md(r.d)}</text>`:""}<rect x="${pts[i][0]-14}" y="${T}" width="28" height="${H-T-B}" class="hit" data-tip="${esc(`${md(r.d)} · 정답률 ${pct(r.c,r.a)}% (${r.a}문제)`)}"/>`;
   }).join("");
   return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="날짜별 정답률">${grid}${line}${dots}</svg></div>`;
 }
