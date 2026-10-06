@@ -851,7 +851,7 @@ function applyCard(item,ok){
   if(ok){
     if(item.mode==="mc"){if(s.l<1){s.l=1;s.d=sched(1);}}
     else if(s.l<4){s.l=s.l+1;s.d=s.l>=4?null:sched(INTERVAL[s.l]);}
-    if(session.ladder&&session.ladder.r===3&&item.mode==="write"){s.l=4;s.d=null;}
+    if(((session.ladder&&session.ladder.r===3)||session.finish)&&item.mode==="write"){s.l=4;s.d=null;}
   }else{
     s.w=(s.w||0)+1;s.l=0;s.d=null;
     addWrong({k:"card",id});
@@ -981,7 +981,13 @@ function pathHTML(){
       <div class="pbar" role="img" aria-label="${N}단계 중 ${i}단계 완료"><span style="width:${(i/N*100).toFixed(1)}%"></span></div>
       <div class="pmeta"><span>${i} / ${N}단계 완료</span><span>남은 단계 ${N-i}</span></div>
       <button class="btn wide" data-act="ladder">${stepName(x)} 시작</button></div>`
-    :`<div class="box pnow"><div class="lab">학습 순서</div><div class="pbig">모두 마쳤어요</div><p class="muted m0">${N}단계를 다 끝냈어요. 아래 단원 점검과 모의고사로 마무리하세요.</p></div>`;
+    :leftover().length?`<div class="box pnow"><div class="lab">${N}단계 완료 · 마무리</div>
+      <div class="pbig">남은 카드 ${leftover().length}장</div>
+      <p class="muted m0">${FINISH_DESC}</p>
+      <div class="pbar" role="img" aria-label="외움 ${counts(cards).l4} / ${TOTAL}장"><span style="width:${(counts(cards).l4/TOTAL*100).toFixed(1)}%"></span></div>
+      <div class="pmeta"><span>외움 ${counts(cards).l4} / ${TOTAL}장</span><span>남은 카드 ${leftover().length}</span></div>
+      <button class="btn wide" data-act="finish">마무리 시작</button></div>`
+    :`<div class="box pnow"><div class="lab">학습 순서</div><div class="pbig">모두 외웠어요</div><p class="muted m0">${TOTAL}장을 모두 외웠어요. 아래 단원 점검과 모의고사로 마무리하세요.</p></div>`;
   const cell=(b,r)=>{
     if(b<1||b>B)return `<span class="sc empty" aria-hidden="true"></span>`;
     const j=LADDER.findIndex(t=>t.b===b&&t.r===r),cls=j<i?"done":j===i?"cur":"ahead";
@@ -1055,11 +1061,13 @@ function weakestUnit(){
 function nextStep(){
   const day=dayRec(),wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
   const dp=deepPlan();
-  const lx=ladderStep();
+  const lx=ladderStep(),lo=leftover().length;
   const main=lx?{act:"ladder",t:stepName(lx),d:STEP_DESC[lx.r]}
+    :lo?{act:"finish",t:`남은 카드 ${lo}장 마무리`,d:FINISH_DESC}
     :(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
     :{act:"mock",t:"모의고사",d:"20문항 · 실전처럼 정답은 끝나고 공개"};
   const more=[];
+  if(main.act!=="finish"&&lo)more.push(`<button class="btn ghost small" data-act="finish">3회 틀린 카드 ${lo}장 마무리</button>`);
   more.push(`<button class="btn ghost small" data-act="bank">문제 은행 20문제</button>`);
   if(wr)more.push(`<button class="btn ghost small" data-act="drill" data-v="wrong">오답 ${Math.min(30,wr)}장 다시</button>`);
   if(wu)more.push(`<button class="btn ghost small" data-act="drill" data-v="urev" data-u="${wu.u}">약한 단원(${UNITS[wu.u][0]}) 복습</button>`);
@@ -1080,12 +1088,28 @@ function startLadder(j,opt){
     :shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write")));
   begin("ladder",items,Object.assign({ladder:{i:j,b:x.b,r:x.r}},opt||{}));
 }
+/* 마무리: 3회까지 끝낸 묶음에서 아직 외움이 아닌 카드 */
+function leftover(){
+  const i=S.ladder.i,out=[];
+  LADDER.slice(0,i).forEach(x=>{if(x.r===3)batches[x.b-1].forEach(c=>{if(levelOf(c.id)<4)out.push(c);});});
+  return out;
+}
+const FINISH_DESC="3회째에 틀린 카드를 주관식으로 다시 풀어요 · 맞히면 '외움'";
+function startFinish(){
+  const list=leftover();if(!list.length)return;
+  begin("finish",shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write"))),{finish:true});
+}
 let skipAsk=false;
 function ladderBoxHTML(){
   const x=ladderStep(),i=S.ladder.i,N=LADDER.length,day=dayRec();
   const todayLine=`<p class="muted mt">오늘 푼 문제 ${day.a}개${day.a?` · 정답률 ${pct(day.c,day.a)}%`:""} · 연속 ${streakNow()}일</p>`;
+  const lo=leftover().length;
+  if(!x&&lo)return `<div class="box"><h2>1. 학습 순서 <span class="muted">마무리</span></h2>
+    <div class="ladnow"><b>남은 카드 ${lo}장</b> <span class="muted">외움 ${counts(cards).l4} / ${TOTAL}장</span></div>
+    <p class="muted">${FINISH_DESC}. 다 외울 때까지 몇 번이든 다시 할 수 있어요.</p>
+    <button class="btn wide" data-act="finish">마무리 시작 · 약 ${Math.max(1,Math.round(lo*15/60))}분</button>${todayLine}</div>`;
   if(!x)return `<div class="box"><h2>1. 학습 순서 <span class="lv l4">완료</span></h2>
-    <p class="muted">${batches.length}일차까지 모두 3회씩 마쳤어요. 모의고사와 오답 복습으로 마무리하세요.</p>
+    <p class="muted">${TOTAL}장을 모두 외웠어요. 모의고사와 오답 복습으로 마무리하세요.</p>
     <div class="row"><button class="btn" data-act="mock">모의고사</button><button class="btn ghost" data-act="drill" data-v="wrong">오답 다시</button></div>${todayLine}</div>`;
   const n=batches[x.b-1].length,mins=Math.max(1,Math.round(n*(x.r===1?30:15)/60));
   const up=LADDER.slice(i+1,i+4).map(t=>`<span class="nw">${stepName(t)}</span>`).join(" → ");
@@ -1097,6 +1121,7 @@ function ladderBoxHTML(){
     <p class="muted">${STEP_DESC[x.r]}</p>
     <button class="btn wide" data-act="ladder">${stepName(x)} 시작 · 약 ${mins}분</button>
     ${up?`<p class="muted mt">다음: ${up}</p>`:""}${todayLine}
+    ${lo?`<button class="linkbtn" data-act="finish">3회에서 틀린 카드 ${lo}장 마무리하기</button>`:""}
     <details class="mt"><summary>전체 순서 보기</summary><ol class="ladlist">${LADDER.map((t,j)=>`<li class="${j<i?"done":j===i?"cur":""}">${stepName(t)}</li>`).join("")}</ol></details>
     ${skip}</div>`;
 }
@@ -1417,9 +1442,9 @@ function wrongListHTML(){
 function doneHTML(){
   const a=session.answered,c=session.score;
   const cw=session.wrong.some(w=>w.k==="card");
-  const nx=(session.ladder||session.kind==="deep"||session.ahead)?nextStep().main:null;
+  const nx=(session.ladder||session.finish||session.kind==="deep"||session.ahead)?nextStep().main:null;
   return `<div class="box done">
-    <div class="muted">${session.ladder?stepName(session.ladder)+" 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"단원 사료 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
+    <div class="muted">${session.ladder?stepName(session.ladder)+" 끝":session.finish?"마무리 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"단원 사료 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
     <div class="big">${fmt(c)} / ${a}</div>
     <div class="muted">${a?"정답률 "+pct(c,a)+"%":"푼 문제가 없어요"}</div>
     ${session.test?`<p class="muted">${pct(session.score,session.answered)>=80?"건너뛰기 성공! 맞힌 카드는 바로 복습 단계로 넘어갔어요.":"맞힌 카드는 복습 단계로 넘어갔어요. 틀린 카드는 이 레슨에서 처음부터 배우게 돼요."}</p>`:""}
@@ -1480,6 +1505,7 @@ app.addEventListener("click",e=>{
   else if(act==="ladder"){const fp=view==="path"&&!!sheet;session=null;sheet=null;skipAsk=false;startLadder(null,fp?{fromPath:true}:null);}
   else if(act==="ladderskip"){skipAsk=true;render();}
   else if(act==="ladderskipno"){skipAsk=false;render();}
+  else if(act==="finish"){session=null;sheet=null;startFinish();}
   else if(act==="ladderskipyes"){skipAsk=false;if(ladderStep()){S.ladder.i++;save();}render();}
   else if(act==="deep"){session=null;startDeep();}
   else if(act==="deepfull"){session=null;startDeep(true);}
