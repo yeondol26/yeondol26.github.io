@@ -853,7 +853,9 @@ function applyCard(item,ok){
     else if(s.l<4){s.l=s.l+1;s.d=s.l>=4?null:sched(INTERVAL[s.l]);}
     if(((session.ladder&&session.ladder.r===3)||session.finish)&&item.mode==="write"){s.l=4;s.d=null;}
   }else{
-    s.w=(s.w||0)+1;s.l=0;s.d=null;
+    s.w=(s.w||0)+1;
+    /* 외움 카드는 학습 순서·마무리 밖(모의고사·연습 등)에서 틀려도 외움 유지, 오답 목록에만 남김 */
+    if(!(s.l===4&&!session.ladder&&!session.finish)){s.l=0;s.d=null;}
     addWrong({k:"card",id});
     if(!session.mock&&!session.test)requeue(id);
     if(session.test&&wasNew)s.s=false;
@@ -865,7 +867,7 @@ function applyMockCard(item,ok){
   stat(c.u,item.mode==="mc"?"mc":"wr",ok?1:0);
   if(s&&s.s){s.t=(s.t||0)+1;if(ok)s.r=(s.r||0)+1;}
   if(!ok){
-    if(s&&s.s){s.w=(s.w||0)+1;s.l=0;s.d=null;}
+    if(s&&s.s){s.w=(s.w||0)+1;if(s.l!==4){s.l=0;s.d=null;}}
     else S.cards[id]={l:0,d:null,w:1,s:false};
     addWrong({k:"card",id});
   }
@@ -1472,7 +1474,7 @@ function mockResultHTML(){
     <div class="muted">${r.n}문항 중 ${r.c}문항 정답${weakU&&weakU.c<weakU.a?` · 약한 단원 <b>${esc(weakU.label)}</b>`:""}</div></div>
     <div class="box"><h2>단원별</h2>${hbars(uRows)}</div>
     <div class="box"><h2>유형별</h2>${hbars(kRows)}</div>
-    ${review?`<div class="box"><h2>틀린 문항 다시 보기</h2><p class="muted">틀린 카드는 복습 목록으로 돌아갔어요.</p><ul class="clist">${review}</ul></div>`:""}
+    ${review?`<div class="box"><h2>틀린 문항 다시 보기</h2><p class="muted">틀린 카드는 오답 목록에 남아요. 외운 카드는 외움 그대로예요.</p><ul class="clist">${review}</ul></div>`:""}
     <div class="row center"><button class="btn" data-act="home" id="focusme">처음으로</button></div></div>`;
 }
 function focusStudy(){
