@@ -53,7 +53,7 @@ h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--sub);margin-
 .tabs{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:10px;margin-bottom:16px;position:sticky;top:0;z-index:5;box-shadow:0 0 0 8px var(--paper)}
 .tabs button{flex:1;border:0;background:transparent;padding:8px 6px;border-radius:7px;font-size:14px;color:var(--sub)}
 .tabs button[aria-selected="true"]{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.panel{display:grid;gap:14px}
+.panel{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
 .dday{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .dday .big{font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
@@ -94,12 +94,13 @@ summary{cursor:pointer;color:var(--sub)}
 .empty{text-align:center;padding:26px 10px;color:var(--sub)}
 
 /* 학습 화면 */
-.study{display:grid;gap:14px}
+.study{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.study>*,.qcard>*,.panel>*{min-width:0}
 .stop{display:flex;align-items:center;gap:12px}
 .stop .prog{flex:1;height:6px;border-radius:3px;background:var(--l0);overflow:hidden}
 .stop .prog span{display:block;height:100%;background:var(--ink);transition:width .25s}
 .stop .cnt{font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
-.qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;display:grid;gap:14px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;color:var(--sub)}
 .chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;background:var(--soft)}
 .chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
@@ -113,8 +114,9 @@ summary{cursor:pointer;color:var(--sub)}
 .opt.ok{border-color:var(--ok);background:var(--ok-bg)}
 .opt.no{border-color:var(--no);background:var(--no-bg)}
 .opt:disabled{cursor:default}
-.write{display:flex;gap:8px}
-.write input{flex:1;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:17px}
+.write{display:flex;gap:8px;min-width:0}
+.write .btn{flex:none}
+.write input{flex:1 1 0;width:0;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:17px}
 .verdict{border-radius:10px;padding:12px 14px;display:grid;gap:4px}
 .verdict.ok{background:var(--ok-bg)}
 .verdict.no{background:var(--no-bg)}
@@ -182,7 +184,7 @@ details.box summary{font-weight:700;color:var(--ink)}
 .tlb.ok{border-color:var(--ok);background:var(--ok-bg)}
 .tlb.no{border-color:var(--no);background:var(--no-bg)}
 .ord{margin:4px 0 0;padding-left:20px}
-textarea#ei{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font:inherit;font-size:15.5px;resize:vertical}
+textarea#ei{width:100%;max-width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font:inherit;font-size:15.5px;resize:vertical}
 .mine,.model{border-radius:10px;padding:10px 12px;background:var(--soft);font-size:14.5px}
 .model{background:var(--ok-bg)}
 .kw{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
@@ -231,7 +233,7 @@ textarea#ei{width:100%;border:1px solid var(--line);background:var(--paper);bord
 .sh-btns{display:grid;gap:8px}
 .linkbtn{border:0;background:none;color:var(--sub);text-decoration:underline;font-size:13px;padding:8px 0 0;cursor:pointer}
 .oxprop{font-size:22px;font-weight:700;padding:10px 14px;border-radius:10px;background:var(--soft)}
-.oxrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.oxrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .opt.ox{justify-content:center;font-size:28px;font-weight:700;padding:16px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style><style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style></head><body><div class="wrap">
