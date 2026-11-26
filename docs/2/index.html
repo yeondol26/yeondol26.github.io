@@ -1,0 +1,2256 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#23262D"><title>현대사 암기 카드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap">
+<style>
+:root{
+  --paper:#FBFAF6; --grid:#ECEEF2; --ink:#23262D; --sub:#6A6F7A; --line:#D9DDE4;
+  --card:#FFFFFF; --soft:#F2F3F6; --on-ink:#FBFAF6;
+  --r:#D12F3A; --b:#2358C4; --g:#1C8651; --p:#8A3CC0; --o:#D9730D; --w:#8B5A2B;
+  --ok:#1C8651; --ok-bg:#E6F4EC; --no:#C62833; --no-bg:#FBE9EA;
+  --l0:#C9CED8; --l1:#9DB8E8; --l2:#6C95DE; --l3:#3E6FCB; --l4:#1C8651;
+  --viz:#3E6FCB; --viz-soft:#A9C1EC;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#15171B; --grid:#1D2026; --ink:#E6E8EC; --sub:#9AA0AB; --line:#30343C;
+    --card:#1C1F25; --soft:#23272E; --on-ink:#15171B;
+    --r:#FF6B72; --b:#79A6FF; --g:#4FCB8B; --p:#C58BFF; --o:#FFAA55; --w:#D6A26E;
+    --ok:#4FCB8B; --ok-bg:#183326; --no:#FF6B72; --no-bg:#3A1C1F;
+    --l0:#3A3F48; --l1:#2E4A7A; --l2:#3E64A8; --l3:#5C86D6; --l4:#3FAE76;
+    --viz:#79A6FF; --viz-soft:#3A5584;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#15171B; --grid:#1D2026; --ink:#E6E8EC; --sub:#9AA0AB; --line:#30343C;
+  --card:#1C1F25; --soft:#23272E; --on-ink:#15171B;
+  --r:#FF6B72; --b:#79A6FF; --g:#4FCB8B; --p:#C58BFF; --o:#FFAA55; --w:#D6A26E;
+  --ok:#4FCB8B; --ok-bg:#183326; --no:#FF6B72; --no-bg:#3A1C1F;
+  --l0:#3A3F48; --l1:#2E4A7A; --l2:#3E64A8; --l3:#5C86D6; --l4:#3FAE76;
+  --viz:#79A6FF; --viz-soft:#3A5584;
+}
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;
+  color:var(--ink);
+  font-family:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:15px; line-height:1.6; word-break:keep-all; overflow-wrap:anywhere;
+}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+.wrap{max-width:680px;margin:0 auto;padding:20px 16px 56px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:22px;font-weight:700;margin:0;line-height:1.25}
+h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--sub);margin-top:4px}
+.sync{font-size:12px;color:var(--sub);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding-top:4px}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--l0);display:inline-block}
+.sync.on i{background:var(--ok)}
+.tabs{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:10px;margin-bottom:16px;position:sticky;top:0;z-index:5;box-shadow:0 0 0 8px var(--paper)}
+.tabs button{flex:1;border:0;background:transparent;padding:8px 6px;border-radius:7px;font-size:14px;color:var(--sub)}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.panel{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.dday{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dday .big{font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.dday .lab{font-size:13px;color:var(--sub)}
+.dday label{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.dday input{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;font-size:14px}
+.today h2,.box h2{font-size:16px;margin:0 0 8px;font-weight:700}
+.nums{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 14px}
+.nums div{display:grid}
+.nums b{font-size:24px;font-variant-numeric:tabular-nums;line-height:1.2}
+.nums span{font-size:12.5px;color:var(--sub)}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--ink);color:var(--on-ink);font-weight:700;font-size:15px}
+.btn.wide{width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:400}
+.btn.small{padding:7px 12px;font-size:13.5px}
+.btn:disabled{opacity:.45;cursor:default}
+.muted{color:var(--sub);font-size:13.5px}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--l0)}
+.bar span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--sub);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.streak{font-size:13px;color:var(--sub)}
+.unit{display:grid;gap:8px;padding:14px 0;border-top:1px solid var(--line)}
+.unit:first-of-type{border-top:0;padding-top:0}
+.unit .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.unit .t{font-weight:700;font-size:14.5px}
+.unit .c{font-size:12.5px;color:var(--sub);white-space:nowrap;font-variant-numeric:tabular-nums}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+details{font-size:13.5px}
+summary{cursor:pointer;color:var(--sub)}
+.clist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.clist li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:start;padding:8px 10px;background:var(--soft);border-radius:8px}
+.clist .q{grid-column:2;font-size:inherit;line-height:1.5}
+.clist .a{grid-column:2;font-weight:700}
+.lv{font-size:11px;padding:1px 7px;border-radius:999px;white-space:nowrap;align-self:start;margin-top:2px;background:var(--l0);color:var(--ink)}
+.lv.l1{background:var(--l1)} .lv.l2{background:var(--l2);color:#fff} .lv.l3{background:var(--l3);color:#fff} .lv.l4{background:var(--l4);color:#fff}
+.lv.wr{background:var(--no-bg);color:var(--no)}
+.empty{text-align:center;padding:26px 10px;color:var(--sub)}
+
+/* 학습 화면 */
+.study{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.study>*,.qcard>*,.panel>*{min-width:0}
+.stop{display:flex;align-items:center;gap:12px}
+.stop .prog{flex:1;height:6px;border-radius:3px;background:var(--l0);overflow:hidden}
+.stop .prog span{display:block;height:100%;background:var(--ink);transition:width .25s}
+.stop .cnt{font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;color:var(--sub)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;background:var(--soft)}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.chip.mode{background:transparent;border:1px solid var(--line)}
+.q{font-size:19px;line-height:1.5;text-wrap:pretty;margin:0}
+.ans{font-size:24px;font-weight:700}
+.note{font-size:13.5px;color:var(--sub)}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:16px}
+.opt .k{font-size:12px;color:var(--sub);width:16px;flex:none}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}
+.opt.no{border-color:var(--no);background:var(--no-bg)}
+.opt:disabled{cursor:default}
+.write{display:flex;gap:8px;min-width:0}
+.write .btn{flex:none}
+.write input{flex:1 1 0;width:0;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:17px}
+.verdict{border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.verdict.ok{background:var(--ok-bg)}
+.verdict.no{background:var(--no-bg)}
+.verdict .h{font-weight:700}
+.verdict.ok .h{color:var(--ok)} .verdict.no .h{color:var(--no)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.done{text-align:center;display:grid;gap:10px;justify-items:center}
+.done .big{font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.confirm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cr{color:var(--r)} .cb{color:var(--b)} .cg{color:var(--g)} .cp{color:var(--p)} .co{color:var(--o)} .cw{color:var(--w)}
+
+.m0{margin:0}.mt{margin:8px 0 0}
+.box p.muted{margin:0 0 12px}
+.box p.muted.m0,.box p.muted.mt{margin-bottom:0}
+details.box summary{font-weight:700;color:var(--ink)}
+.tip h2{margin-bottom:4px}
+.row.center{justify-content:center}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.prow:first-of-type{border-top:0;padding-top:0}
+.prow .t{font-weight:700}
+.prow .muted{font-size:13px}
+.prow .btn{flex:none;white-space:nowrap}
+.box h2 .muted{font-weight:400;font-size:13px}
+.ladnow{font-size:18px;margin:2px 0 2px}
+.nw{white-space:nowrap}
+.ladnow .muted{font-size:13px}
+.ladlist{margin:8px 0 0;padding-left:24px;columns:2;column-gap:20px;font-size:13px;color:var(--sub)}
+.ladlist li.done{text-decoration:line-through;opacity:.7}
+.ladlist li.cur{color:var(--ink);font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tiles div{display:grid}
+.tiles b{font-size:22px;font-variant-numeric:tabular-nums;line-height:1.25}
+.tiles span{font-size:12px;color:var(--sub)}
+@media (max-width:460px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.chart .ax{fill:var(--sub);font-size:11px;font-family:inherit}
+.chart .vl{fill:var(--ink);font-size:12px;font-weight:700;font-family:inherit}
+.chart .bm{fill:var(--viz-soft)}
+.chart .bm.now{fill:var(--viz)}
+.chart .ln{fill:none;stroke:var(--viz);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .dt{fill:var(--viz);stroke:var(--card);stroke-width:2}
+.chart .hit{fill:transparent;cursor:default}
+.hb{display:grid;gap:8px}
+.hbr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.hl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ht{height:10px;background:var(--soft);border-radius:4px;overflow:hidden}
+.ht span{display:block;height:100%;background:var(--viz);border-radius:0 4px 4px 0}
+.hv{color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12.5px}
+@media (max-width:460px){.hbr{grid-template-columns:1fr auto}.hbr .ht{grid-column:1/-1;grid-row:2}}
+.tip-pop{position:absolute;z-index:10;background:var(--ink);color:var(--on-ink);font-size:12.5px;padding:6px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.tblwrap{overflow-x:auto;margin-top:10px}
+.tblwrap table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tblwrap th,.tblwrap td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}
+.tblwrap th:first-child,.tblwrap td:first-child{text-align:left}
+.tblwrap th{color:var(--sub);font-weight:400}
+.srcq{margin:0;padding:12px 14px;background:var(--soft);border-radius:10px;font-size:15.5px;line-height:1.7;border-left:3px solid var(--line)}
+.q.sm{font-size:16.5px;font-weight:700}
+.opt.sel{border-color:var(--ink);background:var(--soft);font-weight:700}
+.tl{display:grid;gap:8px}
+.tlb{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font-size:15.5px}
+.tlb .n{width:24px;height:24px;flex:none;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.tlb.on .n{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.tlb .yr{margin-left:auto;color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
+.tlb.ok{border-color:var(--ok);background:var(--ok-bg)}
+.tlb.no{border-color:var(--no);background:var(--no-bg)}
+.ord{margin:4px 0 0;padding-left:20px}
+textarea#ei{width:100%;max-width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;font:inherit;font-size:15.5px;resize:vertical}
+.mine,.model{border-radius:10px;padding:10px 12px;background:var(--soft);font-size:14.5px}
+.model{background:var(--ok-bg)}
+.kw{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.kw li{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+.kw li.hit{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+.mockh{font-size:12.5px}
+.clist.left{width:100%;text-align:left}
+.next{border-color:var(--ok)}
+.done-badge{display:inline-block;font-size:12.5px;color:var(--ok);background:var(--ok-bg);padding:2px 10px;border-radius:999px;margin-bottom:8px}
+.mt2{margin-top:10px}
+.filebtn{position:relative;overflow:hidden;cursor:pointer;display:inline-block}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.filebtn:focus-within{outline:2px solid var(--b);outline-offset:2px}
+.confirm.col{flex-direction:column;align-items:flex-start}
+#codein{width:100%;margin:8px 0;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.tabs button{padding:8px 2px}
+.pnow{display:grid;gap:6px}
+.pnow .lab{font-size:13px;color:var(--sub)}
+.pbig{font-size:28px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.pbar{height:8px;border-radius:4px;background:var(--l0);overflow:hidden;margin-top:6px}
+.pbar span{display:block;height:100%;background:var(--ok)}
+.pmeta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--sub);font-variant-numeric:tabular-nums;margin-bottom:6px}
+.stair{display:grid;grid-template-columns:1.6em repeat(3,minmax(0,1fr));gap:6px;align-items:stretch}
+.stair .hd{display:grid;text-align:center;font-size:11.5px;color:var(--sub);line-height:1.3;padding-bottom:2px}
+.stair .hd b{font-size:13.5px;color:var(--ink)}
+.stair .rn{display:grid;place-items:center;font-size:11.5px;color:var(--sub);font-variant-numeric:tabular-nums}
+.sc{position:relative;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 2px;font-size:14px;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.sc.empty{border:0;background:transparent;padding:0}
+.sc.done{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
+.sc.cur{background:var(--b);border-color:var(--b);color:var(--on-ink);font-weight:700;outline:2px solid var(--b);outline-offset:2px}
+.sc.ahead{background:transparent;color:var(--sub);border-style:dashed}
+.umark{grid-column:2/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 0 8px;border-bottom:1px dashed var(--line);margin-bottom:4px}
+.umark .ut{font-size:12px;color:var(--sub);flex:1 1 100%}
+.uchip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 11px;font-size:12.5px;color:var(--ink)}
+.uchip.done{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
+.legend .lg{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .lg.done{background:var(--ok-bg);border-color:var(--ok)}
+.legend .lg.cur{background:var(--b);border-color:var(--b)}
+.legend .lg.ahead{border-style:dashed}
+.prow1{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.prow1 .btn{flex:none}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:20}
+.sheet{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(680px,100%);max-height:80vh;overflow:auto;background:var(--card);border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));z-index:21;display:grid;gap:10px;box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+.sh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sh-t{font-size:18px;font-weight:700}
+.sh-btns{display:grid;gap:8px}
+.linkbtn{border:0;background:none;color:var(--sub);text-decoration:underline;font-size:13px;padding:8px 0 0;cursor:pointer}
+.oxprop{font-size:22px;font-weight:700;padding:10px 14px;border-radius:10px;background:var(--soft)}
+.oxrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.opt.ox{justify-content:center;font-size:28px;font-weight:700;padding:16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style></head><body><div class="wrap">
+<header>
+  <h1>현대사 암기 카드<small>고등 한국사2 (미래엔) Ⅱ·Ⅲ단원 · 교과서 66~119쪽, 134~147쪽 (120~133쪽 제외)</small></h1>
+  <span class="sync" id="sync"><i></i><span>이 기기에만 저장</span></span>
+</header>
+<div id="app"></div>
+</div>
+<script>
+// 2학기판: 고등 한국사2(미래엔) Ⅱ·Ⅲ단원, 교과서 66~119쪽, 134~147쪽 (120~133쪽은 시험 범위 제외)
+const EDITION={
+  units:{
+    1:["Ⅱ-01","냉전 체제와 대한민국 정부 수립","66~77쪽"],
+    2:["Ⅱ-02","6·25 전쟁과 남북 분단의 고착화","78~85쪽"],
+    3:["Ⅱ-03","민주화를 위한 노력","86~99쪽"],
+    4:["Ⅱ-04","산업화의 성과와 사회·문화의 변화","100~109쪽"],
+    5:["Ⅲ-01","6월 민주 항쟁 이후 민주화 과정","114~119쪽"],
+    6:["Ⅲ-03","한반도 분단 극복과 동아시아 평화를 위한 노력","134~143쪽"],
+    7:["부록","한눈에 보는 대한민국 헌법 개정","146~147쪽"]
+  },
+  cats:{r:"정부·정치",b:"민주화 운동",g:"남북 관계·통일",p:"경제·산업",o:"사회·문화",w:"국제 정세"},
+  exam:"2026-12-14",key:"hyeondae-cards-v1",app:"hyeondae-cards",file:"현대사카드_기록"
+};
+// [id, 단원, 색, 그룹, 질문, 답, 메모(쪽), 허용답(|), 헷갈리는 보기(|)]
+const CARDS=[];
+// [id, 단원, 색, 질문, 사료 구절(일부·요약), 정답, 오답 보기(|), 출처·쪽]
+const SOURCES=[];
+// [사건, 연도, 월(교과서에 나온 경우만, 없으면 0), 단원, 교과서 쪽]
+const EVENTS=[];
+// [id, 단원, 질문, 모범 답안, 핵심어 묶음(; 로 구분, 묶음 안 | 는 같은 뜻), 쪽]
+const ESSAYS=[];
+// ── Ⅱ-01 냉전 체제와 대한민국 정부 수립 (66~77쪽)
+CARDS.push(
+// 1 냉전 체제의 형성 (66~67쪽)
+["h1-001",1,"w","개념","직접적인 무력 충돌은 없지만 군사적·경제적·외교적 대립이 지속되는 상태는?","냉전","Cold War, 미국 중심 자본주의 진영 vs 소련 중심 공산주의 진영 · 66쪽","Cold War|콜드 워","열전|제3세계|비동맹 중립"],
+["h1-002",1,"w","개념","냉전의 확산이 아시아에서 이어진, 중국·한국·베트남에서 일어난 실제 전쟁을 교과서는 무엇이라 부르나?","열전","66쪽","","냉전|내전|국제전"],
+["h1-003",1,"w","개념","1950년대 중반 이후 비동맹 중립 노선을 내세우며 등장한 국가들을 부르는 말은?","제3세계","아시아·아프리카 신생 독립국, 반둥 회의 · 66~67쪽","제 3세계","냉전|공산주의 진영|자본주의 진영"],
+["h1-004",1,"w","선언","1960년대 말 발표되어 냉전 체제 완화에 영향을 끼친 미국의 선언은?","닉슨 독트린","1969 · 66~67쪽","닉슨독트린","트루먼 독트린|애치슨 선언|마셜 플랜"],
+["h1-005",1,"w","기구","제2차 세계 대전 후 일본의 비군사화와 민주화를 목표로 개혁을 추진한 미국 주도의 기구는?","연합국 최고 사령부","66쪽","","미군정|유엔 한국 임시 위원단|미소 공동 위원회"],
+["h1-006",1,"w","법령","일본의 군사력 보유 금지 등을 주요 내용으로 전후에 제정된 일본 헌법은?","평화 헌법","66쪽","평화헌법","제헌 헌법|유신 헌법|사회주의 헌법"],
+["h1-007",1,"w","회의","일본의 전쟁 범죄자 처벌을 위해 열린 재판(1946~1948)은?","극동 국제 군사 재판","도쿄 재판 · 66쪽","도쿄 재판|극동 국제 군사재판","여성 국제 전범 법정|파리 강화 회의|뉘른베르크 재판"],
+["h1-008",1,"w","인물","극동 국제 군사 재판에서 전쟁 최고 책임자였지만 기소되지 않은 사람은?","일왕","주요 피해국 의견도 제대로 반영 안 됨 · 66쪽","천황|일본 천황","도조 히데키|맥아더|요시다 시게루"],
+["h1-009",1,"w","기타","냉전이 본격화되면서 미국이 일본을 삼으려 한 동아시아의 무엇은?","반공 거점","66쪽 (6·25 이후 반공 거점 국가로 자리 잡음 · 80쪽)","반공 거점 국가","비동맹 중립국|공산화 완충 지대|신탁 통치 지역"],
+["h1-010",1,"w","선언","미국이 공산주의의 팽창을 막기 위해 자유 민주주의 국가를 지원하겠다고 한 1947년 선언은?","트루먼 독트린","66쪽","트루먼독트린","닉슨 독트린|애치슨 선언|마셜 플랜"],
+["h1-011",1,"w","정책","미국이 세운 유럽 부흥을 위한 경제 원조 계획은?","마셜 플랜","66쪽","마셜플랜|마셜 계획","트루먼 독트린|경제 상호 원조 회의|뉴딜"],
+["h1-012",1,"w","기구","미국이 서유럽 국가와 군사 방위 체제를 구축하려고 조직한 기구는?","북대서양 조약 기구","NATO · 66쪽","NATO|나토","바르샤바 조약 기구|경제 상호 원조 회의|유럽 연합"],
+["h1-013",1,"w","기구","소련이 동유럽 국가와 결성한 경제 협력 기구는?","경제 상호 원조 회의","COMECON · 66쪽","COMECON|코메콘","바르샤바 조약 기구|북대서양 조약 기구|마셜 플랜"],
+["h1-014",1,"w","기구","소련이 동유럽 국가와 상호 방위를 목적으로 조직한 기구는?","바르샤바 조약 기구","WTO(Warsaw Treaty Organization) · 66쪽","바르샤바조약기구","북대서양 조약 기구|경제 상호 원조 회의|세계 무역 기구"],
+["h1-015",1,"w","인물","중국 공산당을 이끌고 중화 인민 공화국을 수립한 인물은?","마오쩌둥","1949 · 67쪽","모택동","호찌민|장제스|닉슨"],
+["h1-016",1,"w","지명","내전에서 밀려난 중국 국민당이 이동한 곳은?","타이완","67쪽","대만","하노이|만주|홍콩"],
+["h1-017",1,"w","인물","베트남 민주 공화국 수립을 주도한 인물은?","호찌민","67쪽","호치민","마오쩌둥|김일성|응오딘지엠"],
+["h1-018",1,"w","회의","베트남을 북위 17도선을 경계로 분단시킨 회담은?","제네바 회담","프랑스와의 전쟁 승리 후 · 67쪽","제네바회담","반둥 회의|몰타 회담|파리 강화 회의"],
+["h1-019",1,"w","수치","제네바 회담에 따라 베트남이 분단된 경계선은?","북위 17도선","67쪽","17도선|북위17도선","북위 38도선|북위 39도선|휴전선"],
+["h1-020",1,"w","세계사건","미국이 베트남 전쟁에 전면 개입하는 빌미가 된 사건(1964)은?","통킹만 사건","67쪽","통킹만","루거우차오 사건|진주만 기습|9·11 테러"],
+["h1-021",1,"w","기타","미국의 지원으로 베트남 남쪽에 들어선 나라는?","베트남 공화국","67쪽","","베트남 민주 공화국|중화 민국|베트남 사회주의 공화국"],
+["h1-022",1,"w","회의","비동맹 중립주의 움직임이 구체화되어 제3세계 형성으로 이어진 1955년 회의는?","아시아·아프리카 회의","반둥 회의 · 66~67쪽","반둥 회의|반둥회의|아시아 아프리카 회의","제네바 회담|몰타 회담|모스크바 3국 외상 회의"],
+["h1-023",1,"w","선언","'미국은 아시아 각국의 자주적 행동을 측면 지원한다'는 내용이 담긴 선언은?","닉슨 독트린","1969, 아시아에서 미국의 군사적 역할 축소 · 67쪽","","트루먼 독트린|애치슨 선언|브라운 각서"],
+["h1-024",1,"w","인물","미국 대통령 최초로 중국을 방문(1972)한 인물은?","닉슨","마오쩌둥과 만남 · 67쪽","리처드 닉슨","트루먼|애치슨|부시"],
+["h1-025",1,"w","연도","미국과 중국이 수교한 해는?","1979","66쪽 지금 세계는","",""],
+["h1-026",1,"w","연도","중화 인민 공화국이 수립된 해는?","1949","66쪽","",""],
+["h1-027",1,"w","연도","트루먼 독트린이 발표된 해는?","1947","66쪽","",""],
+["h1-028",1,"w","연도","아시아·아프리카 회의(반둥 회의)가 열린 해는?","1955","66쪽","",""],
+["h1-029",1,"w","연도","통킹만 사건이 일어난 해는?","1964","66쪽","",""],
+["h1-030",1,"w","연도","닉슨 독트린이 발표된 해는?","1969","66~67쪽","",""],
+// 2 광복과 국토의 분단 (68~69쪽)
+["h1-031",1,"r","인물","조선 건국 동맹을 비밀리에 이끌다 일제 패망 직전 조선 총독부와 치안 유지·행정권 이양을 교섭한 인물은?","여운형","68쪽","","안재홍|송진우|김규식"],
+["h1-032",1,"r","단체","여운형과 안재홍이 좌우익 세력을 모아 광복 직후 조직한 단체는?","조선 건국 준비 위원회","건준 · 68쪽","건준|조선건국준비위원회","조선 건국 동맹|좌우 합작 위원회|민주 헌법 쟁취 국민운동 본부"],
+["h1-033",1,"r","인물","여운형과 함께 건준을 조직했다가 좌익이 주도권을 잡자 이탈한 우익 인물은?","안재홍","68쪽","","송진우|김성수|박헌영"],
+["h1-034",1,"r","기타","조선 총독부가 여운형에게 교섭 대가로 약속한 것은?","정치 활동 불간섭","68쪽","정치활동 불간섭|정치 활동 보장","행정권 전면 이양|독립 승인|무기 인도"],
+["h1-035",1,"r","단체","건준이 전국 각지 지부에 조직해 질서를 유지한 조직은?","치안대","68쪽","","인민 위원회|서북 청년회|애국반"],
+["h1-036",1,"r","기구","건준이 미군 진주에 앞서 선포한 정부는?","조선 인민 공화국","선포 후 건준 해체 · 68쪽","조선인민공화국|인공","대한민국 임시 정부|조선 민주주의 인민 공화국|북조선 임시 인민 위원회"],
+["h1-037",1,"r","기구","조선 인민 공화국 선포 후 건준 각 지부가 바뀐 이름은?","인민 위원회","68쪽","인민위원회","치안대|북조선 인민 위원회|좌우 합작 위원회"],
+["h1-038",1,"r","기타","일본 항복 직전 소련군이 남하하자 미국이 소련에 제안한 분할 점령 경계선은?","북위 38도선","68쪽","38도선|북위38도선","북위 17도선|휴전선|평화선"],
+["h1-039",1,"r","기구","1945년 9월 서울에 진주한 미군이 38도선 이남에서 선포한 통치는?","군정","미군정, 직접 통치 · 69쪽","미군정","신탁 통치|간접 통치|인민 위원회"],
+["h1-040",1,"r","정책","미군정이 질서 유지를 명분으로 그대로 활용한 것은?","조선 총독부의 행정 체제와 경찰 조직","69쪽","총독부 행정 체제와 경찰|조선 총독부 행정 체제|총독부 경찰 조직","인민 위원회와 치안대|대한민국 임시 정부 조직|건준 지부"],
+["h1-041",1,"r","정책","행정권을 북한 각 지역 인민 위원회에 이양한 소군정의 통치 방식은?","간접 통치","69쪽","","직접 통치|군정 직할 통치|신탁 통치"],
+["h1-042",1,"r","인물","소군정이 후원한 북한의 좌익 지도자는?","김일성","69쪽","","박헌영|조만식|김두봉"],
+["h1-043",1,"r","단체","송진우·김성수가 이끈 광복 이후 정치 세력은?","한국 민주당","69쪽 표","한민당|한국민주당","한국 독립당|독립 촉성 중앙 협의회|조선 공산당"],
+["h1-044",1,"r","단체","김구가 이끈 광복 이후 정치 세력은?","한국 독립당","69쪽 표","한독당|한국독립당","한국 민주당|독립 촉성 중앙 협의회|조선 공산당"],
+["h1-045",1,"r","단체","이승만이 이끈 광복 이후 정치 세력은?","독립 촉성 중앙 협의회","69쪽 표","독촉|독립촉성중앙협의회","한국 민주당|한국 독립당|조선 공산당"],
+["h1-046",1,"r","단체","박헌영이 이끈 광복 이후 정치 세력은?","조선 공산당","69쪽 표","","한국 민주당|한국 독립당|독립 촉성 중앙 협의회"],
+["h1-047",1,"w","회의","1945년 12월 미국·영국·소련의 외무 장관이 한국 문제를 논의한 회의는?","모스크바 3국 외상 회의","69쪽","모스크바 삼국 외상 회의|모스크바 3상 회의|삼상 회의","카이로 회담|얄타 회담|포츠담 회담"],
+["h1-048",1,"w","수치","모스크바 3국 외상 회의에서 협의된 신탁 통치의 최대 기간은?","5년","69쪽","5","3년|10년|2년"],
+["h1-049",1,"w","수치","모스크바 3국 외상 회의 초반에 미국이 주장한 신탁 통치 기간은?","최대 10년","소련은 임시 정부 수립 등 제안 · 69쪽","10년|10","최대 5년|최대 3년|최대 20년"],
+["h1-050",1,"w","기타","모스크바 3국 외상 회의 결정서상 신탁 통치를 맡을 4개국은?","미국·소련·영국·중국","69쪽 사료","미국 소련 영국 중국|미소영중","미국·소련·영국·프랑스|미국·영국·프랑스·중국|미국·소련·중국·일본"],
+["h1-051",1,"r","기타","신탁 통치가 한국인의 자주권을 부정한다며 반대 운동을 펼친 진영은?","우익","김구, 이승만 등 · 69쪽","우익 진영","좌익|중도|미군정"],
+["h1-052",1,"r","기타","처음엔 반대했지만 신탁 통치를 임시 정부 수립 지원으로 여겨 3국 외상 회의 결정을 지지한 진영은?","좌익","'삼상 결정 절대 지지' · 69쪽","좌익 진영","우익|중도|미군정"],
+["h1-053",1,"w","기타","모스크바 3국 외상 회의 직후 국내에 사실과 다르게 알려진 보도 내용은?","소련이 신탁 통치 주장","실제로는 미국이 최대 10년 신탁 통치 주장 · 69쪽","소련 신탁 통치 주장","미국이 즉시 독립 주장|영국이 임시 정부 반대|중국이 신탁 통치 반대"],
+["h1-054",1,"w","선언","한국이 연합국으로부터 처음 독립을 약속받은 선언은?","카이로 선언","69쪽 읽기","","포츠담 선언|트루먼 독트린|대서양 헌장"],
+// 3 통일 정부 수립 운동 (70~72쪽)
+["h1-055",1,"r","인물","'장차 수립될 정부는 미국이나 소련이 아닌 한국인이 원하는 정부'라고 말한 미군정 군정 장관은?","러취","『조선일보』 1946. 3. 20. · 70쪽","","하지|맥아더|애치슨"],
+["h1-056",1,"r","회의","1946년 3월 서울에서 열려 임시 민주 정부 수립을 논의한 회의는?","제1차 미소 공동 위원회","1946. 5. 무기 휴회 · 70쪽","제1차 미소공동위원회|1차 미소 공동 위원회","제2차 미소 공동 위원회|모스크바 3국 외상 회의|남북 연석 회의"],
+["h1-057",1,"r","기타","제1차 미소 공위에서 미국이 협의 대상에 포함하려 한 세력은?","신탁 통치 반대 세력","소련은 3국 외상 회의 지지 세력만 주장 · 70쪽","반탁 세력|신탁 통치 반대 세력도 포함","모스크바 결정 지지 세력만|좌익 세력만|중도 세력만"],
+["h1-058",1,"r","선언","1946년 6월 이승만이 남한만이라도 임시 정부를 수립하자고 한 발언은?","정읍 발언","『서울신문』 1946. 6. 5. · 70쪽","정읍발언","삼천만 동포에게 읍고함|좌우 합작 7원칙|4·13 호헌 조치"],
+["h1-059",1,"r","운동","여운형·김규식 등 중도 세력이 제1차 미소 공위 무기 휴회 후 추진한 운동은?","좌우 합작 운동","미군정의 지원 · 70쪽","좌우합작운동","남북 협상|신탁 통치 반대 운동|민족 유일당 운동"],
+["h1-060",1,"r","인물","여운형과 함께 좌우 합작 운동을 이끈 중도 우파 인물은?","김규식","70쪽","","김구|안재홍|송진우"],
+["h1-061",1,"r","단체","중도 세력을 중심으로 정국을 개편하려 한 미군정의 지원을 받아 조직된 단체는?","좌우 합작 위원회","1946. 7. 결성, 1947. 12. 해산 · 70~71쪽","좌우합작위원회","조선 건국 준비 위원회|반민족 행위 특별 조사 위원회|민주 헌법 쟁취 국민운동 본부"],
+["h1-062",1,"r","선언","1946년 10월 좌익과 우익의 의견을 절충해 발표한 원칙은?","좌우 합작 7원칙","70쪽","좌우합작7원칙|좌우 합작 칠원칙","남북 협상 공동 성명|조선 건국 준비 위원회 강령|정읍 발언"],
+["h1-063",1,"r","정책","좌우 합작 7원칙의 토지 개혁 원칙은?","유상 매입·무상 분배","몰수, 유상 매수 등으로 농민에게 무상 분배 · 70~71쪽","유상 매입 무상 분배|유상매입 무상분배","무상 몰수·무상 분배|유상 매수·유상 분배|무상 몰수·유상 분배"],
+["h1-064",1,"r","기타","좌우 합작 7원칙을 적극 지지한 세력은?","김구와 한국 독립당","이승만은 모호한 태도 · 70쪽","한국 독립당|김구","한국 민주당|조선 공산당|이승만"],
+["h1-065",1,"r","기타","좌우 합작 7원칙의 토지 개혁 방식이 국가 재정 파탄을 초래한다며 반대한 세력은?","한국 민주당","70쪽","한민당","한국 독립당|좌익 세력|미군정"],
+["h1-066",1,"r","기타","무상 몰수·무상 분배의 토지 개혁과 친일파 즉각 청산을 요구하며 7원칙을 비판한 세력은?","좌익 세력","70쪽","좌익","한국 민주당|한국 독립당|중도 세력"],
+["h1-067",1,"r","기타","좌우 합작 운동이 사실상 중단된 계기는?","여운형 암살","71쪽","여운형의 암살|여운형 피살","김구 암살|제2차 미소 공위 결렬|정읍 발언"],
+["h1-068",1,"r","회의","1947년 5월 열렸으나 이견을 좁히지 못하고 결렬된 회의는?","제2차 미소 공동 위원회","이후 미국이 한국 문제를 유엔에 이관 · 71쪽","2차 미소 공동 위원회","제1차 미소 공동 위원회|모스크바 3국 외상 회의|유엔 소총회"],
+["h1-069",1,"w","기구","인구 비례 총선거로 한반도에 정부를 수립하자는 결의(1947. 11.)를 통과시킨 기구는?","유엔 총회","71쪽","","유엔 소총회|유엔 안전 보장 이사회|미소 공동 위원회"],
+["h1-070",1,"w","기구","총선거를 관리 감독하려 파견되었으나 소련이 입북을 거부한 단체는?","유엔 한국 임시 위원단","71쪽","유엔한국임시위원단","미소 공동 위원회|미국 군사 고문단|연합국 최고 사령부"],
+["h1-071",1,"w","기구","1948년 2월 '위원단 접근이 가능한 지역의 총선거'를 결의한 곳은?","유엔 소총회","71쪽","","유엔 총회|유엔 안전 보장 이사회|제헌 국회"],
+["h1-072",1,"r","회의","1948년 4월 평양에서 열린 '전 조선 제 정당·사회단체 대표자 연석 회의'의 다른 이름은?","남북 연석 회의","71쪽","","남북 협상|미소 공동 위원회|남북 고위급 회담"],
+["h1-073",1,"r","운동","남한만의 단독 선거가 결정되자 김구·김규식이 통일 정부 수립을 위해 추진한 것은?","남북 협상","71쪽","남북협상","좌우 합작 운동|정읍 발언|신탁 통치 반대 운동"],
+["h1-074",1,"r","선언","'38선을 베고 쓰러질지언정 단독 정부를 세우는 데는 협력하지 않겠다'는 김구의 글은?","삼천만 동포에게 읍고함","『조선일보』 1948. 2. 12. · 71쪽","3천만 동포에게 읍고함","정읍 발언|좌우 합작 7원칙|대동단결 선언"],
+["h1-075",1,"r","선언","외국 군대 철수와 남한 단독 선거 반대를 담아 남북 협상에서 발표된 것은?","남북 공동 성명","「남북 조선 제 정당·사회단체 공동 성명서」 1948. 4. 30. · 71쪽","남북 협상 공동 성명","7·4 남북 공동 성명|좌우 합작 7원칙|6·15 남북 공동 선언"],
+["h1-076",1,"r","사건","1947년 3월 1일을 기점으로 1948년 4월 3일 봉기와 1954년 9월 21일까지 이어진 무력 충돌로 많은 주민이 희생된 사건은?","제주 4·3 사건","72쪽","제주 4.3 사건|제주4·3사건|4·3 사건","여수·순천 10·19 사건|거창 양민 학살 사건|광주 대단지 사건"],
+["h1-077",1,"r","사건","제주 4·3 사건의 발단이 된 1947년 사건은?","3·1절 기념행사 후 가두시위 중 경찰 발포","72쪽","3·1절 시위 경찰 발포|경찰의 발포","5·10 총선거 실시|여수 군부대 봉기|미소 공위 결렬"],
+["h1-078",1,"r","단체","제주 4·3 사건 진압에 미군정이 군대·경찰과 함께 동원한 청년 단체는?","서북 청년회","72쪽","서북청년회","국민 보도 연맹|대한 청년단|치안대"],
+["h1-079",1,"r","정책","제주 4·3 사건 때 이승만 정부가 제주도에 선포한 것은?","계엄령","강경 진압, 민간인 집단 사살 · 72쪽","계엄","긴급 조치|위수령|통행금지"],
+["h1-080",1,"r","사건","제주도 출동 명령을 받은 여수 주둔 군부대 내 좌익 세력 등이 봉기한 사건은?","여수·순천 10·19 사건","1948. 10. 19. · 72쪽","여수 순천 10·19 사건|여순 사건|여수·순천 사건","제주 4·3 사건|거창 양민 학살 사건|부마 민주 항쟁"],
+["h1-081",1,"r","기구","여수·순천 10·19 사건 진압에 정부군과 협조한 미국 측 조직은?","미국 군사 고문단","72쪽","미 군사 고문단","유엔 한국 임시 위원단|미국 전략 정보국|연합국 최고 사령부"],
+["h1-082",1,"r","지명","여수·순천 10·19 사건 후 일부 봉기 세력이 옮겨가 6·25 전쟁 때까지 활동한 곳은?","지리산","72쪽","","한라산|태백산|덕유산"],
+["h1-083",1,"r","수치","제주 4·3 사건 때 국가 폭력으로 희생된 사람 수는?","2만 5천~3만 명","제주도민의 10% · 72쪽","2만5천~3만 명|2만 5천~3만","1만~1만 5천 명|5만~6만 명|6,000여 명"],
+["h1-084",1,"r","기타","제주 4·3 사건 이후 남겨진 사람들이 침묵할 수밖에 없었던 말 '속솜허라'의 뜻은?","조용히 하라","72쪽","조용히 해라","잊지 말라|용서하라|살아남아라"],
+["h1-085",1,"r","기타","민간인 희생자와 토벌대로 참여했다 사망한 군인·경찰의 넋을 함께 위로하려 제주 주민이 조성한 곳은?","영모원","'모두가 희생자이기에 모두가 용서한다' · 72쪽","제주 영모원","제주 4·3 평화 공원|국립 4·19 민주 묘지|비설"],
+["h1-086",1,"r","기타","제주 4·3 평화 공원에 있는 모녀상의 이름은?","비설","제주 봉개 · 72쪽","","영모원|행방불명인 표석|평화의 소녀상"],
+// 4 대한민국 정부 수립 (73~77쪽)
+["h1-087",1,"r","사건","우리 역사상 최초로 실시된 민주적인 선거는?","5·10 총선거","1948. 5. 10., 유엔 한국 임시 위원단 감시 · 73쪽","5.10 총선거|5·10 선거|510 총선거","6·10 국민 대회|3·15 정·부통령 선거|제13대 대통령 선거"],
+["h1-088",1,"r","인물","남한만의 단독 선거에 반대하며 5·10 총선거에 불참한 남북 협상파 두 사람은?","김구·김규식","좌익 세력도 불참 · 73쪽","김구 김규식|김구와 김규식|김규식 김구|김규식·김구","이승만·이시영|여운형·안재홍|송진우·김성수"],
+["h1-089",1,"r","수치","5·10 총선거로 선출된 국회 의원 수는?","198명","제주도 2곳 제외, 임기 2년 · 73쪽","198","200명|203명|210명"],
+["h1-090",1,"r","수치","5·10 총선거로 뽑힌 제헌 국회 의원의 임기는?","2년","73쪽, 146쪽","2","4년|5년|6년"],
+["h1-091",1,"r","수치","5·10 총선거의 투표 연령은?","만 21세 이상","남녀 모두 · 73쪽 포스터","만21세 이상|21세 이상","만 18세 이상|만 20세 이상|만 25세 이상"],
+["h1-092",1,"r","기타","5·10 총선거에서 선거를 치르지 못한 선거구는?","제주도 2곳","73쪽","제주도 2개 선거구|제주도 두 곳","전라남도 2곳|강원도 2곳|여수·순천"],
+["h1-093",1,"r","기타","5·10 총선거 포스터에 쓰인 문구 '기권은 국민의 ○○'에 들어갈 말은?","수치","'투표는 애국민의 의무' · 73쪽","","의무|권리|자유"],
+["h1-094",1,"r","기구","국호를 대한민국으로 정하고 헌법을 제정·공포한 국회는?","제헌 국회","73쪽","제헌국회","임시 의정원|국가 재건 최고 회의|통일 주체 국민 회의"],
+["h1-095",1,"r","날짜","제헌 헌법이 공포된 날은?","1948년 7월 17일","73쪽","1948. 7. 17.|7월 17일|1948.7.17","1948년 8월 15일|1948년 5월 10일|1948년 9월 9일"],
+["h1-096",1,"r","법령","대한민국 임시 정부의 법통 계승, 삼권 분립, 대통령 중심제를 담은 헌법은?","제헌 헌법","73쪽","","유신 헌법|대한민국 임시 헌법|9차 개헌 헌법"],
+["h1-097",1,"r","정책","제헌 헌법이 채택한 정부 형태는?","대통령 중심제","73쪽, 146쪽","대통령제","내각 책임제|의원 내각제|이원 집정부제"],
+["h1-098",1,"r","정책","제헌 헌법이 정한 대통령 선출 방식은?","간선제","국회에서 선출 · 73쪽, 146쪽","국회 간선제|간접 선거","직선제|통일 주체 국민 회의 선출|선거인단 선출"],
+["h1-099",1,"r","인물","제헌 국회가 선출한 초대 부통령은?","이시영","73쪽","","김구|김규식|장면"],
+["h1-100",1,"r","수치","제헌 헌법에 따른 정·부통령의 임기는?","4년","73쪽","4","5년|6년|7년"],
+["h1-101",1,"r","날짜","이승만이 대한민국 정부 수립을 국내외에 선포한 날은?","1948년 8월 15일","미군정 종식 · 73쪽","1948. 8. 15.|8월 15일","1948년 7월 17일|1948년 5월 10일|1948년 9월 9일"],
+["h1-102",1,"w","기구","1948년 12월 대한민국 정부를 유엔 감시하 선거가 가능했던 지역의 유일한 합법 정부로 승인한 곳은?","유엔 총회","73쪽","","유엔 소총회|유엔 안전 보장 이사회|미소 공동 위원회"],
+["h1-103",1,"r","기타","제헌 헌법이 실린 대한민국 제1호 관보에 적힌 연도 표기는?","대한민국 30년","1948. 9. 1., 1919년 임시 정부에서 비롯 · 74쪽","대한민국 30년 9월 1일","단기 4281년|대한민국 1년|광복 3년"],
+["h1-104",1,"r","기타","제헌 헌법 전문이 대한민국을 건립했다고 밝힌 사건은?","기미 삼일 운동","74쪽","3·1 운동|삼일 운동|기미 3·1 운동","8·15 광복|5·10 총선거|대한 제국 수립"],
+["h1-105",1,"r","법령","'모든 국민은 균등하게 교육을 받을 권리가 있다. 적어도 초등 교육은 의무적이며 무상으로 한다.'는 제헌 헌법 조항은?","제16조","74쪽","16조","제2조|제8조|제84조"],
+["h1-106",1,"r","법령","경제 질서를 '사회 정의의 실현과 균형 있는 국민 경제의 발전'을 목적으로 한다고 한 제헌 헌법 조항은?","제84조","74쪽","84조","제16조|제8조|제1조"],
+["h1-107",1,"r","이념","제헌 헌법의 균등 교육·경제 조항 등에 반영된, 정치·경제·교육의 균등을 말하는 이념은?","삼균주의","74쪽 (61쪽 참고)","","복벽주의|민족 자결주의|실용주의"],
+["h1-108",1,"r","법령","'입법권은 의정원이, 행정권은 국무원이, 사법권은 법원이' 행사한다고 한 1919년 헌법은?","대한민국 임시 헌법","74쪽 자료1","임시 헌법","제헌 헌법|유신 헌법|대동단결 선언"],
+["h1-109",1,"r","법령","'반민족 행위를 처벌하는 특별법을 제정할 수 있다'는 헌법 조항에 따라 1948년 9월 제정된 법은?","반민족 행위 처벌법","반민법 · 75쪽","반민법","국가 보안법|친일 반민족 행위 진상 규명 특별법|귀속 재산 처리법"],
+["h1-110",1,"r","기구","반민법에 따라 국회 직속으로 구성된 친일파 조사 기구는?","반민족 행위 특별 조사 위원회","반민 특위 · 75쪽","반민 특위|반민특위","의문사 진상 규명 위원회|조선사 편수회|국가 인권 위원회"],
+["h1-111",1,"r","인물","반민 특위에 검거되자 이승만이 석방을 위한 특별 담화까지 낸 친일 고문 경찰은?","노덕술","75쪽","","최린|김연수|이풍한"],
+["h1-112",1,"r","사건","반민 특위 소속 국회 의원들이 공산당과 내통했다는 혐의로 구속된 사건은?","국회 프락치 사건","75쪽","국회프락치사건","진보당 사건|동백림 사건|제2차 인혁당 사건"],
+["h1-113",1,"r","날짜","경찰이 반민 특위 사무실을 습격한 날은?","1949년 6월 6일","75쪽 탐구","1949. 6. 6.|6월 6일","1949년 8월|1948년 9월|1950년 3월"],
+["h1-114",1,"r","날짜","반민법 개정으로 단축된 공소 시효의 만료 시점은?","1949년 8월","75쪽","1949. 8.","1950년 6월|1948년 12월|1951년 8월"],
+["h1-115",1,"r","인물","체포된 친일 반민족 행위자 사진에 노덕술·김연수·최린과 함께 실린 인물은?","이풍한","75쪽 사진(왼쪽부터 노덕술, 김연수, 최린, 이풍한)","","김성수|송진우|조만식"],
+["h1-116",1,"r","수치","반민 특위가 취급한 친일 반민족 행위 사건 수는?","682건","영장 408, 기소 221, 재판 종결 38 · 75쪽 탐구","682","408건|221건|38건"],
+["h1-117",1,"r","수치","반민 특위 활동에서 재판까지 종결된 건수는?","38건","사형 1, 징역 6, 집행 유예 5, 공민권 정지 18, 무죄 6, 형 면제 2 · 75쪽","38","221건|408건|682건"],
+["h1-118",1,"r","수치","반민 특위 활동으로 기소된 건수는?","221건","75쪽 탐구","221","408건|38건|682건"],
+["h1-119",1,"r","기타","반민 특위 재판에서 실형을 선고받은 7건의 반민족 행위자는 1950년 3월까지 어떻게 되었나?","전원 석방","보석, 형 집행 정지 등 · 75쪽","모두 석방","전원 사형|전원 복역|해외 추방"],
+["h1-120",1,"r","인물","경찰의 반민 특위 습격을 회고록으로 증언한 반민 특위 조사관은?","정철용","『정철용 회고록』 · 75쪽","","노덕술|김상덕|정철"],
+["h1-121",1,"p","수치","광복 전후 남한 공장 수는 1944년 6월 9,323개에서 1948년 1월 몇 개로 줄었나?","4,385개","1946. 11. 5,249개 · 76쪽","4385|4,385","5,249개|9,323개|3,152개"],
+["h1-122",1,"p","정책","미군정이 일제의 식량 통제를 폐지하고 펼쳤으나 매점매석으로 곡물 가격이 크게 오른 정책은?","미곡 자유화 정책","76쪽","미곡 자유화","저곡가 정책|산미 증식 계획|혼분식 장려"],
+["h1-123",1,"p","기타","광복 이후 미군정이 재정 마련을 위해 화폐를 과도하게 발행한 결과는?","물가 폭등","76쪽","물가 상승|인플레이션","실업자 감소|공장 증가|무역 흑자"],
+["h1-124",1,"p","정책","미군정이 몰수해 관리하다 1948년 농민에게 유상으로 매각한 토지는?","일본인 소유의 토지","76쪽","일본인 토지","친일파 토지|국유지|지주의 토지"],
+["h1-125",1,"p","이념","'경작하는 농민이 토지를 소유해야 한다'는 농지 개혁의 원칙은?","경자유전","76쪽","경자유전의 원칙","삼균주의|무상 몰수·무상 분배|유상 매수·유상 분배"],
+["h1-126",1,"p","정책","남한 농지 개혁의 방식은?","유상 매수·유상 분배","76쪽","유상 매수 유상 분배|유상매수 유상분배","무상 몰수·무상 분배|유상 매입·무상 분배|무상 몰수·유상 분배"],
+["h1-127",1,"p","수치","농지 개혁에서 정한 가구당 농지 소유 상한은?","3정보","약 3만m² · 76쪽","3 정보|3정보(약 3만m²)|약 3만m²","5정보|1정보|10정보"],
+["h1-128",1,"p","기타","정부가 상한을 넘는 농지를 매수하며 지주에게 발급한 증서는?","지가 증권","76쪽","지가증권","귀속 재산|독립 공채|토지 대장"],
+["h1-129",1,"p","수치","1950년 개정 농지 개혁법에서 분배받은 농지의 상환액은?","평년작 주생산물의 1.5배","5년 균등 상환 · 76쪽","평년작의 1.5배|1.5배","평년작의 3배|평년작의 2배|평년작의 1배"],
+["h1-130",1,"p","수치","농지 개혁법에서 분배받은 농지 상환액을 나눠 갚는 기간은?","5년","76쪽","5","15년|3년|10년"],
+["h1-131",1,"p","날짜","농지 개혁법이 공포된 때는?","1949년 6월","시행은 1950년 5월 · 76쪽","1949. 6.","1950년 5월|1948년 9월|1950년 3월"],
+["h1-132",1,"p","날짜","농지 개혁법이 개정 후 실제로 시행된 때는?","1950년 5월","6·25 전쟁 직전 · 76쪽","1950. 5.","1949년 6월|1950년 6월|1951년 1월"],
+["h1-133",1,"p","기타","농지 개혁법 공포 후 정부가 곧바로 시행하지 않은 이유는?","재정 부담이 크다는 이유","76쪽","재정 부담|정부 재정 부담","지주의 반대 시위|미국의 반대|국회의 부결"],
+["h1-134",1,"p","기타","농지 개혁에서 개혁 대상에서 빠진 토지는?","농지가 아닌 토지","반민족 행위자 토지 몰수도 안 됨 · 76쪽","농지 외 토지|임야","3정보 이하 농지|일본인 토지|소작지"],
+["h1-135",1,"p","수치","농지 개혁 전후 소작지 면적은 1945년 말 1,447천 정보에서 1951년 말 얼마로 줄었나?","158천 정보","자작지는 779→1,800천 정보 · 76쪽","158","671천 정보|1,325천 정보|868천 정보"],
+["h1-136",1,"p","기타","패전한 일제가 축출되며 일본인이 남기고 간 토지·건물·기업체·유가 증권 등을 부르는 말은?","귀속 재산","77쪽","귀속재산","지가 증권|공출 재산|국유 재산"],
+["h1-137",1,"p","법령","정부가 농지를 제외한 귀속 재산을 민간에 불하하려고 제정한 법(1949)은?","귀속 재산 처리법","77쪽","귀속재산처리법","농지 개혁법|반민족 행위 처벌법|국가 보안법"],
+["h1-138",1,"p","수치","귀속 재산 처리법에서 재산 대금을 나누어 낼 수 있는 최고 기한은?","15년","77쪽 사료","15","5년|10년|20년"],
+["h1-139",1,"p","기타","귀속 재산 불하가 정부 재정에 기여하는 효과가 낮았던 까닭은?","낮은 가격과 장기 분할 상환","특정 기업 특혜 부작용 · 77쪽","낮은 가격 불하와 분할 상환|헐값 불하","높은 가격|일시불 납부|외국 기업 매각"],
+["h1-140",1,"r","인물","신탁 통치에 반대하다 소련군에게 억압받은 북한의 민족주의 지도자는?","조만식","77쪽","","김두봉|박헌영|여운형"],
+["h1-141",1,"r","기구","1946년 2월 김일성을 위원장으로 조직되어 각종 개혁을 추진한 북한의 기구는?","북조선 임시 인민 위원회","77쪽","북조선임시인민위원회","북조선 인민 위원회|최고 인민 회의|조선 인민 공화국"],
+["h1-142",1,"r","정책","북조선 임시 인민 위원회가 실시한 토지 개혁 방식은?","무상 몰수·무상 분배","매매·소작·저당 금지 · 77쪽","무상 몰수 무상 분배|무상몰수 무상분배","유상 매수·유상 분배|유상 매입·무상 분배|무상 몰수·유상 분배"],
+["h1-143",1,"r","법령","북조선 임시 인민 위원회가 토지 개혁과 함께 제정한 노동 법령은?","8시간제 노동법","남녀평등권 법령도 제정 · 77쪽","8시간 노동법","근로 기준법|국가 총동원법|국민 징용령"],
+["h1-144",1,"r","기구","1947년 북조선 임시 인민 위원회가 개편되어 헌법 초안을 마련한 기구는?","북조선 인민 위원회","77쪽","북조선인민위원회","최고 인민 회의|북조선 임시 인민 위원회|국가 재건 최고 회의"],
+["h1-145",1,"r","기구","북한에서 총선거로 구성되어 헌법을 채택한 기구는?","최고 인민 회의","77쪽","","북조선 인민 위원회|제헌 국회|통일 주체 국민 회의"],
+["h1-146",1,"r","날짜","조선 민주주의 인민 공화국이 수립된 날은?","1948년 9월 9일","김일성 초대 수상 · 77쪽","1948. 9. 9.|9월 9일","1948년 8월 15일|1946년 2월|1948년 4월 3일"],
+["h1-147",1,"r","인물","조선 민주주의 인민 공화국의 초대 수상은?","김일성","77쪽","","박헌영|김두봉|조만식"],
+["h1-148",1,"r","연도","모스크바 3국 외상 회의가 열린 해는?","1945","12월 · 69쪽","",""],
+["h1-149",1,"r","연도","좌우 합작 7원칙이 발표된 해는?","1946","10월 · 70쪽","",""],
+["h1-150",1,"r","연도","남북 협상(남북 연석 회의)이 열린 해는?","1948","4월 · 71쪽","",""],
+["h1-151",1,"r","연도","북조선 임시 인민 위원회가 조직된 해는?","1946","2월 · 77쪽","",""]
+);
+SOURCES.push(
+["s1-01",1,"r","이 강령을 발표한 단체는?","우리는 완전한 독립 국가 건설을 기함. 우리는 전 민족의 정치적·경제적·사회적 기본 요구를 실현할 수 있는 민주주의 정권 수립을 기함. 우리는 일시적 과도기에 있어서 국내 질서를 자주적으로 유지하며 대중 생활의 확보를 기함.","조선 건국 준비 위원회","좌우 합작 위원회|한국 민주당|조선 공산당","『매일신보』, 1945. 9. 3. · 68쪽"],
+["s1-02",1,"w","이 결정서를 낸 회의는?","한국의 독립을 위하여 임시 민주 정부를 수립한다. 임시 정부 수립을 위하여 ○○ ○○ ○○○를 설치하고 한국의 정당 및 사회단체와 협의한다. …… 5년 이내를 기한으로 하는 조선에 대한 4개국 신탁 통치의 협정을 작성하기 위하여 ……","모스크바 3국 외상 회의","카이로 회담|제1차 미소 공동 위원회|유엔 총회","모스크바 3국 외상 회의 결정서(요약, 1945) · 69쪽"],
+["s1-03",1,"r","이 발언을 한 인물은?","무기 휴회된 미소 공동 위원회가 다시 열릴 기색도 보이지 않으며, 통일 정부를 고대하나 여의치 않게 되었다. 우리는 남방만이라도 임시 정부 또는 위원회 같은 것을 조직하여 38도선 이북에서 소련이 물러나도록 세계 여론에 호소해야 될 것이니 ……","이승만","김구|여운형|김규식","정읍 발언, 『서울신문』, 1946. 6. 5. · 70쪽"],
+["s1-04",1,"r","이 글을 쓴 인물은?","한국이 있어야 한국 사람이 있고 한국 사람이 있고야 민주주의도 공산주의도 또 무슨 단체도 있을 수 있는 것이다. …… 나는 통일된 조국을 건설하려다 38선을 베고 쓰러질지언정, 일신의 구차한 안일을 위하여 단독 정부를 세우는 데는 협력하지 않겠다.","김구","이승만|여운형|김규식","「삼천만 동포에게 읍고함」, 『조선일보』, 1948. 2. 12. · 71쪽"],
+["s1-05",1,"r","이 원칙을 발표한 단체는?","남북을 통한 좌우 합작으로 민주주의 임시 정부를 수립할 것. 미소 공동 위원회의 속개를 요청하는 공동 성명을 발표할 것. 토지 개혁은 몰수, 유상 매수 등으로 토지를 농민에게 무상 분배하고 주요 산업을 국유화할 것.","좌우 합작 위원회","조선 건국 준비 위원회|한국 민주당|남북 연석 회의","좌우 합작 7원칙, 『독립신보』(1946. 10. 7.) · 71쪽"],
+["s1-06",1,"r","이 성명이 발표된 계기는?","남과 북에서 외국 군대는 즉시 철수해야 한다. …… 남북 정당 사회단체 협의회를 소집하여 임시 정부를 수립하고 총선거를 통해 입법 기관을 선출한 다음 헌법을 제정하고 통일 정부를 수립한다. 남한의 단독 선거를 반대한다.","남북 협상","좌우 합작 운동|제1차 미소 공동 위원회|7·4 남북 공동 성명","「남북 조선 제 정당·사회단체 공동 성명서」, 1948. 4. 30. · 71쪽"],
+["s1-07",1,"r","이 비문이 위로하는 사건은?","지난 세월을 돌아보면 모두가 희생자이기에 모두가 용서한다는 뜻으로 모두가 함께 이 빗돌을 세우나니 죽은 이는 부디 눈을 감고 산 자들은 서로 손을 잡으라.","제주 4·3 사건","여수·순천 10·19 사건|6·25 전쟁|5·18 민주화 운동","제주 영모원 4·3 위령비 · 72쪽"],
+["s1-08",1,"r","이 개회사가 기념하는 일은?","3년 전 이날로서 우리는 해방되었고, 금년 이날 우리는 정부를 수립하였습니다. 이보다 더 경사가 있겠습니까. …… 우리는 민주주의로 발전하여 세계 평화를 일층 더 촉진시켜야 하겠습니다.","대한민국 정부 수립","5·10 총선거|제헌 헌법 공포|광복","대한민국 정부 수립 국민 축하식 개회사, 『조선일보』 · 73쪽"],
+["s1-09",1,"r","이 전문이 실린 헌법은?","유구한 역사와 전통에 빛나는 우리들 대한국민은 기미 삼일 운동으로 대한민국을 건립하여 세계에 선포한 위대한 독립 정신을 계승하여 이제 민주 독립 국가를 재건함에 있어서 ……","제헌 헌법","대한민국 임시 헌법|유신 헌법|1987년 개정 헌법","제헌 헌법 전문(1948) · 74쪽"],
+["s1-10",1,"r","이 조항이 실린 헌법은?","제1조 대한민국은 대한인민으로 조직함. 제2조 대한민국의 주권은 대한인민 전체에 재함. 제5조 대한민국의 입법권은 의정원이, 행정권은 국무원이, 사법권은 법원이 행사함.","대한민국 임시 헌법","제헌 헌법|유신 헌법|대동단결 선언","대한민국 임시 헌법(일부, 1919) · 74쪽"],
+["s1-11",1,"r","이 처벌 대상 유형을 정한 법은?","밀정 행위로 독립운동을 방해한 자 / 독립을 방해할 목적으로 단체를 조직하였거나 그 단체의 수뇌 간부로 활동하였던 자 / 군, 경찰의 관리로서 악질적인 행위로 민족에게 해를 가한 자","반민족 행위 처벌법","국가 보안법|귀속 재산 처리법|친일 반민족 행위 진상 규명 특별법","반민족 행위 처벌법, 1948 · 75쪽"],
+["s1-12",1,"r","이 담화가 견제하려 한 기구는?","이것이 상당한 법안이라 할지라도 전국 치안에 관계될 때에는 임시로 정지하는 것이 마땅한 일이다. …… 우선 조사 위원들의 과도한 행동을 금지하기로 작정한 것이다.","반민족 행위 특별 조사 위원회","좌우 합작 위원회|진보당|국회 프락치","이승만의 담화, 『동아일보』, 1949. 2. 16. · 75쪽"],
+["s1-13",1,"p","이 법은?","농민이 아닌 사람의 농지, 농가 1가구당 3정보 초과 농지는 정부가 사들인다. 분배받은 농지 상환액은 평년작 주생산물의 1.5배로 하고, 5년 동안 균등 상환한다.","농지 개혁법","귀속 재산 처리법|토지 조사령|좌우 합작 7원칙","농지 개혁법(요약, 1950년 개정) · 76쪽"],
+["s1-14",1,"p","이 법은?","…… 합법적이며 사상이 온건하고 운영 능력이 있는 선량한 연고자, 종업원 또는 농지 개혁법에 의하여 농지를 매수당한 자 …… 에게 우선적으로 매각한다. 재산 매각에 있어서 최고 15년의 기한으로 분할하여 대금을 납부할 수 있다.","귀속 재산 처리법","농지 개혁법|반민족 행위 처벌법|회사령","귀속 재산 처리법(요약, 1949) · 77쪽"],
+["s1-15",1,"w","이 선언을 발표한 미국 대통령은?","미국은 베트남 전쟁과 같은 군사적 개입을 앞으로 피한다. 미국은 강대국의 핵 위협을 제외하고는 아시아 각국에서 내란이 일어나거나 침략을 받더라도 개입하지 않는다.","닉슨","트루먼|애치슨|부시","닉슨 독트린(요약, 1969) · 67쪽"],
+["s1-16",1,"r","이 말을 한 미군정의 인물은?","미소 공동 위원회는 반드시 성공할 것이라 믿는다. 또 장차 수립될 정부는 미국이 원하는 정부도 아니고 소련이 원하는 정부도 아니며 한국인이 원하는 정부로 될 것을 믿는다.","러취","하지|애치슨|맥아더","군정 장관 러취의 발언, 『조선일보』(1946. 3. 20.) · 70쪽"]
+);
+EVENTS.push(
+["일본 항복, 한국 광복",1945,8,1,66],["트루먼 독트린 발표",1947,0,1,66],["중화 인민 공화국 수립",1949,0,1,66],["아시아·아프리카 회의(반둥 회의)",1955,0,1,66],
+["통킹만 사건",1964,0,1,66],["닉슨 독트린 발표",1969,0,1,66],["닉슨 중국 방문",1972,0,1,67],["미국과 중국 수교",1979,0,1,66],
+["조선 건국 준비 위원회 조직",1945,8,1,68],["미군 서울 진주, 군정 선포",1945,9,1,69],["모스크바 3국 외상 회의",1945,12,1,69],
+["북조선 임시 인민 위원회 조직",1946,2,1,77],["제1차 미소 공동 위원회 개최",1946,3,1,70],["제1차 미소 공동 위원회 무기 휴회",1946,5,1,70],["이승만 정읍 발언",1946,6,1,70],
+["좌우 합작 위원회 결성",1946,7,1,110],["좌우 합작 7원칙 발표",1946,10,1,70],["제2차 미소 공동 위원회 개최",1947,5,1,71],["유엔 총회, 인구 비례 총선거 결의",1947,11,1,71],
+["좌우 합작 위원회 해산",1947,12,1,71],["유엔 소총회, 접근 가능 지역 총선거 결의",1948,2,1,71],["제주 4·3 무장봉기",1948,4,1,72],["남북 연석 회의(남북 협상)",1948,4,1,71],
+["5·10 총선거",1948,5,1,73],["제헌 헌법 공포",1948,7,1,73],["대한민국 정부 수립 선포",1948,8,1,73],["반민족 행위 처벌법 제정",1948,9,1,75],
+["조선 민주주의 인민 공화국 수립",1948,9,1,77],["여수·순천 10·19 사건",1948,10,1,72],["유엔 총회, 대한민국 정부 승인",1948,12,1,73],
+["농지 개혁법 공포",1949,6,1,76],["경찰의 반민 특위 습격",1949,6,1,75],["농지 개혁법 시행",1950,5,1,76]
+);
+ESSAYS.push(
+["e1-01",1,"모스크바 3국 외상 회의 결정에 대한 우익과 좌익의 입장을 비교하여 쓰시오.","김구, 이승만 등 우익은 신탁 통치가 한국인의 자주권을 부정한다며 반대 운동을 펼쳤다. 좌익은 처음에는 반대하였으나 신탁 통치를 임시 민주 정부 수립을 위한 지원으로 여겨 결정을 지지하였다. 이후 좌우익이 격렬하게 대립하였다.","우익|김구|이승만;반대|자주권;좌익;지지|임시 민주 정부;대립","69쪽"],
+["e1-02",1,"좌우 합작 7원칙에 대한 정치 세력별 반응을 쓰시오.","김구와 한국 독립당은 적극 지지하였고 이승만은 모호한 태도를 보였다. 한국 민주당은 토지 개혁 방식이 국가 재정 파탄을 초래한다며 반대하였고, 좌익은 무상 몰수·무상 분배와 친일파 즉각 청산을 요구하며 비판하였다.","한국 독립당|김구;이승만|모호;한국 민주당|재정;좌익|무상 몰수","70쪽"],
+["e1-03",1,"남북 협상이 추진된 배경과 결과를 쓰시오.","유엔 소총회가 접근 가능 지역 총선거를 결의해 남한만의 단독 선거가 결정되자, 김구와 김규식 등이 통일 정부 수립을 위해 평양에서 남북 연석 회의를 열고 외국 군대 철수, 단독 선거 반대 등의 공동 성명을 발표하였다. 그러나 북한은 이미 독자 정권 수립을 진행 중이었고 남한도 단독 선거를 추진하여 성과를 거두지 못하였다.","단독 선거|유엔 소총회;김구|김규식;외국 군대 철수|공동 성명;성과|실패|독자","71쪽"],
+["e1-04",1,"제헌 헌법의 주요 내용과 의미를 쓰시오.","대한민국이 대한민국 임시 정부의 법통을 계승한 민주 공화국임을 밝히고, 삼권 분립과 대통령 중심제를 채택하였다. 또한 친일 반민족 행위자 청산과 농지 개혁 등 독립운동가들이 새 국가 건설을 위해 구상한 목표를 담았다.","임시 정부|법통;민주 공화국;삼권 분립|대통령 중심제;친일|농지 개혁","73~74쪽"],
+["e1-05",1,"반민 특위의 활동이 좌절된 과정을 쓰시오.","이승만 정부는 반공을 내세워 비협조하고 반민법 개정을 요구하였으며, 노덕술 검거 후 특별 담화를 발표하였다. 경찰이 반민 특위 사무실을 습격하였고, 소속 의원들이 국회 프락치 사건으로 구속되었으며, 공소 시효를 1949년 8월로 단축하는 개정 법안이 통과되어 반민 특위는 해체되었다.","이승만|비협조|반공;습격|경찰;프락치;공소 시효|해체","75쪽"],
+["e1-06",1,"농지 개혁의 원칙과 방식, 한계를 쓰시오.","경자유전의 원칙에 따라 유상 매수·유상 분배 방식으로 실시하였고, 가구당 3정보 상한을 넘는 농지는 지가 증권을 발급해 매수하여 농민에게 팔았다. 지주·소작제는 거의 소멸되었으나 농지가 아닌 토지는 제외되었고 반민족 행위자 토지 몰수가 없었으며, 상환 부담으로 다시 소작농이 되는 농민도 있었다.","경자유전;유상 매수|유상 분배;3정보|지가 증권;농지가 아닌|반민족|소작농","76쪽"],
+["e1-07",1,"남한과 북한의 토지 개혁 방식을 비교하여 쓰시오.","남한은 농지 개혁법에 따라 유상 매수·유상 분배 방식으로 실시하였다. 북한은 북조선 임시 인민 위원회가 무상 몰수·무상 분배 방식으로 실시하였고 분배된 토지의 매매·소작·저당을 금지하였다.","남한|농지 개혁법;유상;북한|북조선 임시 인민 위원회;무상 몰수|무상 분배","76~77쪽"],
+["e1-08",1,"광복 직후 미군정과 소군정의 통치 방식을 비교하여 쓰시오.","미군정은 직접 통치에 나서 조선 총독부의 행정 체제와 경찰 조직을 그대로 활용하고 대한민국 임시 정부와 조선 인민 공화국을 인정하지 않았다. 소군정은 인민 위원회에 행정권을 이양하는 간접 통치 방식을 취하면서 김일성 등 좌익 세력을 후원하였다.","직접 통치;총독부|경찰;간접 통치|인민 위원회;김일성|좌익","69쪽"]
+);
+// ── Ⅱ-02 6·25 전쟁과 남북 분단의 고착화 (78~85쪽)
+CARDS.push(
+// 1 6·25 전쟁과 그 영향 (78~81쪽)
+["h2-001",2,"o","인물","6·25 전쟁 발발 소식에 '전쟁이 기어이 벌어지고 말았구나'라고 일기 『역사 앞에서』에 쓴 역사학자는?","김성칠","78쪽","","김원일|박완서|김수영"],
+["h2-002",2,"r","기구","남한이 국방력을 강화하려고 국군으로 개편한 조직은?","조선 경비대","좌익 유격대 토벌 · 78쪽","조선경비대","국민 방위군|서북 청년회|치안대"],
+["h2-003",2,"g","단체","중국 내전에 참여했다가 6·25 전쟁 전 북한군에 편입된 부대는?","조선 의용군","78쪽","","조선 의용대|한국광복군|조선 혁명군"],
+["h2-004",2,"w","선언","미국의 태평양 지역 방위선에서 한국을 제외한 1950년 1월 선언은?","애치슨 선언","78쪽","애치슨선언|애치슨 라인","트루먼 독트린|닉슨 독트린|카이로 선언"],
+["h2-005",2,"w","지명","애치슨 라인이 연결한 지역에 들어가지 않은 곳은? (알류샨 열도-일본-필리핀)","대한민국과 타이완","78쪽 지도","한국과 타이완|대한민국·타이완","일본과 필리핀|알류샨 열도와 일본|필리핀과 오키나와"],
+["h2-006",2,"g","날짜","북한군이 전면적인 남침을 시작한 날은?","1950년 6월 25일","78쪽","1950. 6. 25.|6월 25일","1950년 9월 15일|1951년 1월 4일|1953년 7월 27일"],
+["h2-007",2,"g","수치","북한군이 서울을 점령하기까지 걸린 기간은?","개전 3일 만","78쪽","3일|3일 만","개전 7일 만|개전 1일 만|개전 2주 만"],
+["h2-008",2,"w","기구","전쟁 발발 직후 북한의 행위를 침략으로 규정하고 유엔군 파병을 결의한 곳은?","유엔 안전 보장 이사회","78쪽","유엔 안보리|안전 보장 이사회","유엔 총회|유엔 소총회|유엔 한국 임시 위원단"],
+["h2-009",2,"w","수치","6·25 전쟁에 참전한 유엔군은 미국을 비롯해 몇 개국으로 구성되었나?","16개국","78쪽","16|16개 나라","21개국|20개국|12개국"],
+["h2-010",2,"g","지명","국군과 유엔군이 방어선을 구축해 북한군을 저지한 곳은?","낙동강 일대","1950. 8. · 78~79쪽","낙동강|낙동강 방어선","한강 일대|압록강 일대|청천강 일대"],
+["h2-011",2,"g","작전","국군과 유엔군이 전세를 역전시킨 1950년 9월 15일 작전은?","인천 상륙 작전","79쪽","인천상륙작전","1·4 후퇴|낙동강 방어선|흥남 철수"],
+["h2-012",2,"g","날짜","국군과 유엔군이 서울을 수복한 날은?","1950년 9월 28일","79쪽 지도","1950. 9. 28.|9월 28일","1950년 9월 15일|1951년 1월 4일|1950년 6월 28일"],
+["h2-013",2,"g","지명","국군과 유엔군이 평양을 점령한 뒤 진격한 북쪽 끝 강은?","압록강","최대 북진선 1950. 11. · 79쪽","","두만강|청천강|대동강"],
+["h2-014",2,"w","기타","국군과 유엔군의 북진 후 전세를 다시 역전시킨 것은?","중국군의 참전","1950. 10. · 79쪽","중국군 개입|중국군 참전","소련군 참전|미군 철수|인천 상륙 작전"],
+["h2-015",2,"g","사건","1951년 1월 국군과 유엔군이 서울을 다시 빼앗긴 일은?","1·4 후퇴","79쪽","1.4 후퇴|14 후퇴|1·4후퇴","인천 상륙 작전|서울 수복|흥남 철수"],
+["h2-016",2,"w","기타","6·25 전쟁 정전 회담을 처음 제의한 나라는?","소련","1951. 7. · 79쪽","","미국|중국|영국"],
+["h2-017",2,"w","기타","정전 회담을 어렵게 한 두 쟁점은 군사 분계선 설정과 무엇인가?","포로 송환 문제","79쪽","포로 송환","전쟁 배상 문제|이산가족 상봉|외국군 철수"],
+["h2-018",2,"w","기타","정전 회담에서 중국과 북한이 군사 분계선으로 주장한 것은?","북위 38도선","유엔군은 회담 당시 전선 주장 · 79쪽","38도선","회담 당시 전선|북위 17도선|압록강"],
+["h2-019",2,"w","기타","정전 회담에서 포로 문제에 대한 유엔군의 주장은?","포로의 자유로운 선택 허용","중국·북한은 본국 송환 주장 · 79쪽","자유 송환|자유로운 선택","본국 송환|일괄 송환|포로 교환 금지"],
+["h2-020",2,"r","정책","정전 회담 중 이승만 정부가 협상을 어렵게 하려고 단독으로 한 일은?","반공 포로 석방","북진 통일 주장 · 79쪽","반공포로 석방","국군 철수|정전 협정 서명|휴전선 설정"],
+["h2-021",2,"r","기타","이승만 정부가 정전을 받아들이는 대가로 미국에서 약속받은 것은?","상호 방위 조약 체결","79쪽","한미 상호 방위 조약|상호 방위 조약","경제 원조 중단|미군 철수|북진 통일 지원"],
+["h2-022",2,"g","날짜","정전 협정이 체결된 날은?","1953년 7월 27일","79쪽","1953. 7. 27.|7월 27일","1953년 10월|1951년 7월|1950년 6월 25일"],
+["h2-023",2,"g","수치","정전 협정에 따라 군사 분계선에서 남과 북으로 각각 몇 km씩 비무장 지대를 두었나?","2km","79쪽 자료실","2|2킬로미터","4km|1km|10km"],
+["h2-024",2,"g","기타","정전 협정으로 설치되어 적대 행위를 할 수 없게 된 지역은?","비무장 지대","DMZ · 79쪽","DMZ|디엠지","공동 경비 구역|평화선|북방 한계선"],
+["h2-025",2,"w","기타","정전 협정문에 서명한 세 사령관은 유엔군, 북한군과 어느 군 사령관인가?","중국군","남한은 당사자로 참여 못함 · 79쪽","중국","국군|소련군|미군"],
+["h2-026",2,"r","기타","남한이 정전 협정 당사자로 참여하지 못한 까닭은?","국군 작전 지휘권을 유엔군 사령관에 넘겼기 때문","79쪽 자료실","작전 지휘권 이양|작전 지휘권을 유엔군 사령관에 넘김","정전에 찬성했기 때문|유엔 회원국이 아니었기 때문|전쟁에 패했기 때문"],
+["h2-027",2,"w","기타","정전 협정문이 작성된 세 언어는 영어, 한국어와 무엇인가?","중국어","79쪽","","러시아어|일본어|프랑스어"],
+["h2-028",2,"g","기타","정전 협정 후 북위 38도선 대신 남북한의 군사 분계선이 된 것은?","휴전선","1953. 7. 27. 22시 기준 전선 · 79쪽","","북위 17도선|애치슨 라인|평화선"],
+["h2-029",2,"g","지명","정전 협정이 체결된 장소는?","판문점","79쪽 사진","","개성|평양|금강산"],
+["h2-030",2,"w","조약","6·25 전쟁 직후 체결되어 미군이 한국에 계속 주둔하게 된 조약은?","한미 상호 방위 조약","1953. 10. · 78·80쪽","한미상호방위조약","브라운 각서|정전 협정|자유 무역 협정"],
+["h2-031",2,"r","수치","6·25 전쟁 인명 피해 그래프에서 남한 민간인 피해는?","990.9천 명","남한 군인 589.1천, 북한 민간인 1,798천 · 80쪽","990.9천|약 99만 명","589.1천 명|1,798천 명|640천 명"],
+["h2-032",2,"w","수치","6·25 전쟁 인명 피해 그래프에서 중국군 피해는?","972.6천 명","유엔군 154천 · 80쪽","972.6천|약 97만 명","154천 명|640천 명|589.1천 명"],
+["h2-033",2,"w","수치","6·25 전쟁 인명 피해 그래프에서 인명 피해가 가장 많은 집단은?","북한 민간인","1,798천 명 · 80쪽 『6·25 전쟁 통계 자료집』(2023)","","남한 민간인|중국군|남한 군인"],
+["h2-034",2,"o","기타","많은 사람이 고향을 떠나 이주하면서 6·25 전쟁으로 해체된 사회 질서는?","촌락·대가족 중심의 공동체적 사회 질서","80쪽","공동체적 사회 질서|대가족 중심 공동체","신분제 질서|양반 중심 질서|도시 중심 질서"],
+["h2-035",2,"w","기타","6·25 전쟁 중 주권을 회복해 국제 사회에 복귀하고 전쟁 특수로 경제 재건 기회를 얻은 나라는?","일본","80쪽","","중국|타이완|필리핀"],
+["h2-036",2,"w","기타","6·25 전쟁에 군대를 파병해 북한에 대한 영향력이 커진 나라는?","중국","80쪽","","소련|일본|미국"],
+["h2-037",2,"o","인물","공개 인민재판과 즉결 처형 장면을 그린 소설 『불의 제전』의 작가는?","김원일","80쪽 읽기","","박완서|조세희|김성칠"],
+["h2-038",2,"o","인물","'빨갱이가 간다는 뒷손가락질 한 번으로' 즉결 처분된 사례를 쓴 『그 많던 싱아는 누가 다 먹었을까』의 작가는?","박완서","80쪽 읽기","","김원일|조정래|조세희"],
+["h2-039",2,"g","기타","북한군이 점령 지역에서 정당한 법적 절차 없이 열어 많은 사람을 공개 처형한 재판은?","인민재판","80쪽","","즉결 심판|군사 재판|반민 특위 재판"],
+["h2-040",2,"g","지명","북한군이 이념 등을 이유로 민간인을 학살한 곳으로 교과서에 나온 지역은?","전라남도 영광, 충청남도 서천","80쪽","영광 서천|영광, 서천|영광·서천","경남 거창, 산청|제주, 여수|노근리, 함평"],
+["h2-041",2,"r","사건","국군이 북한군과 좌익 무장대를 토벌하며 마을 주민까지 무차별 사살한 사건으로 교과서에 나온 것은?","거창 양민 학살 사건","80쪽","거창 양민 학살|거창 사건","제주 4·3 사건|여수·순천 10·19 사건|국민 방위군 사건"],
+["h2-042",2,"r","단체","좌익 활동을 하다 전향한 사람을 계도한다며 조직되었으나 6·25 때 회원들이 집단 학살된 단체는?","국민 보도 연맹","80쪽","국민보도연맹|보도 연맹","서북 청년회|국민 방위군|애국반"],
+["h2-043",2,"o","기타","전쟁 기념관이 구술 자료를 모아 공개하는 누리집 이름은?","전쟁 기념관 오픈 아카이브","81쪽","오픈 아카이브","국가 기록원|한국사 데이터베이스|국립 중앙 박물관"],
+// 2 남북의 정치·경제 변화와 분단의 고착화 (82~85쪽)
+["h2-044",2,"r","기타","1955년 학생 반공 궐기 대회의 구호 '반공으로 세계 평화를 ○○하자'에서 '싸워서 쟁취'를 뜻하는 말은?","전취","82쪽","","전진|쟁패|수호"],
+["h2-045",2,"r","기타","6·25 전쟁 직전 실시된 제2대 국회 의원 선거의 결과는?","이승만 정부에 비판적인 후보가 대거 당선","82쪽","비판적 후보 대거 당선|야당 대거 당선","자유당 압승|무소속 전멸|여당 과반"],
+["h2-046",2,"r","사건","군 지휘관들이 군수품을 빼돌려 소집된 많은 사람이 추위와 굶주림으로 사망한 사건은?","국민 방위군 사건","82쪽","국민방위군사건","거창 양민 학살 사건|국회 프락치 사건|진보당 사건"],
+["h2-047",2,"r","단체","1951년 이승만이 대통령 직선제 개헌을 위해 창당한 정당은?","자유당","82쪽","","민주당|민주 공화당|민주 정의당"],
+["h2-048",2,"r","지명","1952년 이승만 정부가 계엄령을 선포한 임시 수도는?","부산","82쪽","부산 일대","대구|대전|수원"],
+["h2-049",2,"r","개헌","경찰과 군인이 국회를 포위한 가운데 토론 없이 기립 투표로 통과된 1952년 개헌은?","발췌 개헌","대통령 직선제, 1차 개헌 · 82쪽","발췌개헌|1차 개헌","사사오입 개헌|3선 개헌|유신 헌법"],
+["h2-050",2,"r","개헌","'당시 대통령 이승만에 한해 중임 제한을 적용하지 않는다'는 1954년 개헌은?","사사오입 개헌","2차 개헌 · 82쪽","사사오입개헌|2차 개헌","발췌 개헌|3선 개헌|유신 헌법"],
+["h2-051",2,"r","수치","사사오입 개헌 당시 국회 재적 의원 수는?","203명","82쪽","203","198명|135명|136명"],
+["h2-052",2,"r","수치","사사오입 개헌안 표결에서 나온 찬성표 수는?","135표","정족수 136명에 1명 모자람 · 82쪽","135","136표|203표|134표"],
+["h2-053",2,"r","수치","사사오입 개헌 당시 개헌에 필요했던 찬성 의원 수는?","136명","재적 203명의 3분의 2(135.333…명) 초과 · 82쪽","136","135명|134명|203명"],
+["h2-054",2,"r","단체","법과 절차를 무시한 개헌에 맞서 야당 세력이 창당한 정당은?","민주당","82쪽","","자유당|진보당|신민당"],
+["h2-055",2,"r","인물","1956년 제3대 대통령 선거 기간에 갑자기 사망한 민주당 후보는?","신익희","83쪽","","조봉암|장면|윤보선"],
+["h2-056",2,"r","인물","1956년 제3대 대통령 선거에서 유효 표의 30%가량을 얻으며 돌풍을 일으킨 진보 성향 무소속 후보는?","조봉암","83쪽","","신익희|장면|이기붕"],
+["h2-057",2,"r","인물","1956년 부통령 선거에서 자유당 이기붕을 누르고 당선된 민주당 후보는?","장면","83쪽","","신익희|윤보선|조봉암"],
+["h2-058",2,"r","기타","1956년 제3대 대통령 선거에서 민주당이 내세운 구호는?","못살겠다 갈아 보자","자유당은 '갈아 봤자 더 못산다' · 83쪽","못살겠다 갈아보자","갈아 봤자 더 못산다|반공으로 세계 평화를|잘살아 보세"],
+["h2-059",2,"r","기타","'못살겠다 갈아 보자'에 맞서 자유당이 내세운 구호는?","갈아 봤자 더 못산다","83쪽","갈아봤자 더 못산다","못살겠다 갈아 보자|반공 통일|잘살아 보세"],
+["h2-060",2,"r","단체","조봉암이 평화 통일 등을 내세우며 창당한 정당은?","진보당","83쪽","","민주당|한국 독립당|혁신당"],
+["h2-061",2,"r","사건","1958년 조봉암과 진보당 간부들을 간첩죄와 국가 보안법 위반 혐의로 구속한 사건은?","진보당 사건","83쪽","진보당사건","동백림 사건|국회 프락치 사건|제2차 인혁당 사건"],
+["h2-062",2,"r","연도","조봉암의 사형이 집행된 해는?","1959","2011년 재심 무죄 · 83쪽","",""],
+["h2-063",2,"r","연도","조봉암이 재심에서 무죄를 선고받은 해는?","2011","52년 만, 대법원 판결 2011. 1. 20. · 83쪽","",""],
+["h2-064",2,"r","법령","이승만 정부가 야당 반대에도 개정해 언론의 자유 등을 침해하는 독소 조항을 담은 법은?","국가 보안법","83쪽","국가보안법","반민족 행위 처벌법|치안 유지법|긴급 조치"],
+["h2-065",2,"r","기타","이승만 정부가 1959년 폐간한, 정부에 비판적이었던 신문은?","『경향신문』","83쪽","경향신문","『동아일보』|『조선일보』|『사상계』"],
+["h2-066",2,"r","개헌","'국회는 민의원과 참의원으로써 구성한다', '대통령과 부통령은 국민의 직접 투표로 선거한다'는 내용의 개헌안은?","발췌 개헌안","1952 · 83쪽 탐구","발췌 개헌","사사오입 개헌안|3선 개헌안|유신 헌법"],
+["h2-067",2,"p","정책","한국 정부가 원한 생산재 원조와 달리 미국이 주로 원조한 것은?","소비재와 잉여 농산물","84쪽","소비재|잉여 농산물","철강과 기계|차관과 기술|무기와 군수품"],
+["h2-068",2,"p","산업","원조받은 원재료를 가공한 제분·제당·면방직 산업을 부르는 말은?","삼백 산업","밀가루·설탕·면직물이 흰색 · 84쪽","삼백산업","중화학 공업|경공업|기간 산업"],
+["h2-069",2,"p","기타","삼백 산업의 세 생산품은?","밀가루, 설탕, 면직물","84쪽","밀가루 설탕 면직물|밀가루·설탕·면직물","쌀, 소금, 면직물|밀가루, 설탕, 소금|쌀, 설탕, 비단"],
+["h2-070",2,"p","기타","원조 물자를 기업에 배정하는 과정에서 특정 기업에 혜택이 편중되며 나타난 부작용은?","정경 유착과 독점","84쪽","정경 유착|독점","물가 폭락|농업 성장|재정 흑자"],
+["h2-071",2,"p","기타","미국의 값싼 농산물이 들어오며 농촌에 나타난 변화는?","곡물 가격 하락","농가 부채, 춘궁기, 이농 증가 · 84쪽","곡물 가격이 떨어짐","곡물 가격 폭등|농촌 인구 증가|농가 소득 증가"],
+["h2-072",2,"p","수치","미국의 경제 원조 그래프에서 원조액이 가장 많았던 해는?","1957년","32,127만 달러 · 84쪽","1957","1955년|1961년|1952년"],
+["h2-073",2,"p","기타","1950년대 후반부터 미국의 원조가 줄어든 이유는?","미국의 경제 상황 악화","84쪽","미국 경제 상황이 나빠져서","한국 경제 성장|베트남 파병|한일 협정 체결"],
+["h2-074",2,"o","기타","댄스홀을 다니는 대학교수 부인을 그려 사회적 논쟁을 일으킨 1954년 소설은?","『자유 부인』","1956년 영화화 · 84쪽","자유 부인|자유부인","『난장이가 쏘아 올린 작은 공』|『마술의 손』|『불의 제전』"],
+["h2-075",2,"o","수치","1950년대 인구 증가와 교육열로 한 학급의 학생 수는 몇 명이 되기도 했나?","70~80명","84쪽","70~80|70~80명 정도","40~50명|100~120명|30~40명"],
+["h2-076",2,"o","기타","한글 교육이 본격화되며 등장해 1960년대 경제 성장의 원동력이 된 세대는?","한글세대","84쪽","한글 세대","베이비붐 세대|4·19 세대|386 세대"],
+["h2-077",2,"o","기타","6·25 전쟁 이후 젊은 세대가 열광하며 동경한 문화는?","미국으로 대표되는 서구 문화","84쪽","서구 문화|미국 문화","일본 문화|중국 문화|전통 문화"],
+["h2-078",2,"r","기타","6·25 전쟁 직후 김일성이 전쟁 실패 책임을 물어 제거한 세력은?","박헌영 계열","85쪽","박헌영","김두봉 계열|조만식 계열|연안파"],
+["h2-079",2,"r","기타","1950년대 후반 김일성의 권력 독점과 개인숭배를 비판하다 숙청된 세력으로 교과서에 나온 것은?","김두봉 계열","85쪽","김두봉","박헌영 계열|조만식 계열|김구 계열"],
+["h2-080",2,"p","정책","북한이 소련·중국의 무상 지원을 토대로 전후 복구와 사회주의 경제 건설을 위해 추진한 계획은?","제1차 5개년 계획","85쪽","1차 5개년 계획","제1차 경제 개발 5개년 계획|천리마 운동|새마을 운동"],
+["h2-081",2,"p","정책","북한이 농토와 생산 수단을 협동조합이 소유하게 한 작업은?","농업과 상공업의 집단화","85쪽","집단화|협동화","토지 개혁|국유화|민영화"],
+["h2-082",2,"p","수치","북한에서 협동조합에 편입된 농가와 경지 비율이 거의 100%가 된 해는?","1958년","85쪽 그래프","1958","1953년|1955년|1961년"],
+["h2-083",2,"p","운동","하루에 천 리를 달린다는 속도로 사회주의 경제를 건설하자며 1950년대 후반 북한이 벌인 운동은?","천리마 운동","85쪽","천리마운동","새마을 운동|농촌 진흥 운동|국민정신 총동원 운동"],
+["h2-084",2,"p","기타","천리마 운동에서 평양에서 14분에 살림집 1대를 조립한다며 선전한 말은?","평양 속도","85쪽","","천리마 속도|노력 영웅|속도전"],
+["h2-085",2,"p","기타","천리마 운동에서 29시간 계속 일해 공사 기간을 40일에서 5일로 줄였다고 선전한 사람을 부른 말은?","노력 영웅","85쪽","","평양 속도|천리마 기수|모범 노동자"],
+["h2-086",2,"p","수치","천리마 운동 선전에서 수입한 트랙터를 모방해 자체 트랙터를 만들었다는 기간은?","30일","85쪽","30일 만|30","14일|5일|40일"],
+["h2-087",2,"p","기타","천리마 운동이 결국 이용된 목적은?","김일성 중심 유일 지배 체제의 기반 마련","85쪽","유일 지배 체제 기반|김일성 유일 지배 체제","남북 경제 협력|시장 경제 도입|대외 개방"],
+["h2-088",2,"g","연도","정전 협정과 한미 상호 방위 조약이 체결된 해는?","1953","78쪽","",""],
+["h2-089",2,"r","연도","발췌 개헌이 이루어진 해는?","1952","82쪽","",""],
+["h2-090",2,"r","연도","사사오입 개헌이 이루어진 해는?","1954","82쪽","",""],
+["h2-091",2,"r","연도","진보당 사건이 일어난 해는?","1958","82~83쪽","",""],
+["h2-092",2,"r","연도","『경향신문』이 폐간된 해는?","1959","82쪽 연표","",""],
+["h2-093",2,"w","연도","애치슨 선언이 발표된 해는?","1950","1월 · 78쪽","",""]
+);
+SOURCES.push(
+["s2-01",2,"o","이 일기가 쓰인 계기는?","오늘 하루 호외(號外)가 두 번이나 돌고 신문은 큼직한 활자로 \"괴뢰군의 38전선에 걸친 불법 남침\"을 알리었다. …… '5년 동안 민족의 넋을 가위 누르던 동족상잔이 마침내 오고야 마는구나.'","6·25 전쟁 발발","인천 상륙 작전|1·4 후퇴|정전 협정 체결","김성칠, 『역사 앞에서』 · 78쪽"],
+["s2-02",2,"g","이 조항이 담긴 문서는?","제1조 1항 한 개의 군사 분계선을 확정하고 쌍방이 이 선으로부터 각기 2km씩 후퇴하여 적대 군대 간에 한 개의 비무장 지대를 설정한다.","정전 협정","한미 상호 방위 조약|남북 기본 합의서|판문점 선언","『정전 협정문』, 1953 · 79쪽"],
+["s2-03",2,"o","이 소설이 그린 장면은?","공터에서 공개 인민재판을 열고 …… 즉결 처형하기도 하였다. 처형된 자는 많은 재산을 독식한 부호, 반공 단체 간부, 경찰 출신 등이었다.","6·25 전쟁 중 민간인 학살","제주 4·3 사건|5·18 민주화 운동|여수·순천 10·19 사건","김원일, 『불의 제전』 · 80쪽"],
+["s2-04",2,"o","이 편지를 쓴 사람은?","어머니, 저는 사람을 죽였습니다. 수류탄이라는 무서운 폭발 무기를 던져 일순간에 죽이고 말았습니다. 아무리 적이지만 그들도 같은 언어와 같은 피를 나눈 동족이라고 생각하니 가슴이 답답하고 무겁습니다.","학도병으로 참전한 학생","유엔군으로 참전한 군인|국민 방위군|베트남 파병 군인","전쟁 기념관 구술 자료 · 81쪽"],
+["s2-05",2,"r","이 기사가 보도한 행사가 열린 정부 시기는?","반공 대열의 최선봉에 나선 백만 학도들의 결의를 새로이 하는 대한 학도 반공 궐기 대회가 서울 동대문 운동장에서 …… 성대히 거행되었다.","이승만 정부","박정희 정부|장면 내각|전두환 정부","『동아일보』, 1956. 10. 21. · 82쪽"],
+["s2-06",2,"r","이 개헌안은?","제55조 1항 대통령과 부통령의 임기는 4년으로 한다. 단 재선에 의하여 1차 중임할 수 있다. …… 부칙 이 헌법 공포 당시의 대통령에 대하여는 제55조 1항 단서의 제한을 적용하지 아니한다.","사사오입 개헌안","발췌 개헌안|3선 개헌안|유신 헌법","사사오입 개헌안(일부, 1954) · 83쪽"],
+["s2-07",2,"r","이 개헌안은?","제31조 입법권은 국회가 행한다. 국회는 민의원과 참의원으로써 구성한다. 제53조 대통령과 부통령은 국민의 보통·평등·직접·비밀 투표에 의하여 각각 선거한다.","발췌 개헌안","사사오입 개헌안|3선 개헌안|유신 헌법","발췌 개헌안(일부, 1952) · 83쪽"],
+["s2-08",2,"r","이 판결로 명예를 회복한 인물은?","피고인은 …… 진보당 창당과 관련한 이 사건 재심 대상 판결로 사형이 집행되기에 이르렀는바, 이 사건 재심에서 피고인에 대한 공소 사실 대부분이 무죄로 밝혀졌으므로 이제 뒤늦게나마 재심 판결로써 그 잘못을 바로잡고 ……","조봉암","신익희|장면|노덕술","대법원 판결문, 2011. 1. 20. · 83쪽"]
+);
+EVENTS.push(
+["애치슨 선언",1950,1,2,78],["6·25 전쟁 발발",1950,6,2,78],["낙동강 방어선 구축",1950,8,2,79],["인천 상륙 작전",1950,9,2,79],["중국군 개입",1950,10,2,79],["1·4 후퇴",1951,1,2,79],
+["정전 회담 시작",1951,7,2,79],["정전 협정 체결",1953,7,2,79],["한미 상호 방위 조약 체결",1953,10,2,78],["자유당 창당",1951,0,2,82],["발췌 개헌",1952,0,2,82],
+["사사오입 개헌",1954,11,2,82],["제3대 대통령 선거(조봉암 돌풍)",1956,0,2,83],["진보당 사건",1958,0,2,83],["조봉암 사형 집행",1959,0,2,83],["『경향신문』 폐간",1959,0,2,82]
+);
+ESSAYS.push(
+["e2-01",2,"6·25 전쟁 직전 전쟁의 기운이 감돌던 한반도 상황을 쓰시오.","남북에 체제가 다른 정권이 들어서 38도선 근처에서 잦은 충돌이 있었다. 미군과 소련군이 철수한 상황에서 북한은 소련의 무기 지원과 조선 의용군 편입으로 군사력을 키웠고, 소련과 중국은 북한의 전쟁 계획에 동의하였다. 미국은 애치슨 선언으로 한국을 태평양 방위선에서 제외하였다.","38도선|충돌;철수;소련|조선 의용군|중국;애치슨","78쪽"],
+["e2-02",2,"정전 회담이 어려움을 겪은 이유를 쓰시오.","군사 분계선 설정과 포로 송환 문제로 대립하였다. 중국과 북한은 북위 38도선을, 유엔군은 회담 당시 전선을 군사 분계선으로 주장하였고, 포로는 본국 송환과 자유로운 선택 허용으로 맞섰다. 또 이승만 정부가 북진 통일을 주장하며 반공 포로를 석방해 협상을 어렵게 하였다.","군사 분계선|38도선;포로;본국 송환|자유;반공 포로|이승만","79쪽"],
+["e2-03",2,"6·25 전쟁이 국내외에 끼친 영향을 세 가지 이상 쓰시오.","수백만 명이 희생되고 전쟁고아와 이산가족이 생겼으며 산업 시설이 파괴되었다. 공동체적 사회 질서가 해체되고 남북의 적대감이 깊어졌다. 미국의 영향력이 커져 한미 상호 방위 조약으로 미군이 주둔하였고, 중국은 북한에 대한 영향력이 커졌으며, 일본은 전쟁 특수로 경제 재건의 기회를 얻었다.","희생|이산가족|고아;파괴|산업;적대감|이념;미국|한미 상호 방위 조약;일본|특수|중국","80쪽"],
+["e2-04",2,"사사오입 개헌안 통과 과정의 문제점을 쓰시오.","개헌에는 재적 203명의 3분의 2인 136명이 찬성해야 했으나 135표로 부결되었다. 그런데 이틀 후 국회 의장이 사사오입(반올림) 논리를 적용해 통과되었다고 선포하여 법과 절차를 무시하였다.","203|136;135|부결;사사오입|반올림;절차|번복","82쪽"],
+["e2-05",2,"1950년대 미국의 경제 원조가 한국 경제에 끼친 영향을 쓰시오.","원조로 식량 사정은 나아졌고 잉여 농산물을 가공하는 삼백 산업 중심으로 공업화가 진행되었다. 그러나 소비재 위주의 원조였고 원조 배정 과정에서 정경 유착과 독점이 나타났으며, 값싼 농산물 유입으로 곡물 가격이 하락해 농촌 경제가 어려워졌다.","식량;삼백 산업|제분|제당|면방직;정경 유착|독점;곡물 가격|농촌","84쪽"],
+["e2-06",2,"천리마 운동의 내용과 한계를 쓰시오.","1950년대 후반 하루에 천 리를 달리는 천리마의 속도로 사회주의 경제를 건설하자는 운동으로, 평양 속도·노력 영웅 같은 모범 사례를 선전하였다. 그러나 기술 혁신과 물질적 뒷받침 없이 노동력 동원과 정신 무장만 강요해 지속적인 성과를 내기 어려웠고 김일성 유일 지배 체제 기반에 이용되었다.","천리마|속도;평양 속도|노력 영웅|선전;기술|노동력|정신;유일 지배|김일성","85쪽"]
+);
+// ── Ⅱ-03 민주화를 위한 노력 (86~99쪽)
+CARDS.push(
+// 1 4·19 혁명 (86~89쪽)
+["h3-001",3,"b","인물","3·15 부정 선거 시위 중 최루탄에 맞아 사망하고 시신이 마산 앞바다에서 발견된 학생은?","김주열","1960. 4. 11. 발견 · 86쪽","","이한열|박종철|진영숙"],
+["h3-002",3,"r","사건","1960년 3월 15일 정·부통령 선거에서 자행된 대대적인 부정을 부르는 말은?","3·15 부정 선거","86쪽","3.15 부정 선거|315 부정 선거|3·15 부정선거","5·10 총선거|사사오입 개헌|4·13 호헌 조치"],
+["h3-003",3,"r","인물","3·15 부정 선거에서 이승만 정부와 자유당이 반드시 부통령에 당선시키려 한 자유당 후보는?","이기붕","86쪽","","장면|신익희|윤보선"],
+["h3-004",3,"r","기타","자유당이 이기붕을 반드시 부통령에 당선시키려 한 까닭은?","고령인 이승만에게 문제가 생기면 부통령이 대통령직을 승계하기 때문","86쪽","부통령이 대통령직 승계|대통령직 승계","국회 의장을 겸하기 때문|내각 책임제이기 때문|헌법상 부통령이 총리를 겸하기 때문"],
+["h3-005",3,"r","정책","3·15 부정 선거에서 사용된 공개 투표 방식은?","3인조·9인조 공개 투표","선거인 명부 조작, 관권·금권 선거 · 86쪽","3인조 9인조 공개 투표|3인조·9인조","대리 투표|무기명 투표|기립 투표"],
+["h3-006",3,"r","기타","3·15 부정 선거 때 총유권자 수보다 투표자 수가 많이 나오자 공무원들이 한 일은?","투표용지를 불태움","86쪽 사진","투표용지 소각|투표용지를 태움","재선거 실시|개표 중단|선거 무효 선언"],
+["h3-007",3,"b","지명","선거 당일 시위에서 경찰이 시위대에 발포해 많은 사상자가 발생한 곳은?","마산","광주에서도 시위 · 86쪽","","부산|대구|광주"],
+["h3-008",3,"r","기타","시위 확산 후 사임해 상황을 잠시 진정시킨 사람은?","선거 관리 책임자인 내무부 장관","86쪽","내무부 장관","국무총리|자유당 의장|서울 시장"],
+["h3-009",3,"r","기타","이승만 정부가 시위의 배후라고 발표한 것은?","공산당","86쪽","공산당의 조종","야당|학생회|미국"],
+["h3-010",3,"b","지명","4월 19일 시위대가 향한 대통령 집무 장소는?","경무대","87쪽","","청와대|중앙청|국회 의사당"],
+["h3-011",3,"b","수치","4월 19일 하루 동안 전국에서 사망한 사람은?","100명이 넘음","87쪽","100명 이상|100명 넘게","10여 명|186명|1,000명 이상"],
+["h3-012",3,"b","기타","대학교수들이 시위에 나서 외친 구호는?","학생의 피에 보답하라","87쪽","","부모 형제들에게 총부리를 대지 말라|독재 타도|호헌 철폐"],
+["h3-013",3,"b","기타","서울 수송초등학교 학생들이 시위에서 내건 구호는?","부모 형제들에게 총부리를 대지 말라","87쪽 사진","","학생의 피에 보답하라|학생에게 자유를 달라|독재 타도"],
+["h3-014",3,"b","날짜","대규모 시위 속에 이승만이 하야 성명을 발표한 날은?","1960년 4월 26일","이후 미국 망명 · 87쪽","4월 26일|1960. 4. 26.","1960년 4월 19일|1960년 3월 15일|1960년 4월 11일"],
+["h3-015",3,"b","지명","이승만이 대통령에서 물러난 뒤 망명한 나라는?","미국","87쪽","","일본|중국|필리핀"],
+["h3-016",3,"b","기타","4·19 혁명의 의의는?","다양한 계층의 시민이 참여해 독재 정권을 무너뜨린 민주 혁명","이후 민주화 운동의 밑거름 · 87쪽","독재 정권을 무너뜨린 민주 혁명|민주 혁명","최초의 직선제 개헌|최초의 평화적 정권 교체|군사 정권 종식"],
+["h3-017",3,"b","선언","'3·15 선거는 부정 선거이다. 공명선거로 다시 하라.'를 담아 대학교수들이 발표한 것은?","대학교수단 시국 선언문","『동아일보』 1960. 4. 26. · 87쪽 탐구","시국 선언문|대학교수단 시국 선언","3·1 민주 구국 선언|민주 투쟁 선언문|6·10 국민 대회 선언문"],
+["h3-018",3,"r","기구","4·19 혁명 직후 3·15 부정 선거를 무효로 하고 개헌을 추진한 정부는?","허정 과도 정부","88쪽","허정 과도정부","장면 내각|국가 재건 최고 회의|최규하 정부"],
+["h3-019",3,"r","개헌","4·19 혁명 후 개헌의 주요 내용은 내각 책임제와 무엇인가?","양원제 국회","3차 개헌(1960. 6.) · 88쪽, 146쪽","양원제|국회 양원제","단원제 국회|대통령 직선제|간선제"],
+["h3-020",3,"r","기타","양원제 국회에서 장면 정부 시기 두 의회의 이름은?","민의원과 참의원","88쪽","민의원 참의원|민의원·참의원","상원과 하원|민의원과 국회|국회와 참사원"],
+["h3-021",3,"r","인물","4·19 혁명 이후 민주당 정부의 대통령은?","윤보선","88쪽","","장면|허정|이기붕"],
+["h3-022",3,"r","인물","4·19 혁명 이후 민주당 정부의 국무총리는?","장면","88쪽","","윤보선|허정|신익희"],
+["h3-023",3,"r","정책","장면 내각이 경제 건설을 위해 수립한 계획은?","경제 개발 5개년 계획","5·16으로 실행 못함 · 88쪽, 100쪽","경제개발5개년계획","새마을 운동|삼백 산업 육성|중화학 공업화 선언"],
+["h3-024",3,"r","정책","장면 내각이 실시한 지방 정치 제도는?","지방 자치제","공무원 공개 채용 제도도 도입 · 88쪽","지방자치제","대통령 직선제|유신 헌법|금융 실명제"],
+["h3-025",3,"r","기타","장면 내각 시정 방침에 담긴 통일 방안은?","유엔 감시하의 남북한 자유선거","88쪽 사료","유엔 감시하 남북한 자유선거|남북한 자유선거","북진 통일|중립화 통일|남북 협상"],
+["h3-026",3,"r","기타","장면 내각이 붕괴된 원인이 된 사건은?","5·16 군사 정변","88쪽","5·16|5.16 군사 정변","12·12 사태|10·26 사태|4·13 호헌 조치"],
+["h3-027",3,"g","단체","'민족 자주·평화·민주' 3대 원칙의 통일 운동을 벌인 단체는?","민족 자주 통일 중앙 협의회","민자통, 『민국일보』 1961. 2. 26. · 88쪽","민자통","민주 헌법 쟁취 국민운동 본부|조선 건국 준비 위원회|진보당"],
+["h3-028",3,"g","기타","남북 학생 회담 지지 집회의 구호는?","가자 북으로! 오라 남으로!","1961. 5. · 88쪽","가자 북으로 오라 남으로","북진 통일|반공 통일|우리는 하나"],
+["h3-029",3,"g","지명","4·19 혁명 후 학생들이 남북 학생 회담을 개최하자고 제안한 장소는?","판문점","88쪽","","평양|서울|개성"],
+["h3-030",3,"o","인물","'어째서 자유에는 피의 냄새가 섞여 있는가를'이 담긴 시 「푸른 하늘을」의 시인은?","김수영","89쪽","","이육사|김원일|박완서"],
+["h3-031",3,"b","인물","1960년 4월 19일 숨지기 4시간 전 어머니께 편지를 남긴 한성여중 학생은?","진영숙","89쪽","","김주열|유관순|이한열"],
+["h3-032",3,"b","수치","4·19 혁명 당시 희생자 수(보건 사회부, 1960)는?","186명","부상자 6,259명 · 89쪽","186","100명|165명|96명"],
+["h3-033",3,"b","수치","4·19 혁명 희생자 중 가장 많은 사망 원인은?","총상","165명 · 89쪽","총상 165명","차량 사고|경찰 폭행|시위 대열 사망"],
+["h3-034",3,"b","수치","4·19 혁명 희생자 186명 중 가장 많은 집단은?","일반인","96명, 고등학생 39명, 대학생 24명, 중학생 21명, 초등학생 6명 · 89쪽","일반인 96명","대학생|고등학생|중학생"],
+["h3-035",3,"b","수치","4·19 혁명 당시 부상자 수는?","6,259명","89쪽","6259|6,259","1,000명|186명|2,600명"],
+["h3-036",3,"b","지명","4·19 혁명 희생자를 기리는 국립 4·19 민주 묘지가 있는 곳은?","서울 강북구","89쪽","강북구","서울 종로구|경남 창원|광주 북구"],
+["h3-037",3,"b","지명","김주열 동상이 세워진 곳은?","경남 창원","89쪽 사진","창원","서울 강북구|부산|광주"],
+// 2 5·16 군사 정변과 박정희 정부의 성립 (90~91쪽)
+["h3-038",3,"r","선언","'반공을 국시의 제일의로 삼는다'는 내용으로 5·16 군사 정변 세력이 발표한 것은?","혁명 공약","90쪽","","6·29 선언|유신 헌법|시정 방침"],
+["h3-039",3,"r","기타","5·16 혁명 공약 6항에서 '과업이 성취되면' 하겠다고 약속한 것은?","양심적인 정치인들에게 정권 이양","90쪽","정권 이양|민간 정권 이양","반공 국시 확립|자주 경제 재건|통일 달성"],
+["h3-040",3,"r","인물","5·16 군사 정변을 이끈 육군 소장은?","박정희","1961. 5. 16. · 90쪽","","전두환|김종필|노태우"],
+["h3-041",3,"r","기구","5·16 군사 정변 세력이 입법·사법·행정권을 장악하려 설치한 기구는?","국가 재건 최고 회의","90쪽","국가재건최고회의","국가 보위 비상 대책 위원회|통일 주체 국민 회의|중앙정보부"],
+["h3-042",3,"r","기구","국가 안보를 명분으로 설치되어 박정희의 정권 창출과 권력 유지에 활용된 기관은?","중앙정보부","이후 국가 안전 기획부 → 국가 정보원 · 90쪽","중앙 정보부","국가 재건 최고 회의|보안사령부|국가 인권 위원회"],
+["h3-043",3,"r","기구","중앙정보부가 국가 안전 기획부를 거쳐 개편된 현재의 기관은?","국가 정보원","90쪽","국정원","국가 인권 위원회|경찰청|국방부"],
+["h3-044",3,"r","단체","5·16 군사 정변 세력이 1962년 개헌 후 창당한 정당은?","민주 공화당","90쪽","민주공화당|공화당","자유당|민주 정의당|민주 자유당"],
+["h3-045",3,"r","인물","1963년 대통령 선거에서 박정희가 누른 후보는?","윤보선","90쪽","","장면|김대중|김영삼"],
+["h3-046",3,"r","인물","한일 국교 정상화를 위해 일본 외무상 오히라와 비밀리에 만난 중앙정보부장은?","김종필","90쪽","","김재규|이후락|박정희"],
+["h3-047",3,"b","사건","한일 회담을 대일 굴욕 외교라 여긴 학생과 시민의 1964년 반대 시위는?","6·3 시위","90쪽","6.3 시위|63 시위|6·3 항쟁","6·10 국민 대회|4·19 혁명|부마 민주 항쟁"],
+["h3-048",3,"r","조약","야당 반대에도 민주 공화당 의원들만 참석해 1965년 국회에서 비준된 것은?","한일 협정","90쪽","한일협정|한일 기본 조약","브라운 각서|한미 상호 방위 조약|정전 협정"],
+["h3-049",3,"r","기타","한일 협정에서 받아내지 못한 것은?","식민 지배에 대한 사죄와 배상","90쪽","사죄와 배상","경제 개발 자금|국교 정상화|청구권 자금"],
+["h3-050",3,"r","수치","1964~1973년 베트남 파병 규모는?","32만여 명","90~91쪽","32만 명|32만여|약 32만 명","5만여 명|10만여 명|60만여 명"],
+["h3-051",3,"r","조약","베트남 추가 파병에 따른 미국의 지원 내용을 담아 1966년 체결한 것은?","브라운 각서","주한 미국 대사 브라운과 외무 장관 · 91쪽","브라운각서","한일 협정|한미 상호 방위 조약|닉슨 독트린"],
+["h3-052",3,"r","기타","베트남 파병의 부정적 결과로 교과서에 나온 것은?","장병 희생, 고엽제 피해, 라이따이한 문제, 민간인 희생","91쪽","고엽제 피해|라이따이한","수출 증가|기업 해외 진출|한국군 현대화"],
+["h3-053",3,"r","기타","베트남 파병 과정에서 생긴 한국인 혼혈인을 부르는 말은?","라이따이한","91쪽","","코피노|파독 광부|한글세대"],
+["h3-054",3,"r","개헌","1969년 대통령의 3회 연임을 허용한 개헌은?","3선 개헌","6차 개헌, 국회 별관에서 편법 통과 · 91쪽","3선개헌|삼선 개헌|6차 개헌","유신 헌법|사사오입 개헌|발췌 개헌"],
+["h3-055",3,"r","기타","여당이 야당 의원들을 따돌리고 3선 개헌안을 통과시킨 장소는?","국회 별관","91쪽","","국회 본회의장|중앙청|장충 체육관"],
+["h3-056",3,"r","인물","1971년 제7대 대통령 선거에서 박정희가 힘겹게 누른 야당 후보는?","김대중","91쪽","","김영삼|윤보선|김종필"],
+["h3-057",3,"r","사건","1967년 동베를린을 거점으로 활동했다며 예술인·교수·학생 등을 간첩 혐의로 연행한 사건은?","동백림 사건","91쪽","동백림사건|동베를린 사건","진보당 사건|제2차 인혁당 사건|국회 프락치 사건"],
+["h3-058",3,"r","수치","동백림 사건 발표 때 연루되었다고 한 인원은?","194명","확대 수사로 국내외 300여 명 연행 · 91쪽","194","300여 명|31명|8명"],
+["h3-059",3,"r","기타","동백림 사건 재판에서 간첩 혐의는 어떻게 되었나?","입증되지 않음","91쪽","입증 안 됨","전원 유죄|사형 집행|전원 국외 추방"],
+// 3 유신 체제의 성립과 민주화 운동 (92~93쪽)
+["h3-060",3,"r","기구","유신 헌법에서 대통령을 선출하도록 한 기구는?","통일 주체 국민 회의","체육관 선거 · 92쪽","통일주체국민회의","국가 재건 최고 회의|제헌 국회|최고 인민 회의"],
+["h3-061",3,"r","수치","1972년 통일 주체 국민 회의 대통령 선거에서 박정희의 득표율은?","99.92%","찬성 2,357표, 반대 0, 무효 2 · 92쪽","99.92|약 99.9%","100%|98.5%|36.6%"],
+["h3-062",3,"r","수치","1972년 유신 헌법에 따른 대통령 선거에서 박정희의 찬성표 수는?","2,357표","92쪽","2357|2,357","2,359표|135표|1,972표"],
+["h3-063",3,"g","선언","1972년 박정희 정부가 북한과 대화에 나서 발표한 것은?","7·4 남북 공동 성명","92쪽","7.4 남북 공동 성명|74 남북 공동 성명","남북 기본 합의서|6·15 남북 공동 선언|판문점 선언"],
+["h3-064",3,"r","정책","안보 위기와 평화 통일 대비를 구실로 1972년 단행된 체제 변화는?","10월 유신","비상계엄, 국회 해산, 비상 국무 회의 · 92쪽","유신|10월유신","5·16 군사 정변|12·12 사태|3선 개헌"],
+["h3-065",3,"r","기구","10월 유신 때 국회 대신 유신 헌법을 제정한 곳은?","비상 국무 회의","국민 투표로 확정 · 92쪽","비상국무회의","통일 주체 국민 회의|국가 재건 최고 회의|국가 보위 비상 대책 위원회"],
+["h3-066",3,"r","수치","유신 헌법의 대통령 임기는?","6년","중임 제한 없음 · 92쪽","6","4년|5년|7년"],
+["h3-067",3,"r","정책","유신 헌법이 대통령에게 준 권한으로, 국민의 기본권마저 제한할 수 있는 것은?","긴급 조치권","92쪽","긴급 조치|긴급조치권","국회 해산권|법관 임명권|계엄 선포권"],
+["h3-068",3,"r","수치","유신 헌법에서 대통령이 추천권을 가진 국회 의원 비율은?","3분의 1","92쪽","1/3","2분의 1|3분의 2|4분의 1"],
+["h3-069",3,"r","정책","'유신 헌법을 부정, 비방 및 개정, 폐지를 요구하는 행위를 금한다'는 1974년 조치는?","긴급 조치 1호","92쪽 사료","긴급조치 1호|긴급 조치 제1호","긴급 조치 9호|4·13 호헌 조치|계엄 포고 1호"],
+["h3-070",3,"r","사건","유신 반대 운동을 활발하게 한 1973년 사건은?","김대중 납치 사건","일본에서 중앙정보부가 납치 · 92쪽","김대중 납치","동백림 사건|YH 무역 사건|10·26 사태"],
+["h3-071",3,"b","인물","개헌 청원 100만 인 서명 운동을 전개하고 잡지 『사상계』를 창간한 인물은?","장준하","92쪽","","김대중|함석헌|김영삼"],
+["h3-072",3,"b","기타","장준하가 창간해 통일과 민주주의를 주로 다룬 잡지는?","『사상계』","92쪽","사상계","『개벽』|『경향신문』|『씨알의 소리』"],
+["h3-073",3,"r","사건","학생 운동 배후에 국가 전복을 노리는 조직이 있다며 관련자 8명에게 사형이 선고·집행된 1974년 사건은?","제2차 인혁당 사건","92~93쪽","제2차 인민 혁명당 사건|2차 인혁당 사건|인혁당 사건","동백림 사건|진보당 사건|국회 프락치 사건"],
+["h3-074",3,"b","단체","천주교 신부들이 유신 체제에 저항하려 조직한 단체는?","정의 구현 사제단","93쪽","정의구현사제단|천주교 정의 구현 사제단","민주 헌법 쟁취 국민운동 본부|민족 자주 통일 중앙 협의회|한국 공해 문제 연구소"],
+["h3-075",3,"b","운동","유신에 반대하다 해직된 언론인들이 벌인 투쟁은?","언론 자유 수호 투쟁","93쪽","언론 자유 수호 운동","보도 지침 거부|반공해 운동|개헌 청원 운동"],
+["h3-076",3,"b","선언","1976년 명동 성당에서 정치인과 종교 인사들이 발표해 유신 체제를 정면으로 비판한 선언은?","3·1 민주 구국 선언","93쪽","3.1 민주 구국 선언|31 민주 구국 선언","대학교수단 시국 선언문|민주 투쟁 선언문|6·29 선언"],
+["h3-077",3,"r","기타","1978년 국회 의원 선거에서 집권 여당을 득표율로 앞지른 야당은?","신민당","93쪽","","민주당|민주 공화당|통일 민주당"],
+["h3-078",3,"p","사건","1978~1979년 유신 체제 말기 경제를 어렵게 한 국제적 사건은?","제2차 석유 파동","93쪽, 101쪽","2차 석유 파동|제2차 오일 쇼크","제1차 석유 파동|외환 위기|세계 금융 위기"],
+["h3-079",3,"b","사건","회사의 일방적인 폐업에 항의해 신민당사에서 농성하던 노동자를 경찰이 강경 진압한 1979년 사건은?","YH 무역 사건","여성 노동자 1명 사망 · 93쪽","YH무역사건|YH 사건","전태일 분신 사건|광주 대단지 사건|함평 고구마 사건"],
+["h3-080",3,"r","인물","YH 무역 사건 후 국회 의원에서 제명된 신민당 총재는?","김영삼","93쪽","","김대중|장준하|윤보선"],
+["h3-081",3,"b","운동","김영삼 제명을 계기로 부산과 마산(창원) 일대에서 일어난 유신 반대 시위는?","부마 민주 항쟁","1979. 10. · 93쪽","부마항쟁|부마 항쟁","6·3 시위|5·18 민주화 운동|6월 민주 항쟁"],
+["h3-082",3,"r","사건","대통령 박정희가 중앙정보부장 김재규에게 피살된 사건은?","10·26 사태","1979 · 93쪽","10.26 사태|1026 사태|10·26 사건","12·12 사태|5·16 군사 정변|5·17 비상계엄 확대"],
+["h3-083",3,"r","인물","10·26 사태 때 박정희를 피살한 중앙정보부장은?","김재규","93쪽","","김종필|전두환|이후락"],
+["h3-084",3,"b","선언","1979년 10월 15일 부산대학교 교정에 뿌려져 부마 민주 항쟁의 시작이 된 글은?","민주 투쟁 선언문","93쪽 자료실","민주투쟁선언문","3·1 민주 구국 선언|대학교수단 시국 선언문|6·10 국민 대회 선언문"],
+["h3-085",3,"b","기타","부마 민주 항쟁에서 학생들이 외친 구호는?","유신 철폐, 독재 타도","93쪽","유신 철폐|독재 타도","호헌 철폐|학생의 피에 보답하라|계엄 철폐"],
+["h3-086",3,"b","기타","부마 민주 항쟁이 이어진 이후의 민주화 운동은?","5·18 민주화 운동","93쪽","","6월 민주 항쟁|4·19 혁명|6·3 시위"],
+// 4 5·18 민주화 운동 (94~96쪽)
+["h3-087",3,"b","기타","1980년 5월 20일 '우리는 보았다 …… 이에 우리는 부끄러워 붓을 놓는다'라고 쓴 사람들은?","『전남매일신문』 기자 일동","공동 사직서 2만 장 배포 · 94쪽","전남매일신문 기자|전남매일신문 기자들","『동아일보』 기자 일동|『경향신문』 기자 일동|광주 시민 일동"],
+["h3-088",3,"r","인물","10·26 사태 후 통일 주체 국민 회의를 통해 대통령에 선출된 국무총리는?","최규하","94쪽","","전두환|김종필|노태우"],
+["h3-089",3,"r","사건","전두환이 이끄는 일부 군인이 병력을 이끌고 반란을 일으켜 군사권을 장악한 사건은?","12·12 사태","1979 · 94쪽","12.12 사태|1212 사태|12·12 군사 반란","10·26 사태|5·16 군사 정변|5·17 비상계엄 확대"],
+["h3-090",3,"b","운동","10·26 사태 후 계엄 철폐·유신 헌법 개정 등 민주화를 요구한 1980년 5월 절정의 시위를 부르는 말은?","서울의 봄","94쪽","서울의봄","부마 민주 항쟁|6월 민주 항쟁|4·19 혁명"],
+["h3-091",3,"r","정책","10·26 사태 직후 해제되어 서울의 봄을 가능하게 한 조치는?","긴급 조치 9호","일부 민주 인사 석방 · 94쪽","긴급조치 9호","긴급 조치 1호|4·13 호헌 조치|계엄령"],
+["h3-092",3,"b","지명","1980년 5월 15일 10만여 명의 학생과 시민이 모여 신군부 퇴진을 요구한 곳은?","서울역","94쪽","서울역 앞","명동 성당|시청 앞|금남로"],
+["h3-093",3,"r","날짜","신군부가 비상계엄을 전국으로 확대한 날은?","1980년 5월 17일","김대중 등 체포, 정치 활동 금지, 휴교령 · 94쪽","5월 17일|1980. 5. 17.","1980년 5월 18일|1979년 12월 12일|1980년 5월 27일"],
+["h3-094",3,"b","기타","1980년 5월 18일 광주에서 등교하는 대학생들을 구타하며 해산시킨 부대는?","공수 부대","계엄군 · 95쪽","공수부대|계엄군","경찰 기동대|서북 청년회|시민군"],
+["h3-095",3,"b","단체","계엄군의 폭력적 진압에 항의하며 일부 시민이 무기를 탈취해 조직한 것은?","시민군","95쪽","","시민 수습 대책 위원회|민주 헌법 쟁취 국민운동 본부|치안대"],
+["h3-096",3,"b","단체","광주가 봉쇄된 상태에서 시민들이 질서를 유지하며 정부와 평화 협상을 시도하려 구성한 조직은?","시민 수습 대책 위원회","95쪽","시민수습대책위원회","시민군|민주 헌법 쟁취 국민운동 본부|국가 보위 비상 대책 위원회"],
+["h3-097",3,"b","지명","1980년 5월 27일 새벽 시민군이 끝까지 항전한 곳은?","전남 도청","95쪽","전라남도 도청|옛 전남 도청","금남로|광주역|조선대학교"],
+["h3-098",3,"b","기타","5·18 민주화 운동이 영향을 준 아시아 국가로 교과서에 예시된 나라는?","필리핀","95쪽","","베트남|미얀마|타이완"],
+["h3-099",3,"b","기타","신군부의 병력 동원이 미국의 묵인 아래 이루어졌다고 판단한 일부 대학생들이 이후 벌인 운동은?","반미 운동","95쪽","반미운동","반공 운동|통일 운동|반핵 운동"],
+["h3-100",3,"b","선언","'우리는 왜 총을 들 수밖에 없었는가'로 시작하는 1980년 5월 25일 글은?","광주 시민 궐기문","95쪽 사료","광주시민궐기문","민주 투쟁 선언문|6·10 국민 대회 선언문|3·1 민주 구국 선언"],
+["h3-101",3,"b","인물","'헌혈하시면 안 되겠다고 하면 막 화를 내는 거예요'라고 5월 광주를 증언한 간호사는?","안성례","95쪽 자료실","","진영숙|이소선|정철용"],
+["h3-102",3,"b","수치","5·18 당시 광주의 인구로 교과서에 나온 수는?","80만 명","95쪽","80만|80만명","10만 명|150만 명|30만 명"],
+["h3-103",3,"b","기타","1980년 5월 21일 계엄군이 광주 외곽으로 물러난 후 시민들이 보여 준 공동체를 교과서는 무엇이라 표현하나?","나눔과 연대의 자치 공동체","95쪽","자치 공동체|나눔과 연대","시민군 정부|해방구|임시 정부"],
+["h3-104",3,"b","기타","1997년 대법원이 전두환·노태우 판결에서 인정한 광주 시민 시위의 성격은?","헌정 질서를 수호하기 위한 정당한 행위","96쪽","헌정 질서 수호를 위한 정당한 행위|정당한 행위","국헌 문란 행위|내란 행위|폭동"],
+["h3-105",3,"r","수치","대법원이 노태우에게 선고한 형은?","징역 17년","전두환은 무기 징역 · 96쪽","17년","무기 징역|징역 10년|사형"],
+["h3-106",3,"r","수치","대법원이 전두환에게 선고한 형은?","무기 징역","1997. 4. 17. · 96쪽","무기징역","징역 17년|사형|징역 20년"],
+["h3-107",3,"o","연도","5·18 민주화 운동 기록물이 유네스코 세계 기록 유산으로 등재된 해는?","2011","96쪽","",""],
+["h3-108",3,"r","법령","'정부는 5·18 민주화 운동 정신을 계승하는 기념사업을 추진하여야 한다'는 조항을 둔 1995년 법은?","5·18 민주화 운동 등에 관한 특별법","96쪽","5·18 특별법|5.18 민주화 운동 등에 관한 특별법","친일 반민족 행위 진상 규명 특별법|반민족 행위 처벌법|국가 보안법"],
+["h3-109",3,"b","연도","전두환·노태우가 12·12 사태 및 5·17 내란 등의 혐의로 구속 기소된 해는?","1996","96쪽","",""],
+// 5 6월 민주 항쟁 (97~99쪽)
+["h3-110",3,"b","인물","1987년 1월 경찰의 고문으로 숨지고 '탁 하고 치니 억 하고 죽었다'는 발표가 나온 대학생은?","박종철","97쪽","","이한열|김주열|전태일"],
+["h3-111",3,"r","기구","5·18을 진압한 신군부가 설치해 입법·행정·사법부를 장악한 기구는?","국가 보위 비상 대책 위원회","97쪽","국보위|국가보위비상대책위원회","국가 재건 최고 회의|통일 주체 국민 회의|중앙정보부"],
+["h3-112",3,"r","기구","사회 정화를 구실로 많은 민간인을 끌고 가 군사 훈련과 강제 노역을 시킨 곳은?","삼청 교육대","군부대 내 설치, 인권 유린 · 97쪽","삼청교육대","남영동 대공분실|서북 청년회|국민 방위군"],
+["h3-113",3,"r","개헌","전두환이 1980년 단행한 개헌의 대통령 선출 방식은?","7년 단임의 대통령 간선제","8차 개헌 · 97쪽, 147쪽","7년 단임 간선제|간선제 7년 단임","5년 단임 직선제|6년 간선제|4년 중임 직선제"],
+["h3-114",3,"r","정책","전두환 정부가 야간 통행금지 폐지, 두발·교복 자율화와 함께 유화 정책으로 출범시킨 것은?","프로 야구","정권 장악의 불법성과 폭력성을 감추려는 유화 정책 · 97쪽","프로야구","올림픽 유치|컬러텔레비전 방송|새마을 운동"],
+["h3-115",3,"r","정책","전두환 정부가 각 언론사에 보도 여부·제목·용어·분량까지 통제하려고 내린 것은?","보도 지침","97쪽","보도지침","긴급 조치|금지곡 지정|사전 검열"],
+["h3-116",3,"r","사건","학생·노동 운동 탄압 과정에서 일어나 정부 불신을 키운 1986년 경찰서 사건은?","부천 경찰서 성 고문 사건","97쪽","부천 경찰서 성고문 사건|부천서 성 고문 사건","박종철 고문치사 사건|남영동 대공분실 사건|동백림 사건"],
+["h3-117",3,"r","정책","전두환 정부가 대통령 직선제 개헌 논의 자체를 금지한 조치는?","4·13 호헌 조치","1987 · 97쪽","4.13 호헌 조치|413 호헌 조치|호헌 조치","6·29 선언|긴급 조치 1호|보도 지침"],
+["h3-118",3,"b","단체","1987년 결성되어 대통령 직선제 개헌과 고문 살인 정권 퇴진 운동을 전국적으로 이끈 조직은?","민주 헌법 쟁취 국민운동 본부","98쪽","국민운동 본부|민주헌법쟁취국민운동본부","민족 자주 통일 중앙 협의회|정의 구현 사제단|좌우 합작 위원회"],
+["h3-119",3,"b","인물","1987년 6월 9일 경찰이 쏜 최루탄에 맞아 쓰러진 대학생은?","이한열","98쪽","","박종철|김주열|전태일"],
+["h3-120",3,"b","사건","민주 헌법 쟁취 국민운동 본부가 범국민 민주 항쟁을 선언한 1987년 6월 10일 집회는?","6·10 국민 대회","98쪽","6.10 국민 대회|610 국민 대회|6·10 국민대회","6·3 시위|서울역 시위|6·29 선언"],
+["h3-121",3,"b","기타","6월 민주 항쟁에서 각계각층의 시민이 외친 구호는?","독재 타도, 호헌 철폐","98쪽","호헌 철폐|독재 타도","유신 철폐|학생의 피에 보답하라|계엄 철폐"],
+["h3-122",3,"r","선언","1987년 전두환 정부가 국민적 저항에 굴복해 직선제 개헌을 수용한다고 발표한 것은?","6·29 선언","98쪽","6.29 선언|629 선언|6·29 민주화 선언","4·13 호헌 조치|3·1 민주 구국 선언|7·4 남북 공동 성명"],
+["h3-123",3,"r","인물","6·29 선언을 발표한 민주 정의당 대표는?","노태우","98쪽 자료3","","전두환|김영삼|김종필"],
+["h3-124",3,"b","기타","6월 민주 항쟁의 의의는?","군사 독재를 끝내고 평화적 정권 교체의 길을 엶","시민 의식 성장, 성숙한 시민 사회의 주춧돌 · 98쪽","평화적 정권 교체의 길|군사 독재 종식","최초의 민주 선거 실시|이승만 정권 붕괴|유신 체제 붕괴"],
+["h3-125",3,"b","지명","6월 10일 오후 6시 국민운동 본부 대표들이 국민 대회를 열고 민주 항쟁을 알린 장소는?","대한 성공회 서울 주교좌성당","99쪽","성공회 서울 주교좌성당|성공회 성당","명동 성당|향린 교회|한국은행 앞 광장"],
+["h3-126",3,"b","지명","6월 민주 항쟁 기간 경찰에 쫓긴 시위대가 모여 농성한 중심 장소는?","명동 성당","99쪽","명동성당","대한 성공회 서울 주교좌성당|향린 교회|서울역"],
+["h3-127",3,"b","지명","1987년 5월 27일 민주 헌법 쟁취 국민운동 본부 결성식이 열린 곳은?","향린 교회","99쪽","옛 향린 교회","명동 성당|대한 성공회 서울 주교좌성당|민주화 운동 기념관"],
+["h3-128",3,"b","지명","박종철이 경찰 고문으로 목숨을 잃은 치안 본부 대공분실이 있던 곳(현재 민주화 운동 기념관)은?","남영동","99쪽","남영동 대공분실","서대문|명동|삼청동"],
+["h3-129",3,"b","지명","6월 민주 항쟁 기간 서울에서 가장 빈번하게 시위가 벌어진 장소는?","한국은행 앞 광장","99쪽","한국은행 앞","서울역 앞|명동 성당|시청 앞 광장"],
+["h3-130",3,"b","연도","4·19 혁명이 일어난 해는?","1960","86쪽","",""],
+["h3-131",3,"r","연도","5·16 군사 정변이 일어난 해는?","1961","90쪽","",""],
+["h3-132",3,"b","연도","6·3 시위가 일어나고 베트남 파병이 시작된 해는?","1964","90쪽","",""],
+["h3-133",3,"r","연도","한일 협정이 체결된 해는?","1965","90쪽","",""],
+["h3-134",3,"r","연도","3선 개헌이 이루어진 해는?","1969","90~91쪽","",""],
+["h3-135",3,"r","연도","유신 헌법이 제정된 해는?","1972","92쪽","",""],
+["h3-136",3,"r","연도","제2차 인혁당 사건이 일어난 해는?","1974","92쪽","",""],
+["h3-137",3,"b","연도","3·1 민주 구국 선언이 발표된 해는?","1976","93쪽","",""],
+["h3-138",3,"b","연도","부마 민주 항쟁과 10·26 사태가 일어난 해는?","1979","92~93쪽","",""],
+["h3-139",3,"b","연도","5·18 민주화 운동이 일어난 해는?","1980","94쪽","",""],
+["h3-140",3,"b","연도","6월 민주 항쟁이 일어난 해는?","1987","97쪽","",""],
+["h3-141",3,"r","연도","동백림 사건이 일어난 해는?","1967","91쪽","",""],
+["h3-142",3,"r","연도","브라운 각서가 체결된 해는?","1966","91쪽","",""]
+);
+SOURCES.push(
+["s3-01",3,"b","이 기사가 다룬 운동은?","죽은 김주열의 영혼을 위로하기 위하여 조화를 바치려는데 우리에게 이 같은 자유조차 주지 않느냐. …… 경찰은 이제 우리들 마음의 자유조차 뺏으려고 한다.","4·19 혁명","6월 민주 항쟁|부마 민주 항쟁|5·18 민주화 운동","『마산일보』, 1960. 4. 14. · 86쪽"],
+["s3-02",3,"b","이 선언문을 발표한 사람들은?","마산, 서울, 기타 각지의 학생 데모는 주권을 빼앗긴 국민의 울분을 대신하여 궐기한 학생들의 순진한 정의감의 발로이며 …… 3·15 선거는 부정 선거이다. 공명선거에 의하여 정·부통령 선거를 다시 하라.","대학교수단","정의 구현 사제단|민주 헌법 쟁취 국민운동 본부|민족 자주 통일 중앙 협의회","『동아일보』, 1960. 4. 26. · 87쪽"],
+["s3-03",3,"r","이 성명을 발표한 인물은?","국민이 원한다면 대통령직을 사임하겠다. 3·15 정·부통령 선거에 많은 부정이 있었다 하니 선거를 다시 하도록 지시하였다. …… 만일 국민이 원한다면 내각 책임제 개헌을 하겠다.","이승만","이기붕|장면|허정","대통령 사임 성명, 『대통령 기록관』, 1960. 4. 26. · 87쪽"],
+["s3-04",3,"r","이 시정 방침을 밝힌 정부는?","일본과의 국교 정상화 및 유엔 감시하의 남북한 자유선거에 의한 통일 달성 / 관료 제도의 합리화와 공무원 재산 등록 및 경찰 중립화 / 부정 선거의 원흉과 발포 책임자, 부정·불법 축재자 처벌","장면 내각","허정 과도 정부|박정희 정부|이승만 정부","『동아일보』, 1960. 8. 28. · 88쪽"],
+["s3-05",3,"b","이 편지를 쓴 학생이 참여한 운동은?","끝까지 부정 선거 데모로 싸우겠습니다. 지금 저와 저의 모든 친구들 그리고 대한민국 모든 학생들은 우리나라 민주주의를 위하여 피를 흘립니다. 어머니, 데모에 나간 저를 책하지 마시옵소서.","4·19 혁명","6월 민주 항쟁|5·18 민주화 운동|6·3 시위","한성여중 진영숙, 1960. 4. 19. · 89쪽"],
+["s3-06",3,"r","이 공약을 발표한 사건은?","1. 반공을 국시의 제일의로 삼는다. 4. 국가 자주 경제 재건에 총력을 기울인다. 6. 과업이 성취되면 양심적인 정치인들에게 정권을 이양한다.","5·16 군사 정변","12·12 사태|10월 유신|4·19 혁명","혁명 공약, 1961 · 90쪽"],
+["s3-07",3,"r","이 각서는?","미국은 파병 비용을 부담하고 한국군의 장비를 현대화한다. 베트남 주둔 한국군 지원 사업과 현지의 각종 사업에 한국을 참여시킨다. 미국은 한국에 군사 원조와 차관을 제공한다.","브라운 각서","한일 협정|한미 상호 방위 조약|닉슨 독트린","브라운 각서(요약, 1966) · 91쪽"],
+["s3-08",3,"r","이 보고서가 다룬 사건은?","박정희 정권은 이 사건을 이용하여 …… 대학생들의 부정 선거 규탄 시위 등 학생들과 야당의 규탄 운동을 침묵시킴으로써 궁극적으로 3선 개헌과 장기 집권의 초석을 만들 수 있었음.","동백림 사건","진보당 사건|제2차 인혁당 사건|국회 프락치 사건","국가 정보원 과거사 진실 규명을 통한 발전 위원회, 2006 · 91쪽"],
+["s3-09",3,"r","이 기사가 보도한 선거 방식을 정한 헌법은?","투표는 …… 토론 없이 무기명으로 투표용지에 후보자 성명을 기입하는 방법으로 진행되었다. 투표 결과는 찬성 2,357표, 반대는 한 표도 없이 무효 2표로 박정희 후보를 선출하였다.","유신 헌법","3선 개헌 헌법|제헌 헌법|8차 개헌 헌법","『매일경제』, 1972. 12. 23. · 92쪽"],
+["s3-10",3,"r","이 조치는?","(유신) 헌법을 부정, 비방 및 개정, 폐지를 요구하는 행위를 금한다. 이 조치를 위반한 자와 이 조치를 비방한 자는 영장 없이 체포, 수색할 수 있으며 비상 군법 회의에서 심판, 처단한다.","긴급 조치 1호","4·13 호헌 조치|보도 지침|계엄 포고","긴급 조치 1호(일부, 1974) · 92쪽"],
+["s3-11",3,"b","이 선언은?","우리는 국민의 자유를 억압하는 긴급 조치를 곧 철폐하고 민주주의를 요구하다가 투옥된 민주 인사들과 학생들을 석방하라고 요구한다. 우리는 유신 헌법으로 허울만 남은 의회 정치가 회복되어야 한다고 주장한다.","3·1 민주 구국 선언","대학교수단 시국 선언문|민주 투쟁 선언문|6·10 국민 대회 선언문","3·1 민주 구국 선언(일부, 1976) · 93쪽"],
+["s3-12",3,"b","이 선언문이 뿌려지며 시작된 운동은?","경제적 모순과 실정을 근로자의 불순으로 뒤집어씌우고 협박·공포·폭력으로 짓눌러 왔음을 YH 사건에서 단적으로 보여 주고 있고 ……","부마 민주 항쟁","5·18 민주화 운동|6월 민주 항쟁|4·19 혁명","「민주 투쟁 선언문」, 1979. 10. 15. · 93쪽"],
+["s3-13",3,"b","이 글을 쓴 사람들이 보도하지 못한 사건은?","우리는 보았다. 사람이 개 끌리듯 끌려가 죽어가는 것을 두 눈으로 똑똑히 보았다. 그러나 신문에는 단 한 줄도 싣지 못하였다. 이에 우리는 부끄러워 붓을 놓는다.","5·18 민주화 운동","부마 민주 항쟁|6월 민주 항쟁|제주 4·3 사건","『전남매일신문』 기자 일동, 1980. 5. 20. · 94쪽"],
+["s3-14",3,"b","이 궐기문이 나온 운동은?","우리는 왜 총을 들 수밖에 없었는가. …… 계엄 당국은 18일 오후부터 공수 부대를 대량 투입하여 시내 곳곳에서 학생, 젊은이들에게 무차별 살상을 자행하였으니! …… 협상이 올바른 방향으로 진행되면 즉각 총을 놓겠습니다.","5·18 민주화 운동","부마 민주 항쟁|4·19 혁명|6월 민주 항쟁","광주 시민 궐기문(1980. 5. 25.) · 95쪽"],
+["s3-15",3,"b","이 판결 요지가 정당성을 인정한 운동은?","광주 시민들의 시위는 국헌을 문란하게 하는 내란 행위가 아니라 헌정 질서를 수호하기 위한 정당한 행위였음에도 불구하고 이를 난폭하게 진압함으로써 …… 그 시위 진압 행위는 …… 국헌 문란에 해당한다.","5·18 민주화 운동","부마 민주 항쟁|6월 민주 항쟁|4·19 혁명","전두환·노태우 대법원 판결 요지, 1997. 4. 17. · 96쪽"],
+["s3-16",3,"r","이 담화는?","본인은 …… 임기 중 개헌이 불가능하다고 판단하고 현행 헌법에 따라 내년 2월 25일 본인의 임기 만료와 더불어 후임자에게 정부를 이양할 것을 천명하는 바입니다. …… 소모적인 개헌 논의를 지양할 것을 선언합니다.","4·13 호헌 조치","6·29 선언|긴급 조치 1호|10월 유신","전두환 특별 담화, 1987. 4. 13. · 98쪽"],
+["s3-17",3,"b","이 선언문이 발표된 집회는?","오늘 우리는 …… 40년 독재 정치를 청산하고 희망찬 민주 국가를 건설하기 위한 거보를 전 국민과 함께 내딛는다. 국가의 미래요 소망인 꽃다운 젊은이를 야만적인 고문으로 죽여 놓고 ……","6·10 국민 대회","서울역 시위|4·19 혁명|3·1 민주 구국 선언","민주 헌법 쟁취 국민운동 본부, 1987. 6. 10. · 98쪽"],
+["s3-18",3,"r","이 선언은?","여야 합의하에 조속히 대통령 직선제 개헌을 하고 새 헌법에 의한 대통령 선거를 통해 1988년 2월 평화적 정부 이양을 실현토록 해야 하겠습니다. …… 시국 관련 사범들은 석방해야 합니다.","6·29 선언","4·13 호헌 조치|7·4 남북 공동 성명|3·1 민주 구국 선언","민주 정의당 대표 노태우, 1987. 6. 29. · 98쪽"],
+["s3-19",3,"r","이 지침을 내린 정부는?","오늘 오후 4시 검찰이 발표한 조사 결과 내용만 보도할 것. 검찰 발표 전문은 꼭 실어 줄 것. 이 사건의 명칭을 '성추행'이라고 하지 말고 '성 모욕 행위'라고 할 것.","전두환 정부","박정희 정부|노태우 정부|이승만 정부","부천 경찰서 성 고문 사건 보도 지침(1986. 7. 17.) · 97쪽"]
+);
+EVENTS.push(
+["3·15 부정 선거",1960,3,3,86],["김주열 시신 발견",1960,4,3,86],["4·19 혁명",1960,4,3,87],["이승만 하야 성명",1960,4,3,87],["장면 내각 출범",1960,8,3,86],
+["5·16 군사 정변",1961,5,3,90],["박정희, 대통령 당선",1963,0,3,90],["6·3 시위",1964,0,3,90],["한일 협정 체결",1965,0,3,90],["브라운 각서",1966,0,3,91],["동백림 사건",1967,7,3,91],
+["3선 개헌",1969,0,3,91],["7·4 남북 공동 성명",1972,0,3,92],["유신 헌법 제정",1972,0,3,92],["김대중 납치 사건",1973,0,3,92],["제2차 인혁당 사건",1974,0,3,93],["긴급 조치 1호",1974,0,3,92],
+["3·1 민주 구국 선언",1976,0,3,93],["YH 무역 사건",1979,0,3,93],["부마 민주 항쟁",1979,10,3,93],["10·26 사태",1979,10,3,93],["12·12 사태",1979,12,3,94],
+["서울역 시위",1980,5,3,94],["5·18 민주화 운동",1980,5,3,95],["전두환, 통일 주체 국민 회의에서 대통령 취임",1980,0,3,97],["박종철 고문치사 사건",1987,1,3,97],["4·13 호헌 조치",1987,4,3,97],["6·10 국민 대회",1987,6,3,98],["6·29 선언",1987,6,3,98]
+);
+ESSAYS.push(
+["e3-01",3,"3·15 부정 선거에서 자행된 부정행위를 세 가지 이상 쓰시오.","공무원과 경찰을 동원한 관권 선거와 금권 선거를 자행하였고, 야당 후보의 유세를 방해하였으며, 선거인 명부를 조작하고 3인조·9인조 공개 투표를 실시하였다.","관권|공무원|경찰;금권;유세|방해;명부;3인조|9인조|공개 투표","86쪽"],
+["e3-02",3,"4·19 혁명의 의의를 쓰시오.","학생뿐 아니라 다양한 계층의 시민이 참여하여 이승만 독재 정권을 무너뜨린 민주 혁명이다. 많은 희생 속에 민주주의를 이루어 낸 경험은 이후 독재에 저항하는 민주화 운동의 밑거름이 되었다.","시민|계층;독재|이승만;민주 혁명;밑거름|민주화 운동","87쪽"],
+["e3-03",3,"장면 내각의 정책과 한계를 쓰시오.","경제 개발 5개년 계획을 세우고 국토 개발 사업을 추진했으며 지방 자치제와 공무원 공개 채용 제도를 도입하였다. 그러나 분출하는 민주화 요구를 수용하지 못했고, 민간 통일 운동에 부정적이었으며, 부정 선거 책임자 처벌에 소극적이었고, 민주당 내 파벌 싸움으로 혼란을 초래하다 5·16 군사 정변으로 붕괴되었다.","경제 개발 5개년|국토 개발;지방 자치|공개 채용;통일 운동|처벌|소극;파벌;5·16","88쪽"],
+["e3-04",3,"한일 협정 체결 과정과 결과를 쓰시오.","박정희 정부는 경제 개발 자금을 확보하려고 국교 정상화를 추진했고 미국도 한일 관계 개선을 요구하였다. 김종필과 오히라의 비밀 회담 등으로 식민 지배 사죄와 배상 없이 회담이 진행되자 6·3 시위가 일어났으나 계엄령으로 진압하고 1965년 협정을 비준하였다. 그 결과 자금 일부를 확보했으나 사죄와 배상은 받아내지 못하였다.","경제 개발 자금;미국;김종필|오히라;6·3|시위;사죄|배상","90쪽"],
+["e3-05",3,"베트남 파병의 영향을 긍정적 측면과 부정적 측면으로 나누어 쓰시오.","미국의 기술·차관 제공과 한국군 현대화 지원을 받았고, 기업의 해외 진출과 수출이 활발해져 경제 성장의 발판이 마련되었다. 그러나 많은 장병이 희생되고 고엽제 피해자가 생겼으며 라이따이한 문제가 남았고 일부 국군에 의해 베트남 민간인이 희생되었다.","차관|기술|현대화;수출|해외 진출|경제 성장;희생;고엽제|라이따이한|민간인","91쪽"],
+["e3-06",3,"유신 헌법이 민주 정치의 기본 원리를 무시한 체제라고 할 수 있는 근거를 쓰시오.","통일 주체 국민 회의에서 대통령을 간선으로 뽑고 임기 6년에 중임 제한이 없어 종신 집권이 가능하였다. 대통령이 국회 의원 3분의 1 추천권, 국회 해산권, 법관 임명권을 가져 삼권 분립을 무력화하였고, 국민의 기본권을 제한할 수 있는 긴급 조치권까지 가졌다.","통일 주체 국민 회의|간선;6년|중임|종신;3분의 1|국회 해산|법관;삼권 분립;긴급 조치","92쪽"],
+["e3-07",3,"유신 체제가 붕괴된 과정을 쓰시오.","1978년 총선에서 신민당이 득표율로 여당을 앞지르고 제2차 석유 파동으로 경제가 어려워졌다. YH 무역 사건 후 김영삼이 국회에서 제명되자 부산과 마산에서 부마 민주 항쟁이 일어났고, 대응을 둘러싼 정권 내부 갈등 속에 박정희가 김재규에게 피살되는 10·26 사태로 유신 체제는 사실상 붕괴되었다.","신민당|석유 파동;YH;김영삼|제명;부마;10·26|김재규","93쪽"],
+["e3-08",3,"5·18 민주화 운동의 전개 과정을 쓰시오.","신군부가 비상계엄을 전국으로 확대하자 광주에서 계엄 철폐와 신군부 퇴진을 요구하는 시위가 일어났다. 공수 부대가 무차별 폭력으로 진압하고 발포하자 시민들은 시민군을 조직하였고, 계엄군이 외곽을 봉쇄한 가운데 시민 수습 대책 위원회가 협상을 시도하였으나 5월 27일 계엄군이 전남 도청의 시민군을 무력으로 진압하였다.","비상계엄|확대;공수 부대|발포|폭력;시민군;봉쇄|수습 대책;도청|27일|진압","94~95쪽"],
+["e3-09",3,"5·18 민주화 운동의 의의를 쓰시오.","신군부의 불법적 정권 탈취와 국가 폭력에 맞선 민주화 운동으로, 6월 민주 항쟁 등 1980년대 민주화 운동의 토대가 되었다. 필리핀 등 아시아 여러 나라의 민주화 운동에 영향을 주었고, 관련 기록물은 유네스코 세계 기록 유산으로 등재되었다.","신군부|국가 폭력;토대|6월 민주 항쟁;필리핀|아시아;유네스코|기록 유산","95~96쪽"],
+["e3-10",3,"6월 민주 항쟁의 배경과 결과를 쓰시오.","전두환 정부의 강압 통치 속에 대통령 직선제 개헌 요구가 커졌으나 정부는 4·13 호헌 조치로 개헌 논의를 금지하였다. 박종철 고문치사 사건 은폐가 드러나고 이한열이 최루탄에 맞아 쓰러지자 6·10 국민 대회를 시작으로 전국적 시위가 일어났고, 결국 노태우가 6·29 선언으로 직선제 개헌을 수용하였다.","직선제;4·13|호헌;박종철;이한열;6·10;6·29|노태우","97~98쪽"]
+);
+// ── Ⅱ-04 산업화의 성과와 사회·문화의 변화 (100~109쪽)
+CARDS.push(
+// 1 산업화와 경제 성장 (100~102쪽)
+["h4-001",4,"p","기타","1977년 '한국인이 몰려온다'는 기사로 급성장하는 한국 경제를 소개한 미국 시사 잡지는?","『뉴스위크』","1977. 6. 6. · 100쪽","뉴스위크","『타임』|『사상계』|『포브스』"],
+["h4-002",4,"p","수치","한국이 처음으로 수출 100억 달러를 달성한 해는?","1977년","10억 달러 달성 7년 만 · 100쪽","1977","1970년|1986년|1964년"],
+["h4-003",4,"p","기타","수출 10억 달러에서 100억 달러 달성까지 걸린 기간은?","7년","100쪽","7","10년|5년|15년"],
+["h4-004",4,"p","기타","1960~1980년대 한국의 눈부신 경제 성장을 부르는 말은?","한강의 기적","100쪽","","라인강의 기적|3저 호황|천리마 운동"],
+["h4-005",4,"p","정책","박정희 등 군부 세력이 장면 내각의 계획을 보완해 수립한 경제 계획은?","경제 개발 5개년 계획","100쪽","경제개발5개년계획","제1차 5개년 계획|새마을 운동|산미 증식 계획"],
+["h4-006",4,"p","정책","정부 주도로 적극 추진된 산업화 방식은?","수출 주도형 산업화","100쪽","수출 주도형|수출 주도 산업화","수입 대체 산업화|내수 중심 산업화|농업 중심 개발"],
+["h4-007",4,"p","산업","1960년대 제1, 2차 경제 개발 계획 시기 외국 자본을 토대로 육성한 신발·의류·가발 산업의 성격은?","노동 집약적 산업","경공업 · 100쪽","노동집약적 산업|경공업","자본 집약적 산업|기술 집약적 산업|중화학 공업"],
+["h4-008",4,"p","기타","1960년대 경제가 빠르게 성장한 요인으로 세계 경제 호황과 함께 교과서가 든 것은?","베트남 파병에 따른 특수","100쪽","베트남 특수|베트남 전쟁 특수","중동 건설 붐|3저 호황|미국의 무상 원조 증가"],
+["h4-009",4,"p","기타","1960년대 경제 성장 기반을 다지려 확충한 사회 간접 자본의 대표 사례는?","경부 고속 국도","1970 완공 · 100쪽","경부고속국도|경부 고속도로","지하철 1호선|울산 정유 공장|포항 제철"],
+["h4-010",4,"p","수치","1인당 국민 소득은 1960년 91달러에서 1985년 얼마가 되었나?","3,512달러","1965 150 / 1970 325 / 1975 1,053 / 1980 1,973 · 100쪽","3512|3,512","1,973달러|1,053달러|325달러"],
+["h4-011",4,"p","수치","1인당 국민 소득이 처음 1,000달러를 넘은 해로 그래프에 나온 해는?","1975년","1,053달러 · 100쪽","1975","1970년|1980년|1965년"],
+["h4-012",4,"p","산업","1970년대 제3, 4차 경제 개발 계획 시기 정부가 적극 육성한 산업은?","중화학 공업","철강·화학·기계·조선 · 101쪽","중화학공업","경공업|삼백 산업|첨단 산업"],
+["h4-013",4,"p","지명","1970년대 대규모 중화학 공업 단지가 조성된 지역으로 교과서가 예시한 곳은?","포항, 울산 등 경상도 해안","101쪽","포항 울산|포항·울산","인천, 평택|광주, 목포|원주, 춘천"],
+["h4-014",4,"p","사건","1970년대 유가가 크게 올라 한때 어려움을 겪게 한 사건은?","제1차 석유 파동","1973 · 101쪽","1차 석유 파동|제1차 오일 쇼크","제2차 석유 파동|외환 위기|세계 금융 위기"],
+["h4-015",4,"p","기타","제1차 석유 파동의 위기를 극복하게 한 것은?","중동 건설 사업 참여로 번 '오일 머니'","101쪽","오일 머니|중동 건설","베트남 특수|3저 호황|미국 원조"],
+["h4-016",4,"p","기타","1970년대 말 공업 구조에서 나타난 변화는?","중화학 공업 비중이 경공업을 앞지름","101쪽","중화학 공업이 경공업을 앞섬","경공업 비중이 중화학 공업을 앞지름|농업이 공업을 앞지름|서비스업이 공업을 앞지름"],
+["h4-017",4,"p","기타","1970년대 말 경제 위기를 일으킨 두 원인은 제2차 석유 파동과 무엇인가?","중화학 공업에 대한 과잉 중복 투자","경제 성장률 마이너스 · 101쪽","과잉 중복 투자|중복 투자","미국 원조 감소|외환 보유고 고갈|저곡가 정책"],
+["h4-018",4,"p","기타","국내 최초로 제작된 26만 톤급 초대형 유조선(1974)은?","애틀랜틱 배런호","한국 조선 기술 홍보 · 101쪽","애틀랜틱배런호","금강호|천안함|경부호"],
+["h4-019",4,"p","정책","전두환 정부가 경제 위기 극복을 위해 한 일은?","중화학 공업 중복 투자 조정과 부실기업 정리","민간 부문 참여 확대 · 101쪽","부실기업 정리|중복 투자 조정","금융 실명제|새마을 운동|국제 통화 기금 구제 금융"],
+["h4-020",4,"p","개념","1980년대 후반 저달러·저유가·저금리로 한국 경제가 맞은 호황은?","3저 호황","101쪽","삼저 호황|3저호황","한강의 기적|오일 머니|베트남 특수"],
+["h4-021",4,"p","산업","3저 호황기에 성장을 이끈 자동차·반도체 등의 산업 성격은?","기술 집약적 산업","연평균 10% 넘는 성장률 · 101쪽","기술집약적 산업","노동 집약적 산업|자본 집약적 산업|삼백 산업"],
+["h4-022",4,"p","수치","3저 호황으로 무역 수지가 흑자로 전환한 해는?","1986년","101쪽 그래프","1986","1983년|1989년|1977년"],
+["h4-023",4,"p","수치","1980년대 수출 그래프에서 무역 수지 흑자가 가장 컸던 해는?","1988년","88.9억 달러 · 101쪽","1988","1986년|1987년|1990년"],
+["h4-024",4,"p","기타","'번영의 외길은 수출뿐이다'와 함께 한강의 기적 원동력으로 소개된 기업인 정신 '캔두이즘'의 뜻은?","할 수 있다 정신","101쪽 읽기","할 수 있다","오늘도 무사히|근면 자조 협동|잘살아 보세"],
+["h4-025",4,"p","기타","파독 광부들이 하루의 무사를 기원하며 한 인사 '글뤽 아우프'의 뜻은?","오늘도 무사히","101쪽 읽기","","할 수 있다|잘살아 보세|일어나라"],
+["h4-026",4,"p","기타","정부가 대규모 산업 시설을 집중 건설해 지역 간 격차를 낳은 지방은?","영남 지방","102쪽","영남","호남 지방|강원 지방|충청 지방"],
+["h4-027",4,"p","기타","정부의 특혜를 받은 일부 대기업이 성장한 형태는?","재벌","정경 유착, 경제 독점 · 102쪽","","중소기업|협동조합|공기업"],
+["h4-028",4,"p","기타","외국 자본 의존과 수출 중심 전략으로 심화된 한국 경제의 문제는?","외채 부담 증가와 대외 의존도 심화","102쪽","대외 의존도 심화|외채 증가","내수 시장 과열|무역 흑자 과다|농업 과잉 생산"],
+["h4-029",4,"p","수치","소득 상위 10% 집단의 소득 비중은 1960년 16.7%에서 1990년 몇 %가 되었나?","37.1%","1980 35.7% · 102쪽","37.1","26.3%|35.7%|28.7%"],
+["h4-030",4,"p","지명","1980년대 국가 주요 산업 단지가 축으로 삼아 몰린 지역은?","경부 고속 국도를 축으로 한 수도권과 영남","102쪽 지도","수도권과 영남","호남과 충청|강원과 영동|제주와 남해안"],
+["h4-031",4,"p","인물","'박정희 정권의 잘못된 경제 정책이 부익부 빈익빈, 정경 유착의 왜곡된 경제 구조를 낳았다'고 평가한 전직 대통령은?","김영삼","1999. 5. 17. · 102쪽 탐구","","김대중|노태우|전두환"],
+// 2 산업화에 따른 문제점과 해결 노력 (103~105쪽)
+["h4-032",4,"o","기타","철거 전 마지막 저녁 식사를 그린 소설 『난장이가 쏘아 올린 작은 공』의 작가는?","조세희","103쪽","","조정래|박완서|김원일"],
+["h4-033",4,"o","기타","도시 인구가 농촌 인구를 앞지른 시기는?","1970년대 중엽 이후","103쪽","1970년대 중엽|1970년대 중반","1960년대 초|1980년대 말|1950년대 후반"],
+["h4-034",4,"o","기타","도시 변두리나 높은 지대에 형성된 빈민촌을 부르는 말은?","판자촌, 달동네","103쪽","판자촌|달동네","토막촌|신도시|아파트 단지"],
+["h4-035",4,"o","사건","서울시가 판자촌 철거민을 집단 이주시켜 방치하자 1971년 8월 주민 5만여 명이 시위한 사건은?","광주 대단지 사건","103쪽","광주대단지사건|광주 대단지","함평 고구마 사건|YH 무역 사건|온산병 사태"],
+["h4-036",4,"o","수치","광주 대단지 사건으로 구속된 주민 수는?","23명","주민과 경찰 100여 명 부상 · 103쪽","23","100명|5만 명|8명"],
+["h4-037",4,"o","연도","서울 지하철 1호선이 개통된 해는?","1974","103쪽 사진","",""],
+["h4-038",4,"o","지명","한남 대교 건설, 경부 고속 국도 개통, 아파트 건설로 1970년대 이후 빠르게 도시화된 서울 지역은?","강남 지역","103쪽","강남","강북 지역|영등포|여의도"],
+["h4-039",4,"p","정책","정부가 저임금을 유지하려 쌀값을 낮게 책정한 정책은?","저곡가 정책","104쪽","저곡가","미곡 자유화 정책|혼분식 장려|산미 증식 계획"],
+["h4-040",4,"p","운동","'근면, 자조, 협동'을 구호로 1970년 정부가 추진한 농촌 운동은?","새마을 운동","104쪽","새마을운동","농촌 진흥 운동|천리마 운동|브나로드 운동"],
+["h4-041",4,"p","기타","새마을 운동이 받은 비판은?","국민정신 운동으로 변해 유신 체제 유지에 이용됨","농가 소득 크게 향상 못함 · 104쪽","유신 체제 유지에 이용|유신 체제에 이용","공업화를 방해함|도시 문제를 키움|북한과의 교류를 막음"],
+["h4-042",4,"p","사건","농협이 고구마 전량 수매 약속을 어기자 농민들이 3년간 투쟁해 피해를 보상받은 사건(1976~1978)은?","함평 고구마 사건","104쪽","함평 고구마|함평고구마사건","광주 대단지 사건|YH 무역 사건|암태도 소작 쟁의"],
+["h4-043",4,"p","운동","1980년대 농민 운동으로 교과서에 나온 것은?","외국 농산물 수입 개방 반대 운동","104쪽","수입 개방 반대 운동","새마을 운동|농지 개혁 운동|소작료 인하 운동"],
+["h4-044",4,"p","인물","근로 기준법 준수를 외치며 분신한 평화 시장 노동자는?","전태일","1970 · 104쪽","","박종철|이한열|김주열"],
+["h4-045",4,"p","인물","전태일의 영정 사진을 붙들고 오열한 어머니는?","이소선","104쪽 사진","","안성례|진영숙|이희호"],
+["h4-046",4,"p","기타","전태일 탄원서에 나온 평화 시장 보조공의 평균 연령은?","15세","104쪽 자료2","15","12세|18세|20세"],
+["h4-047",4,"p","수치","전태일 탄원서에 나온 평화 시장 보조공의 하루 작업 시간은?","15시간","하루 급료 90~100원 · 104쪽","15","8시간|12시간|18시간"],
+["h4-048",4,"p","수치","전태일 탄원서에서 평화 시장 2만여 명 중 보조공이 차지한 비율은?","40%","104쪽 자료2","40","15%|60%|25%"],
+["h4-049",4,"p","기타","전태일 분신 사건을 그린 책 『전태일 평전』의 저자는?","조영래","104쪽 자료1","","조세희|조정래|장준하"],
+["h4-050",4,"p","기타","1980년대 노동 운동이 사회적·정치적 투쟁으로 발전하는 데 참여한 사람들은?","해고 노동자와 대학생","104쪽","대학생|해고 노동자","농민과 어민|재벌과 관료|교사와 언론인"],
+["h4-051",4,"o","단체","1982년 탄생한 우리나라 최초의 민간 환경 운동 단체는?","한국 공해 문제 연구소","반공해 운동 · 105쪽","한국공해문제연구소","환경청|자연 보호 협의회|녹색 연합"],
+["h4-052",4,"o","사건","1985년 공론화되어 환경 오염을 사회 문제로 크게 주목받게 한 사태는?","온산병 사태","우리나라 최초의 공해병 · 105쪽","온산병","광주 대단지 사건|함평 고구마 사건|낙동강 페놀 사건"],
+["h4-053",4,"o","법령","정부가 1970년대 후반 환경 문제에 대응해 제정한 법은?","환경 보전법","105쪽","환경보전법","환경 정책 기본법|근로 기준법|도시 계획법"],
+["h4-054",4,"o","기구","1980년 설치된 환경 전담 기구는?","환경청","105쪽","","환경부|한국 공해 문제 연구소|국가 인권 위원회"],
+["h4-055",4,"o","기타","1980년 개정된 헌법에 처음 명시된 기본권은?","환경권","105쪽","","노동권|교육권|행복 추구권"],
+["h4-056",4,"o","운동","1977년 정부 주도로 추진되었으나 국민 개개인의 국토 청결 의무 강조에 머문 운동은?","자연 보호 범국민 운동","105쪽","자연보호 범국민 운동|자연 보호 운동","반공해 운동|새마을 운동|국민정신 총동원 운동"],
+["h4-057",4,"o","수치","1986년 서울의 초미세 먼지(PM2.5) 연평균 농도는?","109μg/m³","2017년 25μg/m³보다 4배 이상 · 105쪽","109","25μg/m³|50μg/m³|209μg/m³"],
+["h4-058",4,"o","지명","1974년 비철 금속 공업 기지로 지정된 뒤 주민들이 공해병을 앓은 울산의 지역은?","온산","울주군 · 105쪽","울주군 온산","여수|마산|포항"],
+["h4-059",4,"o","수치","1985년 온산에서 전신 마비 증상을 보인 주민 수는?","1,000여 명","105쪽","1000여 명|1,000명","100여 명|5,000여 명|500여 명"],
+["h4-060",4,"o","기타","한국 공해 문제 연구소가 온산 주민의 병이 비슷하다고 발표한 일본의 공해병은?","이타이이타이병","105쪽","이타이 이타이병","미나마타병|진폐증|석면증"],
+["h4-061",4,"o","기타","온산병 사태 후 정부가 결정한 조치는?","지역 주민의 집단 이주","105쪽","집단 이주","공장 폐쇄|공단 해체|주민 보상 거부"],
+["h4-062",4,"o","수치","온산병 사태 보도 기사에서 하천 아연 농도는 기준의 몇 배였나?","23배","105쪽 사진","23","10배|4배|100배"],
+// 3 산업화에 따른 문화 변동과 일상생활의 변화 (106~109쪽)
+["h4-063",4,"o","기타","텔레비전 보급으로 변하는 1970년대 시골 마을을 그린 소설 『마술의 손』의 작가는?","조정래","106쪽","","조세희|박완서|김원일"],
+["h4-064",4,"o","기타","아파트 같은 공동 주택이 늘면서 집 안에 설치된 것은?","수세식 화장실","서양식 부엌, 거실 중심 · 106쪽","수세식화장실","온돌|재래식 화장실|우물"],
+["h4-065",4,"o","수치","주요 가전제품 보급 그래프(1979~1989)에서 가구당 보급 대수가 가장 높은 것은?","냉장고","106쪽 (전력 통계 정보 시스템, 2013)","","세탁기|헤어드라이어|텔레비전"],
+["h4-066",4,"o","기타","섬유 산업이 발전하며 1960년대 후반 본격화된 의생활 변화는?","기성복 생산","106쪽","기성복","한복 착용 확대|맞춤복 유행|몸뻬 강요"],
+["h4-067",4,"o","기타","1980년대 스포츠 붐을 일으킨 두 요인은?","프로 스포츠 출범과 올림픽 유치","106쪽","프로 스포츠|올림픽 유치","월드컵 개최|아시안 게임 폐지|국민체조 보급"],
+["h4-068",4,"o","기타","아파트가 늘며 분리되어 있던 부엌이 집 안으로 들어와 불리게 된 이름은?","주방","106쪽 읽기","","정지|거실|안방"],
+["h4-069",4,"o","기타","1980년대 경제 호황과 함께 시작되어 패션에 대한 관심을 높인 방송은?","컬러텔레비전 방송","106쪽, 108쪽","컬러 텔레비전 방송|컬러TV 방송","라디오 방송|흑백 텔레비전 방송|위성 방송"],
+["h4-070",4,"o","기타","1980년대 패션 트렌드로 교과서에 나온 것은?","넓은 어깨 슈트, 디스코 바지, 원색·형광색","106쪽","디스코 바지|큰 사이즈 슈트","몸뻬와 국민복|통기타와 청바지|미니스커트 단속"],
+["h4-071",4,"o","정책","정부가 쌀 부족 문제를 해결하려 장려해 밀가루 음식 소비를 늘린 정책은?","혼식과 분식 장려","107쪽","혼분식 장려|혼식 분식 장려","저곡가 정책|미곡 자유화|새마을 운동"],
+["h4-072",4,"o","수치","1960년에서 1979년까지 중학생 수는 몇 배가 되었나?","2배","고등학생은 6배 · 107쪽","2","6배|3배|10배"],
+["h4-073",4,"o","수치","1960년에서 1979년까지 고등학생 수는 몇 배가 되었나?","6배","107쪽","6","2배|3배|10배"],
+["h4-074",4,"o","정책","박정희 정부가 1969년 입시 경쟁 완화를 위해 도입한 제도는?","중학교 무시험 추첨제","'뺑뺑이' · 107쪽","중학교 무시험 추첨|무시험 추첨제","고교 평준화|과외 전면 금지|대학 졸업 정원제"],
+["h4-075",4,"o","정책","박정희 정부가 1973년 대도시에 실시한 정책은?","고교 평준화","107쪽","고교평준화","중학교 무시험 추첨제|본고사 폐지|대학 졸업 정원제"],
+["h4-076",4,"o","정책","전두환 정부가 1981년 과외 전면 금지, 본고사 폐지와 함께 시행한 대학 제도는?","대학 졸업 정원제","107쪽","졸업 정원제","고교 평준화|중학교 무시험 추첨제|대학 입학 정원 동결"],
+["h4-077",4,"o","기타","각 학교 번호를 적은 구슬로 학생이 직접 추첨하는 중학교 진학 방식에서 생긴 신조어는?","뺑뺑이","107쪽","","평준화|추첨제|본고사"],
+["h4-078",4,"o","기타","'집 없이는 살아도 자동차 없이는 못 산다'는 풍조를 낳은 1980년대 현상은?","마이카 붐","107쪽 읽기","마이카 시대","3저 호황|스포츠 붐|삼겹살 붐"],
+["h4-079",4,"o","기타","자가용으로 근교에 떠나는 가벼운 여행을 일컫는 말로 1980년대 생긴 것은?","드라이브","107쪽","","피크닉|소풍|관광"],
+["h4-080",4,"o","기타","전문화된 양돈장에서 사료로 키운 돼지가 출하되며 서울을 중심으로 일어난 유행은?","삼겹살 붐","107쪽","삼겹살","치킨 붐|햄버거 붐|분식 붐"],
+["h4-081",4,"o","기타","1960년대 대중문화를 주도한 매체는?","라디오","1970년대 텔레비전, 1980년대 컬러텔레비전 · 108쪽","","텔레비전|컬러텔레비전|신문"],
+["h4-082",4,"o","기타","1970년대 청년 문화를 대변한 두 가지는?","통기타와 청바지","108쪽","통기타 청바지|통기타·청바지","장발과 미니스커트|넓은 어깨 슈트와 디스코 바지|교복과 두발"],
+["h4-083",4,"o","정책","1970~1980년대 정부가 창작의 자유를 억압한 방법은?","영화 사전 검열과 대중가요 금지곡 지정","108쪽","사전 검열|금지곡 지정","보도 지침|긴급 조치|야간 통행금지"],
+["h4-084",4,"o","기타","팝을 선보인 한명숙의 1961년 노래는?","「노오란 샤쓰의 사나이」","1960년대 미국식 팝과 트로트의 시대 · 108쪽","노오란 샤쓰의 사나이","「미인」|「사랑하기 때문에」|「거짓말이야」"],
+["h4-085",4,"o","기타","한국 록의 시초로 소개된 신중현과 엽전들의 1974년 노래는?","「미인」","1970년대 포크와 록의 시대 · 108쪽","미인","「노오란 샤쓰의 사나이」|「사랑하기 때문에」|「물 좀 주소」"],
+["h4-086",4,"o","기타","한국 발라드의 고전으로 소개된 유재하의 1987년 노래는?","「사랑하기 때문에」","1980년대 대중음악이 다양하게 꽃핀 시대 · 108쪽","사랑하기 때문에","「미인」|「노오란 샤쓰의 사나이」|「늙은 군인의 노래」"],
+["h4-087",4,"o","기타","1980년대 대중음악에서 삼파전 양상을 보인 세 장르는?","발라드, 트로트, 댄스 음악","108쪽","발라드 트로트 댄스","포크, 록, 팝|팝, 트로트, 민요|록, 발라드, 민중가요"],
+["h4-088",4,"o","기타","1980년대 후반 일반 대중 사이에서 주목받기 시작한 음악은?","민중가요","108쪽","","트로트|포크|팝"],
+["h4-089",4,"o","기타","1970년대 대중문화 소비자로 등장해 포크와 록 음악을 내세운 세대는?","청년 세대","전후 성장, 미국식 교육에 익숙 · 108쪽","청년|청년층","한글세대|기성세대|노년층"],
+["h4-090",4,"o","기타","김추자의 「거짓말이야」가 1975년 금지곡이 된 이유는?","사회에 불신 풍조를 조장한다는 이유","109쪽","불신 풍조 조장","군인의 사기 저하|물고문 연상|퇴폐 풍조"],
+["h4-091",4,"o","기타","김민기의 「늙은 군인의 노래」가 금지곡이 된 이유는?","군인의 사기를 저하시킨다는 이유","109쪽","군인 사기 저하","불신 풍조 조장|물고문 연상|반미 감정 조장"],
+["h4-092",4,"o","기타","한대수의 「물 좀 주소」가 금지곡이 된 이유는?","물고문을 연상시킨다는 이유","109쪽","물고문 연상","불신 풍조 조장|군인의 사기 저하|가사가 저속함"],
+["h4-093",4,"o","기타","1970년대 장발이나 짧은 치마를 단속하던 경찰에게 걸린 여성 중 일부가 받은 처벌은?","25일간 구류","109쪽","25일 구류","벌금 100원|훈방|삼청 교육대 입소"],
+["h4-094",4,"o","기타","매일 오후 6시(동절기 5시) 애국가가 나오면 길 가던 사람도 멈춰 국기에 경례하게 한 의식은?","국기 하기식","109쪽","국기하기식","국민의례|궁성 요배|애국 조회"],
+["h4-095",4,"o","정책","밤 12시부터 다음 날 새벽 4시까지 거리 통행을 금지한 제도는?","야간 통행금지","1982년 1월 해제 · 109쪽","야간통행금지|통행금지","긴급 조치|계엄령|위수령"],
+["h4-096",4,"o","날짜","야간 통행금지가 해제되어 24시간의 자유를 누리게 된 때는?","1982년 1월","109쪽","1982. 1.|1982년","1980년 5월|1987년 6월|1979년 10월"],
+["h4-097",4,"p","연도","제1차 경제 개발 5개년 계획이 시작된 해는?","1962","100쪽","",""],
+["h4-098",4,"p","연도","경부 고속 국도가 완공되고 전태일이 분신한 해는?","1970","100쪽, 104쪽","",""],
+["h4-099",4,"p","연도","제1차 석유 파동이 일어난 해는?","1973","100쪽","",""],
+["h4-100",4,"p","연도","제2차 석유 파동이 일어난 해는?","1978","100쪽 연표","",""],
+["h4-101",4,"o","연도","광주 대단지 사건이 일어난 해는?","1971","8월 · 103쪽","",""],
+["h4-102",4,"o","연도","한국 공해 문제 연구소가 탄생한 해는?","1982","105쪽","",""],
+["h4-103",4,"o","연도","환경청이 설치된 해는?","1980","105쪽","",""],
+["h4-104",4,"o","연도","고교 평준화가 실시된 해는?","1973","107쪽","",""]
+);
+SOURCES.push(
+["s4-01",4,"p","이 기사가 다룬 시기의 경제 상황은?","한국 경제는 지난 15년 동안 매년 대략 10% 성장을 이루었고, 수출액도 지난 3년 사이에 2배가 되었다. 자신감에 차 있는 한국 경제 관료들은 …… 수출 100억 달러 달성을 확신하고 있다.","1970년대 고도성장","1950년대 원조 경제|1980년대 말 3저 호황 종료|1997년 외환 위기","「한국인이 몰려온다」, 『뉴스위크』(1977. 6. 6.) · 100쪽"],
+["s4-02",4,"p","이 평가의 대상이 된 정책은?","박정희 전 대통령이 추진한 경제 개발 정책을 높이 평가하는 외국 학자들의 주장에 따르면 …… 경제가 일정 수준에 올라 중산층이 두터워져야 민주주의가 발전할 수 있다는 것이다.","성장 중심 경제 정책","새마을 운동|금융 실명제|농지 개혁","『주간조선』, 1999. 11. 4. · 102쪽"],
+["s4-03",4,"o","이 소설이 다룬 산업화의 문제는?","철거반원들이 우리의 시멘트 담을 쳐부수었다. 먼저 구멍이 뚫리더니 담은 내려앉았다. 먼지가 올랐다. …… 우리는 말없이 식사를 계속했다.","도시 빈민의 주거 문제","환경 오염|농촌 소외|노동 시간","조세희, 『난장이가 쏘아 올린 작은 공』 · 103쪽"],
+["s4-04",4,"p","이 회고가 보여 주는 문제를 고발하며 분신한 인물은?","먼지 속에 둘러싸여 하루를 보내노라면 눈에서 눈물이 나오고 코를 풀면 시커먼 콧물이 나온다. …… 잠 안 오는 약을 먹고 억지로 밤을 새워 일한 다음날에는 팔다리가 제대로 펴지지 않고 ……","전태일","박종철|이한열|김주열","조영래, 『전태일 평전』 · 104쪽"],
+["s4-05",4,"p","이 탄원서를 쓴 인물은?","2만여 명 중 40%를 차지하는 보조공들은 평균 연령 15세의 어린이들입니다. …… 하루에 90원 내지 100원의 급료를 받으며 1일 15시간씩 작업을 합니다.","전태일","조영래|이소선|장준하","「박정희 대통령에게 보낸 탄원서」(1969) · 104쪽"],
+["s4-06",4,"o","이 증언이 나온 환경 문제는?","이젠 5분 동안 같은 자세로 누울 수도 없고요. …… 막내딸도 작년부터 어깨가 아픈데 금년부터는 더 심해지고 있어요. …… 우리 애들만은 제발 좀 살려주이소.","온산병 사태","광주 대단지 사건|함평 고구마 사건|대기 오염","「최초의 반공해 투쟁 - 온산 주민 투쟁」, 2000. 3. 7. · 105쪽"],
+["s4-07",4,"o","이 소설이 보여 주는 1970년대 변화는?","텔레비전 바람은 좀처럼 잠잘 줄을 모른 채 더러 가정불화까지 일으키며 …… 감자나 옥수수 추렴을 하는 아낙네들의 마실도 씻은 듯이 없어졌다. 집집마다 텔레비전 앞에 매달려 있는 탓이었다.","텔레비전 보급","라디오 보급|컬러텔레비전 방송 시작|마이카 붐","조정래, 『마술의 손』 · 106쪽"]
+);
+EVENTS.push(
+["제1차 경제 개발 5개년 계획 시작",1962,0,4,100],["중학교 무시험 추첨제 도입",1969,0,4,107],["경부 고속 국도 완공",1970,0,4,100],["새마을 운동 시작",1970,0,4,104],
+["광주 대단지 사건",1971,8,4,103],["제1차 석유 파동",1973,0,4,100],["고교 평준화 실시",1973,0,4,107],["지하철 1호선 개통",1974,0,4,103],["수출 100억 달러 달성",1977,0,4,100],
+["제2차 석유 파동",1978,0,4,100],["환경청 설치",1980,0,4,105],["과외 전면 금지",1981,0,4,107],["야간 통행금지 해제",1982,1,4,109],["한국 공해 문제 연구소 탄생",1982,0,4,105],["무역 수지 흑자 전환",1986,0,4,101]
+);
+ESSAYS.push(
+["e4-01",4,"1960년대와 1970년대 경제 개발의 중심 산업을 비교하여 쓰시오.","1960년대 제1, 2차 경제 개발 5개년 계획 시기에는 외국 자본을 토대로 신발·의류·가발 등 노동 집약적 경공업을 육성하였다. 1970년대 제3, 4차 계획 시기에는 철강·화학·기계·조선 등 중화학 공업을 집중 육성하였다.","1960년대|제1|2차;노동 집약|경공업|신발|의류|가발;1970년대|3|4차;중화학|철강|조선","100~101쪽"],
+["e4-02",4,"고도성장 이면의 문제점을 세 가지 이상 쓰시오.","분배가 제대로 이루어지지 않아 저임금·열악한 작업 환경과 빈부 격차가 커졌다. 도시와 농촌, 영남과 다른 지역 간 격차가 생겼고, 재벌 중심 구조 속에 정경 유착과 경제 독점이 나타났다. 외채 부담과 경제의 대외 의존도도 심화되었다.","빈부 격차|분배|저임금;도시와 농촌|지역|영남;재벌|정경 유착|독점;외채|대외 의존","102쪽"],
+["e4-03",4,"새마을 운동의 성과와 한계를 쓰시오.","'근면, 자조, 협동'을 구호로 주택 개량, 도로 확충 등 농촌 생활 환경 개선에 성과를 거두었다. 그러나 농가 소득은 크게 향상되지 못했고 점차 국민정신 운동으로 변하며 유신 체제 유지에 이용되었다는 지적을 받았다.","근면|자조|협동;주택|도로|생활 환경;소득;국민정신|유신","104쪽"],
+["e4-04",4,"전태일 분신 사건이 노동 운동에 끼친 영향을 쓰시오.","평화 시장 노동자 전태일이 근로 기준법 준수를 외치며 분신한 사건은 노동 현실을 극명하게 보여 주었다. 이를 계기로 지식인과 대학생도 노동 문제에 관심을 가지면서 노동 운동이 본격화되었고, 노동조합 결성 움직임이 활발해졌다.","근로 기준법;노동 현실;지식인|대학생;본격화|노동조합","104쪽"],
+["e4-05",4,"온산병 사태가 환경 운동사에서 갖는 의미를 쓰시오.","1985년 온산 주민들이 이타이이타이병과 비슷한 공해병을 앓은 사태로, 주민과 환경 운동 단체가 결합하여 피해 보상과 집단 이주를 이끌어 냈다. 국민에게 환경 문제에 대한 경각심을 일깨워 우리나라 환경 운동사의 중요한 전환점이 되었다.","온산;이타이이타이|공해병;주민|환경 단체|한국 공해 문제 연구소;보상|이주;경각심|전환점","105쪽"],
+["e4-06",4,"박정희 정부가 일상생활과 문화를 통제하고 검열한 사례를 세 가지 이상 쓰시오.","장발과 미니스커트를 단속하였고, 대중가요를 금지곡으로 지정하였다. 매일 국기 하기식 때 국기에 경례하게 하였고, 야간 통행금지를 실시하였다. 영화도 사전 검열하였다.","장발|미니스커트;금지곡;하기식|국기;통행금지;검열|영화","108~109쪽"]
+);
+// ── Ⅲ-01 6월 민주 항쟁 이후 민주화 과정 (114~119쪽, 120~123쪽은 시험 범위 제외)
+CARDS.push(
+// 1 냉전의 해체와 국제 질서의 재편 (114~115쪽)
+["h5-001",5,"w","인물","1980년대 중반 시장 경제를 수용하는 개혁·개방 정책을 추진한 소련 지도자는?","고르바초프","114쪽","","부시|레닌|옐친"],
+["h5-002",5,"w","정책","고르바초프의 개혁 정책을 부르는 러시아어는?","페레스트로이카","개방은 글라스노스트 · 114쪽","","글라스노스트|닉슨 독트린|신자유주의"],
+["h5-003",5,"w","정책","고르바초프의 개방 정책을 부르는 러시아어는?","글라스노스트","개혁은 페레스트로이카 · 114쪽","","페레스트로이카|데탕트|코메콘"],
+["h5-004",5,"w","기구","소련 해체 후 출범한 국가 연합은?","독립 국가 연합","CIS · 114쪽","CIS|독립국가연합","유럽 연합|경제 상호 원조 회의|바르샤바 조약 기구"],
+["h5-005",5,"w","회의","1989년 미국 부시 대통령과 소련 고르바초프가 냉전 종식을 선언한 회담은?","몰타 회담","114쪽","몰타회담","제네바 회담|반둥 회의|얄타 회담"],
+["h5-006",5,"w","인물","몰타 회담에서 고르바초프와 만난 미국 대통령은?","부시","114쪽","조지 부시","닉슨|트루먼|레이건"],
+["h5-007",5,"w","세계사건","1991년 민족·종교 갈등으로 내전이 일어나 이듬해 연방이 해체된 나라는?","유고슬라비아","114쪽","","소련|체코슬로바키아|시리아"],
+["h5-008",5,"w","세계사건","2011년 시작되어 이슬람교 내 종파 갈등과 국제 이해관계가 얽혀 장기화된 내전은?","시리아 내전","114쪽","시리아","유고슬라비아 내전|이라크 전쟁|베트남 전쟁"],
+["h5-009",5,"w","기타","전쟁으로 생겨 국제 사회의 중요한 과제가 된 문제로 교과서가 든 것은?","난민 문제","114쪽","난민","인구 감소|외환 위기|식량 과잉"],
+["h5-010",5,"w","기타","유고슬라비아 해체 지도에 슬로베니아·크로아티아·보스니아 헤르체고비나·세르비아·몬테네그로와 함께 나온 나라는?","마케도니아","114쪽 지도","","알바니아|루마니아|불가리아"],
+["h5-011",5,"w","기구","서유럽 국가들이 1993년 결성해 정치적·경제적 통합을 이룬 기구는?","유럽 연합","EU, 공동 화폐 유로 · 115쪽","EU|유럽연합","북대서양 조약 기구|독립 국가 연합|세계 무역 기구"],
+["h5-012",5,"w","기타","유럽 연합의 공동 화폐는?","유로","115쪽","","달러|마르크|파운드"],
+["h5-013",5,"w","기타","냉전 해체 후 미국이 두 차례 전쟁을 벌인 나라는?","이라크","115쪽","","베트남|시리아|아프가니스탄"],
+["h5-014",5,"w","이념","미국 등 선진국이 시장 개방과 자본의 자유로운 이동을 강조하며 내세운 이념은?","신자유주의","115쪽","","실용주의|삼균주의|수정 자본주의"],
+["h5-015",5,"w","기구","1995년 출범한 세계 무역 질서 기구는?","세계 무역 기구","WTO · 115쪽","WTO|세계무역기구","유럽 연합|국제 통화 기금|아시아 태평양 경제 협력체"],
+["h5-016",5,"w","세계사건","신자유주의 경제 질서의 한계를 드러낸 2008년 사건은?","세계 금융 위기","미국발 · 115쪽, 118쪽","세계금융위기|미국발 금융 위기","외환 위기|석유 파동|9·11 테러"],
+["h5-017",5,"w","지명","1999년 WTO 반대 시위가 벌어진 미국 도시는?","시애틀","115쪽 사진","","뉴욕|워싱턴|시카고"],
+["h5-018",5,"w","선언","1992년 국제 사회가 발표한 환경과 개발에 관한 선언은?","리우 선언","115쪽","리우선언","교토 의정서|파리 기후 변화 협약|몰타 선언"],
+["h5-019",5,"w","조약","1997년 각국의 온실가스 배출량을 줄이기 위해 발표한 것은?","교토 의정서","115쪽","교토의정서","리우 선언|파리 기후 변화 협약|몬트리올 의정서"],
+["h5-020",5,"w","조약","195개국이 국제법 효력을 갖는 온실가스 감축 의무 이행을 합의한 2015년 협약은?","파리 기후 변화 협약","115쪽","파리 기후 협약|파리 협약","교토 의정서|리우 선언|몰타 협약"],
+["h5-021",5,"w","수치","파리 기후 변화 협약에 합의한 나라 수는?","195개국","115쪽","195","21개국|20개국|150개국"],
+["h5-022",5,"w","연도","베를린 장벽이 무너지고 몰타 회담이 열린 해는?","1989","114쪽","",""],
+["h5-023",5,"w","연도","독일이 통일된 해는?","1990","114쪽, 112쪽","",""],
+["h5-024",5,"w","연도","남북한이 유엔에 동시 가입하고 소련이 해체된 해는?","1991","112쪽, 134쪽","",""],
+["h5-025",5,"w","연도","한·중 수교가 이루어진 해는?","1992","112쪽, 114쪽","",""],
+["h5-026",5,"w","연도","유럽 연합(EU)이 출범한 해는?","1993","115쪽","",""],
+["h5-027",5,"w","연도","세계 무역 기구(WTO)가 출범한 해는?","1995","115쪽","",""],
+["h5-028",5,"w","연도","9·11 테러가 일어난 해는?","2001","112쪽, 115쪽","",""],
+["h5-029",5,"w","연도","이라크 전쟁이 일어난 해는?","2003","115쪽","",""],
+["h5-030",5,"w","연도","파리 기후 변화 협약이 채택된 해는?","2015","115쪽","",""],
+// 2 평화적 정권 교체 (116~119쪽)
+["h5-031",5,"r","기타","1987년 이전 선거인단에 의한 대통령 선거를 부정적으로 부른 말은?","체육관 선거","『동아일보』 1987. 12. 16. · 116쪽","체육관선거","관권 선거|금권 선거|3인조 공개 투표"],
+["h5-032",5,"r","개헌","6월 민주 항쟁의 결과 제정된 헌법의 대통령 선출 방식은?","5년 단임의 대통령 직선제","9차 개헌 · 116쪽, 147쪽","5년 단임 직선제|직선제 5년 단임","7년 단임 간선제|6년 간선제|4년 중임 직선제"],
+["h5-033",5,"r","인물","1987년 제13대 대통령 선거에서 당선된 여당 후보는?","노태우","30% 중반 득표 · 116쪽","","김영삼|김대중|김종필"],
+["h5-034",5,"r","기타","노태우가 낮은 득표율로 당선된 원인은?","야당의 분열","116쪽","야당 분열","여당의 분열|부정 선거|간선제"],
+["h5-035",5,"r","수치","제13대 대통령 선거에서 노태우(민주 정의당)의 득표율은?","36.6%","김영삼 28.0%, 김대중 27.0%, 김종필 8.1% · 116쪽","36.6","28.0%|27.0%|41.8%"],
+["h5-036",5,"r","단체","제13대 대통령 선거 때 김영삼의 정당은?","통일 민주당","116쪽 그래프","통일민주당","평화 민주당|신민주 공화당|민주 정의당"],
+["h5-037",5,"r","단체","제13대 대통령 선거 때 김대중의 정당은?","평화 민주당","116쪽 그래프","평화민주당|평민당","통일 민주당|신민주 공화당|민주 정의당"],
+["h5-038",5,"r","단체","제13대 대통령 선거 때 김종필의 정당은?","신민주 공화당","116쪽 그래프","신민주공화당","통일 민주당|평화 민주당|민주 공화당"],
+["h5-039",5,"r","단체","제13대 대통령 선거 때 노태우의 정당은?","민주 정의당","116쪽 그래프","민주정의당|민정당","민주 자유당|민주 공화당|통일 민주당"],
+["h5-040",5,"r","기타","제13대 대통령 선거 결과 지도에서 나타난 특징은?","지역 감정을 이용해 지역별로 편중된 투표 결과","116쪽 지도","지역별 편중 투표|지역 편중","도시와 농촌의 차이|세대별 차이|전국 고른 득표"],
+["h5-041",5,"r","개념","대통령이 속한 여당보다 야당 국회 의원 수가 더 많은 정국은?","여소 야대","1988 제13대 국회 · 116쪽","여소야대","여대 야소|3당 합당|단일 정당"],
+["h5-042",5,"r","수치","1988년 제13대 국회 의원 선거에서 민주 정의당의 의석은?","125석","41.8% · 116쪽","125","70석|59석|35석"],
+["h5-043",5,"r","기타","여소 야대 국회에서 개최된, 전두환 정부 비리와 5·18 진상 규명을 위한 것은?","청문회","116쪽","국회 청문회","특별 검사|국정 감사|국민 투표"],
+["h5-044",5,"r","단체","노태우 정부가 김영삼·김종필의 야당과 연합해 만든 정당(1990)은?","민주 자유당","3당 합당, 거대 보수 정당 · 116쪽","민주자유당|민자당","민주 정의당|통일 민주당|자유당"],
+["h5-045",5,"r","정책","노태우 정부가 소련·중국 등 공산권 국가와 외교 관계를 맺은 외교 정책은?","북방 외교","116쪽, 144쪽","북방외교","햇볕 정책|실용주의 외교|비동맹 외교"],
+["h5-046",5,"r","인물","1992년 대통령 선거에서 당선된 민간인 출신 대통령은?","김영삼","117쪽","","김대중|노태우|이회창"],
+["h5-047",5,"r","정책","부정한 자금 거래를 막으려 금융 거래에 실제 이름 사용을 의무화한 김영삼 정부의 제도는?","금융 실명제","1993 · 117쪽","금융실명제","부동산 실명제|지방 자치제|공무원 공개 채용 제도"],
+["h5-048",5,"r","정책","김영삼 정부가 지방 자치법을 개정해 34년 만에 전면 실시한 제도는?","지방 자치제","1995 · 117쪽","지방자치제","금융 실명제|대통령 직선제|내각 책임제"],
+["h5-049",5,"r","수치","김영삼 정부가 지방 자치제를 전면 실시한 것은 몇 년 만인가?","34년","117쪽","34","26년|30년|40년"],
+["h5-050",5,"r","기타","1995년 6월 우리나라 선거 사상 처음으로 동시에 실시된 지방 선거의 수는?","4개","시·도지사 선거 등 · 117쪽 사진","4개 지방 선거|4","2개|3개|5개"],
+["h5-051",5,"r","정책","김영삼 정부가 잘못된 과거사를 청산하려 추진한 개혁의 이름은?","역사 바로 세우기","117쪽","역사바로세우기","과거사 정리|민족 정기 회복|국민 화합"],
+["h5-052",5,"r","단체","김영삼 정부가 군 인사에서 몰아낸 군부 내 불법 사조직은?","하나회","117쪽 읽기","","보안사령부|국가 보위 비상 대책 위원회|삼청 교육대"],
+["h5-053",5,"r","기타","김영삼 정부가 철거해 경복궁의 옛 경관을 되찾은 건물은?","옛 조선 총독부 건물","중앙청·국립 중앙 박물관으로 사용 · 117쪽","조선 총독부 건물|중앙청","경무대|서대문 형무소|남영동 대공분실"],
+["h5-054",5,"r","기타","해체된 옛 조선 총독부 건물의 첨탑이 옮겨진 곳은?","독립 기념관","117쪽 사진","","국립 중앙 박물관|경복궁|서대문 형무소 역사관"],
+["h5-055",5,"r","기타","김영삼 정부가 '황국 신민의 학교'에서 유래한 명칭을 바꾼 결과는?","국민학교 → 초등학교","117쪽","초등학교","소학교 → 국민학교|보통학교 → 국민학교|국민학교 → 소학교"],
+["h5-056",5,"r","인물","정부 수립 이후 최초로 선거를 통한 평화적 여야 정권 교체를 이룬 대통령은?","김대중","1997 당선 · 117쪽","","김영삼|노무현|이명박"],
+["h5-057",5,"r","기구","외환 위기 때 한국이 관리 체제에 들어갔다 빠르게 벗어난 국제기구는?","국제 통화 기금","IMF · 117쪽","IMF|국제통화기금","세계 무역 기구|세계은행|유럽 연합"],
+["h5-058",5,"r","기구","김대중 정부 시기 인권과 소수자 권익 보호를 위해 설치된 기관 두 가지는?","국가 인권 위원회와 의문사 진상 규명 위원회","117쪽","국가 인권 위원회|의문사 진상 규명 위원회","반민 특위와 중앙정보부|환경청과 국가 정보원|국가 재건 최고 회의와 국보위"],
+["h5-059",5,"r","기구","독재 정권에 저항하다 희생된 것으로 추정되는 의문사의 진상을 밝히려 2000년대 초반 한시적으로 조직된 기관은?","의문사 진상 규명 위원회","117쪽","의문사진상규명위원회","국가 인권 위원회|반민족 행위 특별 조사 위원회|과거사 정리 위원회"],
+["h5-060",5,"r","기타","제1차 남북 정상 회담을 성사시킨 노력을 인정받아 김대중 대통령이 받은 상은?","노벨 평화상","117쪽","노벨평화상","막사이사이상|유네스코 평화상|노벨 문학상"],
+["h5-061",5,"r","인물","2002년 대통령 선거에서 권위주의 청산을 내세워 당선된 여당 후보는?","노무현","118쪽","","이명박|김대중|이회창"],
+["h5-062",5,"r","법령","노무현 정부가 과거사 청산을 위해 제정한 법은?","친일 반민족 행위 진상 규명 특별법","118쪽","친일 반민족 행위 진상 규명법","반민족 행위 처벌법|5·18 민주화 운동 등에 관한 특별법|국가 보안법"],
+["h5-063",5,"r","지명","노무현 정부가 행정 수도 이전 계획이 좌절되자 대신 건설한 행정 중심 복합 도시는?","세종시","118쪽","세종특별자치시|세종","대전|과천|오송"],
+["h5-064",5,"r","조약","노무현 정부가 미국과 체결하는 과정에서 국민의 반발을 산 협정은?","자유 무역 협정","FTA · 118쪽","FTA|한미 자유 무역 협정|한미 FTA","한일 협정|한미 상호 방위 조약|브라운 각서"],
+["h5-065",5,"r","기타","노무현 정부가 미국 요청으로 파병해 반발을 산 전쟁은?","이라크 전쟁","2003 · 118쪽","","베트남 전쟁|걸프 전쟁|시리아 내전"],
+["h5-066",5,"r","기타","2006년 노무현 대통령이 희생자 위령제에서 묵념한 사건은?","제주 4·3 사건","118쪽 사진","제주 4.3 사건","여수·순천 10·19 사건|5·18 민주화 운동|거창 양민 학살 사건"],
+["h5-067",5,"r","인물","2007년 대통령 선거에서 당선되어 10년 만에 여야 정권 교체를 이룬 야당 후보는?","이명박","118쪽","","노무현|박근혜|정동영"],
+["h5-068",5,"r","이념","'작은 정부'를 표방한 이명박 정부의 국정 기조는?","실용주의","시장 원리, 규제 철폐, 공기업 민영화 · 118쪽","","신자유주의|권위주의 청산|창조 경제"],
+["h5-069",5,"r","기타","이명박 정부 시기 시민들의 거센 반발을 받은 한미 협상은?","쇠고기 수입 협상","118쪽","한미 쇠고기 수입 협상","자유 무역 협정|방위비 분담 협상|북핵 협상"],
+["h5-070",5,"r","정책","생태계 파괴를 우려한 시민·환경 단체의 반대에도 이명박 정부가 추진한 사업은?","4대강 정비 사업","118쪽","4대강 사업|4대강 정비","새만금 사업|경부 운하|세종시 건설"],
+["h5-071",5,"r","기구","2005년 노무현 정부가 부산에서 개최한 경제 지도자 회의의 기구는?","APEC","아시아 태평양 경제 협력체, 21개국 · 118쪽","아시아 태평양 경제 협력체|에이펙","G20|WTO|아세안+3"],
+["h5-072",5,"r","회의","2010년 이명박 정부가 아시아 최초로 서울에서 개최한 정상 회의는?","G20 정상 회의","20개 선진국 · 118쪽","G20|서울 G20 정상 회의","APEC 경제 지도자 회의|동아시아 정상 회의|6자 회담"],
+["h5-073",5,"r","수치","부산 APEC 경제 지도자 회의에 참가한 나라 수는?","21개국","118쪽","21","20개국|16개국|195개국"],
+["h5-074",5,"r","인물","2012년 대통령 선거에서 당선된 여당 후보는?","박근혜","119쪽","","문재인|이명박|윤석열"],
+["h5-075",5,"r","정책","박근혜 정부가 집권 초기 국민 행복, 화합과 함께 강조한 경제 정책은?","창조 경제","119쪽","창조경제","소득 주도 성장|실용주의|작은 정부"],
+["h5-076",5,"r","기타","박근혜 정부가 국민의 반발을 산 문제로 교과서에 나온 것은?","세월호 사건 부실 대응, 역사 교과서 국정화 추진","119쪽","세월호 부실 대응|역사 교과서 국정화","4대강 정비 사업|쇠고기 수입 협상|이라크 파병"],
+["h5-077",5,"w","기타","박근혜 정부가 도입해 중국과 갈등을 빚은 미국의 미사일 방어 체계는?","고고도 미사일 방어 체계","THAAD · 119쪽","THAAD|사드","패트리엇|이지스|SM-3"],
+["h5-078",5,"r","수치","박근혜 대통령 탄핵 심판에서 인용한 헌법재판관 수는?","8명 중 8명","기각 0 · 119쪽","8명|8","8명 중 6명|9명 중 7명|9명 중 9명"],
+["h5-079",5,"r","연도","박근혜 대통령이 대통령직에서 파면된 해는?","2017","헌정 사상 최초 파면 · 119쪽, 144쪽","",""],
+["h5-080",5,"r","인물","2017년 제19대 대통령 선거에서 당선된 야당 후보는?","문재인","119쪽","","윤석열|박근혜|홍준표"],
+["h5-081",5,"r","정책","문재인 정부가 복지 정책 강화를 기반으로 내세운 성장 정책은?","소득 주도 성장","119쪽","소득주도성장","창조 경제|실용주의|수출 주도 성장"],
+["h5-082",5,"r","정책","문재인 정부가 내세운 에너지 정책은?","탈원전과 신재생 에너지 중심의 에너지 전환","119쪽","에너지 전환|탈원전","원전 확대|4대강 정비|석탄 발전 확대"],
+["h5-083",5,"r","기타","코로나바이러스감염증 팬데믹 상황에서 주목받은 한국의 대응을 부르는 말은?","K-방역","119쪽","K방역","K-팝|K-문화|K-의료"],
+["h5-084",5,"r","인물","2022년 제20대 대통령 선거에서 당선된 야당 후보는?","윤석열","119쪽","","문재인|이재명|박근혜"],
+["h5-085",5,"r","기타","윤석열 정부가 제시한 국정 비전은?","다시 대한민국! 새로운 국민의 나라","119쪽","다시 대한민국|새로운 국민의 나라","나라다운 나라|국민 행복 시대|창조 경제"],
+["h5-086",5,"r","기타","1987년 개정된 헌법의 특징으로 교과서가 든 것은?","헌정 사상 가장 오랫동안 시행되고 있음","119쪽 읽기","가장 오래 시행된 헌법","최초의 직선제 헌법|최초의 내각제 헌법|가장 많이 개정된 헌법"],
+["h5-087",5,"r","수치","선거 민주주의 지수 그래프에서 대한민국의 1979년 지수는?","0.214","1987 0.389, 1997 0.755, 2008 0.772, 2015 0.720 · 119쪽","0.214","0.389|0.288|0.755"],
+["h5-088",5,"r","수치","선거 민주주의 지수 그래프에서 대한민국의 1997년 지수는?","0.755","119쪽","0.755","0.389|0.772|0.486"],
+["h5-089",5,"w","기타","선거 민주주의 지수 그래프에서 대한민국과 비교된 나라는?","덴마크","세계 평균도 함께 · 119쪽","","스웨덴|미국|일본"],
+["h5-090",5,"r","연도","금융 실명제가 시행된 해는?","1993","112쪽","",""],
+["h5-091",5,"r","연도","지방 자치제가 전면 시행된 해는?","1995","112쪽, 117쪽","",""],
+["h5-092",5,"r","연도","외환 위기가 일어난 해는?","1997","112쪽","",""],
+["h5-093",5,"r","연도","부산 APEC 경제 지도자 회의가 열린 해는?","2005","118쪽","",""],
+["h5-094",5,"r","연도","서울 G20 정상 회의가 열린 해는?","2010","118쪽","",""],
+["h5-095",5,"r","연도","3당 합당으로 민주 자유당이 창당된 해는?","1990","116쪽","",""],
+["h5-096",5,"r","연도","평창 동계 올림픽이 열린 해는?","2018","112쪽","",""]
+);
+SOURCES.push(
+["s5-01",5,"w","이 선언이 나온 회담은?","우리는 지속 가능한 평화를 현실로 만들고 동서 갈등을 화합으로 바꿀 수 있습니다. / 무력을 통한 위협, 이념적 투쟁은 이제 모두 과거의 것입니다. 미국을 적으로 여기지 않겠다고 약속합니다.","몰타 회담","반둥 회의|제네바 회담|파리 기후 변화 협약","몰타 회담에서 만난 미·소 정상(1989) · 114쪽"],
+["s5-02",5,"r","이 유권자가 투표한 선거는?","과거 선거인단에 의한 '체육관 선거' 때의 무력감에서 벗어나 스스로 한 표를 행사하는 것 자체에 감동까지 느껴진다.","제13대 대통령 선거","5·10 총선거|제3대 대통령 선거|제7대 대통령 선거","『동아일보』, 1987. 12. 16. · 116쪽"]
+);
+EVENTS.push(
+["베를린 장벽 붕괴, 몰타 회담",1989,0,5,114],["독일 통일",1990,0,5,114],["민주 자유당 창당(3당 합당)",1990,0,5,116],["유고슬라비아 내전 발발",1991,0,5,114],["한·중 수교",1992,0,5,114],
+["유럽 연합 출범",1993,0,5,115],["금융 실명제 시행",1993,0,5,112],["세계 무역 기구 출범",1995,0,5,115],["지방 선거 동시 실시(지방 자치제 전면 시행)",1995,6,5,117],["외환 위기",1997,0,5,112],
+["9·11 테러",2001,0,5,115],["이라크 전쟁",2003,0,5,115],["부산 APEC 경제 지도자 회의",2005,0,5,118],["세계 금융 위기",2008,0,5,115],["서울 G20 정상 회의",2010,0,5,118],
+["파리 기후 변화 협약 채택",2015,0,5,115],["박근혜 대통령 파면",2017,0,5,119],["평창 동계 올림픽 개최",2018,0,5,112],["윤석열 대통령 당선",2022,0,5,119],
+["제13대 대통령 선거",1987,12,5,116]
+);
+ESSAYS.push(
+["e5-01",5,"냉전 체제가 해체된 과정을 쓰시오.","1980년대 중반 소련의 고르바초프가 개혁(페레스트로이카)·개방(글라스노스트) 정책을 추진하였다. 동유럽 공산 정권이 붕괴되고 베를린 장벽이 무너진 뒤 독일이 통일되었으며, 1989년 몰타 회담에서 미·소 정상이 냉전 종식을 선언하였고 소련도 해체되었다.","고르바초프;페레스트로이카|글라스노스트|개혁|개방;동유럽|베를린 장벽|독일 통일;몰타;소련 해체","114쪽"],
+["e5-02",5,"노태우 정부 시기 여소 야대 정국이 형성되고 바뀐 과정을 쓰시오.","야당 분열로 노태우가 낮은 득표율로 당선되었으나 1988년 총선에서 야당과 무소속이 과반을 차지해 여소 야대 정국이 되었고, 국회는 전두환 정부 비리와 5·18 진상 규명 청문회를 열었다. 노태우 정부는 김영삼·김종필의 야당과 3당 합당으로 민주 자유당을 만들어 거대 보수 정당을 출현시켰다.","야당 분열|낮은 득표;여소 야대;청문회;3당 합당|민주 자유당|김영삼|김종필","116쪽"],
+["e5-03",5,"김영삼 정부의 주요 개혁을 세 가지 이상 쓰시오.","금융 실명제를 전격 실시하였고, 지방 자치법을 개정해 34년 만에 지방 자치제를 전면 실시하였다. '역사 바로 세우기'로 하나회를 몰아내고 전두환·노태우를 구속하였으며, 옛 조선 총독부 건물을 철거하고 국민학교를 초등학교로 바꾸었다.","금융 실명제;지방 자치|34년;역사 바로 세우기|하나회|전두환|노태우;조선 총독부|초등학교","117쪽"],
+["e5-04",5,"김대중 정부 출범의 역사적 의미와 주요 성과를 쓰시오.","정부 수립 이후 최초로 선거를 통한 평화적 여야 정권 교체를 이루었다. 강도 높은 구조 조정으로 외환 위기를 극복해 IMF 관리 체제에서 벗어났고, 국가 인권 위원회와 의문사 진상 규명 위원회를 설치했으며, 제1차 남북 정상 회담을 성사시켜 노벨 평화상을 받았다.","최초|평화적 정권 교체;외환 위기|IMF|구조 조정;국가 인권 위원회|의문사;남북 정상 회담|노벨","117쪽"],
+["e5-05",5,"1987년 이후 한국 사회의 성장과 남은 과제를 쓰시오.","1987년 개정 헌법이 헌정 사상 가장 오래 시행되는 가운데 언론 자유 등 기본권이 강화되고 정부를 견제할 장치가 만들어져 권위주의 체제에서 벗어나 선진국에 들어섰다. 그러나 보수와 진보의 극한 갈등, 지역주의 등 극복할 문제가 남아 다양한 목소리를 담을 새 제도와 질서가 필요하다는 주장이 힘을 얻고 있다.","1987|헌법;기본권|언론;선진국|권위주의;갈등|보수|진보|지역주의","119쪽"]
+);
+// ── Ⅲ-03 한반도 분단 극복과 동아시아 평화를 위한 노력 (134~143쪽, 132~133쪽은 시험 범위 제외)
+CARDS.push(
+// 2 한반도 평화와 통일을 위한 노력 (134~137쪽)
+["h6-001",6,"g","기타","2000년 6월 13일 평양에서 처음 만난 남북 정상은 김대중 대통령과 누구인가?","김정일 국방 위원장","134쪽","김정일","김일성|김정은|김영남"],
+["h6-002",6,"g","기타","5·16 군사 정변으로 집권한 군부 세력이 국시로 내걸며 민간 통일 운동을 탄압한 이념은?","반공","134쪽","반공주의","북진 통일|평화 통일|중립화 통일"],
+["h6-003",6,"g","정책","박정희 정부가 강경한 대북 정책을 펴며 내세운 구호는?","선 건설, 후 통일","134쪽","선건설 후통일|선 건설 후 통일","북진 통일|햇볕 정책|평화 통일"],
+["h6-004",6,"g","기타","박정희 정부 시기 북한이 주장한 통일 방식은?","적화 통일","특수 부대 남파 등 군사 도발 · 134쪽","적화통일","북진 통일|연방제 통일|흡수 통일"],
+["h6-005",6,"g","사건","1968년 1월 북한이 청와대 습격과 요인 암살을 목적으로 김신조 등 특수 부대원을 남한에 침투시킨 사건은?","1·21 사태","134쪽","1.21 사태|121 사태|1·21 사건","천안함 침몰 사건|연평도 포격 사건|동백림 사건"],
+["h6-006",6,"g","수치","1·21 사태 때 남한에 침투한 북한 특수 부대원 수는?","31명","자하문으로 잠입 · 134쪽","31","194명|8명|21명"],
+["h6-007",6,"g","인물","1·21 사태 때 남한에 침투한 북한 특수 부대원으로 교과서에 이름이 나온 사람은?","김신조","134쪽","","김재규|김정일|김일성"],
+["h6-008",6,"g","회의","7·4 남북 공동 성명이 나오는 계기가 된 남북 대화는?","남북 적십자 회담","134쪽","남북적십자회담","남북 고위급 회담|6자 회담|남북 정상 회담"],
+["h6-009",6,"g","기타","7·4 남북 공동 성명에서 최초로 합의한 통일 3대 원칙은?","자주·평화·민족적 대단결","134쪽","자주 평화 민족적 대단결|자주, 평화, 민족 대단결","자주·평화·민주|화해·불가침·교류|상호 체제 인정·불가침·교류"],
+["h6-010",6,"g","기타","7·4 남북 공동 성명 이후 통일 추진을 명분으로 남북한이 각각 제정한 헌법은?","유신 헌법과 사회주의 헌법","독재 강화 · 134쪽","유신 헌법·사회주의 헌법","제헌 헌법과 사회주의 헌법|유신 헌법과 인민 헌법|9차 개헌 헌법과 사회주의 헌법"],
+["h6-011",6,"g","기타","북한이 1972년 사회주의 헌법을 제정해 국가 통치 이념으로 공식화한 사상은?","주체사상","140쪽 스스로 확인하기","주체 사상","천리마 사상|선군 사상|마르크스주의"],
+["h6-012",6,"g","기타","전두환 정부 시기 남한에 수해가 나자 북한이 원조 물자를 제공한 뒤 이루어진 일(1985)은?","남북 이산가족 고향 방문 및 예술 공연단 교환 방문","일회성 행사 · 134쪽","이산가족 고향 방문|예술 공연단 교환 방문","금강산 관광|개성 공단 조성|남북 정상 회담"],
+["h6-013",6,"g","회의","노태우 정부가 남북 대화에 적극 나선 회담은?","남북 고위급 회담","134쪽","남북고위급회담","남북 적십자 회담|남북 정상 회담|6자 회담"],
+["h6-014",6,"g","선언","1991년 채택된 남북한 정부 간 최초의 공식 합의로 상호 체제 인정과 불가침에 합의한 것은?","남북 기본 합의서","134쪽","남북기본합의서","7·4 남북 공동 성명|6·15 남북 공동 선언|판문점 선언"],
+["h6-015",6,"g","기타","남북 기본 합의서에서 남북 관계를 '나라와 나라 사이가 아닌' 무엇으로 규정했나?","통일을 지향하는 과정에서 잠정적으로 형성되는 특수 관계","135쪽 자료2","특수 관계","국가 대 국가 관계|연방 관계|동맹 관계"],
+["h6-016",6,"g","기타","남북 기본 합의서와 같은 해(1991) 남북한이 함께 한 일은?","유엔 동시 가입","134쪽","유엔에 동시 가입","올림픽 공동 입장|정상 회담|개성 공단 조성"],
+["h6-017",6,"g","기타","김영삼 정부 시기 한반도 긴장을 고조시킨 북한 문제는?","핵 개발 의혹","134쪽","북한 핵 개발 의혹|핵 개발","미사일 발사|천안함 침몰|연평도 포격"],
+["h6-018",6,"g","기타","김영삼 정부가 추진한 남북 정상 회담이 무산된 이유는?","김일성의 갑작스러운 사망","134쪽","김일성 사망","북한의 핵 실험|이산가족 문제|미국의 반대"],
+["h6-019",6,"g","정책","남북 관계에 전환점을 가져온 김대중 정부의 대북 화해 협력 정책의 다른 이름은?","햇볕 정책","135쪽","햇볕정책","북방 외교|선 건설, 후 통일|대북 강경 정책"],
+["h6-020",6,"g","인물","1998년 소 떼를 몰고 판문점을 통해 북한을 방문한 기업가는?","정주영","135쪽","","정몽헌|이병철|김우중"],
+["h6-021",6,"g","수치","정주영이 1998년 판문점을 통해 북한에 몰고 간 소의 수는?","1,001마리","135쪽 사진","1001마리|1,001","500마리|1,000마리|501마리"],
+["h6-022",6,"g","기타","김대중 정부 시기 정주영의 소 떼 방북과 함께 시작된 남북 협력 사업은?","금강산 관광 사업","135쪽","금강산 관광","개성 공단|경의선 연결|이산가족 상봉"],
+["h6-023",6,"g","선언","분단 이후 처음 열린 남북 정상 회담(2000)에서 발표된 것은?","6·15 남북 공동 선언","135쪽","6.15 남북 공동 선언|615 남북 공동 선언|6·15 공동 선언","7·4 남북 공동 성명|남북 기본 합의서|10·4 남북 공동 선언"],
+["h6-024",6,"g","기타","6·15 남북 공동 선언에서 서로 공통성이 있다고 인정한 남북의 통일 방안은?","남측의 연합제 안과 북측의 낮은 단계의 연방제 안","135쪽 자료3","연합제 안과 낮은 단계의 연방제 안|연합제와 낮은 단계 연방제","남측의 연방제 안과 북측의 연합제 안|남측의 흡수 통일안과 북측의 적화 통일안|남측의 중립화 안과 북측의 연방제 안"],
+["h6-025",6,"g","기타","6·15 남북 공동 선언에서 해결하기로 한 인도적 문제로 이산가족 방문단 교환과 함께 나온 것은?","비전향 장기수 문제","135쪽 자료3","비전향 장기수","국군 포로 문제|납북자 문제|탈북민 문제"],
+["h6-026",6,"g","사건","김대중 정부 시기 남북 관계를 위기에 빠뜨린 북한의 군사적 도발 장소는?","연평도 인근 해역","135쪽","연평도","백령도 인근|판문점|금강산"],
+["h6-027",6,"g","정책","노무현 정부가 대북 화해 협력 정책을 계승하며 조성한 남북 경제 협력 단지는?","개성 공단","135~136쪽","개성공단","금강산 관광 지구|서해 평화 협력 특별 지대|나진·선봉"],
+["h6-028",6,"g","기타","노무현 정부가 교류 확대를 위해 연결한 철도는?","경의선과 동해선","136쪽","경의선 동해선|경의선·동해선","경부선과 호남선|경원선과 중앙선|경춘선과 영동선"],
+["h6-029",6,"g","선언","2007년 평양 남북 정상 회담에서 채택해 6·15 공동 선언 실천 방안을 담은 선언은?","남북 관계 발전과 평화 번영을 위한 선언","10·4 선언 · 136쪽","10·4 선언|10·4 남북 정상 선언|남북관계 발전과 평화 번영을 위한 선언","판문점 선언|6·15 남북 공동 선언|남북 기본 합의서"],
+["h6-030",6,"g","회의","노무현 정부가 북핵 문제로 고조된 긴장을 해소하려 연 다자 회담은?","6자 회담","136쪽","6자회담|육자 회담","남북 고위급 회담|북미 정상 회담|아세안+3"],
+["h6-031",6,"g","기타","2007년 10·4 선언에서 설치하기로 한, 해주 직항로·한강 하구 공동 이용을 포함한 지대는?","서해 평화 협력 특별 지대","136쪽 사료","서해평화협력특별지대","비무장 지대|개성 공단|금강산 관광 지구"],
+["h6-032",6,"g","기타","10·4 선언에서 현 정전 체제를 종식하고 항구적 평화 체제를 구축하려 추진하기로 한 것은?","종전 선언","136쪽 사료","종전선언","평화 협정|불가침 조약|비핵화 선언"],
+["h6-033",6,"g","정책","북한의 핵 실험과 미사일 발사가 계속되자 이명박 정부가 편 정책과 그 결과 중단된 사업은?","대북 강경 정책, 금강산 관광 중단","136쪽","금강산 관광 중단|대북 강경 정책","햇볕 정책, 개성 공단 확대|대북 강경 정책, 개성 공단 확대|햇볕 정책, 금강산 관광 시작"],
+["h6-034",6,"g","사건","이명박 정부 시기 연평도 포격 사건과 함께 남북 관계를 악화시킨 북한의 도발은?","천안함 침몰 사건","136쪽","천안함 사건|천안함 피격","1·21 사태|연평도 포격 사건|강릉 잠수함 침투"],
+["h6-035",6,"g","연도","연평도 포격 도발이 일어난 해는?","2010","136쪽 사진","",""],
+["h6-036",6,"g","기타","박근혜 정부 시기 남북 관계 경색 속에 결국 중단된 사업은?","개성 공단 사업","136쪽","개성 공단","금강산 관광|이산가족 상봉|경의선 운행"],
+["h6-037",6,"g","기타","문재인 정부 출범 후 북한이 선수단을 파견한 대회는?","2018 평창 동계 올림픽","136쪽","평창 동계 올림픽|평창 올림픽","시드니 올림픽|부산 아시안 게임|서울 올림픽"],
+["h6-038",6,"g","선언","2018년 남북 정상 회담에서 발표된 선언은?","한반도의 평화와 번영, 통일을 위한 판문점 선언","136쪽","판문점 선언|4·27 판문점 선언","10·4 선언|6·15 남북 공동 선언|7·4 남북 공동 성명"],
+["h6-039",6,"g","날짜","판문점 선언이 발표된 날은?","2018년 4월 27일","136쪽 사료","2018. 4. 27.|4월 27일","2000년 6월 15일|2007년 10월 4일|1972년 7월 4일"],
+["h6-040",6,"g","기타","판문점 선언에서 1차적으로 연결·활용하기로 한 것은?","동해선 및 경의선 철도와 도로","136쪽 사료","동해선·경의선 철도와 도로|경의선 동해선","경부선과 호남선|개성 공단 도로|금강산 관광 도로"],
+["h6-041",6,"g","기타","판문점 선언에서 평화 체제 구축을 위해 추진하기로 한 회담은?","남·북·미 또는 남·북·미·중 회담","136쪽 사료","남북미 또는 남북미중 회담","6자 회담|남·북·일 회담|남·북·러 회담"],
+["h6-042",6,"g","기타","판문점 선언에서 재확인한 공동의 목표는?","완전한 비핵화를 통한 핵 없는 한반도","136쪽 사료","완전한 비핵화|핵 없는 한반도","연방제 통일|주한 미군 철수|흡수 통일"],
+["h6-043",6,"g","지명","문재인 대통령과 김정은 국무 위원장이 처음 만나 악수한 장소는?","판문점 군사 분계선","2018 · 136쪽 사진","판문점","평양 순안 공항|개성|싱가포르"],
+["h6-044",6,"w","지명","북미 정상이 한반도 비핵화와 대북 제재 해제 문제로 연이어 회담을 연 두 도시는?","싱가포르와 하노이","136쪽","싱가포르 하노이|싱가포르·하노이","판문점과 평양|베이징과 모스크바|제네바와 몰타"],
+["h6-045",6,"g","기타","남북 교류를 다룬 주제 탐구에서 1998년 금강산 관광객을 싣고 동해항을 출발한 배는?","금강호","137쪽 사진","","애틀랜틱 배런호|천안함|세월호"],
+["h6-046",6,"g","기타","2010년 금강산 면회소에서 열린 이산가족 상봉에서 60년 만에 재회한 사람들은?","남매","제18차 이산가족 1차 상봉 · 137쪽","","모녀|부자|부부"],
+["h6-047",6,"g","기타","2018년 남북이 공동으로 진행한 학술·문화 교류 행사로 교과서에 나온 것은?","안중근 의거 109주년 기념 행사","137쪽","안중근 의거 기념 행사","윤봉길 의거 기념 행사|3·1 운동 100주년 기념식|광복 70주년 행사"],
+["h6-048",6,"g","기타","2018년 평양에서 열린 남북 예술인 연합 공연 무대의 이름은?","우리는 하나","137쪽","'우리는 하나'","봄이 온다|가을이 왔다|통일의 노래"],
+["h6-049",6,"g","기타","남북이 공동 편찬 위원회를 꾸려 함께 만들고 있는 사전은?","『겨레말큰사전』","제25차 협의(2015) · 137쪽","겨레말큰사전","『조선말 큰사전』|『표준국어대사전』|『한국민족문화대백과사전』"],
+["h6-050",6,"g","기타","남북 선수단이 한반도기를 들고 처음 공동 입장한 올림픽(2000)은?","시드니 올림픽","137쪽","시드니올림픽","평창 동계 올림픽|서울 올림픽|아테네 올림픽"],
+["h6-051",6,"g","기타","2018 평창 동계 올림픽에서 남북 단일팀으로 구성된 종목은?","여자 아이스하키","137쪽","여자 아이스하키 대표팀|아이스하키","여자 컬링|쇼트트랙|봅슬레이"],
+// 3 동아시아 평화를 위한 노력 (138~143쪽)
+["h6-052",6,"w","기구","'당길수록 더 얽힙니다!' 광고 공모전(2008)을 주최한 기관은?","동북아 역사 재단","138쪽","동북아역사재단","독도 연구소|국가 정보원|한국 공해 문제 연구소"],
+["h6-053",6,"w","이념","중국이 '중국 영토 안 소수 민족의 역사도 중국사'라는 논리로 내세운 이론은?","통일적 다민족 국가론","138쪽","통일적 다민족국가론","중화사상|일선동조론|타율성론"],
+["h6-054",6,"w","정책","중국이 2002년부터 5년간 동북 3성 지역의 역사·지리를 집중 연구해 고조선·고구려·발해를 중국사라 주장한 사업은?","동북공정","138쪽","동북 공정","서남공정|탐원 공정|일대일로"],
+["h6-055",6,"w","기타","동북공정에서 중국이 자기 역사라고 주장한 우리 나라들은?","고조선, 고구려, 발해","138쪽","고조선 고구려 발해","신라, 백제, 가야|고려, 조선, 대한 제국|부여, 옥저, 동예"],
+["h6-056",6,"w","기타","중국이 최근 자기 것인 양 홍보하고 있다고 교과서가 든 우리 전통문화는?","한복, 한옥, 민요 아리랑","138쪽","한복 한옥 아리랑","김치, 태권도, 판소리|한글, 온돌, 탈춤|씨름, 강강술래, 농악"],
+["h6-057",6,"w","지명","중국이 후산(호산) 장성으로 개조해 '만리장성 동단 기점'이라 주장하는 고구려 성은?","박작성","중국 랴오닝성 · 138쪽","고구려 박작성","안시성|국내성|비사성"],
+["h6-058",6,"w","기타","2018년 우리나라 대법원이 일본 기업에 배상금 지급을 판결한 피해자는?","강제 징용 피해자","일본은 반발 · 138쪽","강제 징용 피해자들","일본군 '위안부' 피해자|원폭 피해자|관동 대지진 피해자"],
+["h6-059",6,"w","단체","2000년대 초 일본의 침략과 식민 지배를 미화한 중학교 역사 교과서를 편찬한 단체는?","새로운 역사 교과서를 만드는 모임","138쪽","새역모","동북아 역사 재단|일본 공산당|야스쿠니 신사"],
+["h6-060",6,"w","기타","일본 정부가 2014년 개정해 전쟁 범죄에 대한 일본군 관여를 부정하도록 강요한 것은?","교과서 검정 기준","138쪽","검정 기준","평화 헌법|교육 기본법|역사 교육 과정"],
+["h6-061",6,"w","기타","아시아·태평양 전쟁의 A급 전범을 포함해 일왕을 위해 죽은 군인을 신으로 받드는 사당은?","야스쿠니 신사","2013 일본 총리 참배 · 138쪽","야스쿠니신사","메이지 신궁|이세 신궁|조선 신궁"],
+["h6-062",6,"w","지명","러·일 간 영토 분쟁 지역으로 쿠릴 열도 남부의 4개 섬은?","북방 4도","138~139쪽","북방4도|쿠릴 열도 4개 섬","센카쿠 열도|사할린|오키나와"],
+["h6-063",6,"w","지명","청일 전쟁 때 일본이 중국에서 빼앗아 중·일 간 분쟁이 된 섬들(중국명: 댜오위다오)은?","센카쿠 열도","139쪽","센카쿠열도|댜오위다오","북방 4도|쿠릴 열도|오키섬"],
+["h6-064",6,"w","지명","소련이 제2차 세계 대전 결과 러일 전쟁 때 빼앗긴 남부를 차지한 섬은?","사할린","139쪽","사할린섬","쿠릴 열도|홋카이도|센카쿠 열도"],
+["h6-065",6,"w","기타","아시아·태평양 전쟁 이후 센카쿠 열도를 점령했다가 일본에 돌려준 나라는?","미국","139쪽","","중국|소련|영국"],
+["h6-066",6,"w","지명","일본이 근대 산업 시설이라는 명목으로 2015년 유네스코 세계 유산에 등재한 강제 징용 현장인 섬(군함도)은?","하시마섬","139쪽","하시마|군함도","오키섬|쓰시마섬|사도섬"],
+["h6-067",6,"w","날짜","유네스코가 하시마섬 관련 결정을 일본이 충실히 이행하지 않았다며 '강한 유감'을 표명한 날은?","2021년 7월 12일","139쪽","2021. 7. 12.|7월 12일","2015년 7월 5일|2020년 6월 15일|2018년 10월 30일"],
+["h6-068",6,"w","기구","2020년 문을 열었으나 하시마섬 강제 노역 대신 '학대 이야기는 들어보지 못했다'는 영상만 재생하는 일본 시설은?","산업 유산 정보 센터","139쪽","일본 산업 유산 정보 센터","야스쿠니 신사|유슈칸|평화 기념 자료관"],
+["h6-069",6,"w","기구","동남아시아 국가 연합 10개국과 한·중·일 3개국이 설립한 국제 회의체는?","아세안+3","140쪽","아세안 플러스 3|ASEAN+3","APEC|G20|동아시아 정상 회의"],
+["h6-070",6,"w","선언","종전 50주년 기념일에 일본 총리가 식민 지배에 대한 사죄의 뜻을 표명한 1995년 담화는?","무라야마 담화","140쪽","무라야마담화","고노 담화|아베 담화|간 담화"],
+["h6-071",6,"w","인물","2015년 서대문 형무소 역사관의 독립투사 추모비 앞에 무릎 꿇은 전 일본 총리는?","하토야마","140쪽 사진","하토야마 유키오","무라야마|아베|고노"],
+["h6-072",6,"w","기타","평화·인권·민주주의 등 보편적 가치를 바탕으로 만든 동아시아 최초의 공동 역사 교재는?","한·중·일 공동 역사 교과서","『미래를 여는 역사』 · 140쪽","한중일 공동 역사 교과서|미래를 여는 역사","새로운 역사 교과서|국정 역사 교과서|동북공정 교과서"],
+["h6-073",6,"w","기타","한·중·일 시민 사회가 공동으로 펼친 활동으로 교과서가 든 것은?","일본군 '위안부' 문제 해결과 난징 대학살 피해자를 위한 활동","140쪽","위안부 문제 해결|난징 대학살 피해자 지원","동북공정 지원|야스쿠니 참배|독도 공동 관리"],
+["h6-074",6,"w","회의","2000년 한국·중국 등 피해국과 일본 시민 단체가 공동으로 주최해 일왕 히로히토에게 유죄를 선고한 법정은?","여성 국제 전범 법정","일본군 성 노예 제도 재판 · 141쪽","여성국제전범법정","극동 국제 군사 재판|국제 사법 재판소|유엔 인권 이사회"],
+["h6-075",6,"o","기타","한·중·일 연극인들이 1994년 창설한 '베세토 연극제'에서 확대된 공연 예술 축제는?","베세토 페스티벌","세 나라 수도의 첫 음 · 141쪽","BeSeTo 페스티벌|베세토 연극제","서울 세계 불꽃 축제|부산 국제 영화제|동아시아 문화 도시"],
+["h6-076",6,"o","기타","'베세토'라는 이름은 무엇을 조합한 것인가?","베이징·서울·도쿄의 첫 음","141쪽","세 나라 수도의 첫 음|베이징 서울 도쿄","세 나라 이름의 첫 음|세 나라 대표 연극의 첫 음|세 나라 바다 이름의 첫 음"],
+["h6-077",6,"w","연도","동아시아 청소년 역사 체험 캠프가 시작된 해는?","2002","한·중·일 연구자와 시민 단체 주도 · 141쪽","",""],
+["h6-078",6,"w","기타","독도 영유권 문제와 관련해 일본이 1905년 불법적으로 독도를 편입한 현은?","시마네현","러일 전쟁 중 · 142쪽","시마네 현","돗토리현|나가사키현|오키현"],
+["h6-079",6,"w","수치","울릉도와 독도 사이의 거리는?","87.4km","울진(죽변)~울릉도 130.3km, 독도~오키섬 157.5km · 142쪽","87.4|87.4킬로미터","130.3km|157.5km|49.0km"],
+["h6-080",6,"w","수치","독도와 일본 오키섬 사이의 거리는?","157.5km","142쪽 지도","157.5","87.4km|130.3km|211km"],
+["h6-081",6,"w","기타","512년 이사부가 울릉도와 독도를 차지하던 우산국을 복속시킨 기록이 있는 책은?","『삼국사기』","신라 지증왕 13년 6월 기사 · 142쪽","삼국사기","『신증동국여지승람』|『숙종실록』|『세종실록』 지리지"],
+["h6-082",6,"w","인물","하슬라주 군주가 되어 우산국을 항복시킨 인물은?","이사부","142쪽","","안용복|이규원|홍순칠"],
+["h6-083",6,"w","기타","1531년 '우산도(독도)와 울릉도가 동쪽 바다 가운데 있다'고 기록하고 「팔도총도」를 실은 책은?","『신증동국여지승람』","142쪽","신증동국여지승람","『삼국사기』|『숙종실록』|『대한 제국 관보』"],
+["h6-084",6,"w","인물","두 차례 일본에 건너가 울릉도와 독도가 우리 영토임을 주장한 조선 숙종 때 인물은?","안용복","『숙종실록』 숙종 22년(1696) · 142쪽","","이사부|홍순칠|이규원"],
+["h6-085",6,"w","기타","1877년 메이지 정부 최고 행정 기관이 울릉도와 독도가 일본과 관계없음을 명심하라고 시마네현에 내린 지령은?","태정관 지령","142쪽","태정관지령","칙령 제41호|SCAPIN 제677호|평화선"],
+["h6-086",6,"w","법령","대한 제국이 1900년 10월 25일 반포하여 독도(석도)가 우리 영토임을 밝힌 것은?","칙령 제41호","143쪽","대한 제국 칙령 제41호|칙령 41호","태정관 지령|SCAPIN 제677호|인접 해양에 대한 주권에 관한 선언"],
+["h6-087",6,"w","기타","대한 제국 칙령 제41호에서 독도를 부른 이름은?","석도","143쪽","","우산도|죽도|송도"],
+["h6-088",6,"w","법령","1946년 연합국 최고 사령부가 울릉도·독도·제주도 등을 일본 영토에서 제외한다고 규정한 문서는?","연합국 최고 사령관 각서(SCAPIN) 제677호","143쪽","SCAPIN 제677호|연합국 최고 사령관 각서 제677호|스카핀 677호","칙령 제41호|태정관 지령|샌프란시스코 강화 조약"],
+["h6-089",6,"w","선언","이승만 정부가 1952년 연안 70~150해리에 평화선을 긋고 독도를 우리 영토에 포함한 선언은?","인접 해양에 대한 주권에 관한 선언","평화선 · 143쪽","평화선 선언|평화선","칙령 제41호|태정관 지령|SCAPIN 제677호"],
+["h6-090",6,"w","수치","이승만 정부가 그은 평화선의 범위는?","연안 70~150해리","143쪽","70~150해리","12해리|200해리|50~100해리"],
+["h6-091",6,"w","기타","일본 마이니치 신문사가 간행한 샌프란시스코 강화 조약 해설서 『대일 강화 조약』에 실려 독도를 한국 영토로 표시한 지도는?","일본 영역도","1952 · 143쪽","「일본 영역도」","팔도총도|SCAPIN 부속 지도|대동여지도"],
+["h6-092",6,"w","단체","일본이 6·25 전쟁을 틈타 독도를 불법 침범하자 울릉도 출신 청년을 중심으로 독도 경계를 맡은 조직(1954)은?","독도 의용 수비대","143쪽","독도의용수비대","독도 경비대|해양 경찰대|서북 청년회"],
+["h6-093",6,"g","연도","1·21 사태가 일어난 해는?","1968","134쪽","",""],
+["h6-094",6,"g","연도","남북 기본 합의서가 채택된 해는?","1991","134쪽","",""],
+["h6-095",6,"g","연도","6·15 남북 공동 선언이 발표된 해는?","2000","135쪽","",""],
+["h6-096",6,"g","연도","남북 관계 발전과 평화 번영을 위한 선언(10·4 선언)이 발표된 해는?","2007","136쪽","",""],
+["h6-097",6,"g","연도","남북 이산가족 고향 방문 및 예술 공연단 교환 방문이 이루어진 해는?","1985","134쪽","",""],
+["h6-098",6,"g","연도","정주영의 소 떼 방북과 금강산 관광 시작(금강호 출발)이 있었던 해는?","1998","135쪽, 137쪽","",""],
+["h6-099",6,"w","연도","무라야마 담화가 발표된 해는?","1995","140쪽","",""],
+["h6-100",6,"w","연도","하시마섬이 유네스코 세계 유산에 등재된 해는?","2015","139쪽","",""],
+["h6-101",6,"w","연도","동북공정이 시작된 해는?","2002","138쪽","",""],
+["h6-102",6,"w","연도","대한 제국 칙령 제41호가 반포된 해는?","1900","143쪽","",""],
+["h6-103",6,"w","연도","태정관 지령이 내려진 해는?","1877","142쪽","",""],
+["h6-104",6,"w","연도","안용복의 활동이 『숙종실록』 숙종 22년에 기록된 해는?","1696","142쪽","",""],
+["h6-105",6,"w","연도","SCAPIN 제677호가 발표된 해는?","1946","143쪽","",""],
+["h6-106",6,"w","연도","독도 의용 수비대가 활동을 시작한 해로 교과서 연표에 나온 해는?","1954","143쪽","",""],
+["h6-107",6,"w","연도","여성 국제 전범 법정이 열린 해는?","2000","141쪽","",""]
+);
+SOURCES.push(
+["s6-01",6,"g","이 기사가 보도한 회담은?","평양이 열렸다. 뜨겁게 손잡았다. 역사를 새로 쓴다. 남북 정상, 분단 55년 만에 첫 회담","제1차 남북 정상 회담","제2차 남북 정상 회담|남북 고위급 회담|판문점 남북 정상 회담","『중앙일보』, 2000. 6. 14. · 134쪽"],
+["s6-02",6,"g","이 성명은?","첫째, 통일은 외세에 의존하거나 외세의 간섭을 받지 않고 자주적으로 해결하여야 한다. 둘째, 통일은 서로 상대방을 반대하는 무력 행사에 의거하지 않고 평화적 방법으로 실현하여야 한다. 셋째, 사상과 이념, 제도의 차이를 초월하여 …… 민족적 대단결을 도모하여야 한다.","7·4 남북 공동 성명","남북 기본 합의서|6·15 남북 공동 선언|판문점 선언","1972. 7. 4. · 135쪽"],
+["s6-03",6,"g","이 합의문은?","남과 북은 …… 쌍방의 관계가 나라와 나라 사이의 관계가 아닌 통일을 지향하는 과정에서 잠정적으로 형성되는 특수 관계라는 것을 인정하고 …… 제1조 남과 북은 서로 상대방의 체제를 인정하고 존중한다. 제4조 남과 북은 상대방을 파괴·전복하려는 일체 행위를 하지 아니한다.","남북 기본 합의서","7·4 남북 공동 성명|6·15 남북 공동 선언|10·4 선언","1991. 12. 13. · 135쪽"],
+["s6-04",6,"g","이 선언은?","나라의 통일을 위한 남측의 연합제 안과 북측의 낮은 단계의 연방제 안이 서로 공통성이 있다고 인정하고, 이 방향에서 통일을 지향시켜 나가기로 하였다. 이산가족 방문단을 교환하며, 비전향 장기수 문제를 해결하는 등 ……","6·15 남북 공동 선언","7·4 남북 공동 성명|남북 기본 합의서|판문점 선언","2000. 6. 15. · 135쪽"],
+["s6-05",6,"g","이 선언은?","6·15 공동 선언을 고수하고 적극 구현해 나간다. 현 정전 체제를 종식시키고 항구적인 평화 체제를 구축하기 위한 종전 선언을 협력해 추진하기로 하였다. …… 서해 평화 협력 특별 지대를 설치하여 ……","남북 관계 발전과 평화 번영을 위한 선언","판문점 선언|6·15 남북 공동 선언|남북 기본 합의서","2007. 10. 4. · 136쪽"],
+["s6-06",6,"g","이 선언은?","우리 민족의 미래는 우리 스스로 결정한다는 민족 자주의 원칙을 확인하였다. 10·4 선언에서 합의한 사업들을 적극 추진해 나가며 …… 올해 종전을 선언하고 …… 완전한 비핵화를 통해 핵 없는 한반도를 실현한다는 공동의 목표를 재확인하였다.","판문점 선언","10·4 선언|6·15 남북 공동 선언|7·4 남북 공동 성명","2018. 4. 27. · 136쪽"],
+["s6-07",6,"w","이 담화는?","우리 나라는 멀지 않은 과거의 한 시기, 국가 정책을 그르쳐 전쟁의 길로 나아가 …… 식민지 지배와 침략으로 많은 나라들, 특히 아시아 여러 나라 사람들에게 다대한 손해와 고통을 주었습니다. …… 진심으로 사죄의 마음을 표명합니다.","무라야마 담화","고노 담화|아베 담화|포츠담 선언","무라야마 담화(1995) · 140쪽"],
+["s6-08",6,"w","이 판결을 내린 법정은?","일왕은 실질적인 일본군 최고 통수권자로서 위안소 설치 등 일본군의 잔학 행위를 알고 있었음에도 여성을 성 노예로 삼은 기소 사실이 인정된다. 유죄를 선고한다.","여성 국제 전범 법정","극동 국제 군사 재판|대법원|헌법 재판소","2000 · 141쪽"],
+["s6-09",6,"w","이 기록이 실린 책은?","이찬 이사부가 하슬라주(지금의 강릉)의 군주가 되어 \"…… 이 맹수를 풀어서 밟아 죽이겠다.\"라고 하였다. 나라(우산국) 사람들이 두려워하며 곧 항복하였다.","『삼국사기』","『신증동국여지승람』|『숙종실록』|『고려사』","신라 지증왕 13년 6월 기사 · 142쪽"],
+["s6-10",6,"w","이 활동을 한 인물은?","제가 호키주로 가서 …… '두 섬(울릉도와 독도)을 함부로 침범하였으니 …… 그 죄상을 두루 말하려 한다.'라고 하였더니, 도주가 '두 섬은 이미 너희 나라에 속하였으니 ……'라고 하였습니다.","안용복","이사부|홍순칠|이규원","『숙종실록』 숙종 22년 9월 기사 · 142쪽"],
+["s6-11",6,"w","이 지령을 내린 일본의 기관은?","문의한 취지의 죽도(울릉도) 외 일도(독도)의 건은 우리(일본)와 관계없다는 것을 명심할 것.","태정관","시마네현|연합국 최고 사령부|조선 총독부","「태정관 지령」(1877) · 142쪽"],
+["s6-12",6,"w","유네스코가 이렇게 유감을 표명한 대상은?","당사국이 관련 결정을 아직 충실히 이행하지 않은 데 대해 강하게 유감을 표명한다.","일본 정부의 하시마섬 강제 노역 설명 약속 불이행","중국의 동북공정|일본의 독도 편입|일본의 야스쿠니 참배","유네스코, 2021. 7. 12. · 139쪽"]
+);
+EVENTS.push(
+["1·21 사태",1968,1,6,134],["남북 이산가족 고향 방문",1985,0,6,134],["남북한 유엔 동시 가입, 남북 기본 합의서",1991,0,6,134],
+["정주영 소 떼 방북",1998,0,6,135],["제1차 남북 정상 회담, 6·15 남북 공동 선언",2000,6,6,135],["시드니 올림픽 남북 공동 입장",2000,0,6,137],["동북공정 시작",2002,0,6,138],
+["제2차 남북 정상 회담, 10·4 선언",2007,10,6,136],["연평도 포격 사건",2010,0,6,136],["하시마섬 세계 유산 등재",2015,0,6,139],["판문점 선언",2018,4,6,136],
+["무라야마 담화",1995,0,6,140],["여성 국제 전범 법정",2000,0,6,141],["유네스코, 하시마섬 관련 '강한 유감' 표명",2021,7,6,139],
+["『삼국사기』: 이사부 우산국 복속",512,0,6,142],["『신증동국여지승람』 「팔도총도」",1531,0,6,142],["안용복의 독도 수호 활동 기록",1696,0,6,142],["태정관 지령",1877,0,6,142],
+["대한 제국 칙령 제41호",1900,10,6,143],["일본, 독도를 시마네현에 불법 편입",1905,0,6,142],["SCAPIN 제677호",1946,0,6,143],["평화선 선언",1952,0,6,143],["독도 의용 수비대",1954,0,6,143]
+);
+ESSAYS.push(
+["e6-01",6,"7·4 남북 공동 성명의 내용과 한계를 쓰시오.","닉슨 독트린 이후 냉전 완화 속에 남북 적십자 회담을 계기로 발표되었으며, 자주·평화·민족적 대단결의 통일 3대 원칙에 최초로 합의하였다. 그러나 후속 성과를 남기지 못하였고, 남북한이 각각 유신 헌법과 사회주의 헌법을 제정해 독재를 강화하는 데 이용되었다.","냉전 완화|닉슨|적십자;자주|평화|민족적 대단결;후속 성과;유신 헌법|사회주의 헌법|독재","134쪽"],
+["e6-02",6,"남북 기본 합의서의 의의를 쓰시오.","냉전 해체 속에 노태우 정부의 남북 고위급 회담 결과 1991년 유엔 동시 가입과 함께 채택되었다. 남북한 정부 간에 이루어진 최초의 공식 합의로, 상호 체제 인정과 불가침에 합의하였다는 점에서 의의가 있다.","고위급 회담|노태우;1991|유엔;최초|공식 합의;상호 체제 인정|불가침","134~135쪽"],
+["e6-03",6,"6·15 남북 공동 선언의 배경과 내용, 이후 변화를 쓰시오.","김대중 정부의 햇볕 정책으로 소 떼 방북과 금강산 관광이 이루어지는 가운데 분단 이후 첫 남북 정상 회담에서 발표되었다. 남측 연합제 안과 북측 낮은 단계의 연방제 안의 공통성 인정, 이산가족 방문단 교환, 경제 협력 등을 담았고, 이후 이산가족 상봉과 남북 교역이 확대되었다.","햇볕 정책|김대중;정상 회담|최초|처음;연합제|낮은 단계의 연방제;이산가족|경제 협력|교역","135쪽"],
+["e6-04",6,"중국과 일본의 역사 왜곡 사례를 각각 쓰시오.","중국은 통일적 다민족 국가론을 바탕으로 동북공정을 실시해 고조선·고구려·발해의 역사를 중국사라고 주장하고, 한복·한옥·아리랑을 중국 것인 양 홍보한다. 일본은 일본군 '위안부' 강제 동원을 부정하고 강제 징용 배상을 외면하며, 침략과 식민 지배를 미화한 교과서를 검정 통과시키고 검정 기준을 개정해 서술 수정을 강요한다.","동북공정|다민족;고조선|고구려|발해;위안부|강제 징용;교과서|검정","138쪽"],
+["e6-05",6,"독도가 우리 영토임을 보여 주는 근거를 시대 순으로 세 가지 이상 쓰시오.","『삼국사기』에 512년 이사부가 우산국을 복속시킨 기록이 있고, 『신증동국여지승람』 「팔도총도」에 울릉도와 독도가 그려져 있다. 『숙종실록』에는 안용복의 영토 수호 활동이, 1877년 태정관 지령에는 독도가 일본과 관계없다는 내용이 있다. 1900년 대한 제국 칙령 제41호로 영토임을 밝혔고, 1946년 SCAPIN 제677호도 독도를 일본 영토에서 제외하였다.","삼국사기|이사부|우산국;신증동국여지승람|팔도총도;안용복|숙종실록;태정관;칙령 제41호|석도;SCAPIN","142~143쪽"],
+["e6-06",6,"동아시아 갈등 해결을 위한 정부와 민간의 노력을 쓰시오.","정부 차원에서는 동아시아 정상 회의, 아세안+3 등 다자간 협력체를 통해 문제 해결과 협력 강화에 노력하고 있다. 민간에서는 한·중·일 공동 역사 교재를 편찬하고, 일본군 '위안부' 문제와 난징 대학살 피해자를 위한 활동을 함께하며, 여성 국제 전범 법정, 베세토 페스티벌, 청소년 역사 체험 캠프 등으로 교류하고 있다.","아세안+3|동아시아 정상 회의|다자;공동 역사 교재|교과서;위안부|난징;베세토|캠프|전범 법정","140~141쪽"]
+);
+// ── 부록 한눈에 보는 대한민국 헌법 개정 (146~147쪽)
+CARDS.push(
+["h7-01",7,"r","개헌","제헌 헌법(1948. 7.)의 대통령 선출 방식과 임기는?","간선제(국회에서 선출), 임기 4년","대통령 중심제, 초대 국회 의원 임기 2년 · 146쪽","국회 간선제 4년|간선제 4년","직선제, 임기 4년|간선제, 임기 6년|직선제, 5년 단임"],
+["h7-02",7,"r","개헌","1차 개헌(발췌 개헌, 1952. 7.)의 배경은?","이승만의 재선 목적","146쪽","이승만 재선","이승만의 종신 집권 시도|4·19 혁명으로 이승만 사임|5·16 군사 정변"],
+["h7-03",7,"r","개헌","1차 개헌(발췌 개헌)의 주요 내용은?","대통령 직선제","결과: 제2대 대통령에 이승만 당선 · 146쪽","직선제","초대 대통령 중임 제한 폐지|내각 책임제|대통령 간선제"],
+["h7-04",7,"r","개헌","2차 개헌(사사오입 개헌, 1954. 11.)의 주요 내용은?","초대 대통령(이승만)에 한하여 중임 제한 폐지","배경: 이승만의 종신 집권 시도, 결과: 제3대 대통령 이승만 · 146쪽","초대 대통령 중임 제한 폐지|중임 제한 폐지","대통령 직선제|대통령의 3선 연임 허용|내각 책임제"],
+["h7-05",7,"r","개헌","3차 개헌(1960. 6.)의 배경은?","4·19 혁명으로 이승만 사임","결과: 장면 내각 수립 · 146쪽","4·19 혁명|이승만 사임","5·16 군사 정변|3·15 부정 선거 관련자 처벌|6월 민주 항쟁"],
+["h7-06",7,"r","개헌","3차 개헌의 주요 내용은?","내각 책임제, 국회 양원제(민의원과 참의원)","146쪽","내각 책임제와 양원제|내각 책임제|양원제","대통령 직선제, 국회 단원제|대통령 간선제(임기 6년)|대통령 직선제(5년 단임)"],
+["h7-07",7,"r","개헌","4차 개헌(1960. 11.)의 주요 내용은?","3·15 부정 선거 관련자 및 부정 축재자 처벌을 위한 소급 특별법 제정","배경: 3·15 부정 선거 관련자 처벌 · 146쪽","소급 특별법 제정|부정 선거 관련자 처벌 소급 특별법","내각 책임제, 양원제|대통령 직선제, 단원제|반민족 행위 처벌법 제정"],
+["h7-08",7,"r","개헌","5차 개헌(1962. 12.)의 배경은?","5·16 군사 정변","146쪽","5·16","4·19 혁명|12·12 사태|6월 민주 항쟁"],
+["h7-09",7,"r","개헌","5차 개헌의 주요 내용은?","대통령 직선제, 국회 단원제","146쪽","직선제와 단원제|대통령 직선제와 국회 단원제","내각 책임제, 양원제|대통령 간선제(7년 단임)|대통령 3선 연임 허용"],
+["h7-10",7,"r","개헌","6차 개헌(3선 개헌, 1969. 10.)의 결과는?","제7대 대통령에 박정희 당선","배경: 장기 집권 시도, 내용: 3선 연임 허용 · 147쪽","박정희 제7대 대통령 당선","제3대 대통령에 이승만 당선|제2대 대통령에 이승만 당선|통일 주체 국민 회의에서 박정희 선출"],
+["h7-11",7,"r","개헌","7차 개헌(유신 헌법, 1972. 12.)의 배경은?","박정희의 종신 집권 시도","147쪽","종신 집권 시도","박정희의 장기 집권 시도|신군부의 집권|이승만의 재선 목적"],
+["h7-12",7,"r","개헌","7차 개헌(유신 헌법)에서 강화된 대통령 권한 세 가지는?","긴급 조치권, 국회 해산권, 법관 임명권","대통령 간선제(임기 6년) · 147쪽","긴급 조치권 국회 해산권 법관 임명권","계엄 선포권, 사면권, 조약 체결권|국회 해산권, 내각 임명권, 거부권|긴급 조치권, 헌법 개정권, 국민 투표권"],
+["h7-13",7,"r","개헌","8차 개헌(1980. 10.)의 주요 내용은?","대통령 간선제(7년 단임)","배경: 신군부의 집권 · 147쪽","7년 단임 간선제|간선제 7년 단임","대통령 직선제(5년 단임)|대통령 간선제(임기 6년)|대통령 직선제, 국회 단원제"],
+["h7-14",7,"r","개헌","9차 개헌(1987. 10.)의 주요 내용은?","대통령 직선제(5년 단임), 대통령 권한 축소(국회 해산권 폐지)","배경: 6월 민주 항쟁 · 147쪽","5년 단임 직선제|대통령 직선제 5년 단임","대통령 간선제(7년 단임)|대통령 간선제(임기 6년)|내각 책임제, 양원제"],
+["h7-15",7,"r","개헌","9차 개헌에서 폐지된 대통령 권한은?","국회 해산권","147쪽","","긴급 조치권|법관 임명권|계엄 선포권"],
+["h7-16",7,"r","정부","부록 연표에 나온 이승만 정부의 기간은?","1948. 8. ~ 1960. 4.","146쪽","1948.8~1960.4","1948. 8. ~ 1961. 5.|1960. 8. ~ 1961. 5.|1963. 12. ~ 1979. 10."],
+["h7-17",7,"r","정부","부록 연표에 나온 장면 내각의 기간은?","1960. 8. ~ 1961. 5.","146쪽","1960.8~1961.5","1960. 4. ~ 1961. 5.|1948. 8. ~ 1960. 4.|1963. 12. ~ 1979. 10."],
+["h7-18",7,"r","정부","부록 연표에 나온 박정희 정부의 기간은?","1963. 12. ~ 1979. 10.","146쪽","1963.12~1979.10","1961. 5. ~ 1979. 10.|1960. 8. ~ 1961. 5.|1980. 8. ~ 1988. 2."],
+["h7-19",7,"r","정부","부록 연표에 나온 전두환 정부의 기간은?","1980. 8. ~ 1988. 2.","147쪽","1980.8~1988.2","1979. 12. ~ 1988. 2.|1988. 2. ~ 1993. 2.|1963. 12. ~ 1979. 10."],
+["h7-20",7,"r","정부","부록 연표에 나온 노태우 정부의 기간은?","1988. 2. ~ 1993. 2.","147쪽","1988.2~1993.2","1987. 12. ~ 1993. 2.|1980. 8. ~ 1988. 2.|1993. 2. ~ 1998. 2."],
+["h7-21",7,"b","개헌","부록 연표에서 6월 민주 항쟁의 계기로 정리된 두 가지는?","박종철 고문 치사 사건 은폐 시도, 4·13 호헌 조치","147쪽","박종철 고문치사 은폐와 4·13 호헌 조치","이한열 최루탄 피격, 6·29 선언|12·12 사태, 비상계엄 확대|3·15 부정 선거, 김주열 사망"],
+["h7-22",7,"b","개헌","부록 연표에서 4·19 혁명의 전개 순서 첫 단계로 정리된 것은?","3·15 마산 의거","→ 김주열 시신 발견 → 전국 시위 확산 → 대학교수단 시위 → 이승만 사임 · 146쪽","마산 의거","대학교수단 시위|김주열 시신 발견|이승만 사임"],
+["h7-23",7,"r","개헌","대통령 간선제를 채택한 개헌을 모두 고르면? (제헌, 7차, 8차 중)","제헌 헌법, 7차, 8차","제헌: 국회 선출 / 7차: 통일 주체 국민 회의 / 8차: 7년 단임 · 146~147쪽","제헌 7차 8차","1차, 5차, 9차|3차, 7차, 9차|제헌, 5차, 8차"],
+["h7-24",7,"r","개헌","대통령 직선제를 채택한 개헌을 모두 고르면?","1차, 5차, 9차","146~147쪽","1차 5차 9차","제헌, 7차, 8차|2차, 6차, 9차|1차, 3차, 7차"]
+);
+EVENTS.push(
+["1차 개헌(발췌 개헌)",1952,7,7,146],["2차 개헌(사사오입 개헌)",1954,11,7,146],["3차 개헌(내각 책임제)",1960,6,7,146],["4차 개헌(소급 특별법)",1960,11,7,146],
+["5차 개헌(직선제·단원제)",1962,12,7,146],["6차 개헌(3선 개헌)",1969,10,7,147],["7차 개헌(유신 헌법)",1972,12,7,147],["8차 개헌(7년 단임 간선제)",1980,10,7,147],["9차 개헌(5년 단임 직선제)",1987,10,7,147]
+);
+ESSAYS.push(
+["e7-01",7,"이승만과 박정희 정부 시기 장기 집권을 위한 개헌을 순서대로 쓰고 각각의 핵심 내용을 쓰시오.","1952년 발췌 개헌으로 대통령 직선제를 도입하였고, 1954년 사사오입 개헌으로 초대 대통령의 중임 제한을 폐지하였다. 1969년 3선 개헌으로 대통령의 3선 연임을 허용하였고, 1972년 유신 헌법으로 통일 주체 국민 회의 간선제(임기 6년, 중임 제한 없음)와 긴급 조치권 등 대통령 권한을 강화하였다.","발췌|직선제;사사오입|중임 제한;3선|연임;유신|간선|6년|긴급 조치","146~147쪽"],
+["e7-02",7,"9차 개헌(1987)의 배경과 주요 내용을 쓰시오.","6월 민주 항쟁의 결과 이루어졌으며, 대통령 직선제(5년 단임)를 채택하고 국회 해산권을 폐지하는 등 대통령 권한을 축소하였다.","6월 민주 항쟁;직선제;5년 단임;국회 해산권|권한 축소","147쪽"]
+);
+</script>
+<script>
+(function(){
+"use strict";
+/* 판(학기)마다 다른 값: 데이터 파일이 EDITION을 정하면 그 값을 쓰고, 없으면 1학기 값 */
+const ED=Object.assign({
+  units:{1:["01","제국주의 질서와 일제의 식민 통치 정책","10~19쪽"],2:["02","3·1 운동과 대한민국 임시 정부","20~29쪽"],3:["03","민족 운동의 전개와 분화","30~45쪽"],4:["04","사회·문화의 변화와 대중 운동","46~55쪽"],5:["05","독립 국가 건설 노력","56~61쪽"]},
+  cats:{r:"일제 정책·탄압",b:"국내 민족 운동",g:"국외 무장·의열",p:"대한민국 임시 정부",o:"사회·문화",w:"국제 정세"},
+  exam:"2026-10-12",key:"ilje-cards-v1",app:"ilje-cards",file:"한국사카드_기록"
+},typeof EDITION!=="undefined"?EDITION:{});
+const UNITS=ED.units;
+const CAT=ED.cats;
+const KIND={mc:"카드 객관식",wr:"카드 주관식",src:"사료",tl:"연표 순서",ess:"서술형",ox:"O/X",rev:"설명 고르기",pair:"먼저 일어난 사건"};
+const LVNAME=["다시 보기","1단계","2단계","3단계","외움"];
+const INTERVAL={1:1,2:2,3:3};
+const DEFAULT_EXAM=ED.exam;
+const LSKEY=ED.key;
+const SUFFIX=["전투","대첩","운동","사건","정책","계획","사업","회의","의거","선언","회담","협정","학살","참변"];
+
+const cards=CARDS.map(c=>({id:c[0],u:c[1],cat:c[2],g:c[3],q:c[4],a:c[5],note:c[6],alts:c[7]?c[7].split("|"):[],x:c[8]?c[8].split("|"):[]}));
+const pageOf=c=>{const m=c.note.match(/(\d+)(?:,\s*\d+)*쪽/);return m?+m[1]:999;};
+cards.forEach((c,i)=>{c.pg=pageOf(c);c.ord=i;});
+cards.sort((a,b)=>a.u-b.u||a.pg-b.pg||a.ord-b.ord);
+const byId=Object.fromEntries(cards.map(c=>[c.id,c]));
+const firstPage=t=>{const m=String(t).match(/(\d+)(?:[,~]\s*\d+)*쪽/);return m?+m[1]:999;};
+const srcs=SOURCES.map(s=>({id:s[0],u:s[1],cat:s[2],q:s[3],text:s[4],a:s[5],x:s[6].split("|"),cite:s[7],pg:firstPage(s[7])}));
+const srcById=Object.fromEntries(srcs.map(s=>[s.id,s]));
+const events=EVENTS.map((e,i)=>({i,label:e[0],y:e[1],m:e[2],u:e[3],pg:e[4]}));
+const essays=ESSAYS.map(e=>({id:e[0],u:e[1],q:e[2],model:e[3],kws:e[4].split(";").map(g=>g.split("|")),pg:e[5],pn:firstPage(e[5])}));
+const essById=Object.fromEntries(essays.map(e=>[e.id,e]));
+const TOTAL=cards.length;
+
+/* 학습 순서: 교과서 순서 20장씩 묶어 새 묶음 1회 → 앞 묶음 2회 → 그 앞 묶음 3회 */
+const BATCH=20;
+const batches=[];for(let i=0;i<cards.length;i+=BATCH)batches.push(cards.slice(i,i+BATCH));
+const LADDER=[];
+for(let n=1;n<=batches.length+2;n++)for(let r=1;r<=3;r++){const b=n-r+1;if(b>=1&&b<=batches.length)LADDER.push({b,r});}
+
+/* 날짜 */
+const pad=n=>String(n).padStart(2,"0");
+const ymd=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const parse=s=>{const p=s.split("-").map(Number);return new Date(p[0],p[1]-1,p[2],12);};
+const addDays=(s,n)=>{const d=parse(s);d.setDate(d.getDate()+n);return ymd(d);};
+const diffDays=(a,b)=>Math.round((parse(b)-parse(a))/864e5);
+const today=()=>ymd(new Date());
+const md=s=>{const p=s.split("-");return (+p[1])+"/"+(+p[2]);};
+
+/* 상태 */
+function fresh(exam){return {v:1,exam:exam||DEFAULT_EXAM,cards:{},streak:{last:"",n:0},days:{},src:{},ess:{},ustat:{},kstat:{},mocks:[],utest:{},total:0,updatedAt:0,ladder:{i:0}};}
+function normalize(o){
+  if(o.ladder===undefined&&o.cards)o.ladder={i:inferLadder(o.cards)};
+  const f=fresh();for(const k in f)if(o[k]===undefined)o[k]=f[k];return o;
+}
+/* 학습 순서가 생기기 전 기록: 앞에서부터 다 본 묶음 수로 위치를 정한다 */
+function inferLadder(cs){
+  let k=0;while(k<batches.length&&batches[k].every(c=>(cs[c.id]||{}).s))k++;
+  return k?LADDER.findIndex(x=>x.b===k&&x.r===1)+1:0;
+}
+let S=fresh();
+try{const raw=localStorage.getItem(LSKEY);if(raw){const o=JSON.parse(raw);if(o&&o.v===1)S=normalize(o);}}catch(e){}
+
+const st=id=>S.cards[id];
+function levelOf(id){const s=st(id);return s&&s.s?s.l:-1;}
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=(a,n)=>shuffle(a.slice()).slice(0,n);
+const esc=s=>String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const norm=s=>String(s).normalize("NFC").toLowerCase().replace(/[\s·ㆍ・.,\-–~'"‘’“”『』「」()\[\]%:]/g,"");
+const pct=(c,a)=>a?Math.round(c/a*100):0;
+
+/* 저장: 이 기기 + 계정 */
+let remote=null,writing=false,again=false,rTimer=null;
+function save(){
+  S.updatedAt=Date.now();
+  try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}
+  if(remote){clearTimeout(rTimer);rTimer=setTimeout(push,1500);}
+}
+async function push(){
+  if(!remote)return;
+  if(writing){again=true;return;}
+  writing=true;
+  try{await remote.set(JSON.parse(JSON.stringify(S)));setSync(true);}
+  catch(e){const c=e&&e.code;if(c==="unavailable")setTimeout(push,4000+Math.random()*2000);else{remote=null;setSync(false);}}
+  writing=false;
+  if(again){again=false;push();}
+}
+function setSync(on){
+  const el=document.getElementById("sync");if(!el)return;
+  el.classList.toggle("on",!!on);
+  el.querySelector("span").textContent=on?"계정에 저장 중 (기기 간 공유)":"이 기기에만 저장";
+}
+function adopt(snap){
+  if(!snap||!snap.exists)return;
+  const r=snap.data();if(!r||r.v!==1)return;
+  const ru=r.updatedAt||0,lu=S.updatedAt||0;
+  if(ru>lu){
+    if(session)return;
+    S=normalize(JSON.parse(JSON.stringify(r)));
+    try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}
+    syncTotal();render();
+  }else if(ru<lu)push();
+}
+async function initRemote(){
+  if(!(window.claude&&typeof window.claude.use==="function"))return;
+  try{
+    const db=await window.claude.use("db");const user=await window.claude.use("user");
+    if(!db||!user)return;
+    const uid=await user.id();if(!uid)return;
+    const ref=db.doc("data/users/"+uid+"/progress");
+    const snap=await ref.get();
+    remote=ref;setSync(true);
+    if(snap.exists)adopt(snap);else if(S.updatedAt)push();
+  }catch(e){remote=null;setSync(false);}
+}
+document.addEventListener("visibilitychange",async()=>{
+  if(document.visibilityState==="visible"&&remote&&!session){try{adopt(await remote.get());}catch(e){}}
+});
+
+/* 하루 계획 */
+const daysLeft=()=>diffDays(today(),S.exam);
+const unseen=()=>cards.filter(c=>levelOf(c.id)<0);
+function planNew(already){
+  const left=daysLeft(),un=unseen().length;
+  if(!un)return already;
+  return already+Math.ceil(un/(left>0?Math.max(1,left-2):1));
+}
+function dayRec(){
+  const t=today();let d=S.days[t];
+  if(!d){d={p:planNew(0),n:0,a:0,c:0};S.days[t]=d;}
+  return d;
+}
+function syncTotal(){if(S.total!==TOTAL){const d=dayRec();if(!d.n)d.p=planNew(0);S.total=TOTAL;}}
+function dueList(){const t=today();return cards.filter(c=>{const s=st(c.id);return s&&s.s&&s.l<4&&(s.l===0||(s.d&&s.d<=t));});}
+const newLeft=()=>Math.min(Math.max(0,dayRec().p-dayRec().n),unseen().length);
+function sched(n){
+  const t=today();let d=addDays(t,n);
+  if(S.exam&&d>=S.exam){const b=addDays(S.exam,-1);d=b>t?b:addDays(t,1);}
+  return d;
+}
+function streakNow(){const t=today(),l=S.streak.last;return (l===t||l===addDays(t,-1))?S.streak.n:0;}
+function touchStreak(){const t=today();if(S.streak.last!==t){S.streak.n=(S.streak.last===addDays(t,-1))?S.streak.n+1:1;S.streak.last=t;}}
+function stat(u,kind,score){
+  const d=dayRec();d.a++;d.c+=score;
+  if(u){const x=S.ustat[u]||(S.ustat[u]=[0,0]);x[0]++;x[1]+=score;}
+  const k=S.kstat[kind]||(S.kstat[kind]=[0,0]);k[0]++;k[1]+=score;
+  touchStreak();
+}
+
+/* 배운 범위: 본 카드 중 가장 뒤 쪽까지 */
+function frontier(){let m=0;cards.forEach(c=>{if(levelOf(c.id)>=0&&c.pg<999&&c.pg>m)m=c.pg;});return m;}
+function scope(){const f=frontier();return {f,src:srcs.filter(s=>s.pg<=f),ev:events.filter(e=>e.pg<=f),ess:essays.filter(e=>e.pn<=f)};}
+function canTl(evs){if(evs.length<4)return false;const ys=new Set(evs.map(e=>e.y));return ys.size>=4;}
+
+/* 문제 만들기 */
+function cardItem(c,mode){return {k:"card",id:c.id,mode:mode||modeFor(c.id)};}
+function modeFor(id){const l=levelOf(id);return l<0?"learn":(l===0?"mc":"write");}
+function makeOpts(c){
+  const ds=[];
+  if(c.g==="연도"){const y=+c.a;shuffle([-4,-3,-2,-1,1,2,3,4]).slice(0,3).forEach(k=>ds.push(String(y+k)));}
+  else{
+    const seen=new Set([norm(c.a)]);
+    const add=v=>{const k=norm(v);if(ds.length<3&&!seen.has(k)){seen.add(k);ds.push(v);}};
+    shuffle(c.x.slice()).forEach(add);
+    shuffle(cards.filter(o=>o.g===c.g).map(o=>o.a)).forEach(add);
+    shuffle(cards.filter(o=>o.u===c.u).map(o=>o.a)).forEach(add);
+  }
+  return shuffle([c.a].concat(ds));
+}
+function grade(c,input){
+  const n=norm(input);if(!n)return false;
+  const ts=[c.a].concat(c.alts).map(norm);
+  if(ts.includes(n))return true;
+  return ts.some(t=>n.length>=2&&t.startsWith(n)&&SUFFIX.includes(t.slice(n.length)));
+}
+const evKey=e=>e.y*100+e.m;
+function compatible(a,b){return a.y!==b.y||(a.m&&b.m&&a.m!==b.m);}
+function tlItem(evs){
+  const pool=shuffle((evs||events).slice());
+  const first=pool[0],chosen=[first];
+  const near=pool.filter(e=>e!==first&&Math.abs(e.y-first.y)<=10);
+  for(const e of near.concat(pool)){if(chosen.length>=4)break;if(!chosen.includes(e)&&chosen.every(c=>compatible(c,e)))chosen.push(e);}
+  return {k:"tl",ev:shuffle(chosen.map(e=>e.i)),order:[]};
+}
+function srcScore(s){const r=S.src[s.id];return r?(r.r/(r.t||1))+r.t*0.01:-1;}
+function srcItems(n,u,pool){
+  let list=(pool||srcs).filter(s=>!u||s.u===u);
+  list=shuffle(list).sort((a,b)=>srcScore(a)-srcScore(b)).slice(0,n);
+  return shuffle(list).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))}));
+}
+function essItems(n,pool){
+  const sc=e=>{const r=S.ess[e.id];return r?r.best*10+r.n:-1;};
+  return shuffle((pool||essays).slice()).sort((a,b)=>sc(a)-sc(b)).slice(0,n).map(e=>({k:"ess",id:e.id}));
+}
+function kwHits(e,text){const n=norm(text);return e.kws.map(g=>g.some(w=>n.includes(norm(w))));}
+
+/* 문제 은행: 같은 사실로 여러 형태의 문제 만들기 */
+const revOK=c=>c.g!=="연도"&&c.g!=="수치"&&/(은|는)\?$/.test(c.q);
+const descOf=c=>c.q.replace(/(은|는)\?$/,"");
+function revItem(c){
+  const an=norm(c.a);const seen=new Set([an]);const ds=[];
+  const pool=shuffle(cards.filter(o=>o.g===c.g&&revOK(o))).concat(shuffle(cards.filter(o=>o.u===c.u&&revOK(o))));
+  for(const o of pool){const k=norm(o.a);if(ds.length<3&&!seen.has(k)){seen.add(k);ds.push(descOf(o));}}
+  return {k:"rev",id:c.id,ans:descOf(c),opts:shuffle([descOf(c)].concat(ds))};
+}
+function oxItem(c){
+  const truth=Math.random()<.5;
+  const shown=truth?c.a:makeOpts(c).find(o=>norm(o)!==norm(c.a));
+  return {k:"ox",id:c.id,shown,truth};
+}
+function pairItem(evs){
+  const pool=shuffle((evs||events).slice());const a=pool[0];
+  const b=pool.find(e=>e!==a&&compatible(a,e));
+  const first=evKey(a)<evKey(b)?a:b;
+  return {k:"pair",ev:[a.i,b.i],ans:first.label,opts:shuffle([a.label,b.label])};
+}
+function bankItems(n,full){
+  const sc=scope();const useAll=full||!sc.f;
+  const cs=cards.filter(c=>useAll||c.pg<=sc.f);
+  const ss=useAll?srcs:sc.src,ev=useAll||!canTl(sc.ev)?events:sc.ev;
+  const out=[];
+  for(let i=0;i<n;i++){
+    const r=Math.random(),c=cs[Math.floor(Math.random()*cs.length)];
+    if(r<.35)out.push(oxItem(c));
+    else if(r<.6){const rc=shuffle(cs.filter(revOK))[0];out.push(rc?revItem(rc):oxItem(c));}
+    else if(r<.75)out.push(cardItem(c,"mc"));
+    else if(r<.9&&ss.length){const s=ss[Math.floor(Math.random()*ss.length)];out.push({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))});}
+    else out.push(pairItem(ev));
+  }
+  return out;
+}
+function startBank(full){begin("drill",bankItems(20,full),{bank:true,full:!!full});}
+function applyGen(item,ok){
+  const u=item.k==="pair"?0:byId[item.id].u;
+  stat(u,item.k,ok?1:0);
+  if(!ok&&item.k!=="pair"){const s=st(item.id);if(s&&s.s)s.w=(s.w||0)+1;addWrong({k:"card",id:item.id});}
+}
+const ansOf=it=>it.k==="card"?byId[it.id].a:it.k==="src"?srcById[it.id].a:it.ans;
+
+/* 세션 */
+let session=null,view="today",resetAsk=false,fbAt=0;
+function begin(kind,items,opt){
+  if(!items.length)return;
+  session=Object.assign({kind,items,i:0,answered:0,score:0,wrong:[],fb:null,done:false,start:Date.now()},opt||{});
+  if(session.mock){session.ans=[];session.sel=null;}
+  render();
+}
+function startToday(){
+  const rev=shuffle(dueList()).map(c=>cardItem(c));
+  const news=unseen().slice(0,newLeft()).map(c=>cardItem(c,"learn"));
+  begin("today",rev.concat(news));
+}
+function deepPlan(){
+  const sc=scope();const tl=canTl(sc.ev)?2:0;const es=sc.ess.length?1:0;
+  const ns=Math.min(sc.src.length,4+(2-tl)+(1-es));
+  return {sc,ns,tl,es,ok:ns+tl+es>=3};
+}
+function startDeep(full){
+  if(full){begin("deep",srcItems(4).concat([tlItem(),tlItem()]).concat(essItems(1)),{full:true});return;}
+  const d=deepPlan();if(!d.ok)return startDeep(true);
+  const items=srcItems(d.ns,0,d.sc.src);
+  for(let i=0;i<d.tl;i++)items.push(tlItem(d.sc.ev));
+  begin("deep",items.concat(essItems(d.es,d.sc.ess)));
+}
+function startMock(){
+  const items=[];
+  /* 카드 10문제를 단원마다 고르게(5단원이면 2문제씩), 사료 6문제 */
+  const U=Object.keys(UNITS).map(Number),per={};
+  U.forEach(u=>{per[u]=Math.floor(10/U.length);});
+  shuffle(U.slice()).slice(0,10-Math.floor(10/U.length)*U.length).forEach(u=>{per[u]++;});
+  U.forEach(u=>{
+    const pool=shuffle(cards.filter(c=>c.u===u));
+    for(let k=0;k<per[u]&&k<pool.length;k++)items.push(cardItem(pool[k],k===0?"mc":Math.random()<.5?"write":"mc"));
+  });
+  const SU=U.filter(u=>srcs.some(s=>s.u===u));
+  const su=SU.length>=6?shuffle(SU.slice()).slice(0,6):SU.concat(Array.from({length:6-SU.length},()=>SU[Math.floor(Math.random()*SU.length)]));
+  const usedS=new Set();
+  su.forEach(u=>{const c=shuffle(srcs.filter(s=>s.u===u&&!usedS.has(s.id)))[0];if(c){usedS.add(c.id);items.push({k:"src",id:c.id,opts:shuffle([c.a].concat(c.x))});}});
+  items.sort((a,b)=>unitOf(a)-unitOf(b));
+  for(let i=0;i<4;i++)items.push(tlItem());
+  begin("mock",items,{mock:true});
+}
+function unitOf(it){return it.k==="card"?byId[it.id].u:it.k==="src"?srcById[it.id].u:it.k==="ess"?essById[it.id].u:9;}
+function requeue(id){
+  const it=session.items;
+  for(let k=session.i+1;k<it.length;k++)if(it[k].k==="card"&&it[k].id===id)return;
+  it.splice(Math.min(it.length,session.i+4),0,{k:"card",id,mode:"mc"});
+}
+function addWrong(w){if(!session.wrong.some(x=>x.k===w.k&&x.id===w.id))session.wrong.push(w);}
+
+/* 채점 반영 */
+function applyCard(item,ok){
+  const id=item.id,c=byId[id],wasNew=levelOf(id)<0;
+  const s=S.cards[id]||(S.cards[id]={l:0,d:null,w:0,s:true});
+  s.s=true;s.t=(s.t||0)+1;if(ok)s.r=(s.r||0)+1;
+  stat(c.u,item.mode==="mc"?"mc":"wr",ok?1:0);
+  if(ok){
+    if(item.mode==="mc"){if(s.l<1){s.l=1;s.d=sched(1);}}
+    else if(s.l<4){s.l=s.l+1;s.d=s.l>=4?null:sched(INTERVAL[s.l]);}
+    if(((session.ladder&&session.ladder.r===3)||session.finish)&&item.mode==="write"){s.l=4;s.d=null;}
+  }else{
+    s.w=(s.w||0)+1;
+    /* 외움 카드는 학습 순서·마무리 밖(모의고사·연습 등)에서 틀려도 외움 유지, 오답 목록에만 남김 */
+    if(!(s.l===4&&!session.ladder&&!session.finish)){s.l=0;s.d=null;}
+    addWrong({k:"card",id});
+    if(!session.mock&&!session.test)requeue(id);
+    if(session.test&&wasNew)s.s=false;
+  }
+}
+function applyMockCard(item,ok){
+  const id=item.id,c=byId[id];
+  const s=S.cards[id];
+  stat(c.u,item.mode==="mc"?"mc":"wr",ok?1:0);
+  if(s&&s.s){s.t=(s.t||0)+1;if(ok)s.r=(s.r||0)+1;}
+  if(!ok){
+    if(s&&s.s){s.w=(s.w||0)+1;if(s.l!==4){s.l=0;s.d=null;}}
+    else S.cards[id]={l:0,d:null,w:1,s:false};
+    addWrong({k:"card",id});
+  }
+}
+function applySrc(id,ok){
+  const s=srcById[id];const r=S.src[id]||(S.src[id]={t:0,r:0,w:0});
+  r.t++;if(ok)r.r++;else{r.w++;addWrong({k:"src",id});}
+  stat(s.u,"src",ok?1:0);
+}
+function applyTl(ok){stat(0,"tl",ok?1:0);if(!ok)addWrong({k:"tl",id:"tl"+session.i});}
+function applyEss(id,rating){
+  const e=essById[id];const r=S.ess[id]||(S.ess[id]={n:0,best:0});
+  r.n++;const v=rating==="full"?2:rating==="part"?1:0;if(v>r.best)r.best=v;
+  stat(e.u,"ess",v/2);
+}
+function commit(item,ok,extra){
+  session.answered++;session.score+=ok===true?1:(typeof ok==="number"?ok:0);
+  if(item.k==="card")(session.mock?applyMockCard:applyCard)(item,ok);
+  else if(item.k==="src")applySrc(item.id,ok);
+  else if(item.k==="tl")applyTl(ok);
+  else if(item.k==="ess")applyEss(item.id,extra);
+  else applyGen(item,ok);
+  if(session.mock)session.ans[session.i]={ok,given:extra};
+  save();
+}
+function learned(){
+  const it=session.items[session.i];
+  if(levelOf(it.id)<0){const prev=S.cards[it.id];S.cards[it.id]={l:0,d:null,w:prev?prev.w||0:0,s:true};dayRec().n++;touchStreak();save();}
+  requeue(it.id);
+  advance();
+}
+function advance(){
+  session.fb=null;session.sel=null;session.i++;
+  if(session.i>=session.items.length)finish();
+  render();
+}
+function finish(){
+  session.done=true;
+  if(session.ladder&&S.ladder.i===session.ladder.i){S.ladder.i++;save();}
+  if(session.unitTest){const sc=pct(session.score,session.answered);S.utest[session.unitTest]=Math.max(S.utest[session.unitTest]||0,sc);save();}
+  if(session.kind==="deep")dayRec().x=1;
+  if(session.mock){
+    const byU={},byK={};
+    session.items.forEach((it,i)=>{
+      const a=session.ans[i]||{ok:false};const u=unitOf(it);const k=it.k==="card"?(it.mode==="mc"?"mc":"wr"):it.k;
+      if(u<9){byU[u]=byU[u]||[0,0];byU[u][0]++;if(a.ok)byU[u][1]++;}
+      byK[k]=byK[k]||[0,0];byK[k][0]++;if(a.ok)byK[k][1]++;
+    });
+    session.result={d:today(),score:Math.round(session.score/session.items.length*100),n:session.items.length,c:session.score,sec:Math.round((Date.now()-session.start)/1000),byU,byK};
+    S.mocks.push(session.result);if(S.mocks.length>30)S.mocks.shift();
+    save();
+  }
+}
+function next(){
+  if(!session||!session.fb||Date.now()-fbAt<200)return;
+  const it=session.items[session.i],fb=session.fb;
+  if(it.k==="ess")commit(it,fb.rating==="full"?true:fb.rating==="part"?0.5:false,fb.rating);
+  else commit(it,fb.ok);
+  advance();
+}
+function mockNext(){
+  const it=session.items[session.i];let ok=false,given="";
+  if(it.k==="card"&&it.mode==="mc"){if(session.sel==null)return;given=it.opts[session.sel];ok=given===byId[it.id].a;}
+  else if(it.k==="card"){const el=document.getElementById("wi");given=el?el.value.trim():"";ok=grade(byId[it.id],given);}
+  else if(it.k==="src"){if(session.sel==null)return;given=it.opts[session.sel];ok=given===srcById[it.id].a;}
+  else if(it.k==="tl"){if(it.order.length<it.ev.length)return;ok=tlCorrect(it);given=it.order.slice();}
+  commit(it,ok,given);
+  advance();
+}
+function tlSorted(it){return it.ev.slice().sort((a,b)=>evKey(events[a])-evKey(events[b]));}
+function tlCorrect(it){const s=tlSorted(it);return it.order.every((v,i)=>v===s[i]);}
+
+/* 그리기: 공통 */
+const app=document.getElementById("app");
+function counts(list){const k={un:0,l0:0,l1:0,l2:0,l3:0,l4:0};list.forEach(c=>{const l=levelOf(c.id);if(l<0)k.un++;else k["l"+l]++;});return k;}
+function barHTML(k,total){
+  const seg=(n,v)=>n?`<span style="width:${(n/total*100).toFixed(2)}%;background:var(--${v})"></span>`:"";
+  return `<div class="bar" role="img" aria-label="외움 ${k.l4}, 복습 중 ${k.l1+k.l2+k.l3}, 다시 보기 ${k.l0}, 안 본 카드 ${k.un}">${seg(k.l4,"l4")}${seg(k.l3,"l3")}${seg(k.l2,"l2")}${seg(k.l1,"l1")}${seg(k.l0,"no")}</div>`;
+}
+const legendHTML=`<div class="legend"><span><i style="background:var(--l4)"></i>외움</span><span><i style="background:var(--l3)"></i>3단계</span><span><i style="background:var(--l2)"></i>2단계</span><span><i style="background:var(--l1)"></i>1단계</span><span><i style="background:var(--no)"></i>다시 보기</span><span><i style="background:var(--l0)"></i>안 본 카드</span></div>`;
+function lvChip(id){const l=levelOf(id);return l<0?`<span class="lv">안 봄</span>`:`<span class="lv l${l}">${LVNAME[l]}</span>`;}
+function evText(e){return e.y+(e.m?"."+e.m:"");}
+
+function render(){
+  hideTip();
+  if(session){app.innerHTML=session.done?(session.mock?mockResultHTML():doneHTML()):studyHTML();focusStudy();return;}
+  app.innerHTML=tabsHTML()+({today:todayHTML,path:pathHTML,practice:practiceHTML,wrong:wrongHTML,stats:statsHTML}[view])();
+  if(sheet&&view==="path")requestAnimationFrame(()=>{const x=document.getElementById("sheetx");if(x)x.focus({preventScroll:true});});
+}
+function tabsHTML(){
+  const t=(v,l)=>`<button role="tab" aria-selected="${view===v}" data-act="tab" data-v="${v}">${l}</button>`;
+  const w=cards.filter(c=>(st(c.id)||{}).w>0).length+srcs.filter(s=>(S.src[s.id]||{}).w>0).length;
+  return `<div class="tabs" role="tablist">${t("today","오늘")}${t("path","경로")}${t("practice","연습")}${t("wrong","오답"+(w?" "+w:""))}${t("stats","기록")}</div>`;
+}
+
+/* 학습 경로: 학습 순서(LADDER)를 계단 표로 보여 준다. 행 = 차례, 열 = 1회·2회·3회 */
+const UNIT_END={};batches.forEach((bt,bi)=>bt.forEach(c=>{UNIT_END[c.u]=bi+1;}));
+const NODES=LADDER.map((x,j)=>({type:"step",id:"P"+j,j,b:x.b,r:x.r}))
+  .concat(Object.keys(UNITS).flatMap(u=>[{type:"src",id:"S"+u,u:+u},{type:"utest",id:"T"+u,u:+u}]),[{type:"mock",id:"M"}]);
+const nodeById=Object.fromEntries(NODES.map(p=>[p.id,p]));
+function nodeState(p){
+  if(p.type==="step"){const i=S.ladder.i;return {done:p.j<i,cur:p.j===i};}
+  if(p.type==="src"){const l=srcs.filter(s=>s.u===p.u),t=l.filter(s=>(S.src[s.id]||{}).t>0).length,r=l.filter(s=>(S.src[s.id]||{}).r>0).length;return {done:t===l.length,r,n:l.length};}
+  if(p.type==="utest"){const b=S.utest[p.u];return {done:b!=null,best:b};}
+  const m=S.mocks.length?S.mocks[S.mocks.length-1].score:null;return {done:m!=null,best:m};
+}
+let sheet=null;
+function pathHTML(){
+  const i=S.ladder.i,N=LADDER.length,x=LADDER[i],B=batches.length;
+  const now=x?`<div class="box pnow"><div class="lab">지금 할 단계</div>
+      <div class="pbig">${stepName(x)}</div>
+      <p class="muted m0">${STEP_DESC[x.r]} · 카드 ${batches[x.b-1].length}장 · ${batchPages(x.b)}</p>
+      <div class="pbar" role="img" aria-label="${N}단계 중 ${i}단계 완료"><span style="width:${(i/N*100).toFixed(1)}%"></span></div>
+      <div class="pmeta"><span>${i} / ${N}단계 완료</span><span>남은 단계 ${N-i}</span></div>
+      <button class="btn wide" data-act="ladder">${stepName(x)} 시작</button></div>`
+    :leftover().length?`<div class="box pnow"><div class="lab">${N}단계 완료 · 마무리</div>
+      <div class="pbig">남은 카드 ${leftover().length}장</div>
+      <p class="muted m0">${FINISH_DESC}</p>
+      <div class="pbar" role="img" aria-label="외움 ${counts(cards).l4} / ${TOTAL}장"><span style="width:${(counts(cards).l4/TOTAL*100).toFixed(1)}%"></span></div>
+      <div class="pmeta"><span>외움 ${counts(cards).l4} / ${TOTAL}장</span><span>남은 카드 ${leftover().length}</span></div>
+      <button class="btn wide" data-act="finish">마무리 시작</button></div>`
+    :`<div class="box pnow"><div class="lab">학습 순서</div><div class="pbig">모두 외웠어요</div><p class="muted m0">${TOTAL}장을 모두 외웠어요. 아래 단원 점검과 모의고사로 마무리하세요.</p></div>`;
+  const cell=(b,r)=>{
+    if(b<1||b>B)return `<span class="sc empty" aria-hidden="true"></span>`;
+    const j=LADDER.findIndex(t=>t.b===b&&t.r===r),cls=j<i?"done":j===i?"cur":"ahead";
+    return `<button class="sc ${cls}" data-act="node" data-v="P${j}" aria-label="${b}일차 ${r}회 ${j<i?"완료":j===i?"지금 차례":""}">${b}일차</button>`;
+  };
+  let rows="";
+  for(let n=1;n<=B+2;n++){
+    rows+=`<span class="rn">${n}</span>${cell(n,1)}${cell(n-1,2)}${cell(n-2,3)}`;
+    Object.keys(UNIT_END).map(Number).filter(u=>UNIT_END[u]===n).forEach(u=>{
+      const sS=nodeState(nodeById["S"+u]),sT=nodeState(nodeById["T"+u]);
+      rows+=`<div class="umark"><span class="ut">${UNITS[u][0]} 단원 카드를 여기까지 배워요</span>
+        <button class="uchip ${sS.done?"done":""}" data-act="node" data-v="S${u}">사료 ${sS.r}/${sS.n}</button>
+        <button class="uchip ${sT.done?"done":""}" data-act="node" data-v="T${u}">점검${sT.best!=null?" "+sT.best+"점":""}</button></div>`;
+    });
+  }
+  const m=nodeState(nodeById.M);
+  return `<div class="panel">${now}
+    <div class="box"><h2>학습 계단</h2>
+      <p class="muted">왼쪽 위부터 한 줄씩 차례대로 풀어요. 새 묶음을 배운 뒤 앞 묶음을 다시 봐요.</p>
+      <div class="stair">
+        <span></span><span class="hd"><b>1회</b>외우기</span><span class="hd"><b>2회</b>주관식</span><span class="hd"><b>3회</b>마지막</span>
+        ${rows}
+      </div>
+      <div class="legend"><span><i class="lg done"></i>끝냄</span><span><i class="lg cur"></i>지금</span><span><i class="lg ahead"></i>남음</span></div>
+    </div>
+    <div class="box prow1"><div><h2 class="m0">모의고사</h2><p class="muted m0">${m.best!=null?`지난 점수 ${m.best}점 · ${S.mocks.length}회 응시`:"전 단원 20문항 · 정답은 끝나고 공개"}</p></div>
+      <button class="btn small" data-act="node" data-v="M">${m.best!=null?"다시 보기":"보기"}</button></div>
+  </div>${sheet?sheetHTML():""}`;
+}
+function sheetHTML(){
+  const p=nodeById[sheet];if(!p)return "";
+  const s=nodeState(p);
+  let title="",meta="",note="",btns="",list="";
+  if(p.type==="step"){
+    const i=S.ladder.i,cs=batches[p.b-1],k=counts(cs);
+    title=`${p.b}일차 ${p.r}회`;
+    meta=`카드 ${cs.length}장 · ${batchPages(p.b)} · 본 카드 ${cs.length-k.un} · 외움 ${k.l4}`;
+    if(p.j===i){note=STEP_DESC[p.r];btns=`<button class="btn wide" data-act="ladder">${title} 시작</button>`;}
+    else if(p.j<i){note="끝낸 단계예요. 다시 풀어도 학습 순서 위치는 그대로예요.";btns=`<button class="btn wide" data-act="stepredo" data-v="${p.j}">다시 하기</button>`;}
+    else note=`아직 차례가 아니에요. 지금은 ${stepName(LADDER[i])} 차례예요.`;
+    list=`<details class="mt"><summary>카드 미리 보기</summary><ul class="clist">${cs.map(c=>`<li>${lvChip(c.id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul></details>`;
+  }else if(p.type==="src"){
+    const l=srcs.filter(x=>x.u===p.u);
+    title=`${UNITS[p.u][0]} 단원 사료`;meta=`교과서 사료 ${l.length}개 · 맞힌 사료 ${l.filter(x=>(S.src[x.id]||{}).r>0).length}개`;
+    note="사료 구절을 보고 어떤 사건·법령·단체인지 맞혀요.";
+    btns=`<button class="btn wide" data-act="nsrc" data-v="${p.u}">사료 ${l.length}문제 풀기</button>`;
+  }else if(p.type==="utest"){
+    title=`${UNITS[p.u][0]} 단원 점검`;meta=s.best!=null?`최고 점수 ${s.best}점`:"아직 안 봤어요";
+    note="이 단원 카드 10문제와 사료 2문제. 90점 이상이면 별 3개.";
+    btns=`<button class="btn wide" data-act="ntest" data-v="${p.u}">${s.best!=null?"다시 보기":"점검 시작"}</button>`;
+  }else{
+    title="모의고사";meta=s.best!=null?`지난 점수 ${s.best}점 · ${S.mocks.length}회 응시`:"아직 안 봤어요";
+    note="전 단원 20문항, 정답은 끝난 뒤 공개.";
+    btns=`<button class="btn wide" data-act="mock">모의고사 시작</button>`;
+  }
+  return `<div class="sheet-bg" data-act="sheetclose"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+    <div class="sh-top"><div><div class="sh-t">${esc(title)}</div><div class="muted">${esc(meta)}</div></div><button class="btn ghost small" data-act="sheetclose" id="sheetx">닫기</button></div>
+    <p class="muted m0">${esc(note)}</p><div class="sh-btns">${btns}</div>${list}</div>`;
+}
+function unitTestItems(u){
+  const cs=pick(cards.filter(c=>c.u===u),10).map(c=>cardItem(c,levelOf(c.id)>=1&&Math.random()<.5?"write":"mc"));
+  const ss=pick(srcs.filter(s=>s.u===u),2).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))}));
+  return shuffle(cs.concat(ss));
+}
+
+/* 다음 단계 */
+function weakestUnit(){
+  const rows=Object.keys(UNITS).map(u=>({u:+u,x:S.ustat[u]||[0,0]})).filter(r=>r.x[0]>=5&&cards.some(c=>c.u===r.u&&levelOf(c.id)>=0));
+  rows.sort((a,b)=>a.x[1]/a.x[0]-b.x[1]/b.x[0]);return rows[0]||null;
+}
+function nextStep(){
+  const day=dayRec(),wr=cards.filter(c=>(st(c.id)||{}).w>0&&levelOf(c.id)<4).length,wu=weakestUnit();
+  const dp=deepPlan();
+  const lx=ladderStep(),lo=leftover().length;
+  const main=lx?{act:"ladder",t:stepName(lx),d:STEP_DESC[lx.r]}
+    :lo?{act:"finish",t:`남은 카드 ${lo}장 마무리`,d:FINISH_DESC}
+    :(!day.x&&dp.ok)?{act:"deep",t:"심화 세트",d:`배운 범위(${dp.sc.f}쪽까지)에서 사료·연표·서술형, 약 10분`}
+    :{act:"mock",t:"모의고사",d:"20문항 · 실전처럼 정답은 끝나고 공개"};
+  const more=[];
+  if(main.act!=="finish"&&lo)more.push(`<button class="btn ghost small" data-act="finish">3회 틀린 카드 ${lo}장 마무리</button>`);
+  more.push(`<button class="btn ghost small" data-act="bank">문제 은행 20문제</button>`);
+  if(wr)more.push(`<button class="btn ghost small" data-act="drill" data-v="wrong">오답 ${Math.min(30,wr)}장 다시</button>`);
+  if(wu)more.push(`<button class="btn ghost small" data-act="drill" data-v="urev" data-u="${wu.u}">약한 단원(${UNITS[wu.u][0]}) 복습</button>`);
+  if(main.act!=="mock")more.push(`<button class="btn ghost small" data-act="mock">모의고사</button>`);
+  if(main.act!=="deep"&&dp.ok)more.push(`<button class="btn ghost small" data-act="deep">${day.x?"심화 세트 한 번 더":"심화 세트"}</button>`);
+  return {main,more};
+}
+/* 학습 순서 */
+const ladderStep=()=>LADDER[S.ladder.i]||null;
+const stepName=x=>`${x.b}일차 ${x.r}회`;
+const STEP_DESC={1:"새 카드 · 답을 보고 외운 뒤 객관식으로 확인",2:"주관식으로 두 번째 복습",3:"주관식으로 마지막 복습 · 맞히면 '외움'"};
+function batchPages(b){const ps=batches[b-1].map(c=>c.pg).filter(p=>p<999);if(!ps.length)return "";const a=Math.min(...ps),z=Math.max(...ps);return a===z?a+"쪽":a+"~"+z+"쪽";}
+function startLadder(j,opt){
+  if(j==null)j=S.ladder.i;
+  const x=LADDER[j];if(!x)return;
+  const list=batches[x.b-1];
+  const items=x.r===1?list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"mc"))
+    :shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write")));
+  begin("ladder",items,Object.assign({ladder:{i:j,b:x.b,r:x.r}},opt||{}));
+}
+/* 마무리: 3회까지 끝낸 묶음에서 아직 외움이 아닌 카드 */
+function leftover(){
+  const i=S.ladder.i,out=[];
+  LADDER.slice(0,i).forEach(x=>{if(x.r===3)batches[x.b-1].forEach(c=>{if(levelOf(c.id)<4)out.push(c);});});
+  return out;
+}
+const FINISH_DESC="3회째에 틀린 카드를 주관식으로 다시 풀어요 · 맞히면 '외움'";
+function startFinish(){
+  const list=leftover();if(!list.length)return;
+  begin("finish",shuffle(list.map(c=>cardItem(c,levelOf(c.id)<0?"learn":"write"))),{finish:true});
+}
+let skipAsk=false;
+function ladderBoxHTML(){
+  const x=ladderStep(),i=S.ladder.i,N=LADDER.length,day=dayRec();
+  const todayLine=`<p class="muted mt">오늘 푼 문제 ${day.a}개${day.a?` · 정답률 ${pct(day.c,day.a)}%`:""} · 연속 ${streakNow()}일</p>`;
+  const lo=leftover().length;
+  if(!x&&lo)return `<div class="box"><h2>1. 학습 순서 <span class="muted">마무리</span></h2>
+    <div class="ladnow"><b>남은 카드 ${lo}장</b> <span class="muted">외움 ${counts(cards).l4} / ${TOTAL}장</span></div>
+    <p class="muted">${FINISH_DESC}. 다 외울 때까지 몇 번이든 다시 할 수 있어요.</p>
+    <button class="btn wide" data-act="finish">마무리 시작 · 약 ${Math.max(1,Math.round(lo*15/60))}분</button>${todayLine}</div>`;
+  if(!x)return `<div class="box"><h2>1. 학습 순서 <span class="lv l4">완료</span></h2>
+    <p class="muted">${TOTAL}장을 모두 외웠어요. 모의고사와 오답 복습으로 마무리하세요.</p>
+    <div class="row"><button class="btn" data-act="mock">모의고사</button><button class="btn ghost" data-act="drill" data-v="wrong">오답 다시</button></div>${todayLine}</div>`;
+  const n=batches[x.b-1].length,mins=Math.max(1,Math.round(n*(x.r===1?30:15)/60));
+  const up=LADDER.slice(i+1,i+4).map(t=>`<span class="nw">${stepName(t)}</span>`).join(" → ");
+  const skip=skipAsk
+    ?`<div class="confirm mt2"><span>${stepName(x)}을 건너뛸까요?</span><button class="btn small" data-act="ladderskipyes">건너뛰기</button><button class="btn ghost small" data-act="ladderskipno">취소</button></div>`
+    :`<button class="linkbtn" data-act="ladderskip">이 단계 건너뛰기</button>`;
+  return `<div class="box"><h2>1. 학습 순서 <span class="muted">${i+1} / ${N}단계</span></h2>
+    <div class="ladnow"><b>${stepName(x)}</b> <span class="muted">카드 ${n}장 · ${batchPages(x.b)}</span></div>
+    <p class="muted">${STEP_DESC[x.r]}</p>
+    <button class="btn wide" data-act="ladder">${stepName(x)} 시작 · 약 ${mins}분</button>
+    ${up?`<p class="muted mt">다음: ${up}</p>`:""}${todayLine}
+    ${lo?`<button class="linkbtn" data-act="finish">3회에서 틀린 카드 ${lo}장 마무리하기</button>`:""}
+    <details class="mt"><summary>전체 순서 보기</summary><ol class="ladlist">${LADDER.map((t,j)=>`<li class="${j<i?"done":j===i?"cur":""}">${stepName(t)}</li>`).join("")}</ol></details>
+    ${skip}</div>`;
+}
+
+/* 오늘 */
+function todayHTML(){
+  const left=daysLeft();
+  const dd=left>0?"D-"+left:left===0?"D-DAY":"시험 끝";
+  const k=counts(cards),day=dayRec();
+  const lastMock=S.mocks.length?S.mocks[S.mocks.length-1]:null;
+  const mockTip=(left>=1&&left<=3)
+    ?`<div class="box tip"><h2>시험 직전 점검</h2><p class="muted">모의고사로 실전처럼 풀어 보고, 약한 단원을 마지막으로 복습하세요.${lastMock?` 지난 점수 ${lastMock.score}점.`:""}</p><button class="btn" data-act="mock">모의고사 보기</button></div>`:"";
+  const dp=deepPlan();
+  const deepBox=`<div class="box"><h2>2. 심화 세트 ${day.x?'<span class="lv l4">완료</span>':""}</h2>
+    ${dp.ok?`<p class="muted">배운 범위(교과서 ${dp.sc.f}쪽까지)에서만 나와요. 사료 ${dp.ns}${dp.tl?`, 연표 순서 ${dp.tl}`:""}${dp.es?`, 서술형 ${dp.es}`:""}문제.</p>
+    <button class="btn ghost wide" data-act="deep">${day.x?"한 세트 더 풀기":"심화 세트 시작 · 약 10분"}</button>`
+    :`<p class="muted">아직 배운 카드가 없어서 범위를 정할 수 없어요. 전체 범위에서 풀 수도 있어요.</p>
+    <button class="btn ghost wide" data-act="deepfull">전체 범위로 풀기</button>`}
+    ${dp.ok?`<button class="linkbtn" data-act="deepfull">전체 범위로 풀기</button>`:""}</div>`;
+  return `<div class="panel">
+  <div class="box dday"><div><div class="lab">시험까지</div><div class="big">${dd}</div></div>
+    <label for="exam">시험일 <input type="date" id="exam" value="${esc(S.exam)}"></label></div>
+  ${mockTip}
+  ${ladderBoxHTML()}
+  ${deepBox}
+  <div class="box"><h2>전체 진행</h2>${barHTML(k,TOTAL)}${legendHTML}
+    <p class="muted mt">외운 카드 <b>${k.l4}</b> / ${TOTAL}장 · 아직 안 본 카드 ${k.un}장</p></div>
+  <details class="box"><summary>진행 방식</summary>
+    <p class="muted mt">카드를 교과서 순서대로 ${BATCH}장씩 묶어(1일차, 2일차 …) 계단식으로 공부해요. 1일차 1회 → 2일차 1회 → 1일차 2회 → 3일차 1회 → 2일차 2회 → 1일차 3회 … 처럼 새 묶음을 배운 뒤 앞 묶음을 다시 봐요. 날짜와 상관없이 한 단계를 끝내면 바로 다음 단계로 이어 갈 수 있어요. 1회는 답을 보고 외운 뒤 객관식으로 확인하고, 2회·3회는 주관식이에요. 3회째에 맞힌 카드는 '외움'이 됩니다. 틀린 카드는 그 자리에서 객관식으로 다시 나오고 오답 목록에 남아요.</p></details>
+  </div>`;
+}
+
+/* 연습 */
+function practiceHTML(){
+  const seenAll=cards.filter(c=>levelOf(c.id)>=0).length;
+  const lastMock=S.mocks.length?S.mocks[S.mocks.length-1]:null;
+  const units=Object.keys(UNITS).map(Number).map(u=>{
+    const list=cards.filter(c=>c.u===u),k=counts(list),[no,name,pg]=UNITS[u];
+    const seen=list.length-k.un,ns=srcs.filter(s=>s.u===u).length;
+    return `<div class="unit"><div class="top"><span class="t">${no} ${esc(name)}</span><span class="c">${pg}</span></div>
+      ${barHTML(k,list.length)}
+      <span class="c">외움 ${k.l4} · 공부 중 ${k.l0+k.l1+k.l2+k.l3} · 안 봄 ${k.un} / ${list.length}장</span>
+      <div class="row"><button class="btn small" data-act="drill" data-v="unew" data-u="${u}" ${k.un?"":"disabled"}>새 카드 ${Math.min(10,k.un)||10}장 미리 배우기</button>
+      <button class="btn ghost small" data-act="drill" data-v="urev" data-u="${u}" ${seen?"":"disabled"}>본 카드 ${Math.min(20,seen)||20}장 복습</button>
+      <button class="btn ghost small" data-act="usrc" data-u="${u}">사료 ${Math.min(6,ns)}문제</button></div>
+      <details><summary>카드 목록 보기</summary><ul class="clist">${list.map(c=>`<li>${lvChip(c.id)}<span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul></details>
+    </div>`;
+  }).join("");
+  const reset=resetAsk
+    ?`<div class="confirm"><span>진행 기록을 모두 지울까요? 되돌릴 수 없어요.</span><button class="btn small" data-act="resetyes">지우기</button><button class="btn ghost small" data-act="resetno">취소</button></div>`
+    :`<button class="btn ghost small" data-act="resetask">진행 기록 초기화</button>`;
+  const row=(t,d,act,label,dis)=>`<div class="prow"><div><div class="t">${t}</div><div class="muted">${d}</div></div><button class="btn small" data-act="${act}" ${dis?"disabled":""}>${label}</button></div>`;
+  return `<div class="panel">
+    <div class="box"><h2>모의고사</h2>
+      <p class="muted">단원별 카드 10문제, 사료 6문제, 연표 순서 4문제, 모두 20문항(문항당 5점). 실전처럼 정답은 끝난 뒤에 한꺼번에 보여 줘요.${lastMock?` 지난 점수 <b>${lastMock.score}점</b>.`:""}</p>
+      <button class="btn wide" data-act="mock">모의고사 시작 · 약 15분</button></div>
+    <div class="box"><h2>유형별 연습</h2>
+      ${row("사료 보고 맞히기",`배운 범위의 사료 중 덜 맞힌 것부터 8문제`,"psrc","시작")}
+      ${row("연표 순서 맞추기","배운 범위의 사건 4개를 일어난 순서대로, 5문제","ptl","시작")}
+      ${row("서술형 연습","배운 범위에서 3문제, 핵심어 체크로 스스로 채점","pess","시작")}
+      ${row("문제 은행 (계속 풀기)","O/X·설명 고르기·객관식·사료·먼저 일어난 사건을 섞어 20문제씩, 배운 범위에서","bank","시작")}
+      ${row("카드 섞어서 풀기","이미 본 카드 중 무작위 20장","pmix","시작",!seenAll)}
+    </div>
+    <div class="box"><h2>단원별</h2>${units}</div>
+    <div class="box"><h2>내 기록 관리</h2>
+      <p class="muted">기록은 자동으로 저장돼요(로그인한 Claude에서는 계정, 그 밖에는 이 기기의 브라우저). 파일로 저장해 두면 다른 기기로 옮기거나 백업할 수 있어요. 다른 사람이 이 앱을 써도 기록은 각자 따로 저장됩니다.</p>
+      ${importAsk?importConfirmHTML():`<div class="row"><button class="btn small" data-act="export" ${dlState===false?"hidden":""}>기록 파일로 저장</button>
+      <label class="btn ghost small filebtn">기록 파일 불러오기<input type="file" id="impf" accept=".json,application/json"></label></div>
+      ${ioMsg?`<p class="muted mt" role="status">${esc(ioMsg)}</p>`:""}
+      <details class="mt"><summary>파일 저장이 안 될 때: 기록 코드로 옮기기</summary>
+        <p class="muted mt">아래 코드를 복사해 메모 등에 보관했다가, 다른 기기에서 붙여 넣으면 기록을 옮길 수 있어요.</p>
+        <div class="row"><button class="btn ghost small" data-act="copycode">기록 코드 복사</button></div>
+        <textarea id="codein" rows="3" placeholder="기록 코드를 여기에 붙여 넣으세요" aria-label="기록 코드"></textarea>
+        <div class="row"><button class="btn ghost small" data-act="pastecode">붙여 넣은 코드로 불러오기</button></div>
+      </details>`}
+    </div>
+    <div class="box"><h2>설정</h2>${reset}</div>
+  </div>`;
+}
+
+/* 기록 파일 */
+let importAsk=null,ioMsg="",dlState=null;
+function exportText(){return JSON.stringify({app:ED.app,exported:new Date().toISOString(),state:S});}
+function parseImport(text){
+  try{const o=JSON.parse(text);const st=o&&o.app===ED.app?o.state:o;
+    if(!st||st.v!==1||typeof st.cards!=="object")return null;return normalize(st);}catch(e){return null;}
+}
+function importConfirmHTML(){
+  const st=importAsk;const seen=Object.values(st.cards).filter(c=>c.s).length,mast=Object.values(st.cards).filter(c=>c.s&&c.l>=4).length;
+  const days=Object.keys(st.days||{}).filter(d=>st.days[d].a>0).sort();
+  return `<div class="confirm col"><span>불러올 기록: 공부한 날 ${days.length}일${days.length?` (마지막 ${md(days[days.length-1])})`:""} · 본 카드 ${seen}장 · 외운 카드 ${mast}장 · 모의고사 ${st.mocks.length}회. 지금 기록을 이 기록으로 바꿀까요?</span>
+    <div class="row"><button class="btn small" data-act="importyes">이 기록으로 바꾸기</button><button class="btn ghost small" data-act="importno">취소</button></div></div>`;
+}
+async function doExport(){
+  ioMsg="";
+  try{
+    const inClaude=!!(window.claude&&window.claude.use);
+    if(!inClaude){
+      const blob=new Blob([exportText()],{type:"application/json"});const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");a.href=url;a.download=`${ED.file}_${today()}.json`;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);ioMsg="기록 파일을 내려받았어요.";render();return;
+    }
+    const dl=await window.claude.use("downloads");
+    if(!dl){dlState=false;ioMsg="이 화면에서는 파일 저장을 쓸 수 없어요. 아래 '기록 코드'를 이용해 주세요.";render();return;}
+    const r=await dl.save({filename:`${ED.file}_${today()}.json`,data:exportText()});
+    ioMsg=r.status==="saved"?"기록 파일을 저장했어요.":"기록 파일을 보냈어요.";
+  }catch(e){
+    const c=e&&e.code;
+    ioMsg=c==="declined"?"저장을 취소했어요.":c==="rate_limited"?"저장 창이 이미 열려 있어요. 잠시 뒤 다시 눌러 주세요.":"이 화면에서는 파일 저장을 쓸 수 없어요. 아래 '기록 코드'를 이용해 주세요.";
+    if(c&&c!=="declined"&&c!=="rate_limited")dlState=false;
+  }
+  render();
+}
+
+/* 오답 */
+function wrongHTML(){
+  const list=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w||levelOf(a.id)-levelOf(b.id));
+  const sl=srcs.filter(s=>(S.src[s.id]||{}).w>0).sort((a,b)=>S.src[b.id].w-S.src[a.id].w);
+  if(!list.length&&!sl.length)return `<div class="box empty">아직 틀린 문제가 없어요.</div>`;
+  const cardBox=list.length?`<div class="box"><h2>카드 오답 ${list.length}</h2>
+    <p class="muted">많이 틀린 카드부터. 외움 단계가 되어도 목록에 남아요.</p>
+    <button class="btn wide" data-act="drill" data-v="wrong">많이 틀린 순서로 ${Math.min(30,list.length)}장 풀기</button>
+    <ul class="clist">${list.map(c=>`<li><span class="lv wr">틀림 ${st(c.id).w}</span><span class="q">${esc(c.q)}</span><span class="a"><span class="c${c.cat}">${esc(c.a)}</span> ${lvChip(c.id)}</span><span class="q muted">${esc(c.note)}</span></li>`).join("")}</ul></div>`:"";
+  const srcBox=sl.length?`<div class="box"><h2>사료 오답 ${sl.length}</h2>
+    <button class="btn wide" data-act="wsrc">틀린 사료 다시 풀기</button>
+    <ul class="clist">${sl.map(s=>`<li><span class="lv wr">틀림 ${S.src[s.id].w}</span><span class="q">「${esc(s.text)}」</span><span class="a c${s.cat}">${esc(s.a)}</span><span class="q muted">${esc(s.cite)}</span></li>`).join("")}</ul></div>`:"";
+  return `<div class="panel">${cardBox}${srcBox}</div>`;
+}
+
+/* 기록 */
+function statsHTML(){
+  const keys=Object.keys(S.days).filter(d=>S.days[d].a>0).sort();
+  const totA=keys.reduce((s,d)=>s+S.days[d].a,0),totC=keys.reduce((s,d)=>s+S.days[d].c,0);
+  const k=counts(cards);
+  if(!totA&&!S.mocks.length)return `<div class="box empty">아직 기록이 없어요. 오늘 탭에서 학습을 시작하면 여기에 쌓여요.</div>`;
+  const first=keys[0]||today();
+  let from=addDays(today(),-13);if(first>from)from=first;
+  const range=[];for(let d=from;d<=today();d=addDays(d,1))range.push(d);
+  const rows=range.map(d=>({d,a:(S.days[d]||{}).a||0,c:(S.days[d]||{}).c||0}));
+  const tiles=`<div class="tiles">
+    <div><b>${totA}</b><span>푼 문제</span></div><div><b>${pct(totC,totA)}%</b><span>전체 정답률</span></div>
+    <div><b>${TOTAL-k.un}</b><span>배운 카드</span></div><div><b>${k.l4}</b><span>외운 카드 (3회 완료)</span></div></div>
+    <p class="muted mt">연속 학습일 ${streakNow()}일 · 외운 카드는 3회째 주관식에서 맞힌 카드예요.</p>`;
+  const unitRows=Object.keys(UNITS).map(u=>{const x=S.ustat[u]||[0,0];return {label:UNITS[u][0]+" "+UNITS[u][1],a:x[0],c:x[1]};});
+  const kindRows=Object.keys(KIND).map(kk=>{const x=S.kstat[kk]||[0,0];return {label:KIND[kk],a:x[0],c:x[1]};});
+  const weakU=unitRows.filter(r=>r.a>=5).sort((a,b)=>a.c/a.a-b.c/b.a)[0];
+  const weak=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w).slice(0,8);
+  const mocks=S.mocks.slice(-8);
+  return `<div class="panel">
+    <div class="box">${tiles}</div>
+    <div class="box"><h2>날짜별 푼 문제</h2>${dayBars(rows)}</div>
+    <div class="box"><h2>날짜별 정답률</h2>${accLine(rows.filter(r=>r.a>0))}</div>
+    <div class="box"><h2>단원별 정답률</h2>${weakU?`<p class="muted">가장 약한 단원: <b>${esc(weakU.label)}</b> (${pct(weakU.c,weakU.a)}%)</p>`:`<p class="muted">단원마다 5문제 이상 풀면 약한 단원을 알려 드려요.</p>`}${hbars(unitRows)}</div>
+    <div class="box"><h2>유형별 정답률</h2>${hbars(kindRows)}</div>
+    <div class="box"><h2>모의고사 기록</h2>${mocks.length?hbars(mocks.map((m,i)=>({label:`${md(m.d)} · ${S.mocks.length-mocks.length+i+1}회`,a:m.n,c:m.c,txt:`${m.score}점 · ${Math.round(m.sec/60)}분`}))):`<p class="muted m0">아직 본 모의고사가 없어요.</p>`}</div>
+    <div class="box"><h2>자주 틀리는 카드</h2>${weak.length?`<ul class="clist">${weak.map(c=>`<li><span class="lv wr">틀림 ${st(c.id).w}</span><span class="q">${esc(c.q)}</span><span class="a c${c.cat}">${esc(c.a)}</span></li>`).join("")}</ul>`:`<p class="muted m0">아직 없어요.</p>`}</div>
+    <details class="box"><summary>날짜별 기록 표로 보기</summary><div class="tblwrap"><table><thead><tr><th>날짜</th><th>푼 문제</th><th>정답률</th><th>새 카드</th></tr></thead><tbody>${keys.slice().reverse().map(d=>`<tr><td>${md(d)}</td><td>${S.days[d].a}</td><td>${pct(S.days[d].c,S.days[d].a)}%</td><td>${S.days[d].n||0}</td></tr>`).join("")}</tbody></table></div></details>
+  </div>`;
+}
+function chartW(){return Math.max(300,Math.min(640,(app.clientWidth||400)-34));}
+function dayBars(rows){
+  const W=chartW(),H=170,L=34,R=8,T=14,B=24,cw=(W-L-R)/rows.length,bw=Math.min(28,cw*0.62);
+  const max=Math.max(10,...rows.map(r=>r.a));const top=Math.ceil(max/10)*10;
+  const y=v=>T+(H-T-B)*(1-v/top);
+  const grid=[0,top/2,top].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" class="gl"/><text x="${L-6}" y="${y(v)+4}" class="ax" text-anchor="end">${v}</text>`).join("");
+  const step=Math.ceil(rows.length/7);
+  const bars=rows.map((r,i)=>{
+    const cx=L+cw*i+cw/2,h=(H-T-B)*(r.a/top);
+    const tip=`${md(r.d)} · ${r.a}문제${r.a?` · 정답률 ${pct(r.c,r.a)}%`:""}`;
+    const isT=r.d===today();
+    const mark=r.a?`<path d="${roundTop(cx-bw/2,y(r.a),bw,h,4)}" class="bm${isT?" now":""}"/>`:"";
+    const lab=(isT||(i%step===0&&rows.length-1-i>=step))?`<text x="${cx}" y="${H-6}" class="ax" text-anchor="middle">${isT?"오늘":md(r.d)}</text>`:"";
+    const val=(isT&&r.a)?`<text x="${cx}" y="${y(r.a)-5}" class="vl" text-anchor="middle">${r.a}</text>`:"";
+    return `${mark}${val}${lab}<rect x="${L+cw*i}" y="${T}" width="${cw}" height="${H-T-B}" class="hit" data-tip="${esc(tip)}"/>`;
+  }).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="날짜별 푼 문제 수">${grid}${bars}</svg></div>`;
+}
+function roundTop(x,y,w,h,r){r=Math.min(r,h,w/2);return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`;}
+function accLine(rows){
+  if(!rows.length)return `<p class="muted m0">아직 기록이 없어요.</p>`;
+  const W=chartW(),H=170,L=34,R=36,T=14,B=24,n=rows.length;
+  const x=i=>n===1?(L+W-R)/2:L+(W-L-R)*i/(n-1),y=v=>T+(H-T-B)*(1-v/100);
+  const grid=[0,50,100].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" class="gl"/><text x="${L-6}" y="${y(v)+4}" class="ax" text-anchor="end">${v}%</text>`).join("");
+  const pts=rows.map((r,i)=>[x(i),y(pct(r.c,r.a))]);
+  const line=n>1?`<path d="M${pts.map(p=>p.join(",")).join("L")}" class="ln"/>`:"";
+  const step=Math.ceil(n/7);
+  const dots=rows.map((r,i)=>{
+    const last=i===n-1;
+    return `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="${last?5:3.5}" class="dt${last?" now":""}"/>${last?`<text x="${pts[i][0]+8}" y="${pts[i][1]+4}" class="vl">${pct(r.c,r.a)}%</text>`:""}${(last||(i%step===0&&n-1-i>=step))?`<text x="${pts[i][0]}" y="${H-6}" class="ax" text-anchor="middle">${md(r.d)}</text>`:""}<rect x="${pts[i][0]-14}" y="${T}" width="28" height="${H-T-B}" class="hit" data-tip="${esc(`${md(r.d)} · 정답률 ${pct(r.c,r.a)}% (${r.a}문제)`)}"/>`;
+  }).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="날짜별 정답률">${grid}${line}${dots}</svg></div>`;
+}
+function hbars(rows){
+  return `<div class="hb">${rows.map(r=>{
+    const p=pct(r.c,r.a);
+    return `<div class="hbr" data-tip="${esc(`${r.label} · ${r.a?p+"%":"기록 없음"} (${fmt(r.c)}/${r.a})`)}"><span class="hl">${esc(r.label)}</span><span class="ht"><span style="width:${r.a?Math.max(p,1):0}%"></span></span><span class="hv">${r.txt?esc(r.txt):(r.a?`${p}% · ${r.a}문제`:"—")}</span></div>`;
+  }).join("")}</div>`;
+}
+const fmt=v=>Math.round(v*10)/10;
+
+let rsT=null;window.addEventListener("resize",()=>{if(view==="stats"&&!session){clearTimeout(rsT);rsT=setTimeout(render,200);}});
+/* 툴팁 */
+const tip=document.createElement("div");tip.className="tip-pop";tip.hidden=true;document.body.appendChild(tip);
+function showTip(el,x,y){tip.textContent=el.dataset.tip;tip.hidden=false;const w=tip.offsetWidth;tip.style.left=Math.max(8,Math.min(window.innerWidth-w-8,x-w/2))+"px";tip.style.top=(y-tip.offsetHeight-12+window.scrollY)+"px";}
+function hideTip(){tip.hidden=true;}
+app.addEventListener("pointermove",e=>{const t=e.target.closest("[data-tip]");if(t&&e.pointerType==="mouse")showTip(t,e.clientX,e.clientY);else if(e.pointerType==="mouse")hideTip();});
+app.addEventListener("pointerleave",hideTip);
+
+/* 그리기: 학습 화면 */
+function studyHTML(){
+  const it=session.items[session.i],fb=session.fb,total=session.items.length;
+  const pc=(session.i/total*100).toFixed(1);
+  let chips="",q="",body="";
+  const unitChip=u=>`<span class="chip">${UNITS[u][0]} 단원</span>`;
+  if(it.k==="card"){
+    const c=byId[it.id];
+    const ml=it.mode==="learn"?"새 카드 · 외우기":it.mode==="mc"?"객관식":"주관식";
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">${ml}</span>`;
+    q=`<p class="q">${esc(c.q)}</p>`;
+    if(it.mode==="learn"){
+      body=`<div class="ans c${c.cat}">${esc(c.a)}</div><div class="note">${esc(c.note)}</div>
+        <div class="acts"><button class="btn" data-act="learned" id="focusme">외웠어요, 문제로 확인</button></div>`;
+    }else if(it.mode==="mc"){
+      if(!it.opts)it.opts=makeOpts(c);
+      body=optsHTML(it.opts,c.a,fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+    }else{
+      body=writeHTML(fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):(session.mock?"":`<div class="acts"><button class="btn ghost small" data-act="giveup">모르겠어요</button></div>`));
+    }
+  }else if(it.k==="src"){
+    const s=srcById[it.id];
+    chips=`<span class="chip c${s.cat}"><i></i>${CAT[s.cat]}</span>${unitChip(s.u)}<span class="chip mode">사료</span>`;
+    q=`<blockquote class="srcq">${esc(s.text)}</blockquote><p class="q sm">${esc(s.q)}</p>`;
+    body=optsHTML(it.opts,s.a,fb)+(fb?verdictHTML(s.a,s.cat,s.cite,fb):"");
+  }else if(it.k==="tl"){
+    chips=`<span class="chip mode">연표 순서</span>`;
+    q=`<p class="q">먼저 일어난 사건부터 차례로 누르세요.</p>`;
+    const sorted=tlSorted(it);
+    body=`<div class="tl">${it.ev.map(ix=>{
+      const e=events[ix],pos=it.order.indexOf(ix);
+      let cls="";if(fb)cls=(sorted[pos]===ix)?"ok":"no";
+      return `<button class="tlb ${pos>=0?"on":""} ${cls}" data-act="tlpick" data-v="${ix}" ${fb?"disabled":""}><span class="n">${pos>=0?pos+1:""}</span><span>${esc(e.label)}</span>${fb?`<span class="yr">${evText(e)}</span>`:""}</button>`;
+    }).join("")}</div>`;
+    if(fb){
+      body+=`<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${fb.ok?"정답!":"순서가 달라요"}</div><ol class="ord">${sorted.map(ix=>`<li>${esc(events[ix].label)} <span class="muted">${evText(events[ix])}</span></li>`).join("")}</ol></div><div class="acts"><button class="btn" data-act="next" id="focusme">다음</button></div>`;
+    }else if(!session.mock){
+      body+=`<div class="acts"><button class="btn ghost small" data-act="tlreset" ${it.order.length?"":"disabled"}>다시 고르기</button><button class="btn" data-act="tlcheck" ${it.order.length===it.ev.length?"":"disabled"}>확인</button></div>`;
+    }else{
+      body+=`<div class="acts"><button class="btn ghost small" data-act="tlreset" ${it.order.length?"":"disabled"}>다시 고르기</button></div>`;
+    }
+  }else if(it.k==="rev"){
+    const c=byId[it.id];
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">설명 고르기</span>`;
+    q=`<p class="q">‘${esc(c.a)}’에 해당하는 설명은?</p>`;
+    body=optsHTML(it.opts,it.ans,fb)+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+  }else if(it.k==="ox"){
+    const c=byId[it.id];
+    chips=`<span class="chip c${c.cat}"><i></i>${CAT[c.cat]}</span>${unitChip(c.u)}<span class="chip mode">O/X</span>`;
+    q=`<p class="q">${esc(c.q)}</p><div class="oxprop">→ ${esc(it.shown)}</div><p class="muted m0">이 답이 맞으면 O, 틀리면 X</p>`;
+    const b=(val,lab)=>{let cls="";if(fb){if(val===it.truth)cls="ok";else if(val===fb.said)cls="no";}return `<button class="opt ox ${cls}" data-act="ox" data-v="${val?1:0}" ${fb?"disabled":""}>${lab}</button>`;};
+    body=`<div class="oxrow">${b(true,"O")}${b(false,"X")}</div>`+(fb?verdictHTML(c.a,c.cat,c.note,fb):"");
+  }else if(it.k==="pair"){
+    chips=`<span class="chip mode">먼저 일어난 사건</span>`;
+    q=`<p class="q">둘 중 먼저 일어난 사건은?</p>`;
+    const [a,b2]=it.ev.map(i=>events[i]);
+    body=optsHTML(it.opts,it.ans,fb)+(fb?`<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${fb.ok?"정답!":"아쉬워요"}</div><div>${esc(a.label)} <b>${evText(a)}</b></div><div>${esc(b2.label)} <b>${evText(b2)}</b></div></div><div class="acts"><button class="btn" data-act="next" id="focusme">다음</button></div>`:"");
+  }else if(it.k==="ess"){
+    const e=essById[it.id];
+    chips=`${unitChip(e.u)}<span class="chip mode">서술형</span><span class="chip">${esc(e.pg)}</span>`;
+    q=`<p class="q">${esc(e.q)}</p>`;
+    if(!fb){
+      body=`<textarea id="ei" rows="5" placeholder="생각나는 대로 써 보세요. 핵심어가 들어가면 자동으로 표시돼요." aria-label="서술형 답안">${esc(it.draft||"")}</textarea>
+        <div class="acts"><button class="btn ghost small" data-act="essreveal" data-v="skip">모르겠어요</button><button class="btn" data-act="essreveal">다 썼어요, 답 확인</button></div>`;
+    }else{
+      const hits=kwHits(e,fb.input||"");
+      body=`${fb.input?`<div class="mine"><div class="muted">내 답</div>${esc(fb.input)}</div>`:""}
+        <div class="model"><div class="muted">모범 답안</div>${esc(e.model)}</div>
+        <div><div class="muted">핵심어 ${hits.filter(Boolean).length} / ${hits.length}</div><ul class="kw">${e.kws.map((g,i)=>`<li class="${hits[i]?"hit":""}">${hits[i]?"✓":"○"} ${esc(g[0])}</li>`).join("")}</ul></div>
+        ${fb.rating?"":`<p class="muted m0">내 답을 스스로 채점해 주세요.</p>`}
+        <div class="acts">${["again","part","full"].map(r=>`<button class="btn ${fb.rating===r?"":"ghost"} small" data-act="rate" data-v="${r}" ${fb.rating?"disabled":""}>${{again:"다시 공부",part:"일부 맞음",full:"다 맞음"}[r]}</button>`).join("")}${fb.rating?`<button class="btn" data-act="next" id="focusme">다음</button>`:""}</div>`;
+    }
+  }
+  const mockBar=session.mock?`<button class="btn" data-act="mocknext" id="focusme" ${mockReady(it)?"":"disabled"}>${session.i===total-1?"제출하고 채점":"다음 문제"}</button>`:"";
+  return `<div class="study">
+    <div class="stop"><button class="btn ghost small" data-act="quit">${session.mock?"그만두기":"그만하기"}</button><div class="prog"><span style="width:${pc}%"></span></div><span class="cnt">${session.i+1} / ${total}</span></div>
+    <div class="qcard">${session.mock?`<div class="muted mockh">모의고사 · 정답은 끝나고 공개</div>`:""}<div class="chips">${chips}</div>${q}${body}${mockBar?`<div class="acts">${mockBar}</div>`:""}</div></div>`;
+}
+function mockReady(it){
+  if(it.k==="tl")return it.order.length===it.ev.length;
+  if(it.k==="card"&&it.mode==="write")return true;
+  return session.sel!=null;
+}
+function optsHTML(opts,ans,fb){
+  return `<div class="opts">${opts.map((o,i)=>{
+    let cls="";
+    if(fb){if(o===ans)cls="ok";else if(i===fb.pick)cls="no";}
+    else if(session.mock&&session.sel===i)cls="sel";
+    return `<button class="opt ${cls}" data-act="pick" data-v="${i}" ${fb?"disabled":""}><span class="k">${i+1}</span>${esc(o)}</button>`;
+  }).join("")}</div>`;
+}
+function writeHTML(fb){
+  return `<form class="write" id="wf" autocomplete="off"><input id="wi" type="text" placeholder="답을 입력하세요" aria-label="답 입력" value="${fb?esc(fb.input):""}" ${fb?"disabled":""}>${fb||session.mock?"":`<button class="btn" type="submit">확인</button>`}</form>`;
+}
+function verdictHTML(a,cat,note,fb){
+  const head=fb.ok?(fb.override?"맞은 것으로 처리했어요":"정답!"):"아쉬워요";
+  const mine=(!fb.ok&&fb.input)?`<div>내 답: ${esc(fb.input)}</div>`:"";
+  const over=(!fb.ok&&fb.input)?`<button class="btn ghost small" data-act="override">내 답도 맞아요</button>`:"";
+  return `<div class="verdict ${fb.ok?"ok":"no"}"><div class="h">${head}</div><div>정답: <b class="c${cat}">${esc(a)}</b></div>${mine}<div class="note">${esc(note)}</div></div>
+    <div class="acts">${over}<button class="btn" data-act="next" id="focusme">다음</button></div>`;
+}
+function wrongListHTML(){
+  const ws=session.wrong.filter(w=>w.k!=="tl");
+  if(!ws.length)return "";
+  return `<ul class="clist left">${ws.map(w=>{
+    if(w.k==="card"){const x=byId[w.id];return `<li><span class="lv wr">카드</span><span class="q">${esc(x.q)}</span><span class="a c${x.cat}">${esc(x.a)}</span></li>`;}
+    const s=srcById[w.id];return `<li><span class="lv wr">사료</span><span class="q">「${esc(s.text)}」</span><span class="a c${s.cat}">${esc(s.a)}</span></li>`;
+  }).join("")}</ul>`;
+}
+function doneHTML(){
+  const a=session.answered,c=session.score;
+  const cw=session.wrong.some(w=>w.k==="card");
+  const nx=(session.ladder||session.finish||session.kind==="deep"||session.ahead)?nextStep().main:null;
+  return `<div class="box done">
+    <div class="muted">${session.ladder?stepName(session.ladder)+" 끝":session.finish?"마무리 끝":session.unitTest?UNITS[session.unitTest][0]+" 단원 점검 끝":session.lesson?"단원 사료 끝":session.kind==="today"?"오늘 카드 학습 끝":session.kind==="deep"?"심화 세트 끝":"연습 끝"}</div>
+    <div class="big">${fmt(c)} / ${a}</div>
+    <div class="muted">${a?"정답률 "+pct(c,a)+"%":"푼 문제가 없어요"}</div>
+    ${session.test?`<p class="muted">${pct(session.score,session.answered)>=80?"건너뛰기 성공! 맞힌 카드는 바로 복습 단계로 넘어갔어요.":"맞힌 카드는 복습 단계로 넘어갔어요. 틀린 카드는 이 레슨에서 처음부터 배우게 돼요."}</p>`:""}
+    ${wrongListHTML()}
+    <div class="row center">${session.bank?`<button class="btn ghost" data-act="bank" data-v="${session.full?1:0}">20문제 더</button>`:""}${session.lesson||session.fromPath?`<button class="btn ghost" data-act="backpath">경로로 돌아가기</button>`:""}${cw?`<button class="btn ghost" data-act="drill" data-v="again">틀린 카드만 다시</button>`:""}${nx?`<button class="btn ghost" data-act="home">처음으로</button><button class="btn" data-act="${nx.act}" id="focusme">다음: ${esc(nx.t)}</button>`:`<button class="btn" data-act="home" id="focusme">처음으로</button>`}</div>
+  </div>`;
+}
+function mockResultHTML(){
+  const r=session.result;
+  const uRows=Object.keys(UNITS).map(u=>{const x=r.byU[u]||[0,0];return {label:UNITS[u][0]+" "+UNITS[u][1],a:x[0],c:x[1]};});
+  const kRows=Object.keys(KIND).filter(k=>r.byK[k]).map(k=>({label:KIND[k],a:r.byK[k][0],c:r.byK[k][1]}));
+  const weakU=uRows.filter(x=>x.a).sort((a,b)=>a.c/a.a-b.c/b.a)[0];
+  const review=session.items.map((it,i)=>{
+    const a=session.ans[i]||{};if(a.ok)return "";
+    let q="",ans="";
+    if(it.k==="card"){const c=byId[it.id];q=esc(c.q);ans=`<b class="c${c.cat}">${esc(c.a)}</b>`;}
+    else if(it.k==="src"){const s=srcById[it.id];q="「"+esc(s.text)+"」 "+esc(s.q);ans=`<b class="c${s.cat}">${esc(s.a)}</b> <span class="muted">${esc(s.cite)}</span>`;}
+    else{q="연표 순서";ans=tlSorted(it).map(ix=>esc(events[ix].label)+" "+evText(events[ix])).join(" → ");}
+    const given=Array.isArray(a.given)?a.given.map(ix=>esc(events[ix].label)).join(" → "):esc(a.given||"(빈칸)");
+    return `<li><span class="lv wr">${i+1}번</span><span class="q">${q}</span><span class="q">내 답: ${given}</span><span class="a">정답: ${ans}</span></li>`;
+  }).join("");
+  return `<div class="panel"><div class="box done">
+    <div class="muted">모의고사 결과 · ${Math.floor(r.sec/60)}분 ${r.sec%60}초</div>
+    <div class="big">${r.score}점</div>
+    <div class="muted">${r.n}문항 중 ${r.c}문항 정답${weakU&&weakU.c<weakU.a?` · 약한 단원 <b>${esc(weakU.label)}</b>`:""}</div></div>
+    <div class="box"><h2>단원별</h2>${hbars(uRows)}</div>
+    <div class="box"><h2>유형별</h2>${hbars(kRows)}</div>
+    ${review?`<div class="box"><h2>틀린 문항 다시 보기</h2><p class="muted">틀린 카드는 오답 목록에 남아요. 외운 카드는 외움 그대로예요.</p><ul class="clist">${review}</ul></div>`:""}
+    <div class="row center"><button class="btn" data-act="home" id="focusme">처음으로</button></div></div>`;
+}
+function focusStudy(){
+  requestAnimationFrame(()=>{
+    const it=session&&!session.done&&session.items[session.i];
+    if(it&&!session.fb){
+      if(it.k==="card"&&it.mode==="write"){const w=document.getElementById("wi");if(w){w.focus();return;}}
+      if(it.k==="ess"){return;}
+    }
+    const f=document.getElementById("focusme");if(f&&!f.disabled)f.focus({preventScroll:true});
+  });
+}
+function setFb(fb){session.fb=fb;fbAt=Date.now();render();}
+
+/* 입력 */
+app.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");
+  if(!b){const t=e.target.closest("[data-tip]");if(t){const r=t.getBoundingClientRect();showTip(t,r.left+r.width/2,r.top+8);}else hideTip();return;}
+  if(b.disabled)return;
+  const act=b.dataset.act,v=b.dataset.v;
+  const it=session&&!session.done?session.items[session.i]:null;
+  if(act==="tab"){view=v;resetAsk=false;sheet=null;render();window.scrollTo(0,0);}
+  else if(act==="node"){sheet=v;render();}
+  else if(act==="sheetclose"){sheet=null;render();}
+  else if(act==="backpath"){session=null;view="path";sheet=null;render();window.scrollTo(0,0);}
+  else if(act==="stepredo"){sheet=null;startLadder(+v,{fromPath:true});}
+  else if(act==="nsrc"){sheet=null;begin("drill",srcItems(99,+v),{lesson:"S"+v});}
+  else if(act==="ntest"){sheet=null;begin("drill",unitTestItems(+v),{lesson:"T"+v,unitTest:+v});}
+  else if(act==="start")startToday();
+  else if(act==="ladder"){const fp=view==="path"&&!!sheet;session=null;sheet=null;skipAsk=false;startLadder(null,fp?{fromPath:true}:null);}
+  else if(act==="ladderskip"){skipAsk=true;render();}
+  else if(act==="ladderskipno"){skipAsk=false;render();}
+  else if(act==="finish"){session=null;sheet=null;startFinish();}
+  else if(act==="ladderskipyes"){skipAsk=false;if(ladderStep()){S.ladder.i++;save();}render();}
+  else if(act==="deep"){session=null;startDeep();}
+  else if(act==="deepfull"){session=null;startDeep(true);}
+  else if(act==="bank"){session=null;startBank(+(v||0));}
+  else if(act==="mock"){sheet=null;startMock();}
+  else if(act==="ahead"){session=null;begin("drill",unseen().slice(0,10).map(c=>cardItem(c,"learn")),{ahead:true});}
+  else if(act==="learned")learned();
+  else if(act==="pick"&&it&&!session.fb){
+    const i=+v;
+    if(session.mock){session.sel=i;render();return;}
+    setFb({ok:it.opts[i]===ansOf(it),pick:i});
+  }
+  else if(act==="ox"&&it&&!session.fb){const said=v==="1";setFb({ok:said===it.truth,said});}
+  else if(act==="giveup"&&it&&!session.fb)setFb({ok:false,input:""});
+  else if(act==="override"&&session&&session.fb){session.fb.ok=true;session.fb.override=true;render();}
+  else if(act==="next")next();
+  else if(act==="mocknext")mockNext();
+  else if(act==="tlpick"&&it&&!session.fb){
+    const ix=+v,p=it.order.indexOf(ix);
+    if(p>=0)it.order.splice(p,1);else it.order.push(ix);
+    render();
+  }
+  else if(act==="tlreset"&&it){it.order=[];render();}
+  else if(act==="tlcheck"&&it&&!session.fb)setFb({ok:tlCorrect(it)});
+  else if(act==="essreveal"&&it){
+    const t=v==="skip"?"":(document.getElementById("ei")||{}).value||"";
+    setFb({input:t.trim()});
+  }
+  else if(act==="rate"&&session&&session.fb){session.fb.rating=v;render();}
+  else if(act==="quit"||act==="home"){session=null;render();}
+  else if(act==="psrc"){const sc=scope();begin("drill",srcItems(8,0,sc.src.length?sc.src:srcs));}
+  else if(act==="usrc")begin("drill",srcItems(6,+b.dataset.u));
+  else if(act==="wsrc")begin("drill",srcs.filter(s=>(S.src[s.id]||{}).w>0).sort((a,b)=>S.src[b.id].w-S.src[a.id].w).slice(0,15).map(s=>({k:"src",id:s.id,opts:shuffle([s.a].concat(s.x))})));
+  else if(act==="ptl"){const sc=scope(),ev=canTl(sc.ev)?sc.ev:events;begin("drill",[1,2,3,4,5].map(()=>tlItem(ev)));}
+  else if(act==="pess"){const sc=scope();begin("drill",essItems(3,sc.ess.length?sc.ess:essays));}
+  else if(act==="pmix")begin("drill",pick(cards.filter(c=>levelOf(c.id)>=0),20).map(c=>cardItem(c)));
+  else if(act==="drill"){
+    let list=[];
+    if(v==="wrong")list=cards.filter(c=>(st(c.id)||{}).w>0).sort((a,b)=>st(b.id).w-st(a.id).w).slice(0,30);
+    else if(v==="unew")list=unseen().filter(c=>c.u===+b.dataset.u).slice(0,10);
+    else if(v==="urev")list=pick(cards.filter(c=>c.u===+b.dataset.u&&levelOf(c.id)>=0),20);
+    else if(v==="again"&&session)list=session.wrong.filter(w=>w.k==="card").map(w=>byId[w.id]);
+    session=null;begin("drill",list.map(c=>cardItem(c)));
+    if(!session)render();
+  }
+  else if(act==="export")doExport();
+  else if(act==="importyes"&&importAsk){const keepExam=importAsk.exam;S=importAsk;S.exam=keepExam||S.exam;S.total=0;syncTotal();importAsk=null;ioMsg="기록을 불러왔어요.";save();render();}
+  else if(act==="importno"){importAsk=null;ioMsg="";render();}
+  else if(act==="copycode"){
+    const t=exportText();const done=()=>{ioMsg="기록 코드를 복사했어요.";render();};
+    try{navigator.clipboard.writeText(t).then(done,()=>{const ta=document.getElementById("codein");if(ta){ta.value=t;ta.select();}ioMsg="자동 복사가 막혀 있어요. 입력칸에 코드를 넣어 두었으니 직접 복사해 주세요.";const m=document.querySelector('[role=status]');if(m)m.textContent=ioMsg;});}catch(e){}
+  }
+  else if(act==="pastecode"){const ta=document.getElementById("codein");const st=ta&&parseImport(ta.value.trim());if(st){importAsk=st;ioMsg="";}else ioMsg="기록 코드를 읽을 수 없어요. 처음부터 끝까지 빠짐없이 붙여 넣었는지 확인해 주세요.";render();}
+  else if(act==="resetask"){resetAsk=true;render();}
+  else if(act==="resetno"){resetAsk=false;render();}
+  else if(act==="resetyes"){S=fresh(S.exam);S.total=TOTAL;resetAsk=false;save();render();}
+});
+app.addEventListener("input",e=>{if(e.target.id==="ei"&&session){const it=session.items[session.i];if(it)it.draft=e.target.value;}});
+app.addEventListener("submit",e=>{
+  if(e.target.id!=="wf")return;
+  e.preventDefault();
+  if(!session)return;
+  if(session.mock){mockNext();return;}
+  if(session.fb)return;
+  const val=document.getElementById("wi").value.trim();if(!val)return;
+  const it=session.items[session.i];
+  setFb({ok:grade(byId[it.id],val),input:val});
+});
+app.addEventListener("change",e=>{
+  if(e.target.id==="impf"&&e.target.files&&e.target.files[0]){
+    const f=e.target.files[0],fr=new FileReader();
+    fr.onload=()=>{const st=parseImport(String(fr.result));if(st){importAsk=st;ioMsg="";}else ioMsg="이 파일은 이 앱의 기록 파일이 아니에요.";render();};
+    fr.onerror=()=>{ioMsg="파일을 읽지 못했어요.";render();};
+    fr.readAsText(f);return;
+  }
+  if(e.target.id!=="exam"||!e.target.value)return;
+  S.exam=e.target.value;const d=dayRec();d.p=planNew(d.n);
+  save();render();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&sheet&&!session){sheet=null;render();return;}
+  if(!session||session.done||session.fb)return;
+  const it=session.items[session.i];
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;
+  if(it.k==="ox"&&/^[12oOxX]$/.test(e.key)){const said=/^[1oO]$/.test(e.key);setFb({ok:said===it.truth,said});return;}
+  if((it.k==="src"||it.k==="rev"||it.k==="pair"||(it.k==="card"&&it.mode==="mc"))&&/^[1-4]$/.test(e.key)){
+    const i=+e.key-1;if(!it.opts||i>=it.opts.length)return;
+    if(session.mock){session.sel=i;render();return;}
+    setFb({ok:it.opts[i]===ansOf(it),pick:i});
+  }
+});
+
+syncTotal();
+render();
+initRemote();
+})();
+</script>
+</body></html>
