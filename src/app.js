@@ -1,12 +1,18 @@
 (function(){
 "use strict";
-const UNITS={1:["01","제국주의 질서와 일제의 식민 통치 정책","10~19쪽"],2:["02","3·1 운동과 대한민국 임시 정부","20~29쪽"],3:["03","민족 운동의 전개와 분화","30~45쪽"],4:["04","사회·문화의 변화와 대중 운동","46~55쪽"],5:["05","독립 국가 건설 노력","56~61쪽"]};
-const CAT={r:"일제 정책·탄압",b:"국내 민족 운동",g:"국외 무장·의열",p:"대한민국 임시 정부",o:"사회·문화",w:"국제 정세"};
+/* 판(학기)마다 다른 값: 데이터 파일이 EDITION을 정하면 그 값을 쓰고, 없으면 1학기 값 */
+const ED=Object.assign({
+  units:{1:["01","제국주의 질서와 일제의 식민 통치 정책","10~19쪽"],2:["02","3·1 운동과 대한민국 임시 정부","20~29쪽"],3:["03","민족 운동의 전개와 분화","30~45쪽"],4:["04","사회·문화의 변화와 대중 운동","46~55쪽"],5:["05","독립 국가 건설 노력","56~61쪽"]},
+  cats:{r:"일제 정책·탄압",b:"국내 민족 운동",g:"국외 무장·의열",p:"대한민국 임시 정부",o:"사회·문화",w:"국제 정세"},
+  exam:"2026-10-12",key:"ilje-cards-v1",app:"ilje-cards",file:"한국사카드_기록"
+},typeof EDITION!=="undefined"?EDITION:{});
+const UNITS=ED.units;
+const CAT=ED.cats;
 const KIND={mc:"카드 객관식",wr:"카드 주관식",src:"사료",tl:"연표 순서",ess:"서술형",ox:"O/X",rev:"설명 고르기",pair:"먼저 일어난 사건"};
 const LVNAME=["다시 보기","1단계","2단계","3단계","외움"];
 const INTERVAL={1:1,2:2,3:3};
-const DEFAULT_EXAM="2026-10-12";
-const LSKEY="ilje-cards-v1";
+const DEFAULT_EXAM=ED.exam;
+const LSKEY=ED.key;
 const SUFFIX=["전투","대첩","운동","사건","정책","계획","사업","회의","의거","선언","회담","협정","학살","참변"];
 
 const cards=CARDS.map(c=>({id:c[0],u:c[1],cat:c[2],g:c[3],q:c[4],a:c[5],note:c[6],alts:c[7]?c[7].split("|"):[],x:c[8]?c[8].split("|"):[]}));
@@ -254,11 +260,16 @@ function startDeep(full){
 }
 function startMock(){
   const items=[];
-  for(let u=1;u<=5;u++){
+  /* 카드 10문제를 단원마다 고르게(5단원이면 2문제씩), 사료 6문제 */
+  const U=Object.keys(UNITS).map(Number),per={};
+  U.forEach(u=>{per[u]=Math.floor(10/U.length);});
+  shuffle(U.slice()).slice(0,10-Math.floor(10/U.length)*U.length).forEach(u=>{per[u]++;});
+  U.forEach(u=>{
     const pool=shuffle(cards.filter(c=>c.u===u));
-    items.push(cardItem(pool[0],"mc"),cardItem(pool[1],Math.random()<.5?"write":"mc"));
-  }
-  const su=[1,2,3,4,5,1+Math.floor(Math.random()*5)];
+    for(let k=0;k<per[u]&&k<pool.length;k++)items.push(cardItem(pool[k],k===0?"mc":Math.random()<.5?"write":"mc"));
+  });
+  const SU=U.filter(u=>srcs.some(s=>s.u===u));
+  const su=SU.length>=6?shuffle(SU.slice()).slice(0,6):SU.concat(Array.from({length:6-SU.length},()=>SU[Math.floor(Math.random()*SU.length)]));
   const usedS=new Set();
   su.forEach(u=>{const c=shuffle(srcs.filter(s=>s.u===u&&!usedS.has(s.id)))[0];if(c){usedS.add(c.id);items.push({k:"src",id:c.id,opts:shuffle([c.a].concat(c.x))});}});
   items.sort((a,b)=>unitOf(a)-unitOf(b));
@@ -637,9 +648,9 @@ function practiceHTML(){
 
 /* 기록 파일 */
 let importAsk=null,ioMsg="",dlState=null;
-function exportText(){return JSON.stringify({app:"ilje-cards",exported:new Date().toISOString(),state:S});}
+function exportText(){return JSON.stringify({app:ED.app,exported:new Date().toISOString(),state:S});}
 function parseImport(text){
-  try{const o=JSON.parse(text);const st=o&&o.app==="ilje-cards"?o.state:o;
+  try{const o=JSON.parse(text);const st=o&&o.app===ED.app?o.state:o;
     if(!st||st.v!==1||typeof st.cards!=="object")return null;return normalize(st);}catch(e){return null;}
 }
 function importConfirmHTML(){
@@ -654,12 +665,12 @@ async function doExport(){
     const inClaude=!!(window.claude&&window.claude.use);
     if(!inClaude){
       const blob=new Blob([exportText()],{type:"application/json"});const url=URL.createObjectURL(blob);
-      const a=document.createElement("a");a.href=url;a.download=`한국사카드_기록_${today()}.json`;document.body.appendChild(a);a.click();a.remove();
+      const a=document.createElement("a");a.href=url;a.download=`${ED.file}_${today()}.json`;document.body.appendChild(a);a.click();a.remove();
       setTimeout(()=>URL.revokeObjectURL(url),2000);ioMsg="기록 파일을 내려받았어요.";render();return;
     }
     const dl=await window.claude.use("downloads");
     if(!dl){dlState=false;ioMsg="이 화면에서는 파일 저장을 쓸 수 없어요. 아래 '기록 코드'를 이용해 주세요.";render();return;}
-    const r=await dl.save({filename:`한국사카드_기록_${today()}.json`,data:exportText()});
+    const r=await dl.save({filename:`${ED.file}_${today()}.json`,data:exportText()});
     ioMsg=r.status==="saved"?"기록 파일을 저장했어요.":"기록 파일을 보냈어요.";
   }catch(e){
     const c=e&&e.code;
